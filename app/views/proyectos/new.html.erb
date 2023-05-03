@@ -1,4 +1,11 @@
-<div>
-  <h1 class="font-bold text-4xl">Proyectos#new</h1>
-  <p>Find me in app/views/proyectos/new.html.erb</p>
-</div>
+<div class="w-full text-slate-700">
+    <div class="mt-3 flex align-middle border-b-2 border-slate-200">
+      <div><%= inline_svg_tag 'svg/adoc' %></div>
+      <div class="ml-3">Registrar nuevo proyecto</div>
+    </div>
+    
+    <div class="mt-5">
+       <%= render "new" %>
+    </div>
+</div>  
+

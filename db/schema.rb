@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_184206) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_191032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clasificaciones", force: :cascade do |t|
+    t.string "nomclasifica"
+    t.string "clave", limit: 5
+    t.string "ovh", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "financiadoras", force: :cascade do |t|
     t.bigint "proyecto_id", null: false
@@ -24,11 +32,47 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_184206) do
     t.index ["proyecto_id"], name: "index_py.financiadoras_on_proyecto_id"
   end
 
-  create_table "proyectos", force: :cascade do |t|
-    t.text "nombre"
+  create_table "instituciones", force: :cascade do |t|
+    t.string "nominstitucion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "proyecto_id", null: false
+    t.index ["proyecto_id"], name: "index_instituciones_on_proyecto_id"
+  end
+
+  create_table "lineas", force: :cascade do |t|
+    t.string "nomlinea"
+    t.string "clave", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "medios", force: :cascade do |t|
+    t.string "nommedio"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "proyectos", force: :cascade do |t|
+    t.text "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "clasificacion_id", null: false
+    t.bigint "medio_id", null: false
+    t.bigint "linea_id", null: false
+    t.boolean "tfconoc"
+    t.boolean "interinst"
+    t.string "periodo"
+    t.boolean "overhead"
+    t.index ["clasificacion_id"], name: "index_proyectos_on_clasificacion_id"
+    t.index ["linea_id"], name: "index_proyectos_on_linea_id"
+    t.index ["medio_id"], name: "index_proyectos_on_medio_id"
+  end
+
   add_foreign_key "financiadoras", "proyectos"
+  add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "proyectos", "clasificaciones"
+  add_foreign_key "proyectos", "lineas"
+  add_foreign_key "proyectos", "medios"
 end

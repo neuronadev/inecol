@@ -74,5 +74,3 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "inline_svg", "~> 1.9"
-
-gem "wicked", "~> 2.0"

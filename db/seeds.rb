@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Linea.create!([
+    {
+      nomlinea:'Aplicada',
+      clave:'AP'
+   },
+   {
+      nomlinea:'Básica',
+      clave:'BA'
+   }
+
+])
+
+p "Lineas creadas: #{Linea.count}"
