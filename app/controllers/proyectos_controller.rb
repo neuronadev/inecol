@@ -11,6 +11,15 @@ class ProyectosController < ApplicationController
   end
 
   def create
+      @proyecto = Proyecto.new(proyecto_params)
+      respond_to do |format|
+            if @proyecto.save
+                   session[:proyecto_id] = @proyecto.id
+                   format.html { redirect_to new_fuente_path } 
+            else
+                   format.html { render :new, status: :bad_request }
+            end
+      end
   end
 
   def edit
@@ -20,16 +29,23 @@ class ProyectosController < ApplicationController
   end
 
   def institucion
-      @data = '<div>
-                   <label for="proyecto_instituciones_attributes_0_nominstitucion">Nominstitucion</label>
-                   <input type="text" name="proyecto[instituciones_attributes][0][nominstitucion]" id="proyecto_instituciones_attributes_0_nominstitucion">
-               </div>'
       @idx = (Time.now.to_f*1000.0).to_i
       respond_to do |format|
-             #format.html { render html:@data}
              format.html { render partial: 'fields_institucion'}
       end 
   end
 
+  private
+  def proyecto_params
+      params.require(:proyecto).permit(:nombre, 
+                                       :clasificacion_id,
+                                       :overhead,
+                                       :medio_id,
+                                       :linea_id,
+                                       :periodo,
+                                       :tfconoc,
+                                       :interinst,
+                                       instituciones_attributes:[:id, :nominstitucion]  )
+  end
 
 end

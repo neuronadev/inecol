@@ -1,6 +1,6 @@
 require "test_helper"
 
-class FinanciadoraTest < ActiveSupport::TestCase
+class FuenteTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

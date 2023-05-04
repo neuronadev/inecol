@@ -5,16 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Linea.create!([
-    {
-      nomlinea:'Aplicada',
-      clave:'AP'
-   },
-   {
-      nomlinea:'Básica',
-      clave:'BA'
-   }
+Lugar.create!([
+      {nomlugar:'Aguascalientes', tiponac:'NAC'},
+      {nomlugar:'Baja California', tiponac:'NAC'},
+      {nomlugar:'Afganistán', tiponac:'EXT'},
+      {nomlugar:'Alemania', tiponac:'EXT'}
 
-])
+   ])
 
-p "Lineas creadas: #{Linea.count}"
+   p 'Registro completo.'

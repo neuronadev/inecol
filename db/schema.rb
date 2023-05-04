@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_03_191032) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_175155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_191032) do
     t.index ["proyecto_id"], name: "index_py.financiadoras_on_proyecto_id"
   end
 
+  create_table "fuentes", force: :cascade do |t|
+    t.string "nomfuente"
+    t.bigint "nacionalidad_id", null: false
+    t.bigint "lugar_id", null: false
+    t.bigint "proyecto_id", null: false
+    t.string "nomcontacto"
+    t.string "emailcontacto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lugar_id"], name: "index_py.fuentes_on_lugar_id"
+    t.index ["nacionalidad_id"], name: "index_py.fuentes_on_nacionalidad_id"
+    t.index ["proyecto_id"], name: "index_py.fuentes_on_proyecto_id"
+  end
+
   create_table "instituciones", force: :cascade do |t|
     t.string "nominstitucion"
     t.datetime "created_at", null: false
@@ -47,9 +61,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_191032) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lugares", force: :cascade do |t|
+    t.string "nomlugar"
+    t.string "tiponac", limit: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "medios", force: :cascade do |t|
     t.string "nommedio"
     t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nacionalidades", force: :cascade do |t|
+    t.string "nomnacionalidad"
+    t.string "clave", limit: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,6 +99,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_191032) do
   end
 
   add_foreign_key "financiadoras", "proyectos"
+  add_foreign_key "fuentes", "lugares"
+  add_foreign_key "fuentes", "nacionalidades"
+  add_foreign_key "fuentes", "proyectos"
   add_foreign_key "instituciones", "proyectos"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
