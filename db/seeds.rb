@@ -5,12 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Lugar.create!([
-      {nomlugar:'Aguascalientes', tiponac:'NAC'},
-      {nomlugar:'Baja California', tiponac:'NAC'},
-      {nomlugar:'Afganistán', tiponac:'EXT'},
-      {nomlugar:'Alemania', tiponac:'EXT'}
-
-   ])
-
-   p 'Registro completo.'
+Medio.create!([
+   
+     {nommedio:'Por Convocatopria', clave:'CONV'},
+     {nommedio:'Por Demanda', clave:'DEM'},
+     {nommedio:'Por Iniciativa Propia', clave:'PROP'}
+     
+     ])

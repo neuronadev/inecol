@@ -3,11 +3,14 @@ class ProyectosController < ApplicationController
   end
 
   def show
+      p '--------------------------------------'
+      p Nav::stepAct
   end
 
   def new
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
+     
   end
 
   def create
@@ -15,6 +18,7 @@ class ProyectosController < ApplicationController
       respond_to do |format|
             if @proyecto.save
                    session[:proyecto_id] = @proyecto.id
+                   Nav::stepInc
                    format.html { redirect_to new_fuente_path } 
             else
                    format.html { render :new, status: :bad_request }
