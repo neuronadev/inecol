@@ -10,14 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_175155) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "academicos", force: :cascade do |t|
+    t.bigint "red_id", null: false
+    t.bigint "tacademico_id", null: false
+    t.bigint "nivel_id", null: false
+    t.bigint "convocatoria_id", null: false
+    t.bigint "categoria_id", null: false
+    t.date "fechaingreso"
+    t.date "fechabaja"
+    t.integer "numempleado"
+    t.string "estado", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "persona_id", null: false
+    t.index ["categoria_id"], name: "index_rh.academicos_on_categoria_id"
+    t.index ["convocatoria_id"], name: "index_rh.academicos_on_convocatoria_id"
+    t.index ["nivel_id"], name: "index_rh.academicos_on_nivel_id"
+    t.index ["persona_id"], name: "index_academicos_on_persona_id"
+    t.index ["red_id"], name: "index_rh.academicos_on_red_id"
+    t.index ["tacademico_id"], name: "index_rh.academicos_on_tacademico_id"
+  end
+
+  create_table "categorias", force: :cascade do |t|
+    t.string "nomcategoria"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "clasificaciones", force: :cascade do |t|
     t.string "nomclasifica"
     t.string "clave", limit: 5
     t.string "ovh", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "convocatorias", force: :cascade do |t|
+    t.string "nomconvocatoria"
+    t.string "clave", limit: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,6 +117,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_175155) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "niveles", force: :cascade do |t|
+    t.string "nomnivel"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "participantes", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.string "participable_type", null: false
+    t.bigint "participable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participable_type", "participable_id"], name: "index_py.participantes_on_participable"
+    t.index ["proyecto_id"], name: "index_py.participantes_on_proyecto_id"
+  end
+
+  create_table "personas", force: :cascade do |t|
+    t.string "nombre"
+    t.string "apaterno"
+    t.string "amaterno"
+    t.string "email"
+    t.bigint "tpersona_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tpersona_id"], name: "index_rh.personas_on_tpersona_id"
+  end
+
   create_table "proyectos", force: :cascade do |t|
     t.text "nombre"
     t.datetime "created_at", null: false
@@ -98,11 +161,40 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_175155) do
     t.index ["medio_id"], name: "index_proyectos_on_medio_id"
   end
 
+  create_table "redes", force: :cascade do |t|
+    t.string "nomred"
+    t.string "clave"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tacademicos", force: :cascade do |t|
+    t.string "nomtacademico"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tpersonas", force: :cascade do |t|
+    t.string "nomtpersona"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "academicos", "categorias"
+  add_foreign_key "academicos", "convocatorias"
+  add_foreign_key "academicos", "niveles"
+  add_foreign_key "academicos", "personas"
+  add_foreign_key "academicos", "redes"
+  add_foreign_key "academicos", "tacademicos"
   add_foreign_key "financiadoras", "proyectos"
   add_foreign_key "fuentes", "lugares"
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"
   add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "participantes", "proyectos"
+  add_foreign_key "personas", "tpersonas"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"

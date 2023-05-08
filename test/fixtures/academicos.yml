@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  red: one
+  tacademico: one
+  nivel: one
+  convocatoria: one
+  categoria: one
+  fechaingreso: 2023-05-08
+  fechabaja: 2023-05-08
+  numempleado: 1
+  estado: MyString
+
+two:
+  red: two
+  tacademico: two
+  nivel: two
+  convocatoria: two
+  categoria: two
+  fechaingreso: 2023-05-08
+  fechabaja: 2023-05-08
+  numempleado: 1
+  estado: MyString

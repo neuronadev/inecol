@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto: one
+  participable: one
+  participable_type: Participable
+
+two:
+  proyecto: two
+  participable: two
+  participable_type: Participable

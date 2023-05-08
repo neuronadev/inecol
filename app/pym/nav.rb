@@ -1,6 +1,6 @@
 class Nav
    
-    @@step = 2
+    @@step = 0
     @@steps = ['proyectos', 'fuentes', 'participantes', 'presupuestos', 'aportados']
 
     def self.wizard_next(c, a, p)  # c = Nombre del controlador actual. a = Accion del controlador. p = proyecto id almacenado en la sesion. ejem: fuentes/new

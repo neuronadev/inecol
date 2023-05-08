@@ -5,10 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Medio.create!([
-   
-     {nommedio:'Por Convocatopria', clave:'CONV'},
-     {nommedio:'Por Demanda', clave:'DEM'},
-     {nommedio:'Por Iniciativa Propia', clave:'PROP'}
-     
+Tparticipante.create!([
+      {nomtparticipante:'Academico', clave:'ACAD'},
+      {nomtparticipante:'Estudiante', clave:'EST'}
      ])
