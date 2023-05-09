@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -124,14 +124,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "participantes", force: :cascade do |t|
-    t.bigint "proyecto_id", null: false
-    t.string "participable_type", null: false
-    t.bigint "participable_id", null: false
+  create_table "pacademicos", force: :cascade do |t|
+    t.bigint "participante_id", null: false
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.boolean "responsable"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["participable_type", "participable_id"], name: "index_py.participantes_on_participable"
+    t.bigint "academico_id", null: false
+    t.index ["academico_id"], name: "index_pacademicos_on_academico_id"
+    t.index ["participante_id"], name: "index_py.pacademicos_on_participante_id"
+  end
+
+  create_table "participantes", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.bigint "tparticipante_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["proyecto_id"], name: "index_py.participantes_on_proyecto_id"
+    t.index ["tparticipante_id"], name: "index_py.participantes_on_tparticipante_id"
   end
 
   create_table "personas", force: :cascade do |t|
@@ -143,6 +153,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tpersona_id"], name: "index_rh.personas_on_tpersona_id"
+  end
+
+  create_table "pestudiantes", force: :cascade do |t|
+    t.bigint "participante_id", null: false
+    t.bigint "nivel_id", null: false
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nivel_id"], name: "index_py.pestudiantes_on_nivel_id"
+    t.index ["participante_id"], name: "index_py.pestudiantes_on_participante_id"
   end
 
   create_table "proyectos", force: :cascade do |t|
@@ -175,6 +195,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tparticipantes", force: :cascade do |t|
+    t.string "nomtparticipante"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tpersonas", force: :cascade do |t|
     t.string "nomtpersona"
     t.string "clave", limit: 5
@@ -193,8 +220,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_220759) do
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"
   add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "pacademicos", "academicos"
+  add_foreign_key "pacademicos", "participantes"
   add_foreign_key "participantes", "proyectos"
+  add_foreign_key "participantes", "tparticipantes"
   add_foreign_key "personas", "tpersonas"
+  add_foreign_key "pestudiantes", "niveles"
+  add_foreign_key "pestudiantes", "participantes"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"

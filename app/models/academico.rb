@@ -5,4 +5,5 @@ class Academico < ApplicationRecord
   belongs_to :nivel
   belongs_to :convocatoria
   belongs_to :categoria
+  belongs_to :persona
 end

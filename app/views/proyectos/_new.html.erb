@@ -5,7 +5,7 @@
                 <%= form.label :nombre, 'Nombre del Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
             </div>
             <div class="md:w-4/5">
-               <%= form.text_field :nombre, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
+               <%= form.text_field :nombre, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <%= form.select :medio_id,
                                         Medio.all.map{|item| [item.nommedio, item.id]},
                                         {prompt: '-- Seleccione una opción --'},
-                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
+                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
 
                 %>   
             </div>
@@ -53,7 +53,7 @@
                 <%= form.select :linea_id,
                                         Linea.all.map{|item| [item.nomlinea, item.id]},
                                         {prompt: '-- Seleccione una opción --'},
-                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
+                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
 
                 %>   
             </div>
@@ -64,7 +64,7 @@
                 <%= form.label :periodo, 'Periodo de Ejecución:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
             </div>
             <div class="md:w-2/5">
-               <%= form.text_field :periodo, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
+               <%= form.text_field :periodo, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
             </div>
         </div>
 

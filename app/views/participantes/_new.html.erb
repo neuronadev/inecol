@@ -1,0 +1,14 @@
+<div class="w-3/4">
+
+    <%= form_with(model:@participante,
+                    data:{ 
+                            controller:'nested-form-inv nested-form-tec nested-form-est',
+                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                            }) do |form|
+    %>
+       <%= render 'participantes/cont_inv', form:form %>
+       <%= render 'participantes/cont_tec', form:form %>
+
+    <% end %>
+</div> 
+ 

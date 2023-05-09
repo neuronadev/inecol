@@ -7,6 +7,9 @@ class ParticipantesController < ApplicationController
 
   def new
     @proyecto = Proyecto.find(session[:proyecto_id]) 
+    @participante = Participante.new
+    @participante.pacademicos.build
+    @participante.pestudiantes.build
   end
 
   def edit
