@@ -1,18 +1,23 @@
-<div class="flex p-1 mt-2">
-      <div>Tecnicos</div>  
-</div>
-<div class="">
-      <template data-nested-form-tec-target="template" >
-          <%= form.fields_for :pacademicos, Pacademico.new, child_index:'NEW_RECORD' do |pacad_fields|%>
-               <%= render 'participantes/part_tec_form', f: pacad_fields %>
-          <% end %>
-      </template>
+<div class="border border-gray-200">
+            
+            <div class="p-5">
+                  <template data-nested-form-tec-target="template" >
+                  <%= form.fields_for :pacademicos, Pacademico.new, child_index:'NEW_RECORD' do |pacad_fields|%>
+                        <%= render 'participantes/part_tec_form', f: pacad_fields %>
+                  <% end %>
+                  </template>
 
-      <%= form.fields_for :pacademicos do |pacad_fields|%>
-              <%= render 'participantes/part_tec_form', f: pacad_fields %>
-      <% end %>
+                  <%= form.fields_for :pacademicos do |pacad_fields|%>
+                        <%= render 'participantes/part_tec_form', f: pacad_fields %>
+                  <% end %>
 
-      <div data-nested-form-tec-target="target"></div>
-      
-      <button type="button" data-action="nested-form-tec#add">Add</button>
-</div>
+                  <div data-nested-form-tec-target="target"></div>
+                  
+                   <div class="w-full flex mt-3 "> 
+                        <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-tec#add">
+                              <%= inline_svg_tag 'svg/agregar-usuario' %>
+                              <div class="flex mx-1.5">Agregar Técnico...</div>
+                        </button>
+                  </div>  
+            </div>
+</div>            

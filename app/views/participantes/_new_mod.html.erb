@@ -1,23 +1,61 @@
-<div class='w-full'>
-    <div class="w-full">
-        <%= select_tag 'academico', 
-        options_for_select(Academico.all.map{|item| [item.persona.ap_nom, item.id] if ['INV','CAT'].include?(item.tacademico.clave) }),
-            {include_blank: true,
-            data:{controller:'slim', slim_target:'field'}
-            }
-        
-        %>   
-    </div>  
-    <div class="w-3/4">
+<div class="w-3/4" data-controller="tabspr">
+   <%= form_with(model:@participante,
+                    data:{ 
+                            controller:'nested-form-inv nested-form-tec nested-form-est',
+                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                            }) do |form|
+           %>
+           <%= form.hidden_field :proyecto_id, value:7 %>
+           <%= form.hidden_field :tparticipante_id, value:1 %> 
+           <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="profile-tab-example" type="button" role="tab" aria-controls="profile-example" aria-selected="false">Investigadores</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab-example" type="button" role="tab" aria-controls="dashboard-example" aria-selected="false">Técnicos</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab-example" type="button" role="tab" aria-controls="settings-example" aria-selected="false">Estudiantes</button>
+                    </li>
+                    
+                </ul>
+            </div>
 
-        <%= form_with(model:@participante,
-                        data:{ 
-                                controller:'nested-form-inv nested-form-tec nested-form-est',
-                                nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
-                                }) do |form|
-        %>
-        <%= render 'participantes/cont_inv', form:form %>
-
-        <% end %>
-    </div> 
-</div>
+            <div id="tabContentExample" class="mt-2">
+                
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
+                    <%= render 'participantes/cont_inv', form:form %>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
+                    <%= render 'participantes/cont_tec', form:form %>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
+                    <%= render 'participantes/cont_est', form:form %> 
+                </div>
+               
+            </div> 
+            
+            <div class="w-full flex justify-center ">
+                <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
+                     <div>
+                           <div class="flex w-full justify-center">Investigadores</div>
+                           <div class="flex w-full justify-center"> 0.0 % </div>
+                     </div> 
+                </div>       
+                <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
+                      <div>
+                           <div class="flex w-full justify-center">Técnicos</div>
+                           <div class="flex w-full justify-center"> 0.0 % </div>
+                     </div> 
+                </div>       
+                <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
+                       <div>
+                           <div class="flex w-full justify-center font-semibold"> Total </div>
+                           <div class="flex w-full justify-center font-semibold"> 0.0 % </div>
+                     </div> 
+                </div>     
+            </div>  
+       <%= form.submit %>       
+    <% end %>                
+</div>    

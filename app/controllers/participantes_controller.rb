@@ -23,12 +23,12 @@ class ParticipantesController < ApplicationController
   def create
        @participante = Participante.new(participante_params)
        respond_to do |format|
-        if @participante.save
-               format.html { redirect_to edit_participante_path(@participante) } 
-        else
-               format.html { render :new, status: :bad_request }
-        end
-  end    
+            if @participante.save
+                  format.html { redirect_to edit_participante_path(@participante) } 
+            else
+                  format.html { render :new, status: :bad_request }
+            end
+       end    
   end
 
   private
@@ -36,7 +36,8 @@ class ParticipantesController < ApplicationController
        params.require(:participante).permit(
                         :proyecto_id, 
                         :tparticipante_id,
-                        pacademicos_attributes:[:id, :academico_id, :responsable, :porcentaje, :_destroy]
+                        pacademicos_attributes:[:id, :academico_id, :responsable, :porcentaje, :_destroy],
+                        pestudiantes_attributes:[:id, :nombre, :nivel_id, :_destroy]
                      )
   end
 end
