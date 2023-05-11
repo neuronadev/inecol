@@ -6,8 +6,12 @@
                             nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
                             }) do |form|
     %>
+       <%= form.hidden_field :proyecto_id, value:7 %>
+       <%= form.hidden_field :tparticipante_id, value:1 %>
        <%= render 'participantes/cont_inv', form:form %>
        <%= render 'participantes/cont_tec', form:form %>
+
+       <%= form.submit %>
 
     <% end %>
 </div> 

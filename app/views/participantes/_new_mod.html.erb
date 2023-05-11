@@ -1,0 +1,23 @@
+<div class='w-full'>
+    <div class="w-full">
+        <%= select_tag 'academico', 
+        options_for_select(Academico.all.map{|item| [item.persona.ap_nom, item.id] if ['INV','CAT'].include?(item.tacademico.clave) }),
+            {include_blank: true,
+            data:{controller:'slim', slim_target:'field'}
+            }
+        
+        %>   
+    </div>  
+    <div class="w-3/4">
+
+        <%= form_with(model:@participante,
+                        data:{ 
+                                controller:'nested-form-inv nested-form-tec nested-form-est',
+                                nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                                }) do |form|
+        %>
+        <%= render 'participantes/cont_inv', form:form %>
+
+        <% end %>
+    </div> 
+</div>
