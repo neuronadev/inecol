@@ -14,8 +14,11 @@
      </div>
 
      <div class="w-2/12 flex justify-center items-center">
-           <button type="button" data-action="nested-form-est#remove">Eliminar</button>
-     </div>
+                <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-est#remove">
+                         <%= inline_svg_tag 'svg/cruz' %>
+                        
+                  </button>
+          </div>
 
      <%= f.hidden_field :_destroy %>       
 </div>

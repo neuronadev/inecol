@@ -18,11 +18,18 @@
           </div>
 
           <div class="w-2/12 flex justify-center">
-               <%= f.text_field :porcentaje, class:'portec appearance-none border-1 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+               <%= f.text_field :porcentaje, 
+                    class:'portec appearance-none border-1 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                    data:{action:'keydown->utils#keyEnter keyup->utils#formatPorcent keyup->utils#sumaPorc' }
+               %>
           </div>
 
+        
           <div class="w-2/12 flex justify-center items-center">
-               <button type="button" data-action="nested-form-tec#remove">Eliminar</button>
+                <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-tec#remove">
+                         <%= inline_svg_tag 'svg/cruz' %>
+                        
+                  </button>
           </div>
 
           <%= f.hidden_field :_destroy %>

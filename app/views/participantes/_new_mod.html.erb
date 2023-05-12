@@ -1,4 +1,4 @@
-<div class="w-3/4" data-controller="tabspr">
+<div class="w-3/4" data-controller="tabspr utils">
    <%= form_with(model:@participante,
                     data:{ 
                             controller:'nested-form-inv nested-form-tec nested-form-est',
@@ -40,19 +40,19 @@
                 <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
                      <div>
                            <div class="flex w-full justify-center">Investigadores</div>
-                           <div class="flex w-full justify-center"> 0.0 % </div>
+                           <div id="tpinvest" class="flex w-full justify-center"> 0.0 % </div>
                      </div> 
                 </div>       
                 <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
                       <div>
                            <div class="flex w-full justify-center">Técnicos</div>
-                           <div class="flex w-full justify-center"> 0.0 % </div>
+                           <div id="tptec" class="flex w-full justify-center"> 0.0 % </div>
                      </div> 
                 </div>       
                 <div class="flex w-1/2 justify-center p-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
                        <div>
                            <div class="flex w-full justify-center font-semibold"> Total </div>
-                           <div class="flex w-full justify-center font-semibold"> 0.0 % </div>
+                           <div id="tpf" class="flex w-full justify-center font-semibold"> 0.0 % </div>
                      </div> 
                 </div>     
             </div>  
