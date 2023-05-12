@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   
   resources :participantes
+  resources :presupuestos 
 
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

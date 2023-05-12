@@ -24,7 +24,7 @@ class ParticipantesController < ApplicationController
        @participante = Participante.new(participante_params)
        respond_to do |format|
             if @participante.save
-                  format.html { redirect_to edit_participante_path(@participante) } 
+                  format.html { redirect_to new_presupuesto_path } 
             else
                   format.html { render :new, status: :bad_request }
             end

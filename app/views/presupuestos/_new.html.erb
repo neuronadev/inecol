@@ -1,0 +1,83 @@
+<div class="w-full" data-controller="">
+      <%= form_with(model:@presupuesto,
+                    data:{ 
+                            controller:'nested-form-scap ',
+                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                         }) do |form|
+      %>
+                <%= form.hidden_field :proyecto_id, value:7 %>
+
+                <div class="w-1/2">
+                      <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :costo, 'Costo del Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :costo, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                       </div>
+                </div>
+
+                <div class="flex w-full"> 
+                        <div class="w-1/2">
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :costo, 'Costo del Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :costo, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :iva, 'IVA:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :iva, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :tproyecto, 'Total Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :tproyecto, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+
+
+                        </div>
+
+                        <div class="w-1/2">
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :overhead, '20% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :overhead, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :estimulo, '10% Estímulo:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :estimulo, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+                                <div class="md:flex md:items-center mb-3">
+                                    <div class="md:w-2/5">
+                                        <%= form.label :tgastos, 'Total para Gastos:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                    </div>
+                                    <div class="md:w-2/5">
+                                        <%= form.text_field :tgastos, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+
+                <div class="md:mt-5">
+                    Desglose de Gastos
+                </div>
+      <% end %>
+</div>

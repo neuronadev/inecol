@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
     t.index ["persona_id"], name: "index_academicos_on_persona_id"
     t.index ["red_id"], name: "index_rh.academicos_on_red_id"
     t.index ["tacademico_id"], name: "index_rh.academicos_on_tacademico_id"
+  end
+
+  create_table "capitulos", force: :cascade do |t|
+    t.string "nomcapitulo"
+    t.integer "orden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categorias", force: :cascade do |t|
@@ -110,6 +117,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "monedas", force: :cascade do |t|
+    t.string "nommoneda"
+    t.string "simbolo", limit: 3
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "nacionalidades", force: :cascade do |t|
     t.string "nomnacionalidad"
     t.string "clave", limit: 3
@@ -165,6 +180,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
     t.index ["participante_id"], name: "index_py.pestudiantes_on_participante_id"
   end
 
+  create_table "presupuestos", force: :cascade do |t|
+    t.decimal "costo", precision: 16, scale: 2
+    t.decimal "iva", precision: 16, scale: 2
+    t.decimal "tproyecto", precision: 16, scale: 2
+    t.decimal "overhead", precision: 16, scale: 2
+    t.decimal "estimulo", precision: 16, scale: 2
+    t.decimal "tgastos", precision: 16, scale: 2
+    t.bigint "proyecto_id", null: false
+    t.bigint "moneda_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moneda_id"], name: "index_py.presupuestos_on_moneda_id"
+    t.index ["proyecto_id"], name: "index_py.presupuestos_on_proyecto_id"
+  end
+
   create_table "proyectos", force: :cascade do |t|
     t.text "nombre"
     t.datetime "created_at", null: false
@@ -186,6 +216,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
     t.string "clave"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "solicitados", force: :cascade do |t|
+    t.bigint "presupuesto_id", null: false
+    t.bigint "capitulo_id", null: false
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["capitulo_id"], name: "index_py.solicitados_on_capitulo_id"
+    t.index ["presupuesto_id"], name: "index_py.solicitados_on_presupuesto_id"
   end
 
   create_table "tacademicos", force: :cascade do |t|
@@ -227,7 +267,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_161432) do
   add_foreign_key "personas", "tpersonas"
   add_foreign_key "pestudiantes", "niveles"
   add_foreign_key "pestudiantes", "participantes"
+  add_foreign_key "presupuestos", "monedas"
+  add_foreign_key "presupuestos", "proyectos"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"
+  add_foreign_key "solicitados", "capitulos"
+  add_foreign_key "solicitados", "presupuestos"
 end

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  costo: 9.99
+  iva: 9.99
+  tproyecto: 9.99
+  overhead: 9.99
+  estimulo: 9.99
+  tgastos: 9.99
+  proyecto: one
+  moneda: one
+
+two:
+  costo: 9.99
+  iva: 9.99
+  tproyecto: 9.99
+  overhead: 9.99
+  estimulo: 9.99
+  tgastos: 9.99
+  proyecto: two
+  moneda: two
