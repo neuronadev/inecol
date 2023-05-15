@@ -1,0 +1,73 @@
+<div class="flex w-full ">
+
+  <div class="md:flex md:items-center mb-3 w-2/6">
+        <div class="md:w-2/5">
+            <%= form.label :moneda_id, 'Moneda:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+            </div>
+            <div class="md:w-3/5">
+                <%= form.select :moneda_id,
+                        Moneda.all.map{|item| [item.nommoneda, item.id]},
+                            {prompt: '-- Seleccione --'},
+                            {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
+            %>     
+        </div>
+  </div>
+  <div class="md:flex md:items-center mb-3 w-2/6">
+           <div class="md:w-6/12">
+                  <%= form.label :costo, 'Costo del Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+           </div>
+           <div class="md:w-6/12">
+                  <%= form.text_field :costo, 
+                      class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full 
+                             py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white 
+                             focus:border-purple-500'
+                  %>
+           </div>
+  </div>
+  <div class="md:flex md:items-center mb-3 w-2/6 ml-2">
+          <button type="button" 
+                  class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 p-1",
+                  data-action='click->presup-sol#costos'
+          >
+               <%= inline_svg_tag 'svg/usd-circulo' %>
+               <div class="p-2">Calcular montos</div>
+          </button>
+
+  </div> 
+</div>
+
+<div class="flex w-full">
+
+  <div class="w-1/2">
+
+    <%= render 'presupuestos/campos/iva', form:form %>
+    
+    <div class="md:flex md:items-center mb-3">
+      <div class="md:w-2/5">
+        <%= form.label :tproyecto, 'Total Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+      </div>
+      <div class="md:w-2/5">
+        <%= form.text_field :tproyecto, readonly:true, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="w-1/2">
+    
+    <%= render 'presupuestos/campos/porc_ovh', form:form %>
+ 
+    <%= render 'presupuestos/campos/porc_estimulo', form:form %>
+
+    
+    <div class="md:flex md:items-center mb-3">
+      <div class="md:w-2/5">
+        <%= form.label :tgastos, 'Total para Gastos:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+      </div>
+      <div class="md:w-2/5">
+        <%= form.text_field :tgastos, readonly:true, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+      </div>
+    </div>
+
+  </div>
+</div>

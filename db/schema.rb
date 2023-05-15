@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
     t.index ["persona_id"], name: "index_academicos_on_persona_id"
     t.index ["red_id"], name: "index_rh.academicos_on_red_id"
     t.index ["tacademico_id"], name: "index_rh.academicos_on_tacademico_id"
+  end
+
+  create_table "aportados", force: :cascade do |t|
+    t.bigint "recurso_id", null: false
+    t.bigint "fondo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fondo_id"], name: "index_py.aportados_on_fondo_id"
+    t.index ["recurso_id"], name: "index_py.aportados_on_recurso_id"
   end
 
   create_table "capitulos", force: :cascade do |t|
@@ -72,6 +81,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["proyecto_id"], name: "index_py.financiadoras_on_proyecto_id"
+  end
+
+  create_table "fondos", force: :cascade do |t|
+    t.string "nomfondo"
+    t.string "clave"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fuentes", force: :cascade do |t|
@@ -211,6 +227,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
     t.index ["medio_id"], name: "index_proyectos_on_medio_id"
   end
 
+  create_table "recursos", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.recursos_on_proyecto_id"
+  end
+
   create_table "redes", force: :cascade do |t|
     t.string "nomred"
     t.string "clave"
@@ -255,6 +278,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
   add_foreign_key "academicos", "personas"
   add_foreign_key "academicos", "redes"
   add_foreign_key "academicos", "tacademicos"
+  add_foreign_key "aportados", "fondos"
+  add_foreign_key "aportados", "recursos"
   add_foreign_key "financiadoras", "proyectos"
   add_foreign_key "fuentes", "lugares"
   add_foreign_key "fuentes", "nacionalidades"
@@ -272,6 +297,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_182605) do
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"
+  add_foreign_key "recursos", "proyectos"
   add_foreign_key "solicitados", "capitulos"
   add_foreign_key "solicitados", "presupuestos"
 end

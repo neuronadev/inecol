@@ -1,0 +1,34 @@
+<div class="w-full" data-controller="">
+  <%= form_with(model:@recurso,
+                    data:{ 
+                            controller:'nested-form-apor',
+                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                         }) do |form|
+  %>
+       <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+
+      
+ 
+       <div class="md:flex md:items-center mb-3 w-10/12">
+             <div class="p-5">
+                  <%= form.fields_for :aportados do |apor_fields|%>
+                     <%= render 'recursos/apor_ffis', f: apor_fields %>
+                  <% end %>
+
+                  <%= form.fields_for :aportados do |apor_fields|%>
+                      <%= render 'recursos/apor_fesp', f: apor_fields %>
+                  <% end %>
+
+                  <%= form.fields_for :aportados do |apor_fields|%>
+                      <%= render 'recursos/apor_fcon', f: apor_fields %>
+                  <% end %>
+
+
+             </div>
+       </div>
+
+       <div>
+           <%= form.submit %>
+       </div>
+  <% end %>
+</div>

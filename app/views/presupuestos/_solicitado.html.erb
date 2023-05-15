@@ -1,0 +1,24 @@
+<div class="md:flex md:items-center mb-3 w-10/12">
+       <div class="p-5">
+              <template data-nested-form-sol-target="template" >
+                     <%= form.fields_for :solicitados, Solicitado.new, child_index:'NEW_RECORD' do |sol_fields|%>
+                          <%= render 'presupuestos/sol_form', f: sol_fields %>
+                    <% end %>
+              </template>
+              
+              <%= form.fields_for :solicitados do |sol_fields|%>
+                    <%= render 'presupuestos/sol_form', f: sol_fields %>
+              <% end %>
+ 
+              <div data-nested-form-sol-target="target"></div>
+
+              <div class="w-full flex mt-3 ">
+                  <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-sol#add">
+                      <%= inline_svg_tag 'svg/agregar-usuario' %>
+                      <div class="flex mx-1.5">Agregar capítulo...</div>
+                  </button>
+              </div>
+  
+
+       </div>
+</div>
