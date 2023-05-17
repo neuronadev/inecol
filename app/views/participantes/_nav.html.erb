@@ -11,7 +11,7 @@
      <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
      <div><%= link_to 'Siguiente', new_presupuesto_path %></div>
 <% end %>
-<%  if session[:step] == 4 || session[:step] == 5 %>
+<%  if session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
   <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
   <div><%= link_to 'Siguiente', presupuesto_path(@participante.proyecto.presupuesto.id) %></div>
 <% end %>

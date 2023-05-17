@@ -9,8 +9,6 @@ class ProyectosController < ApplicationController
   def new
       session[:proyecto_id] = nil
       session[:step] = 0
-      Nav::reset
-      Nav::offRecurso
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
      

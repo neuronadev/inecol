@@ -9,9 +9,9 @@
                   <% end %>
               </template>
 
-              <%= f.fields_for :apmontos do |apmonto_fields|%>
-                       <%= render 'recursos/ffis_fields', f: apmonto_fields %>
-              <% end %>
+               <%= f.fields_for :apmontos do |apmonto_fields|%>
+                         <%= render 'recursos/ffis_fields', f: apmonto_fields %>
+               <% end %>
 
               <div data-nested-form-ffis-target="target"></div>
 

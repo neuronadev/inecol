@@ -1,18 +1,17 @@
-<div class="w-3/4">
-
-    <%= form_with(model:@participante,
-                    data:{ 
-                            controller:'nested-form-inv nested-form-tec nested-form-est',
-                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
-                            }) do |form|
-    %>
-       <%= form.hidden_field :proyecto_id, value:7 %>
-       <%= form.hidden_field :tparticipante_id, value:1 %>
-       <%= render 'participantes/cont_inv', form:form %>
-       <%= render 'participantes/cont_tec', form:form %>
-
-       <%= form.submit %>
-
-    <% end %>
-</div> 
- 
+<div class='w-full'>
+  <div class="w-full text-slate-700">
+      <div class="mt-3 flex align-middle border-b-2 border-slate-200">
+        <div><%= inline_svg_tag 'svg/usuarios' %></div>
+        <div class="ml-3">Editar Participantes</div>
+      </div>
+      
+      <div class="mt-5 flex justify-center">
+        <%= render "new_mod" %>
+      </div>
+  </div>  
+  
+  <div>
+      <%= render 'nav' %>
+  </div>
+  
+</div>

@@ -8,7 +8,7 @@
   <%= link_to 'Siguiente', new_fuente_path %>
 <% end %>
 
-<%  if session[:step] == 2 || session[:step] == 3 || session[:step] == 4 || session[:step] == 5  %>
+<%  if session[:step] == 2 || session[:step] == 3 || session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
   <%= link_to 'Siguiente', fuente_path(@proyecto.fuente.id) %>
 <% end %>
 

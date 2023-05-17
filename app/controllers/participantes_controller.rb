@@ -4,6 +4,13 @@ class ParticipantesController < ApplicationController
 
   def show
       @participante = Participante.find(params[:id])
+      @inv = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV')
+      @tec = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC')
+      @est = @participante.pestudiantes
+
+      @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
+      @tec_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('pacademicos.porcentaje')
+      @tot_porc = @inv_sum.to_f + @tec_sum.to_f
   end
 
   def new
@@ -15,10 +22,21 @@ class ParticipantesController < ApplicationController
 
   def edit
       @participante = Participante.find(params[:id]) 
-
+      @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
+      @tec_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('pacademicos.porcentaje')
+      @tot_porc = @inv_sum.to_f + @tec_sum.to_f
   end
 
   def update
+      @participante = Participante.find(params[:id])
+      @participante.update(participante_params)
+      respond_to do |format|
+           if @participante.save
+               format.html { redirect_to participante_path(@participante) }
+           else
+               format.html { render :edit, status: :bad_request }
+           end
+      end
   end
 
   def create

@@ -3,8 +3,8 @@
   <div class="md:flex md:items-center mb-3 w-2/6">
         <div class="md:w-2/5">
             <%= form.label :moneda_id, 'Moneda:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
-            </div>
-            <div class="md:w-3/5">
+        </div>
+        <div class="md:w-3/5">
                 <%= form.select :moneda_id,
                         Moneda.all.map{|item| [item.nommoneda, item.id]},
                             {prompt: '-- Seleccione --'},

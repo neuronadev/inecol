@@ -1,8 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl">Recursos#show</h1>
-  <p>Find me in app/views/recursos/show.html.erb</p>
-  <div>
-  <%= render 'nav' %>
-</div>
+<div class="w-full text-slate-700">
+    <div class="mt-3 flex align-middle border-b-2 border-slate-200">
+          <div class="flex w-1/3">
+            <div><%= inline_svg_tag 'svg/comprobacion-de-lista' %></div>
+            <div class="ml-3">Recursos aportados por el INECOL</div>
+          </div>   
+          <div class="flex w-2/3 justify-between">
+              <div class="justify-self-center"><%= render "layouts/interfaz/steps" %></div>
+              <div class="grid justify-self-end"><%= render 'nav' %></div>
+          </div> 
+    </div>
+    
+    <div class="mt-5">
+       <%= render "show" %>
+    </div>
 
-</div>
+    <div>
+        <%= link_to 'Editar', edit_recurso_path(@recurso.id) %>
+    </div> 
+
+</div> 

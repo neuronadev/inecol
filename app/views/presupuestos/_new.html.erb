@@ -5,7 +5,13 @@
                             nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
                          }) do |form|
   %>
-       <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+
+       <% if controller.action_name == 'new' %>  
+              <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+       <% end %> 
+       <% if controller.action_name == 'edit' %>  
+              <%= form.hidden_field :proyecto_id, value:@presupuesto.proyecto_id %>
+       <% end %> 
 
        <%= render 'costos', form:form %>
 

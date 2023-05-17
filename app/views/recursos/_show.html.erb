@@ -1,0 +1,44 @@
+<div class="w-full" data-controller="tabsrec">
+        <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                        hover:border-gray-300 dark:hover:text-gray-300" 
+                                    id="profile-tab-example" 
+                                    type="button" 
+                                    role="tab" 
+                                    aria-controls="profile-example" 
+                                    aria-selected="false">Fondos Fiscales</button>
+                        </li>
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                        hover:border-gray-300 dark:hover:text-gray-300" 
+                                    id="dashboard-tab-example" 
+                                    type="button" 
+                                    role="tab" 
+                                    aria-controls="dashboard-example" 
+                                    aria-selected="false">Aportación en Especie</button>
+                        </li>
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                        hover:border-gray-300 dark:hover:text-gray-300" 
+                                    id="settings-tab-example" 
+                                    type="button" 
+                                    role="tab" 
+                                    aria-controls="settings-example" 
+                                    aria-selected="false">Fondos Concurrentes</button>
+                        </li>
+                    </ul>
+    </div>
+    <div id="tabContentExample" class="mt-2">
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
+                       <%= render 'show_caps', items:@ffis, total:@tot_ffis %>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
+                       <%= render 'show_caps', items:@aes, total:@tot_aes %>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
+                       <%= render 'show_caps', items:@fcon, total:@tot_fcon %>
+                </div>
+        </div>
+</div>    

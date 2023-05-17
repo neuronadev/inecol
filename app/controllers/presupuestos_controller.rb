@@ -4,6 +4,7 @@ class PresupuestosController < ApplicationController
 
   def show
       @presupuesto = Presupuesto.find(params[:id]) 
+      @sum_caps = @presupuesto.solicitados.sum(:monto)
   end
 
   def new
@@ -21,9 +22,19 @@ class PresupuestosController < ApplicationController
   end
 
   def edit
+      @presupuesto = Presupuesto.find(params[:id])  
   end
 
   def update
+      @presupuesto = Presupuesto.find(params[:id])
+      @presupuesto.update(presupuesto_params)
+      respond_to do |format|
+           if @presupuesto.save
+               format.html { redirect_to presupuesto_path(@presupuesto) }
+           else
+               format.html { render :edit, status: :bad_request }
+           end
+      end
   end
 
   def create

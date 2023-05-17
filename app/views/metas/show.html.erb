@@ -1,4 +1,19 @@
-<div>
-  <h1 class="font-bold text-4xl">Metas#show</h1>
-  <p>Find me in app/views/metas/show.html.erb</p>
-</div>
+<div class="w-full text-slate-700">
+    <div class="mt-3 flex align-middle border-b-2 border-slate-200">
+      <div><%= inline_svg_tag 'svg/plan-de-proyecto' %></div>
+      <div class="ml-3">Objetivo del Proyecto</div>
+    </div>
+    
+    <div class="mt-5">
+       <%= render "show" %>
+    </div>
+
+    <div> 
+        <%= link_to 'Editar', edit_meta_path(@meta) %>
+    </div>
+
+    <div>
+       <%= render 'nav' %>
+   </div>
+
+</div>  

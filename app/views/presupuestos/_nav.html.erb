@@ -10,10 +10,11 @@
      <%= link_to 'Atras', participante_path(@presupuesto.proyecto.participante.id) %>
      <%= link_to 'Siguiente',  new_recurso_path %>
 <% end %>
-<%  if session[:step] == 5 %>
+<%  if session[:step] == 5 || session[:step] == 6 %>
   <%= link_to 'Atras', participante_path(@presupuesto.proyecto.participante.id) %>
   <%= link_to 'Siguiente', recurso_path(@presupuesto.proyecto.recurso.id) %>
 <% end %>
+
 
 
 

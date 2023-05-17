@@ -1,0 +1,50 @@
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Nombre Investigador
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Tipo
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Responsable Técnico
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Porcentaje
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% @inv.each do |part_inv| %>
+                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  <%= part_inv.academico.persona.ap_nom %>
+                            </th>
+                            <td class="px-6 py-4 text-center">
+                                  <%= part_inv.academico.tacademico.nomtacademico %>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                  
+                                  <% if part_inv.responsable %>
+                                        <div class="flex justify-center"><%= inline_svg_tag 'svg/controlar' %></div>
+                                  <% end %>
+
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                  <%= part_inv.porcentaje %>
+                            </td>
+                        </tr>
+            <% end %>
+       </tbody>
+       <tfoot>
+        <tr>
+            <td colspan='3' class="text-right px-2 py-2 font-medium text-gray-900 whitespace-nowrap">Total</td>
+            <td class="text-center px-2 py-2 font-medium text-gray-900 whitespace-nowrap"><%= @inv_sum %></td>
+        </tr>
+        </tfoot>
+
+    </table>   
+</div>    
