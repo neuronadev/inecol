@@ -1,7 +1,8 @@
 class Nav
    
     @@step = 0
-    @@steps = ['proyectos', 'fuentes', 'participantes', 'presupuestos', 'aportados']
+    @@recurso = 0
+    @@steps = ['proyectos', 'fuentes', 'participantes', 'presupuestos', 'aportados','metas']
 
     def self.wizard_next(c, a, p)  # c = Nombre del controlador actual. a = Accion del controlador. p = proyecto id almacenado en la sesion. ejem: fuentes/new
         step_nav = @@steps.index c 
@@ -47,7 +48,20 @@ class Nav
          @@step += 1
     end
     def self.stepAct
-         @@step
+         return @@step
     end
+    def self.reset
+         @@step = 0
+    end
+    def self.onRecurso
+         @@recurso = 1
+    end
+    def self.offRecurso
+         @@recurso = 0
+    end
+    def self.recurso
+        return @@recurso
+    end
+
 
 end

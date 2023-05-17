@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aportado: one
+  capitulo: one
+  monto: 9.99
+
+two:
+  aportado: two
+  capitulo: two
+  monto: 9.99

@@ -4,7 +4,7 @@ class FuentesController < ApplicationController
   end
 
   def show
-   
+      @fuente = Fuente.find(params[:id])
   end
 
   def new
@@ -13,15 +13,27 @@ class FuentesController < ApplicationController
   end
 
   def edit
+      @fuente = Fuente.find(params[:id])
   end
 
   def update
+      @fuente = Fuente.find(params[:id]) 
+      @fuente.update(fuente_params)
+      respond_to do |format|
+           if @fuente.save
+               format.html { redirect_to fuente_path(@fuente) }
+           else
+               format.html { render :edit, status: :bad_request }
+           end
+      end
   end
 
   def create
       @fuente = Fuente.new(fuente_params)
       respond_to do |format|
           if @fuente.save
+                Nav::stepInc
+                session[:step] += 1
                 format.html { redirect_to new_participante_path } 
           else
                 format.html { render :new, status: :bad_request }

@@ -1,0 +1,18 @@
+<% 
+   puts 'Paso module:' + Nav::stepAct.to_s
+   puts 'Paso session:' + session[:step].to_s
+
+   
+%>
+<%  if session[:step] == 2 %>
+     <%= link_to 'Atras', fuente_path(@proyecto.fuente.id) %>
+<% end %>
+<%  if session[:step] == 3 %>
+     <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
+     <div><%= link_to 'Siguiente', new_presupuesto_path %></div>
+<% end %>
+<%  if session[:step] == 4 || session[:step] == 5 %>
+  <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
+  <div><%= link_to 'Siguiente', presupuesto_path(@participante.proyecto.presupuesto.id) %></div>
+<% end %>
+

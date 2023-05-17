@@ -1,0 +1,21 @@
+<div class="nested-form-wrapper flex p-1" data-new-record="<%= f.object.new_record? %>" >
+  <div class="w-4/6 flex justify-center">
+    <%= f.select :capitulo_id,
+                         Capitulo.all.map{|item| [item.nomcapitulo, item.id]},
+                         {include_blank: true},
+                         {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'} 
+    %>
+  </div>
+  <div class="w-3/12 flex justify-center">
+    <%= f.text_field :monto, 
+                   class:'capmonto appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                    data:{action:'keydown->utils#keyEnter keyup->utils#formatPorcent'}
+                   %>
+  </div>
+  <div class="w-2/12 flex justify-center items-center">
+    <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fesp#remove">
+      <%= inline_svg_tag 'svg/cruz' %>
+    </button>
+  </div>
+  <%= f.hidden_field :_destroy %>
+</div>

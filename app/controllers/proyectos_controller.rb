@@ -3,11 +3,14 @@ class ProyectosController < ApplicationController
   end
 
   def show
-      p '--------------------------------------'
-      p Nav::stepAct
+      @proyecto = Proyecto.find(params[:id])
   end
 
   def new
+      session[:proyecto_id] = nil
+      session[:step] = 0
+      Nav::reset
+      Nav::offRecurso
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
      
@@ -19,6 +22,7 @@ class ProyectosController < ApplicationController
             if @proyecto.save
                    session[:proyecto_id] = @proyecto.id
                    Nav::stepInc
+                   session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
                    format.html { render :new, status: :bad_request }
@@ -27,9 +31,21 @@ class ProyectosController < ApplicationController
   end
 
   def edit
+      @proyecto = Proyecto.find(params[:id])
+
   end
 
   def update
+      @proyecto = Proyecto.find(params[:id]) 
+      @proyecto.update(proyecto_params)
+      respond_to do |format|
+           if @proyecto.save
+               format.html { redirect_to proyecto_path(@proyecto) }
+           else
+               format.html { render :edit, status: :bad_request }
+           end
+      end
+
   end
 
   def institucion

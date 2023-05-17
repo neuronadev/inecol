@@ -1,34 +1,71 @@
-<div class="w-full" data-controller="">
+<div class="w-full" data-controller="tabsrec utils">
   <%= form_with(model:@recurso,
                     data:{ 
-                            controller:'nested-form-apor',
+                            controller:'nested-form-ffis nested-form-fesp nested-form-fcon',
                             nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
                          }) do |form|
   %>
        <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
-
-      
- 
-       <div class="md:flex md:items-center mb-3 w-10/12">
-             <div class="p-5">
-                  <%= form.fields_for :aportados do |apor_fields|%>
-                     <%= render 'recursos/apor_ffis', f: apor_fields %>
-                  <% end %>
-
-                  <%= form.fields_for :aportados do |apor_fields|%>
-                      <%= render 'recursos/apor_fesp', f: apor_fields %>
-                  <% end %>
-
-                  <%= form.fields_for :aportados do |apor_fields|%>
-                      <%= render 'recursos/apor_fcon', f: apor_fields %>
-                  <% end %>
-
-
-             </div>
+     
+       <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                       hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="profile-tab-example" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="profile-example" 
+                                aria-selected="false">Fondos Fiscales</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                       hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="dashboard-tab-example" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="dashboard-example" 
+                                aria-selected="false">Aportación en Especie</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 
+                                       hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="settings-tab-example" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="settings-example" 
+                                aria-selected="false">Fondos Concurrentes</button>
+                    </li>
+                </ul>
        </div>
-
+ 
+       <div id="tabContentExample" class="mt-2">
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
+                   <%= form.fields_for :aportados do |form_ffis|%>
+                         <%= render 'recursos/apor_ffis', f: form_ffis %>
+                   <% end %>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
+                   <%= form.fields_for :aportados do |form_aesp|%>
+                         <%= render 'recursos/apor_fesp', f: form_aesp %>
+                   <% end %>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
+                   <%= form.fields_for :aportados do |form_con|%>
+                         <%= render 'recursos/apor_fcon', f: form_con %>
+                   <% end %>
+            </div>
+       </div>
+    
+       
        <div>
            <%= form.submit %>
        </div>
   <% end %>
+
+
+  <div>
+     <%= render 'nav' %>
+  </div>
+
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_185925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,54 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
     t.index ["persona_id"], name: "index_academicos_on_persona_id"
     t.index ["red_id"], name: "index_rh.academicos_on_red_id"
     t.index ["tacademico_id"], name: "index_rh.academicos_on_tacademico_id"
+  end
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "apmontos", force: :cascade do |t|
+    t.bigint "aportado_id", null: false
+    t.bigint "capitulo_id", null: false
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aportado_id"], name: "index_py.apmontos_on_aportado_id"
+    t.index ["capitulo_id"], name: "index_py.apmontos_on_capitulo_id"
   end
 
   create_table "aportados", force: :cascade do |t|
@@ -131,6 +179,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
     t.string "clave", limit: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "metas", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.metas_on_proyecto_id"
   end
 
   create_table "monedas", force: :cascade do |t|
@@ -278,6 +333,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
   add_foreign_key "academicos", "personas"
   add_foreign_key "academicos", "redes"
   add_foreign_key "academicos", "tacademicos"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "apmontos", "aportados"
+  add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
   add_foreign_key "aportados", "recursos"
   add_foreign_key "financiadoras", "proyectos"
@@ -285,6 +344,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_220009) do
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"
   add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "metas", "proyectos"
   add_foreign_key "pacademicos", "academicos"
   add_foreign_key "pacademicos", "participantes"
   add_foreign_key "participantes", "proyectos"

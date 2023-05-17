@@ -1,3 +1,26 @@
 <div class="nested-form-wrapper flex p-1"  >
-  <%= f.hidden_field :fondo_id, value:2 %>
+    <%= f.hidden_field :fondo_id, value:2 %>
+    <div class="border border-gray-200">
+         <div class="p-5">
+              <template data-nested-form-fesp-target="template" >
+                  <%= f.fields_for :apmontos, Apmonto.new, child_index:'NEW_RECORD' do |apmonto_fields|%>
+                       <%= render 'recursos/fesp_fields', f: apmonto_fields %>
+                  <% end %>
+              </template>
+
+              <%= f.fields_for :apmontos do |apmonto_fields|%>
+                       <%= render 'recursos/fesp_fields', f: apmonto_fields %>
+              <% end %>
+
+              <div data-nested-form-fesp-target="target"></div>
+
+              <div class="w-full flex mt-3 ">
+                   <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fesp#add">
+                        <%= inline_svg_tag 'svg/agregar-usuario' %>
+                        <div class="flex mx-1.5">Agregar Capítulo...</div>
+                   </button>
+              </div>
+  
+         </div>
+     </div>    
 </div>

@@ -1,0 +1,9 @@
+<% 
+   puts 'Paso module:' + Nav::stepAct.to_s
+   puts 'Proyecto: ' + session[:proyecto_id].to_s
+
+   puts 'Paso session:' + session[:step].to_s
+%>
+<%  if session[:step] == 5 %>
+  <%= link_to 'Atras', presupuesto_path(@proyecto.presupuesto.id) %>
+<% end %>

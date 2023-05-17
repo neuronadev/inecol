@@ -1,0 +1,126 @@
+<div class="w-full text-slate-700">
+  <div class="mt-3 flex align-middle border-b-2 border-slate-200">
+    <div><%= inline_svg_tag 'svg/adoc' %></div>
+    <div class="ml-3">Información del Proyecto</div>
+  </div>
+
+  <div class="md:flex md:items-center mt-3 mb-3">
+        <div class="md:w-1/5">
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                Nombre:
+            </div>    
+        </div>
+        <div class="md:w-4/5">
+            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+                <%= @proyecto.nombre %>
+            </div> 
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+        <div class="md:w-1/5">
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+            Tipo de Proyecto:
+            </div>
+        </div>
+        <div class="md:w-4/5">
+            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+            <%= @proyecto.clasificacion.nomclasifica %>
+            </div>
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        Overhead:
+        </div>
+    </div>
+    <div class="md:w-auto">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+            <% if @proyecto.overhead %>
+                SI
+            <% else%>
+                NO
+            <% end %>
+        </div>
+    </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        Tipo Medio:
+        </div>
+    </div>
+    <div class="md:w-4/5">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+        <%= @proyecto.medio.nommedio %>
+        </div>
+    </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        Tipo Investigación:
+        </div>
+    </div>
+    <div class="md:w-4/5">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+        <%= @proyecto.linea.nomlinea %>
+        </div>
+    </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+            Periodo:
+        </div>
+    </div>
+    <div class="md:w-4/5">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+        <%= @proyecto.periodo %>
+        </div>
+    </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        Transferencia de Conocimiento:
+        </div>
+    </div>
+    <div class="md:w-auto">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+        <% if @proyecto.tfconoc %>
+            SI
+        <% else%>
+            NO
+        <% end %>
+        </div>
+    </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-3">
+    <div class="md:w-1/5">
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        Interinstitucional:
+        </div>
+    </div>
+    <div class="md:w-auto">
+        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+        <% if @proyecto.interinst %>
+            SI
+        <% else%>
+            NO
+        <% end %>
+        </div>
+    </div>
+    <% if @proyecto.interinst %>
+        Lista inst
+    <%end %> 
+ </div>
+
+</div>

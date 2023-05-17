@@ -1,0 +1,18 @@
+<% 
+   puts 'Paso module:' + Nav::stepAct.to_s
+   puts 'Paso session:' + session[:step].to_s
+
+%>
+
+<%  if session[:step] == 1 %>
+      <%= link_to 'Atras', proyecto_path(@proyecto.id) %>
+<% end %>
+<%  if session[:step] == 2 %>
+      <div><%= link_to 'Atras', proyecto_path(@fuente.proyecto_id) %></div>
+      <div><%= link_to 'Siguiente', new_participante_path %></div>
+<% end %>
+<%  if session[:step] == 4 || session[:step] == 5 %>
+  <div><%= link_to 'Atras', proyecto_path(@fuente.proyecto_id) %></div>
+  <div><%= link_to 'Siguiente', participante_path(@fuente.proyecto.participante.id) %></div>
+<% end %>
+

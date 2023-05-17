@@ -1,0 +1,15 @@
+<% 
+   puts 'Paso module:' + Nav::stepAct.to_s
+   puts 'Proyecto: ' + session[:proyecto_id].to_s
+
+   puts 'Paso session:' + session[:step].to_s
+
+%>
+<%  if session[:step] == 4 %>
+      <%= link_to 'Atras', presupuesto_path(@proyecto.presupuesto.id) %>
+<% end %>
+<%  if session[:step] == 5 %>
+      <%= link_to 'Atras', presupuesto_path(@recurso.proyecto.presupuesto.id) %>
+      <%= link_to 'Siguiente', new_meta_path %>
+<% end %>
+

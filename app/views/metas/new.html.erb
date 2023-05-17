@@ -1,0 +1,46 @@
+<div class="w-full" data-controller="">
+       <%= form_with(model:@meta) do |form| %>
+                <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+                <div class="md:items-center mb-3">
+                    <div class="md:w-1/5">
+                         <%= form.label :objetivo, 'Objetivo del Proyecto:', class:'' %>
+                    </div>
+                    <div class="md:w-4/5">
+                         <%= form.rich_text_area :objetivo, 
+                                                  class:'appearance-none border-2 border-gray-200 rounded 
+                                                        w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                    </div>
+                </div>
+
+                <div class="md:items-center mb-3">
+                        <div class="md:w-1/5">
+                          <%= form.label :esperado, 'Producto Esperado:', class:'' %>
+                        </div>
+                        <div class="md:w-4/5">
+                          <%= form.rich_text_area :esperado, 
+                                                  class:'appearance-none border-2 border-gray-200 rounded 
+                                                        w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                        </div>
+                </div>
+
+                <div class="md:items-center mb-3">
+                        <div class="md:w-1/5">
+                          <%= form.label :impacto, 'Impacto:', class:'' %>
+                        </div>
+                        <div class="md:w-4/5">
+                          <%= form.rich_text_area :impacto, 
+                                                  class:'appearance-none border-2 border-gray-200 rounded 
+                                                        w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                        </div>
+                 </div>
+
+                 <div>
+                     <%= form.submit %>
+                 </div>
+ 
+        <% end %>
+        <div>
+  <%= render 'nav' %>
+</div>
+
+</div>

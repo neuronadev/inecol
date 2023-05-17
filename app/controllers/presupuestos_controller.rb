@@ -3,6 +3,7 @@ class PresupuestosController < ApplicationController
   end
 
   def show
+      @presupuesto = Presupuesto.find(params[:id]) 
   end
 
   def new
@@ -29,6 +30,8 @@ class PresupuestosController < ApplicationController
       @presupuesto = Presupuesto.new(presupuesto_params)
       respond_to do |format|
             if @presupuesto.save
+                   Nav::stepInc 
+                   session[:step] += 1
                    format.html { redirect_to new_recurso_path } 
             else
                    format.html { render :new, status: :bad_request }

@@ -3,6 +3,7 @@ class ParticipantesController < ApplicationController
   end
 
   def show
+      @participante = Participante.find(params[:id])
   end
 
   def new
@@ -24,6 +25,8 @@ class ParticipantesController < ApplicationController
        @participante = Participante.new(participante_params)
        respond_to do |format|
             if @participante.save
+                  Nav::stepInc 
+                  session[:step] += 1
                   format.html { redirect_to new_presupuesto_path } 
             else
                   format.html { render :new, status: :bad_request }
