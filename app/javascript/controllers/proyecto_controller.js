@@ -1,12 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 
 var token = document.querySelector('meta[name="csrf-token"]').content
-var medios = document.getElementById('proyecto_medio_id')
-var options = medios.getElementsByTagName('option')
-var ovhEl = document.getElementById('proyecto_overhead')
-
+var medios = ''
+var options = ''
+var ovhEl = ''
 export default class extends Controller {
-   connect() { }
+   connect() {
+
+         medios = document.getElementById('proyecto_medio_id')
+         options = medios.getElementsByTagName('option')
+         ovhEl = document.getElementById('proyecto_overhead')
+    }
 
    onInterInst(event){
          var secc_institucion = document.getElementById('secc_institucion')
@@ -71,20 +75,25 @@ export default class extends Controller {
                                       }
                                 }
                          }
-                         if (val.ovh == 'O' ){
+                         this.activeOVH(val.ovh)
 
-                         }
-                         if (val.ovh == 'S' ){
-                              
-                         }
-                         if (val.ovh == 'N' ){
-                              
-                         }
-                 })     
+                 })
            })
         
         
    }
+
+   activeOVH(ovh){
+       ovhEl.disabled = false 
+       if ( ovh == 'S' ){
+              ovhEl.checked = true 
+              ovhEl.disabled = true 
+       }
+       if (ovh == 'N') {
+               ovhEl.checked = false
+               ovhEl.disabled = true
+       }
+   } 
 
    activeMedios(){
       for ( let i = 0; i < options.length; i++ ) {

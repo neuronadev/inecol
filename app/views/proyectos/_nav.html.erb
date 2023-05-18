@@ -4,11 +4,21 @@
 
 %>
 
+<div class="flex">
 <%  if session[:step] == 1 %>
-  <%= link_to 'Siguiente', new_fuente_path %>
+    <div> <%= link_to new_fuente_path,
+              class:'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %> 
+               <%= inline_svg_tag 'svg/flecha-sm-der' %>              
+          <% end %>
+    </div>
 <% end %>
 
 <%  if session[:step] == 2 || session[:step] == 3 || session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
-  <%= link_to 'Siguiente', fuente_path(@proyecto.fuente.id) %>
-<% end %>
+    <div> <%= link_to fuente_path(@proyecto.fuente.id),
+              class:'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %>
+              <%= inline_svg_tag 'svg/flecha-sm-izq' %>   
+          <% end %>     
+    </div>
 
+<% end %>
+</div>

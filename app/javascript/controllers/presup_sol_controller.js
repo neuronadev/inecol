@@ -1,16 +1,28 @@
 import { Controller } from "@hotwired/stimulus"
 import { Presupuesto } from './presupuesto.js'
+import { SolicitaUtil  } from './solicita_util.js'
 
 var token = document.querySelector('meta[name="csrf-token"]').content
 var py_clasifca = ''
 var py_ovh = ''
+var solUtil = new SolicitaUtil()
 
 export default class extends Controller {
     connect() {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
         this.proyecto(proyecto)
     }
+
+    sumaMontoCaps(event){
+        if ( solUtil.limiteMaxGasto() ){
+              event.target.value = ''
+              alert("El monto total de capitulos no debe ser mayor al monto calculado para gastos")  
+        }
+    }
     
+    setTgasto(event){
+        solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
+    }
     async proyecto(proyecto){
         try {
             var data = await fetch('/presupuestos/pyclasifica', {

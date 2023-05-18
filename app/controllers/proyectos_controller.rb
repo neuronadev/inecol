@@ -87,6 +87,7 @@ class ProyectosController < ApplicationController
                                        :periodo,
                                        :tfconoc,
                                        :interinst,
+                                       mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :dconvocatoria, :_destroy],
                                        instituciones_attributes:[:id, :nominstitucion, :_destroy]  )
   end
 

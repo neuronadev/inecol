@@ -14,7 +14,12 @@ Rails.application.routes.draw do
         end
   end
   
-  resources :participantes
+  resources :participantes do
+            collection do
+                post 'tipopart'
+            end
+  end
+
   resources :presupuestos  do
              collection do
                  post 'pyclasifica'

@@ -52,6 +52,14 @@ class ParticipantesController < ApplicationController
        end    
   end
 
+  def tipopart
+      academico = Academico.find(params[:academico_id])
+      data = {nomtipo:academico.tacademico.nomtacademico}
+      respond_to do |format|
+        format.json { render json:data.to_json }
+      end
+  end
+
   private
   def participante_params
        params.require(:participante).permit(
