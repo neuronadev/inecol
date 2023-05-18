@@ -10,4 +10,5 @@ class Proyecto < ApplicationRecord
     has_one :presupuesto
     has_one :recurso
     has_one :meta
+    has_one :mconvocatoria
 end

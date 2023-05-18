@@ -11,6 +11,7 @@ class ProyectosController < ApplicationController
       session[:step] = 0
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
+      @proyecto.build_mconvocatoria
      
   end
 
@@ -52,6 +53,29 @@ class ProyectosController < ApplicationController
              format.html { render partial: 'fields_institucion'}
       end 
   end
+  def tipomedio
+      medio = Medio.find(params[:medio_id])
+      data = {clave:medio.clave}
+      respond_to do |format|
+          format.json { render json:data.to_json }
+      end
+  end
+
+  def tipoclasifica
+      clasifica = Clasificacion.find(params[:clasifica_id])
+      data = { clave:clasifica.clave, ovh:clasifica.ovh }
+      respond_to do |format|
+        format.json { render json:data.to_json }
+      end
+  end
+  def medclave
+       medio = Medio.where(clave:params[:clave_medio]).first
+       data = {medio_id:medio.id}
+       respond_to do |format|
+        format.json { render json:data.to_json }
+      end
+  end
+ 
 
   private
   def proyecto_params
@@ -63,7 +87,7 @@ class ProyectosController < ApplicationController
                                        :periodo,
                                        :tfconoc,
                                        :interinst,
-                                       instituciones_attributes:[:id, :nominstitucion]  )
+                                       instituciones_attributes:[:id, :nominstitucion, :_destroy]  )
   end
 
 end

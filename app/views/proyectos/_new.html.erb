@@ -1,4 +1,9 @@
-<%= form_with model: @proyecto, remote:true do |form| %>
+<%= form_with(model: @proyecto,
+               data:{
+                   controller:'nested-form-inst',
+                   nested_form_wrapper_selector_value: '.nested-form-wrapper' 
+               })  do |form| 
+%>
     <div data-controller="proyecto">
          <div class="md:flex md:items-center mb-3">
             <div class="md:w-1/5">
@@ -18,7 +23,9 @@
                     <%= form.select :clasificacion_id,
                                         Clasificacion.all.map{|item| [item.nomclasifica, item.id]},
                                         {prompt: '-- Seleccione una opción --'},
-                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
+                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',
+                                         'data-action':'change->proyecto#onClasifica'
+                                        }
 
                     %>   
                 </div> 
@@ -39,11 +46,25 @@
                 <%= form.select :medio_id,
                                         Medio.all.map{|item| [item.nommedio, item.id]},
                                         {prompt: '-- Seleccione una opción --'},
-                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
+                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',
+                                         'data-action':'change->proyecto#onMedio'
+                                         }
 
                 %>   
             </div>
         </div>
+        <div class="md:flex md:items-center mb-3" id='secc_convoca' style="display:none;">
+            <div class="md:w-1/5">
+               
+            </div>
+            <div class="md:w-2/3 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight 
+                        focus:outline-none focus:bg-white focus:border-purple-500">
+                   <%= render 'convocatoria', form:form %>
+            </div>
+        </div>
+
+
+
 
         <div class="md:flex md:items-center mb-3">
             <div class="md:w-1/5">
@@ -96,14 +117,24 @@
             </div> 
         </div>
 
-        <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="display:none;">
-            <div class="md:w-1/5">
-            </div>
-            <div class="md:w-4/5">
-               <%= render 'instituciones', form:form %>
-            </div> 
-        </div>
-
+        <% if controller.action_name == 'new' %> 
+                <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="display:none;" >
+                            <div class="md:w-1/5">
+                            </div>
+                            <div class="md:w-4/5">
+                            <%= render 'instituciones', form:form %>
+                            </div> 
+                </div>
+        <% end %>
+        <% if controller.action_name == 'edit' && @proyecto.interinst %> 
+                <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" >
+                            <div class="md:w-1/5">
+                            </div>
+                            <div class="md:w-4/5">
+                            <%= render 'instituciones', form:form %>
+                            </div> 
+                </div>
+        <% end %>
 
         <div class="md:flex md:items-center mb-3">
             <div class="md:w-1/5">

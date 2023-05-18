@@ -2,7 +2,7 @@
    <%= form_with(model:@participante,
                     data:{ 
                             controller:'nested-form-inv nested-form-tec nested-form-est',
-                            nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
+                            nested_form_wrapper_selector_value: '.nested-form-wrapper'
                          }) do |form|
            %>
            <% if controller.action_name == 'new' %>

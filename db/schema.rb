@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_185925) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -172,6 +172,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_185925) do
     t.string "tiponac", limit: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mconvocatorias", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.string "nomconvocatoria"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.mconvocatorias_on_proyecto_id"
   end
 
   create_table "medios", force: :cascade do |t|
@@ -344,6 +353,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_185925) do
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"
   add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "mconvocatorias", "proyectos"
   add_foreign_key "metas", "proyectos"
   add_foreign_key "pacademicos", "academicos"
   add_foreign_key "pacademicos", "participantes"

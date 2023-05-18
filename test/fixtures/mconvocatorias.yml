@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto: one
+  nomconvocatoria: MyString
+  link: MyString
+
+two:
+  proyecto: two
+  nomconvocatoria: MyString
+  link: MyString

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :proyectos do
         collection do
             get 'institucion'
+            post 'tipomedio'
+            post 'tipoclasifica'
+            post 'medclave'
         end
   end
 

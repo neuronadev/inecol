@@ -1,12 +1,17 @@
-<div class="flex w-full p-1">
+<div class="nested-form-wrapper flex w-full p-1" data-new-record="<%= f.object.new_record? %>" >
     <div class="md:w-10/12">
-         <input class="txt-institu bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-400" 
-                type="text" 
-                placeholder='Nombre de la Institución'
-                name="proyecto[instituciones_attributes][<%= @idx %>][nominstitucion]" id="proyecto_instituciones_attributes_<%= @idx %>_nominstitucion">
+         <%= f.text_field :nominstitucion,
+                class:"txt-institu bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-400",
+                placeholder:'Nombre de la Institución'
+         %>
                 
     </div>
-    <div class="md:w-2/12 mx-1.5 flex justify-center">
-          X
+    <div class="w-2/12 flex justify-center items-center">
+                <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-inst#remove">
+                         <%= inline_svg_tag 'svg/cruz' %>
+                        
+                  </button>
     </div>
+
+    <%= f.hidden_field :_destroy %>
 </div>        
