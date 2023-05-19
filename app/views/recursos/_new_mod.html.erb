@@ -1,0 +1,66 @@
+<div class="w-full" data-controller="">
+    <%= form_with(model:@recurso,
+                        data:{ 
+                                controller:'nested-form-fondo nested-form-ffis',
+                                nested_form_wrapper_selector_value: '.nested-form-wrapper'
+                            }) do |form|
+    %>
+
+    <% if controller.action_name == 'new' %>
+               <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+    <% end %>  
+
+      <template data-nested-form-fondo-target="template">
+                 
+            <%= form.fields_for :aportados, Aportado.new, child_index:'NEW_RECORD' do |f_apor| %>
+                <div class="nested-form-wrapper flex p-1" data-new-record="<%= f_apor.object.new_record? %>" >
+                     <%= f_apor.text_field :fondo_id, value:1 %>
+                             <template data-nested-form-ffis-target="templatea">
+                                 <%= f_apor.fields_for :apmontos, Apmonto.new, child_index:'NEWA_RECORDA_A' do |f_ffis| %>
+                                        <div class="nested-form-wrapper-a flex p-1" data-new-record="<%= f_ffis.object.new_record? %>" >
+                                            <%= f_ffis.select :capitulo_id,
+                                                        Capitulo.all.map{|item| [item.nomcapitulo, item.id]},
+                                                        {include_blank: true},
+                                                        {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'} 
+                                            %>
+                                            <%= f_ffis.text_field :monto, 
+                                                    class:'capmonto appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                                                    data:{action:'keydown->utils#keyEnter keyup->utils#formatPorcent'}
+                                            %>
+                                            <%= f_ffis.hidden_field :_destroy %>
+                                            <div class="w-2/12 flex justify-center items-center">
+                                                <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-ffis#remove">
+                                                    <%= inline_svg_tag 'svg/cruz' %>
+                                                </button>
+                                            </div>
+                                        </div>    
+                                 <% end %>
+                             </template>
+                              <div data-nested-form-ffis-target="targeta"></div>
+                              <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-ffis#add">
+                                       <%= inline_svg_tag 'svg/agregar-usuario' %>
+                                       <div class="flex mx-1.5">Agregar Capítulo...</div>
+                              </button>
+                     <%= f_apor.hidden_field :_destroy %>
+                     <div class="w-2/12 flex justify-center items-center">
+                          <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fondo#remove">
+                                  <%= inline_svg_tag 'svg/cruz' %>
+                          </button>
+                     </div>   
+                </div>              
+            <% end %>
+      </template>
+
+      <div data-nested-form-fondo-target="target"></div>
+
+      <div>
+             <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fondo#add">
+                        <%= inline_svg_tag 'svg/agregar-usuario' %>
+                        <div class="flex mx-1.5">Agregar fondos fiscales...</div>
+             </button>
+      </div>
+
+      <%= form.submit %>
+
+    <% end %>    
+</div>

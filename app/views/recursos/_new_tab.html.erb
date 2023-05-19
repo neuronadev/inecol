@@ -1,0 +1,17 @@
+<div class="w-full" data-controller="tabsrec utils">
+    <%= form_with(model:@recurso,
+                        data:{ 
+                                controller:'nested-form-fondo nested-form-ffis',
+                                nested_form_wrapper_selector_value: '.nested-form-wrapper'
+                            }) do |form|
+    %>
+          <% if controller.action_name == 'new' %>
+               <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+          <% end %>  
+
+          <%= render 'tab_head' %>
+          <%= render 'tab_body', form:form %>
+
+    <%= form.submit %> 
+   <% end %>
+</div>

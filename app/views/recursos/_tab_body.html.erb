@@ -1,0 +1,27 @@
+<div id="tabContentExample" class="mt-2">
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
+                      <% if controller.action_name == 'new' %>
+                              <%= render 'fondo_fiscal', form:form %>
+                       <% end %>
+                       <% if controller.action_name == 'edit' %>
+                              tab1 edit
+                       <% end %>
+
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
+                      <% if controller.action_name == 'new' %> 
+                              tab2 new
+                      <% end %>      
+                      <% if controller.action_name == 'edit' %>
+                              tab1 edit
+                       <% end %>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
+                      <% if controller.action_name == 'new' %> 
+                              tab3 new
+                      <% end %>     
+                      <% if controller.action_name == 'edit' %>
+                              tab3 edit
+                       <% end %> 
+                </div>
+</div>

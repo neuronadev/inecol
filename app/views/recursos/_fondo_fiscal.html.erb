@@ -1,0 +1,49 @@
+<div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full flex">
+            <div class="w-1/2 flex justify-start">
+               <div>
+                    <button type="button" class="flex text-blue-700 border border-blue-700 hover:bg-blue-500 hover:text-white focus:ring-4 
+                                                 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1 text-center inline-flex 
+                                                 items-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 
+                                                 dark:hover:bg-blue-500",
+                                         data-action="nested-form-fondo#add" >
+                                <div class="ml-1">Agregar Fondo Fiscal</div>
+                    </button>
+               </div>
+            </div>
+            
+        </div>
+
+        <template data-nested-form-fondo-target="template">
+            <%= form.fields_for :aportados, Aportado.new, child_index:'NEW_RECORD' do |f_apor| %>
+                <div class="nested-form-wrapper p-1" data-new-record="<%= f_apor.object.new_record? %>" >
+                        <div class="w-2/12 flex justify-center items-center">
+                            <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fondo#remove">
+                                <%= inline_svg_tag 'svg/cruz' %>
+                           </button>
+                        </div>  
+                        <%= f_apor.hidden_field :fondo_id, value:1 %>
+                        <template data-nested-form-ffis-target="templatea">
+                                    <%= f_apor.fields_for :apmontos, Apmonto.new, child_index:'NEWA_RECORDA_A' do |f_ffis| %>
+                                            <%= render 'ffis_fields', f:f_ffis %>
+                                    <% end %>
+                        </template>
+                        <%= f_apor.fields_for :apmontos, Apmonto.new do |f_ffis| %>
+                                   <%= render 'ffis_fields', f:f_ffis %>
+                         <% end %>
+                        <div data-nested-form-ffis-target="targeta"></div>
+                        <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-ffis#add">
+                                <%= inline_svg_tag 'svg/agregar-usuario' %>
+                                <div class="flex mx-1.5">Agregar Capítulo...</div>
+                        </button>
+                        <%= f_apor.hidden_field :_destroy %>   
+                        
+                </div>    
+            <% end %>
+        </template>
+
+        <div class="w-full mt-1 p-5">
+           <div data-nested-form-fondo-target="target"></div>
+        </div>   
+
+</div>

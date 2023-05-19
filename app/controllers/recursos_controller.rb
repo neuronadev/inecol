@@ -18,7 +18,9 @@ class RecursosController < ApplicationController
   def new
       @proyecto = Proyecto.find(session[:proyecto_id]) 
       @recurso = Recurso.new
-      @recurso.aportados.build
+      @aportados = @recurso.aportados.build
+      @aportados.apmontos.build
+      
   end
 
   def edit
@@ -41,8 +43,6 @@ class RecursosController < ApplicationController
       @recurso = Recurso.new(recurso_params)
       respond_to do |format|
           if @recurso.save
-              Nav::stepInc
-              Nav::onRecurso
               session[:step] += 1
               format.html { redirect_to new_meta_path }       
           else
@@ -55,7 +55,8 @@ class RecursosController < ApplicationController
   def recurso_params
       params.require(:recurso).permit(
                                         :proyecto_id,
-                                        aportados_attributes:[:id, :fondo_id, apmontos_attributes:[:id, :capitulo_id, :monto, :_destroy]]
+                                        aportados_attributes:[:id, :fondo_id, :_destroy, apmontos_attributes:[:id, :capitulo_id, :monto, :_destroy]]
+                                        
                                       )
   end
 end
