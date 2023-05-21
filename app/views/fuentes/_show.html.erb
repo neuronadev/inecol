@@ -1,62 +1,64 @@
-<div data-controller="fuente">
-            <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                             Fuente Financiadora
-                        </div>
-                    </div>
-                    <div class="md:w-3/5">
-                            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
-                                  <%= @fuente.nomfuente %>
+<%= turbo_frame_tag 'py_data' do %>
+    <div class='w-full' data-controller="fuente">
+                <div class="md:flex md:items-center mb-3">
+                        <div class="md:w-1/5">
+                            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                                Fuente Financiadora
                             </div>
-                    </div>
+                        </div>
+                        <div class="md:w-3/5">
+                                <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
+                                    <%= @fuente.nomfuente %>
+                                </div>
+                        </div>
+                </div>
+                <div class="md:flex md:items-center mb-3">
+                        <div class="md:w-1/5">
+                            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                                Nacionalidad:
+                            </div>
+                        </div>
+                        <div class="md:w-3/5">
+                            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
+                                <%= @fuente.nacionalidad.nomnacionalidad %>
+                            </div> 
+                        </div>
             </div>
             <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            Nacionalidad:
+                        <div class="md:w-1/5">
+                            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                                País/Estado:
+                            </div>
                         </div>
-                    </div>
-                    <div class="md:w-2/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
-                              <%= @fuente.nacionalidad.nomnacionalidad %>
-                        </div> 
-                    </div>
-        </div>
-        <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                             País/Estado:
+                        <div class="md:w-3/5">
+                            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
+                                    <%= @fuente.lugar.nomlugar %>
+                            </div> 
                         </div>
-                    </div>
-                    <div class="md:w-2/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
-                                 <%= @fuente.lugar.nomlugar %>
-                        </div> 
-                    </div>
-        </div>
-        <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                             Nombre del Contacto:
-                        </div>
-                    </div>
-                    <div class="md:w-2/5">
-                       <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
-                             <%= @fuente.nomcontacto %>
-                       </div> 
-                    </div>
             </div>
             <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            E-mail del Contacto:
+                        <div class="md:w-1/5">
+                            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                                Nombre del Contacto:
+                            </div>
                         </div>
-                    </div>
-                    <div class="md:w-2/5">
-                         <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
-                               <%= @fuente.emailcontacto %>
-                         </div>
-                    </div>
-            </div>
-</div>
+                        <div class="md:w-3/5">
+                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
+                                <%= @fuente.nomcontacto %>
+                        </div> 
+                        </div>
+                </div>
+                <div class="md:flex md:items-center mb-3">
+                        <div class="md:w-1/5">
+                            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                                E-mail del Contacto:
+                            </div>
+                        </div>
+                        <div class="md:w-3/5">
+                            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'>
+                                <%= @fuente.emailcontacto %>
+                            </div>
+                        </div>
+                </div>
+    </div>
+<% end %>    

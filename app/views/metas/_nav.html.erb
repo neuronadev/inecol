@@ -1,12 +1,8 @@
-<% 
-   puts 'Paso module:' + Nav::stepAct.to_s
-   puts 'Proyecto: ' + session[:proyecto_id].to_s
-
-   puts 'Paso session:' + session[:step].to_s
-%>
-<%  if session[:step] == 5 %>
-      <%= link_to 'Atras', recurso_path(@proyecto.recurso.id) %>
-<% end %>
-<%  if session[:step] == 6 %>
-      <%= link_to 'Atras', recurso_path(@meta.proyecto.recurso.id) %>
-<% end %>
+<div class="flex">
+      <%  if session[:step] == 5 %>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', recurso_path(@proyecto.recurso.id) %></div>
+      <% end %>
+      <%  if session[:step] == 6 %>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', recurso_path(@meta.proyecto.recurso.id) %></div>
+      <% end %>
+</div>      

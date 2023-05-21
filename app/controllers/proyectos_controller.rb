@@ -1,9 +1,11 @@
 class ProyectosController < ApplicationController
   def index
+      @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
   end
 
   def show
       @proyecto = Proyecto.find(params[:id])
+      
   end
 
   def new
@@ -19,8 +21,9 @@ class ProyectosController < ApplicationController
       @proyecto = Proyecto.new(proyecto_params)
       respond_to do |format|
             if @proyecto.save
+                   tevento = Tevento.where(clave:'CAP').first
+                   Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
                    session[:proyecto_id] = @proyecto.id
-                   Nav::stepInc
                    session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
@@ -31,7 +34,7 @@ class ProyectosController < ApplicationController
 
   def edit
       @proyecto = Proyecto.find(params[:id])
-
+      
   end
 
   def update
@@ -76,6 +79,7 @@ class ProyectosController < ApplicationController
       end
   end
  
+ 
 
   private
   def proyecto_params
@@ -87,6 +91,7 @@ class ProyectosController < ApplicationController
                                        :periodo,
                                        :tfconoc,
                                        :interinst,
+                                       :persona_id,
                                        mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :dconvocatoria, :_destroy],
                                        instituciones_attributes:[:id, :nominstitucion, :_destroy]  )
   end

@@ -44,7 +44,7 @@ class RecursosController < ApplicationController
       respond_to do |format|
           if @recurso.save
               session[:step] += 1
-              format.html { redirect_to new_meta_path }       
+              format.html { redirect_to recurso_path(@recurso) }
           else
               format.html { render :new, status: :bad_request }
           end
@@ -55,7 +55,7 @@ class RecursosController < ApplicationController
   def recurso_params
       params.require(:recurso).permit(
                                         :proyecto_id,
-                                        aportados_attributes:[:id, :fondo_id, :_destroy, apmontos_attributes:[:id, :capitulo_id, :monto, :_destroy]]
+                                        aportados_attributes:[:id, :fondo_id, apmontos_attributes:[:id, :capitulo_id, :monto, :_destroy] ]
                                         
                                       )
   end

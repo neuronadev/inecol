@@ -1,0 +1,24 @@
+<div class="relative overflow-x-auto">
+
+   <table class="w-3/4 text-base text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-4">
+
+                </th>
+                <th scope="col" class="px-6 py-4">
+
+                </th>
+            </tr>
+        </thead>
+          <tbody>
+              <%= render 'fila', nombre_campo:'Fuente Financiadora:', valor_campo:@fuente.nomfuente %>
+              <%= render 'fila', nombre_campo:'Nacionalidad:', valor_campo:@fuente.nacionalidad.nomnacionalidad %>
+              <%= render 'fila', nombre_campo:'País/Estado:', valor_campo:@fuente.lugar.nomlugar %>
+              <%= render 'fila', nombre_campo:' Nombre del Contacto:', valor_campo:@fuente.nomcontacto %>
+              <%= render 'fila', nombre_campo:'E-mail del Contacto:', valor_campo:@fuente.emailcontacto %>
+          </tbody>  
+   </table>
+
+
+</div>

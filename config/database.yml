@@ -24,7 +24,7 @@ default: &default
   password: developer
   host: localhost
   port: 5432
-  schema_search_path: public,usr,py,rh
+  schema_search_path: public,usr,py,rh,us
 
 development:
   <<: *default

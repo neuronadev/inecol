@@ -1,19 +1,14 @@
-<% 
-   puts 'Paso module:' + Nav::stepAct.to_s
-   puts 'Proyecto: ' + session[:proyecto_id].to_s
-
-   puts 'Paso session:' + session[:step].to_s
-
-%>
-<%  if session[:step] == 4 %>
-      <%= link_to 'Atras', presupuesto_path(@proyecto.presupuesto.id) %>
-<% end %>
-<%  if session[:step] == 5 %>
-      <%= link_to 'Atras', presupuesto_path(@recurso.proyecto.presupuesto.id) %>
-      <%= link_to 'Siguiente', new_meta_path %>
-<% end %>
-<%  if session[:step] == 6 %>
-      <%= link_to 'Atras', presupuesto_path(@recurso.proyecto.presupuesto.id) %>
-      <%= link_to 'Siguiente', meta_path(@recurso.proyecto.meta.id) %>
-<% end %>
-
+<div class="flex">
+      <%  if session[:step] == 4 %>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', presupuesto_path(@proyecto.presupuesto.id) %></div>
+      <% end %>
+      <%  if session[:step] == 5 %>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', presupuesto_path(@recurso.proyecto.presupuesto.id) %></div> 
+            <div class='text-gray-300 ml-1 mr-1'>|</div>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Siguiente', new_meta_path %></div>
+      <% end %>
+      <%  if session[:step] == 6 %>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', presupuesto_path(@recurso.proyecto.presupuesto.id) %></div>
+            <div class='text-blue-600 font-semibold text-base'><%= link_to 'Siguiente', meta_path(@recurso.proyecto.meta.id) %></div>
+      <% end %>
+</div>

@@ -1,3 +1,5 @@
+<%= turbo_frame_tag 'py_data' do %>
+
     <div class="md:flex md:items-center mt-3 mb-3">
         <div class="md:w-1/5">
             <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
@@ -128,3 +130,16 @@
                 </div>
             </div>
     </div>
+
+   <% if params[:src].present? %>
+        <div class="md:flex md:items-center mb-3 justify-end mt-5">
+             <%= link_to edit_proyecto_path(@proyecto), 
+                      class:'text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' do %>
+                Editar Información
+            <% end %>
+        </div>
+
+   <% end %>
+
+<% end %>    
+

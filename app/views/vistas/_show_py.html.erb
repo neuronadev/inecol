@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "py_#{@proyecto.id}" do %>
+    <div class="relative overflow-x-auto">
+
+    <table class="w-3/4 text-base text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-4">
+
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= render 'fila', nombre_campo:'Nombre del proyecto:', valor_campo:@proyecto.nombre %>
+                <%= render 'fila', nombre_campo:'Tipo de Proyecto:', valor_campo:@proyecto.clasificacion.nomclasifica %>
+                <%= render 'fila', nombre_campo:'Overhead:', valor_campo:@proyecto.overhead? ? 'SI' : 'NO' %>
+                <%= render 'fila', nombre_campo:'Tipo Medio:', valor_campo:@proyecto.medio.nommedio %>
+                <%= render 'fila', nombre_campo:'Tipo Investigación:', valor_campo:@proyecto.linea.nomlinea %>
+                <%= render 'fila', nombre_campo:'Periodo:', valor_campo:@proyecto.periodo %>
+                <%= render 'fila', nombre_campo:'Transferencia de Conocimiento:', valor_campo:@proyecto.tfconoc? ? 'SI' : 'NO' %>
+                <%= render 'fila', nombre_campo:'Interinstitucional:', valor_campo:@proyecto.interinst? ? 'SI' : 'NO' %>
+            
+            </tbody>  
+    </table>
+
+
+    </div>
+<% end %>    

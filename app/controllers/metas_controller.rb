@@ -31,10 +31,10 @@ class MetasController < ApplicationController
       @meta = Meta.new(meta_params)
       respond_to do |format|
           if @meta.save
-               Nav::stepInc
                session[:step] += 1
-               format.html { redirect_to meta_path(@meta) }
+               format.html { redirect_to resumen_vistas_path(:id=>@meta.proyecto_id) }
           else
+                @proyecto = Proyecto.find(session[:proyecto_id]) 
                format.html { render :new, status: :bad_request }
           end
       end 

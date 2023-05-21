@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -119,6 +119,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
     t.string "clave", limit: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cuentas", force: :cascade do |t|
+    t.bigint "persona_id", null: false
+    t.bigint "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["persona_id"], name: "index_us.cuentas_on_persona_id"
+    t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
+  end
+
+  create_table "etapas", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.bigint "tevento_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.etapas_on_proyecto_id"
+    t.index ["tevento_id"], name: "index_py.etapas_on_tevento_id"
   end
 
   create_table "financiadoras", force: :cascade do |t|
@@ -286,9 +304,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
     t.boolean "interinst"
     t.string "periodo"
     t.boolean "overhead"
+    t.bigint "persona_id", null: false
     t.index ["clasificacion_id"], name: "index_proyectos_on_clasificacion_id"
     t.index ["linea_id"], name: "index_proyectos_on_linea_id"
     t.index ["medio_id"], name: "index_proyectos_on_medio_id"
+    t.index ["persona_id"], name: "index_proyectos_on_persona_id"
   end
 
   create_table "recursos", force: :cascade do |t|
@@ -322,6 +342,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "teventos", force: :cascade do |t|
+    t.string "nomtevento"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tparticipantes", force: :cascade do |t|
     t.string "nomtparticipante"
     t.string "clave", limit: 5
@@ -336,6 +363,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "usuarios", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_usuarios_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "academicos", "categorias"
   add_foreign_key "academicos", "convocatorias"
   add_foreign_key "academicos", "niveles"
@@ -348,6 +387,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
   add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
   add_foreign_key "aportados", "recursos"
+  add_foreign_key "cuentas", "personas"
+  add_foreign_key "cuentas", "usuarios"
+  add_foreign_key "etapas", "proyectos"
+  add_foreign_key "etapas", "teventos"
   add_foreign_key "financiadoras", "proyectos"
   add_foreign_key "fuentes", "lugares"
   add_foreign_key "fuentes", "nacionalidades"
@@ -367,6 +410,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_034902) do
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"
+  add_foreign_key "proyectos", "personas"
   add_foreign_key "recursos", "proyectos"
   add_foreign_key "solicitados", "capitulos"
   add_foreign_key "solicitados", "presupuestos"

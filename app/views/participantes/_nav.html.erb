@@ -1,18 +1,15 @@
-<% 
-   puts 'Paso module:' + Nav::stepAct.to_s
-   puts 'Paso session:' + session[:step].to_s
-
-   
-%>
-<%  if session[:step] == 2 %>
-     <%= link_to 'Atras', fuente_path(@proyecto.fuente.id) %>
-<% end %>
-<%  if session[:step] == 3 %>
-     <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
-     <div><%= link_to 'Siguiente', new_presupuesto_path %></div>
-<% end %>
-<%  if session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
-  <%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %>
-  <div><%= link_to 'Siguiente', presupuesto_path(@participante.proyecto.presupuesto.id) %></div>
-<% end %>
-
+<div class="flex">
+     <%  if session[:step] == 2 %>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', fuente_path(@proyecto.fuente.id) %></div>
+     <% end %>
+     <%  if session[:step] == 3 %>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %></div>
+          <div class='text-gray-300 ml-1 mr-1'>|</div>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Siguiente', new_presupuesto_path %></div>
+     <% end %>
+     <%  if session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Atras', fuente_path(@participante.proyecto.fuente.id) %></div>
+          <div class='text-gray-300 ml-1 mr-1'>|</div>
+          <div class='text-blue-600 font-semibold text-base'><%= link_to 'Siguiente', presupuesto_path(@participante.proyecto.presupuesto.id) %></div>
+     <% end %>
+</div>

@@ -1,0 +1,9 @@
+<div class="relative overflow-x-auto">
+   <table class="w-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
+       <body>
+           <% items.each do |item|  %>
+                <%= render 'fila', nombre_campo:'', valor_campo:item.nombre %>
+           <% end %>
+       </tbody>  
+   </table>
+</div>

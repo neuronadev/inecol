@@ -14,4 +14,6 @@ class Proyecto < ApplicationRecord
 
     has_one :mconvocatoria
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
+
+    has_many :etapas
 end

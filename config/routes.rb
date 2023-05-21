@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
   resources :proyectos do
         collection do
             get 'institucion'
@@ -28,7 +29,14 @@ Rails.application.routes.draw do
 
   resources :recursos
   resources :metas
-
+  resources :vistas do
+            collection do
+                get 'resumen'
+                get 'secproyecto'
+            end
+  end
+  
+  
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
