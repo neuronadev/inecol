@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_175504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
     t.string "ovh", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "convenios", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.convenios_on_proyecto_id"
   end
 
   create_table "convocatorias", force: :cascade do |t|
@@ -293,6 +301,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
     t.index ["proyecto_id"], name: "index_py.presupuestos_on_proyecto_id"
   end
 
+  create_table "protocolos", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.protocolos_on_proyecto_id"
+  end
+
   create_table "proyectos", force: :cascade do |t|
     t.text "nombre"
     t.datetime "created_at", null: false
@@ -387,6 +403,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
   add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
   add_foreign_key "aportados", "recursos"
+  add_foreign_key "convenios", "proyectos"
   add_foreign_key "cuentas", "personas"
   add_foreign_key "cuentas", "usuarios"
   add_foreign_key "etapas", "proyectos"
@@ -407,6 +424,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_080112) do
   add_foreign_key "pestudiantes", "participantes"
   add_foreign_key "presupuestos", "monedas"
   add_foreign_key "presupuestos", "proyectos"
+  add_foreign_key "protocolos", "proyectos"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"

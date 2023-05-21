@@ -14,6 +14,8 @@ class ProyectosController < ApplicationController
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
       @proyecto.build_mconvocatoria
+      @proyecto.protocolos.build
+      @proyecto.convenios.build
      
   end
 
@@ -93,7 +95,11 @@ class ProyectosController < ApplicationController
                                        :interinst,
                                        :persona_id,
                                        mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :dconvocatoria, :_destroy],
-                                       instituciones_attributes:[:id, :nominstitucion, :_destroy]  )
+                                       instituciones_attributes:[:id, :nominstitucion, :_destroy],
+                                       protocolos_attributes:[:id, :dprotocolo, :_destroy],
+                                       convenios_attributes:[:id, :dconvenio, :_destroy]
+                                      
+                                    )
   end
 
 end
