@@ -43,7 +43,6 @@ class ParticipantesController < ApplicationController
        @participante = Participante.new(participante_params)
        respond_to do |format|
             if @participante.save
-                  Nav::stepInc 
                   session[:step] += 1
                   format.html { redirect_to new_presupuesto_path } 
             else

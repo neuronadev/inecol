@@ -41,7 +41,6 @@ class PresupuestosController < ApplicationController
       @presupuesto = Presupuesto.new(presupuesto_params)
       respond_to do |format|
             if @presupuesto.save
-                   Nav::stepInc 
                    session[:step] += 1
                    format.html { redirect_to new_recurso_path } 
             else

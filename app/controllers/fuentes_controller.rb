@@ -32,7 +32,6 @@ class FuentesController < ApplicationController
       @fuente = Fuente.new(fuente_params)
       respond_to do |format|
           if @fuente.save
-                Nav::stepInc
                 session[:step] += 1
                 format.html { redirect_to new_participante_path } 
           else
