@@ -28,13 +28,23 @@ export default class extends Controller {
             data.then(val => {
                   if ( val.clave == 'CONV' ){
                        this.showMedio()
+                       this.docConve(val.clave)
                   } else{
                        this.hiddeMedio() 
+                       this.docConve(val.clave)
                   }  
             })
       }else{
             this.hiddeMedio()
       }     
+   }
+   docConve(tmedio){
+         var secc_conv_files = document.getElementById('conv_files')
+         if ( tmedio == 'CONV' ){
+                secc_conv_files.style.display = 'none'
+         }else{
+                secc_conv_files.style.display = 'flex' 
+         }
    }
    hiddeMedio(){
       var secc_convoca = document.getElementById('secc_convoca') 
@@ -82,16 +92,33 @@ export default class extends Controller {
         
         
    }
-
+   chkOvh(event){
+         var clasifica = document.getElementById('proyecto_clasificacion_id').value
+         if (clasifica != ''){
+               var data = this.tipoClasifica(clasifica)
+               data.then(val => {
+                       if (val.ovh == 'S'){
+                             event.target.checked = true
+                             event.preventDefault()
+                       }
+                       if (val.ovh == 'N') {
+                             event.target.checked = false
+                             event.preventDefault()
+                       }
+               })
+         }else{
+               console.log(clasifica) 
+         }
+   }
    activeOVH(ovh){
        ovhEl.disabled = false 
        if ( ovh == 'S' ){
               ovhEl.checked = true 
-              ovhEl.disabled = true 
+              //ovhEl.disabled = true 
        }
        if (ovh == 'N') {
                ovhEl.checked = false
-               ovhEl.disabled = true
+               //ovhEl.disabled = true
        }
    } 
 

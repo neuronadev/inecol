@@ -1,9 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 var token = document.querySelector('meta[name="csrf-token"]').content
-var cssOver = ''
-var cssOut = 'bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600'
-var cssClick = 'relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white'
+
+const cssClick = ['menupactivo', 'bg-gradient-to-r', 'from-sky-600', 'to-cyan-400', 'text-white']
+const cssClickRemove = ['rounded-full']
+
+const cssUnselectedItem = ['menupactivo','group', 'flex', 'items-center', 'space-x-4', 'rounded-full', 'px-4', 'py-3', 'text-gray-600']
+
 
 export default class extends Controller {
    connect() {
@@ -19,12 +22,22 @@ export default class extends Controller {
     }
 
     onClickItem(event){  
-         if (event.target.tagName == 'SPAN'){
-               event.target.closest('.flex').classList.remove('bg-gradient-to-r')
-         }
-         if (event.target.tagName == 'A'){
-            console.log( event.target.closest('.flex') )
+       this.clearActiveMenup()
+       if (event.target.tagName == 'SPAN') {
+               event.target.closest('.flex').classList.remove(...cssClickRemove)
+               event.target.closest('.flex').classList.add(...cssClick)
        }
+       if (event.target.tagName == 'A') {
+                event.target.classList.remove(...cssClickRemove)
+                event.target.classList.add(...cssClick)
+       }
+    }
+
+    clearActiveMenup(){
+          var items = document.getElementsByClassName('menupactivo')
+          for (let i = 0; i < items.length; i++){
+                   items[i].classList.remove(...cssClick)
+          }
     }
 
 }

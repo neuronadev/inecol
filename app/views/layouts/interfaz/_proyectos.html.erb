@@ -6,16 +6,18 @@
           <img src="https://tailus.io/images/logo.svg" class="w-32" alt="">
         </div>
         <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
-          <li class="min-w-max" data-action = 'click->menup#onClickItem'>
+          <li class="min-w-max" data-action='click->menup#onClickItem'>
 
-              <%= link_to proyectos_path, class:"relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white" do %> 
-                      <%= inline_svg_tag 'svg/dashboard' %>
-                      <span class="group-hover:text-gray-700">Inicio</span>
+              <%= link_to proyectos_path, class:"menupactivo relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white",
+                   data:{turbo_frame: 'pycontent'} do %> 
+                        <%= inline_svg_tag 'svg/dashboard' %>
+                        <span class="group-hover:text-gray-700">Inicio</span>
              <% end %>
 
           </li>
-          <li class="min-w-max">
-             <%= link_to new_proyecto_path, class:"bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600" do %> 
+          <li class="min-w-max" data-action='click->menup#onClickItem'>
+             <%= link_to new_proyecto_path, class:"group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600",
+                  data:{turbo_frame: 'pycontent'} do %> 
                       <%= inline_svg_tag 'svg/nuevoproy' %>
                       <span class="group-hover:text-gray-700">Nuevo</span>
              <% end %>

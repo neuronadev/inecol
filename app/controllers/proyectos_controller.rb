@@ -1,4 +1,5 @@
 class ProyectosController < ApplicationController
+
   def index
       @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
   end
@@ -29,7 +30,13 @@ class ProyectosController < ApplicationController
                    session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
-                   format.html { render :new, status: :bad_request }
+                    @proyecto.instituciones.build
+                    @proyecto.build_mconvocatoria
+                    @proyecto.protocolos.build
+                    @proyecto.convenios.build
+                    #p @proyecto.errors
+                    flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+                    format.html { render :new, status: :bad_request }
             end
       end
   end

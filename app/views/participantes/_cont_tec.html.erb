@@ -7,7 +7,7 @@
                   <% end %>
                   </template>
                   
-                   <% if controller.action_name == 'new' %>
+                   <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                               <%= form.fields_for :pacademicos do |pacad_fields|%>
                                     <%= render 'participantes/part_tec_form', f: pacad_fields %>
                               <% end %>

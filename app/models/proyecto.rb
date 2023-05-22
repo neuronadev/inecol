@@ -1,5 +1,6 @@
 class Proyecto < ApplicationRecord
     self.table_name='py.proyectos'
+
     has_many :instituciones
     accepts_nested_attributes_for :instituciones, reject_if: :all_blank, allow_destroy: true
 
@@ -24,4 +25,17 @@ class Proyecto < ApplicationRecord
     has_many :etapas
     has_many :protocolos
     has_many :convenios
+
+    validates :nombre, presence: true
+    validates :clasificacion_id, presence: true
+    validates :medio_id, presence: true
+    validates :linea_id, presence: true
+    validates :periodo, presence: true
+
+
+    medio = Medio.where(clave:'CONV').first
+    validates :mconvocatoria, presence: true, :if => lambda {|attr| medio_id == medio.id  }
+    validates :instituciones, presence: true, :if => lambda {|attr| interinst  }
+        
+
 end
