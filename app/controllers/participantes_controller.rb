@@ -44,8 +44,8 @@ class ParticipantesController < ApplicationController
        @proyecto = Proyecto.find(@participante.proyecto_id)
        respond_to do |format|
             if @participante.save
-                  #session[:step] += 1
-                  #format.html { redirect_to new_presupuesto_path } 
+                  session[:step] += 1
+                  format.html { redirect_to new_presupuesto_path } 
             else
                   flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
                   p '------------Errores------------'
@@ -69,6 +69,7 @@ class ParticipantesController < ApplicationController
                         :proyecto_id, 
                         :tparticipante_id,
                         pacademicos_attributes:[:id, :academico_id, :responsable, :porcentaje, :_destroy],
+                        ptecnicos_attributes:[:id, :academico_id, :porcentaje, :_destroy],
                         pestudiantes_attributes:[:id, :nombre, :nivel_id, :_destroy]
                      )
   end

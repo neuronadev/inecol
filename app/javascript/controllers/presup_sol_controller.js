@@ -1,16 +1,25 @@
 import { Controller } from "@hotwired/stimulus"
 import { Presupuesto } from './presupuesto.js'
 import { SolicitaUtil  } from './solicita_util.js'
+import { Formato  } from './formato.js'
 
 var token = document.querySelector('meta[name="csrf-token"]').content
 var py_clasifca = ''
 var py_ovh = ''
 var solUtil = new SolicitaUtil()
+var formato = new Formato()
 
 export default class extends Controller {
     connect() {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
         this.proyecto(proyecto)
+    }
+    campoformat(event){
+          event.target.value = formato.moneda(event.target.value)
+    }
+
+    campounformat(event){
+         event.target.value = formato.unformat(event.target.value)  
     }
 
     sumaMontoCaps(event){
@@ -42,7 +51,7 @@ export default class extends Controller {
         var clasifica = ['PSERV','INCUR', 'CREC']
 
         var costo = document.getElementById('presupuesto_costo')
-        var presupuesto = new Presupuesto(py_clasifca, py_ovh, costo.value)
+        var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
 
         var iva = 0.0
         var tProyecto = 0.0
@@ -61,11 +70,11 @@ export default class extends Controller {
                tGastos = costo.value
         }
 
-        document.getElementById('presupuesto_iva').value =  iva
-        document.getElementById('presupuesto_tproyecto').value = tProyecto
-        document.getElementById('presupuesto_overhead').value = porcOverhead
-        document.getElementById('presupuesto_estimulo').value = porcEstimulo
-        document.getElementById('presupuesto_tgastos').value = tGastos
+        document.getElementById('presupuesto_iva').value =  formato.moneda(iva)
+        document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto)
+        document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead)
+        document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo)
+        document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos)
  
     }
 

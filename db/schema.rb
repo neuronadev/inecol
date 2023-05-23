@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_175504) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -327,6 +327,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_175504) do
     t.index ["persona_id"], name: "index_proyectos_on_persona_id"
   end
 
+  create_table "ptecnicos", force: :cascade do |t|
+    t.bigint "participante_id", null: false
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "academico_id", null: false
+    t.index ["academico_id"], name: "index_ptecnicos_on_academico_id"
+    t.index ["participante_id"], name: "index_py.ptecnicos_on_participante_id"
+  end
+
   create_table "recursos", force: :cascade do |t|
     t.bigint "proyecto_id", null: false
     t.datetime "created_at", null: false
@@ -429,6 +439,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_175504) do
   add_foreign_key "proyectos", "lineas"
   add_foreign_key "proyectos", "medios"
   add_foreign_key "proyectos", "personas"
+  add_foreign_key "ptecnicos", "academicos"
+  add_foreign_key "ptecnicos", "participantes"
   add_foreign_key "recursos", "proyectos"
   add_foreign_key "solicitados", "capitulos"
   add_foreign_key "solicitados", "presupuestos"

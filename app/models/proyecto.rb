@@ -1,7 +1,7 @@
 class Proyecto < ApplicationRecord
     self.table_name='py.proyectos'
 
-    has_many :instituciones
+    has_many :instituciones, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :instituciones, reject_if: :all_blank, allow_destroy: true
 
     belongs_to :clasificacion
@@ -13,13 +13,13 @@ class Proyecto < ApplicationRecord
     has_one :recurso
     has_one :meta
 
-    has_one :mconvocatoria
+    has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
 
-    has_many :protocolos
+    has_many :protocolos, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :protocolos, reject_if: :all_blank, allow_destroy: true
 
-    has_many :convenios
+    has_many :convenios, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :convenios, reject_if: :all_blank, allow_destroy: true
     
     has_many :etapas

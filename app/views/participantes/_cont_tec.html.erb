@@ -2,19 +2,19 @@
             
             <div class="p-5">
                   <template data-nested-form-tec-target="template" >
-                  <%= form.fields_for :pacademicos, Pacademico.new, child_index:'NEW_RECORD' do |pacad_fields|%>
-                        <%= render 'participantes/part_tec_form', f: pacad_fields %>
-                  <% end %>
+                        <%= form.fields_for :ptecnicos, Ptecnico.new, child_index:'NEW_RECORD' do |ptec_fields|%>
+                              <%= render 'participantes/part_tec_form', f: ptec_fields %>
+                        <% end %>
                   </template>
                   
                    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
-                              <%= form.fields_for :pacademicos do |pacad_fields|%>
-                                    <%= render 'participantes/part_tec_form', f: pacad_fields %>
+                              <%= form.fields_for :ptecnicos do |ptec_fields|%>
+                                    <%= render 'participantes/part_tec_form', f: ptec_fields %>
                               <% end %>
                    <% end %>
                    <% if controller.action_name == 'edit' %>
-                             <%= form.fields_for :pacademicos, form.object.pacademicos.includes(academico: :tacademico).where('tacademicos.clave':'TEC') do |pacad_fields|%>
-                                    <%= render 'participantes/part_tec_form', f: pacad_fields %>
+                             <%= form.fields_for :ptecnicos, form.object.pacademicos.includes(academico: :tacademico).where('tacademicos.clave':'TEC') do |ptec_fields|%>
+                                    <%= render 'participantes/part_tec_form', f: ptec_fields %>
                               <% end %>   
                    <% end %>
 

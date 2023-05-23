@@ -16,6 +16,10 @@ export default class extends Controller {
        event.target.value = event.target.value.replace(/[^0-9\.]/g,'');
   }
 
+  onlynumbers(event){
+    event.target.value = event.target.value.replace(/[^0-9\.]/g,'');
+   }
+
  
   
 }
