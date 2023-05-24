@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_221604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,12 +84,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
   end
 
   create_table "aportados", force: :cascade do |t|
-    t.bigint "recurso_id", null: false
     t.bigint "fondo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fondo_id"], name: "index_py.aportados_on_fondo_id"
-    t.index ["recurso_id"], name: "index_py.aportados_on_recurso_id"
   end
 
   create_table "capitulos", force: :cascade do |t|
@@ -112,6 +110,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
     t.string "ovh", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "concurrentes", force: :cascade do |t|
+    t.bigint "capitulo_id", null: false
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "recurso_id", null: false
+    t.index ["capitulo_id"], name: "index_py.concurrentes_on_capitulo_id"
+    t.index ["recurso_id"], name: "index_concurrentes_on_recurso_id"
   end
 
   create_table "convenios", force: :cascade do |t|
@@ -138,6 +146,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
     t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
   end
 
+  create_table "especies", force: :cascade do |t|
+    t.bigint "capitulo_id", null: false
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "recurso_id", null: false
+    t.index ["capitulo_id"], name: "index_py.especies_on_capitulo_id"
+    t.index ["recurso_id"], name: "index_especies_on_recurso_id"
+  end
+
   create_table "etapas", force: :cascade do |t|
     t.bigint "proyecto_id", null: false
     t.bigint "tevento_id", null: false
@@ -155,6 +173,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["proyecto_id"], name: "index_py.financiadoras_on_proyecto_id"
+  end
+
+  create_table "fiscales", force: :cascade do |t|
+    t.bigint "capitulo_id", null: false
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "recurso_id", null: false
+    t.index ["capitulo_id"], name: "index_py.fiscales_on_capitulo_id"
+    t.index ["recurso_id"], name: "index_fiscales_on_recurso_id"
   end
 
   create_table "fondos", force: :cascade do |t|
@@ -412,13 +440,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_034634) do
   add_foreign_key "apmontos", "aportados"
   add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
-  add_foreign_key "aportados", "recursos"
+  add_foreign_key "concurrentes", "capitulos"
+  add_foreign_key "concurrentes", "recursos"
   add_foreign_key "convenios", "proyectos"
   add_foreign_key "cuentas", "personas"
   add_foreign_key "cuentas", "usuarios"
+  add_foreign_key "especies", "capitulos"
+  add_foreign_key "especies", "recursos"
   add_foreign_key "etapas", "proyectos"
   add_foreign_key "etapas", "teventos"
   add_foreign_key "financiadoras", "proyectos"
+  add_foreign_key "fiscales", "capitulos"
+  add_foreign_key "fiscales", "recursos"
   add_foreign_key "fuentes", "lugares"
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"

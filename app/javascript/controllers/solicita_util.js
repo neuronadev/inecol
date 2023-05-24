@@ -5,7 +5,7 @@ export class SolicitaUtil{
          this.monto_limite = 0.0
    }
     limiteGasto(monto){
-         this.monto_limite = monto
+        this.monto_limite = numeral(monto).value()
     }
 
    limiteMaxGasto(){

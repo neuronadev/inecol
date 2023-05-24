@@ -23,15 +23,36 @@ export default class extends Controller {
     }
 
     sumaMontoCaps(event){
+        var total_caps = document.getElementById('total_caps')
         if ( solUtil.limiteMaxGasto() ){
               event.target.value = ''
               alert("El monto total de capitulos no debe ser mayor al monto calculado para gastos")  
+        }else{
+              total_caps.innerHTML = formato.moneda(solUtil.solSumaCapitulos())
         }
+
     }
     
+    calcularGastos(event){
+        var moneda_sel = document.getElementById('presupuesto_moneda_id')
+        var monto_costo = document.getElementById('presupuesto_costo')
+
+        if (moneda_sel.value != ''){
+            if (monto_costo.value != '') {
+                  this.costos()
+                  this.setTgasto()
+            }else{
+                  alert('Debe ingresar el monto del costo del proyecto') 
+            }
+        }else{
+               alert('Debe seleccionar un tipo de moneda')
+        }
+    } 
+
     setTgasto(event){
         solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
     }
+
     async proyecto(proyecto){
         try {
             var data = await fetch('/presupuestos/pyclasifica', {

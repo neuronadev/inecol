@@ -1,18 +1,23 @@
 <div class="w-full" data-controller="tabsrec utils">
+    <% flash.each do |type, msg| %>
+           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <%= msg %>
+           </div>
+    <% end %> 
     <%= form_with(model:@recurso,
                         data:{ 
                                 controller:'nested-form-ffis nested-form-fesp nested-form-fcon',
                                 nested_form_wrapper_selector_vlue: '.nested-form-wrapper'
                             }) do |form|
     %>
-        <% if controller.action_name == 'new' %>
+
+        <div class="mb-4 font-semibolder dark:border-gray-800">
+               Si el proyecto no tiene recursos aportados por el INECOL haga clic en el siguiente enlace <%= link_to 'Omitir este paso.', new_meta_path %>
+        </div>    
+        <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
         <% end %>  
         
-        <div class="mb-4  dark:border-gray-700">
-                <%= link_to 'Omitir', new_meta_path %>
-        </div>
-
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
                         <li class="mr-2" role="presentation">
@@ -47,50 +52,22 @@
     
         <div id="tabContentExample" class="mt-2">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
-                      <% if controller.action_name == 'new' %>
-                           <%= form.fields_for :aportados do |form_ffis|%>
-                                <%= render 'recursos/apor_ffis', f: form_ffis %>
-                           <% end %>
-                       <% end %>
-                       <% if controller.action_name == 'edit' %>
-                           <%= form.fields_for :aportados, form.object.aportados.includes(:fondo).where('fondos.clave':'FF') do |form_ffis|%>
-                                <%= render 'recursos/apor_ffis', f: form_ffis %>
-                           <% end %>
-                       <% end %>
-
+                        <%= render 'recursos/apor_ffis', f: form %>
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
-                      <% if controller.action_name == 'new' %> 
-                            <%= form.fields_for :aportados do |form_aesp|%>
-                                    <%= render 'recursos/apor_fesp', f: form_aesp %>
-                            <% end %>
-                      <% end %>      
-                      <% if controller.action_name == 'edit' %>
-                            <%= form.fields_for :aportados, form.object.aportados.includes(:fondo).where('fondos.clave':'AE') do |form_aesp|%>
-                                <%= render 'recursos/apor_fesp', f: form_aesp %>
-                            <% end %> 
-                       <% end %>
+                        <%= render 'recursos/apor_fesp', f: form %>
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
-                      <% if controller.action_name == 'new' %> 
-                            <%= form.fields_for :aportados do |form_con|%>
-                                    <%= render 'recursos/apor_fcon', f: form_con %>
-                            <% end %>
-                      <% end %>     
-                      <% if controller.action_name == 'edit' %>
-                            <%= form.fields_for :aportados, form.object.aportados.includes(:fondo).where('fondos.clave':'FC') do |form_con|%>
-                                <%= render 'recursos/apor_fcon', f: form_con %>
-                            <% end %> 
-                       <% end %> 
+                         <%= render 'recursos/apor_fcon', f: form %>
                 </div>
         </div>
         
         
         <div class="md:flex md:items-center mb-3 justify-end">
-            <% if controller.action_name == 'new' %>
+            <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                 
                 <div class='ml-2'>
-                    <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Siguiente
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
