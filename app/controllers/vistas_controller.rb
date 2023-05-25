@@ -1,4 +1,5 @@
 class VistasController < ApplicationController
+    layout 'vistas'
     def resumen
         @proyecto = Proyecto.find(params[:id])
         @fuente = @proyecto.fuente

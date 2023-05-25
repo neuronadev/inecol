@@ -6,6 +6,7 @@ Rails.application.routes.draw do
             post 'tipomedio'
             post 'tipoclasifica'
             post 'medclave'
+            post 'enviar'
         end
   end
 

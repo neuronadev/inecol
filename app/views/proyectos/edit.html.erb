@@ -1,9 +1,13 @@
+<%= turbo_frame_tag 'py_content_action', class:'w-full' do %>
 <div class="w-full text-slate-700">
   <div class="mt-3 flex align-middle border-b-2 border-slate-200">
     <div><%= inline_svg_tag 'svg/adoc' %></div>
     <div class="ml-3">Editar proyecto</div>
   </div>
   <div class="mt-5">
-    <%= render "new" %>
+       <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
+              <%= render "new" %>
+       <% end %>       
   </div>
 </div>
+<% end %>

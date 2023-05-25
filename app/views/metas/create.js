@@ -1,0 +1,1 @@
+alert("Terminando captura...")

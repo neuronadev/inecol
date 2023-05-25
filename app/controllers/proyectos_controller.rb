@@ -1,5 +1,5 @@
 class ProyectosController < ApplicationController
-
+  layout 'proyectos'
   def index
       @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
   end
@@ -87,9 +87,16 @@ class ProyectosController < ApplicationController
         format.json { render json:data.to_json }
       end
   end
- 
- 
 
+  def enviar
+       proyecto = Proyecto.find(params[:id])
+       evento = Tevento.where(clave:'REV').first
+       Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
+       respond_to do |format|
+           format.json { render json:@proyecto.to_json }
+      end
+  end
+ 
   private
   def proyecto_params
       params.require(:proyecto).permit(:nombre, 

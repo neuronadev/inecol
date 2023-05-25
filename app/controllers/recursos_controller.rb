@@ -53,8 +53,8 @@ class RecursosController < ApplicationController
       @proyecto = Proyecto.find(@recurso.proyecto_id)
       respond_to do |format|
           if @recurso.save
-              #session[:step] += 1
-              #format.html { redirect_to recurso_path(@recurso) }
+              session[:step] += 1
+              format.html { redirect_to new_meta_path }
           else
                p '---------------------------Errors------------------'
                p @recurso.errors

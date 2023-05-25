@@ -5,11 +5,15 @@
     </div>
     
     <div class="mt-5">
-       <%= render "show" %>
+        <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
+           <%= render "show" %>
+         <% end %>
     </div>
 
     <div> 
-        <%= link_to 'Editar', edit_meta_path(@meta) %>
+
+           <%= link_to 'Editar', edit_meta_path(@meta) %>
+    
     </div>
 
     <div>
