@@ -1,1 +1,45 @@
-okokoko zdxfcszdfsd
+<div class="w-full text-slate-700">
+      <div class="mt-3 flex align-middle border-b-2 border-slate-200 justify-between">
+          <div class="flex w-1/3">
+               <div><%= inline_svg_tag 'svg/adoc' %></div>
+
+               <% if @tipo == 'CORR' %>  
+                    <div class="ml-1">Solictar cambios</div>
+               <% end %> 
+               <% if @tipo == 'EVAL' %>  
+                    <div class="ml-1">Abrir proyecto a evaluadores</div>
+               <% end %> 
+          </div>
+          <div class="flex w-auto">
+                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
+                    <div><%= inline_svg_tag 'svg/regresar' %></div>
+                    <div class="ml-1 text-sm font-semibold">Regresar</div>
+                 <% end %>   
+          </div>
+      </div>
+</div>      
+<% flash.each do |type, msg| %>
+           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <%= msg %>
+           </div>
+<% end %>
+<%= form_with(model: @enlace) do |form| %>
+     <%= form.hidden_field :estado, value:'A' %>
+     <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+     <%= form.hidden_field :enevento_id, value:@enevento.id %>
+     
+     <div class="md:items-center mb-3">
+          <div class="md:w-1/5">
+               <%= form.label :txtcoment, 'Descripción de la solicitud:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
+          </div>
+          <div class="md:w-full">
+               <%= form.rich_text_area :txtcoment, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+          </div>
+     </div>
+     <div class="md:flex md:items-center mb-5 justify-end">
+           <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <%= inline_svg_tag 'svg/send' %>
+                    <div class="ml-2">Enviar</div>
+           </button>
+     </div>                        
+<% end %>

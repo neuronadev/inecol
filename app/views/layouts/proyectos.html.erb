@@ -18,7 +18,7 @@
          <%= render "layouts/interfaz/proyectos" %>
          <div class="flex justify-center w-full">
              <div class="flex w-3/4">
-                  <%= turbo_frame_tag 'pycontent', class:'w-full' do %>
+                  <%= turbo_frame_tag 'pycontent',  data:{turbo_cache:false}, class:'w-full' do %>
                        <%= yield %>
                   <% end %>
              </div>   

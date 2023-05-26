@@ -1,6 +1,6 @@
 <div data-controller="etapasvalpy" class="w-full">
       <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
-            <div class="w-6/12">  
+            <div class="w-9/12">  
                  <% if current_usuario.email == 'sara.sanchez@inecol.mx' %>
                            <%= render 'vistas/util/enlace' %>  
                  <% else %>
@@ -9,9 +9,14 @@
             
             </div>
       </div>
+      
       <div class='flex w-full mb-2'>
           <%= render 'vistas/util/pyestado', proyecto:@proyecto %>
       </div>  
+      
+      <%  if @total_notifica_rp > 0  %> 
+           <%= render 'proyectos/notifi_corr', notificaciones:@notifica_corr %> 
+      <% end %>     
 
       <div class='flex w-full'>
       

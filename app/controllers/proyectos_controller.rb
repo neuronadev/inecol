@@ -2,13 +2,14 @@ class ProyectosController < ApplicationController
   layout :select_layout
 
   def index
+      @total_notifica_rp = 0
       if current_usuario.email == 'sara.sanchez@inecol.mx'
              @proyectos = Proyecto.includes(etapas: :tevento).where('teventos.clave':'REV')
             
       else
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
+             @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       end
-          
 
   end
 
