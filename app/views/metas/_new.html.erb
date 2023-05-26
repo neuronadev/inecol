@@ -1,4 +1,4 @@
-<div class="w-full" data-controller="">
+
        <%= form_with(model:@meta) do |form| %>
                 <% if controller.action_name == 'new' %> 
                      <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
@@ -68,5 +68,3 @@
                 </div>
  
         <% end %>
-        
-</div>

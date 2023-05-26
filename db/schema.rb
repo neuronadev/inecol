@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_171713) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,6 +144,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_171713) do
     t.datetime "updated_at", null: false
     t.index ["persona_id"], name: "index_us.cuentas_on_persona_id"
     t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
+  end
+
+  create_table "eneventos", force: :cascade do |t|
+    t.string "nomenevento"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enlaces", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.bigint "enevento_id", null: false
+    t.string "estado", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enevento_id"], name: "index_py.enlaces_on_enevento_id"
+    t.index ["proyecto_id"], name: "index_py.enlaces_on_proyecto_id"
   end
 
   create_table "especies", force: :cascade do |t|
@@ -449,6 +466,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_171713) do
   add_foreign_key "convenios", "proyectos"
   add_foreign_key "cuentas", "personas"
   add_foreign_key "cuentas", "usuarios"
+  add_foreign_key "enlaces", "eneventos"
+  add_foreign_key "enlaces", "proyectos"
   add_foreign_key "especies", "capitulos"
   add_foreign_key "especies", "recursos"
   add_foreign_key "etapas", "proyectos"

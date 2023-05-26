@@ -1,7 +1,15 @@
 class ProyectosController < ApplicationController
-  layout 'proyectos'
+  layout :select_layout
+
   def index
-      @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
+      if current_usuario.email == 'sara.sanchez@inecol.mx'
+             @proyectos = Proyecto.includes(etapas: :tevento).where('teventos.clave':'REV')
+            
+      else
+             @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
+      end
+          
+
   end
 
   def show
@@ -115,5 +123,19 @@ class ProyectosController < ApplicationController
                                       
                                     )
   end
+ 
+  protected 
+     def select_layout
+        
+        if !current_usuario.nil?
+             if current_usuario.email == 'sara.sanchez@inecol.mx'
+                   return 'enlaces' 
+             else
+                   return 'proyectos'
+             end
+                
+        end
+
+    end        
 
 end

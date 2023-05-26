@@ -4,6 +4,7 @@ class PresupuestosController < ApplicationController
 
   def show
       @presupuesto = Presupuesto.find(params[:id]) 
+      @proyecto = @presupuesto.proyecto
       @sum_caps = @presupuesto.solicitados.sum(:monto)
   end
 

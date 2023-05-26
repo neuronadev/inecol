@@ -4,7 +4,8 @@ class FuentesController < ApplicationController
   end
 
   def show
-      @fuente = Fuente.find(params[:id])
+     @fuente = Fuente.find(params[:id])
+     @proyecto = @fuente.proyecto
   end
 
   def new

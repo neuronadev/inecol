@@ -1,0 +1,23 @@
+<div class="flex mt-5 mb-1">
+     <% if !@proyecto.enlaces.any? %>
+        <div>
+            <%= link_to new_enlace_path(:tipo=>'CORR'), 'data-frame-target':'_top' do %>
+                     <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
+                        <div> <%= inline_svg_tag 'svg/girar-iz' %></div> <div class="ml-2 text-sky-800">Solicitar cambios</div>
+                     </div>   
+               <% end %>      
+         </div>     
+        
+        <div>
+              <%= link_to new_enlace_path(:tipo=>'EVAL'), 'data-frame-target':'_top' do %>
+                 <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                      <div> <%= inline_svg_tag 'svg/usuarios-alt' %></div> <div class="ml-2 text-sky-800">Eviar a evaluadores</div>
+                 </div>     
+              <% end %>    
+        </div>
+
+        <div class="flex  font-medium text-sm leading-tight ml-3" >
+           <div> <%= inline_svg_tag 'svg/doc-acep-gris' %></div> <div class="ml-2 text-gray-400">Dictamen</div>
+        </div>
+   <% end %> 
+</div>

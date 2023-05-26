@@ -3,9 +3,11 @@
       <div><%= inline_svg_tag 'svg/listaproy' %></div>
       <div class="ml-3 text-slate-700">Listado de Proyectos Registrados</div>
     </div>
-
-
-       <%= render 'index' %>  
-
+  
+     <% if current_usuario.email == 'sara.sanchez@inecol.mx' %>
+             <%= render 'index_enlace' %>  
+     <% else %> 
+             <%= render 'index' %>  
+     <% end %>
 
 </div>    

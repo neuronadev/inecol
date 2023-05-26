@@ -7,7 +7,9 @@
       </div>
       
       <div class="mt-5 flex justify-center">
-        <%= render "new_mod" %>
+         <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
+              <%= render "new_mod" %>
+         <% end %>     
       </div>
   </div>  
   

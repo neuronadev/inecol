@@ -25,6 +25,7 @@ class Proyecto < ApplicationRecord
     has_many :etapas
     has_many :protocolos
     has_many :convenios
+    has_many :enlaces
 
     validates :nombre, presence: true
     validates :clasificacion_id, presence: true

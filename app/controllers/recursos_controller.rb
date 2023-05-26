@@ -4,6 +4,7 @@ class RecursosController < ApplicationController
 
   def show
       @recurso = Recurso.find(params[:id])
+      @proyecto = @recurso.proyecto
 
       #@ffis = @recurso.aportados.includes(:fondo).where('fondos.clave':'FF').first
       #@aes = @recurso.aportados.includes(:fondo).where('fondos.clave':'AE').first

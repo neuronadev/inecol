@@ -4,6 +4,7 @@ class MetasController < ApplicationController
 
   def show
       @meta = Meta.find(params[:id]) 
+      @proyecto = @meta.proyecto
   end
 
   def new

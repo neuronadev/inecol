@@ -12,9 +12,13 @@ export default class extends Controller {
 
     mensaje(event){
         //wmodal.mostrar()
+        var fr_el = document.getElementById('pycontent')
         if (window.confirm("El proyecto será habilitado para revisión por parte de comite evaluador. ¿Desea continuar?")) {
-             this.enviarpy(event.params.proyecto).then(result => { console.log(result) })
-        }
+             this.enviarpy(event.params.proyecto).then(result => { 
+                     fr_el.src = '/proyectos/'
+                     fr_el.reload()
+              })
+       }
     }
     mwcerrar(event) {
         wmodal.cerrar()

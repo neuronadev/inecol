@@ -1,3 +1,15 @@
- <div class="text-blue-700">
-     Estado: <%= @proyecto.etapas.last.tevento.nomtevento %>
+ <div class="text-blue-700 flex">
+     <% if proyecto.etapas.last.tevento.clave == 'CAP' %>
+           <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                  <%= proyecto.etapas.last.tevento.nomtevento %>
+                </span>
+     <% end %>
+     <% if proyecto.etapas.last.tevento.clave == 'REV' %>
+            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                   <%= proyecto.etapas.last.tevento.nomtevento %>
+                </span>
+     <% end %>
+ 
  </div>
