@@ -5,7 +5,6 @@ class ProyectosController < ApplicationController
       @total_notifica_rp = 0
       if current_usuario.email == 'sara.sanchez@inecol.mx'
              @proyectos = Proyecto.includes(etapas: :tevento).where('teventos.clave':'REV')
-            
       else
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
@@ -101,6 +100,10 @@ class ProyectosController < ApplicationController
        proyecto = Proyecto.find(params[:id])
        evento = Tevento.where(clave:'REV').first
        Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
+
+       enevento = Enevento.where(clave:'NVO').first
+       Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
+
        respond_to do |format|
            format.json { render json:@proyecto.to_json }
       end

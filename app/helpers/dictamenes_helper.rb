@@ -1,0 +1,2 @@
+module DictamenesHelper
+end

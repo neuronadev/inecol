@@ -14,8 +14,11 @@
           <%= render 'vistas/util/pyestado', proyecto:@proyecto %>
       </div>  
       
-      <%  if @total_notifica_rp > 0  %> 
+      <%  if @total_notifica_rp > 0 && @proyecto.persona_id == current_usuario.cuenta.persona.id   %> 
            <%= render 'proyectos/notifi_corr', notificaciones:@notifica_corr %> 
+      <% end %>     
+      <%  if  current_usuario.email == 'sara.sanchez@inecol.mx' &&  @total_notifica_sola > 0 %> 
+               <%= render 'proyectos/notifi_el', notificaciones:@notifica_sola %> 
       <% end %>     
 
       <div class='flex w-full'>

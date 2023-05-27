@@ -41,9 +41,14 @@ Rails.application.routes.draw do
   resources :enlaces do
              collection do
                   get 'mensaje'
+                  post 'atendido'
+                  post 'enterado'
              end
   end
-  
+
+  resources :validaciones 
+  resources :dictamenes
+
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

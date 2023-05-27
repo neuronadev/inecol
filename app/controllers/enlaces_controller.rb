@@ -28,6 +28,34 @@ class EnlacesController < ApplicationController
       @proyecto = Proyecto.find(params[:idpy])
   end
 
+  def atendido
+      enlace = Enlace.find(params[:enlace_id])
+      enlace_py = enlace.proyecto_id
+      enevento = Enevento.where(clave:'SOLA').first
+
+      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id) 
+
+      data = {result:'ok'}
+      respond_to do |format|
+          format.json { render json:data.to_json }
+      end
+
+  end
+
+  def enterado
+    enlace = Enlace.find(params[:enlace_id])
+    enlace_py = enlace.proyecto_id
+    enevento = Enevento.where(clave:'PROC').first
+
+    Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id) 
+
+    data = {result:'ok'}
+    respond_to do |format|
+        format.json { render json:data.to_json }
+    end
+
+end
+
   private
   def enlace_params
       params.require(:enlace).permit(:proyecto_id, :enevento_id, :txtcoment, :estado)

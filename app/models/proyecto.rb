@@ -7,11 +7,14 @@ class Proyecto < ApplicationRecord
     belongs_to :clasificacion
     belongs_to :medio
     belongs_to :linea
+    belongs_to :persona
+
     has_one :fuente
     has_one :participante
     has_one :presupuesto
     has_one :recurso
     has_one :meta
+    has_one :dictamen
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
@@ -26,6 +29,7 @@ class Proyecto < ApplicationRecord
     has_many :protocolos
     has_many :convenios
     has_many :enlaces
+    has_many :validaciones
 
     validates :nombre, presence: true
     validates :clasificacion_id, presence: true

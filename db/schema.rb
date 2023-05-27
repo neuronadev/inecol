@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_27_202508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -146,6 +146,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
     t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
   end
 
+  create_table "dictamenes", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.string "numregistro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.dictamenes_on_proyecto_id"
+  end
+
   create_table "eneventos", force: :cascade do |t|
     t.string "nomenevento"
     t.string "clave", limit: 5
@@ -180,6 +188,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
     t.datetime "updated_at", null: false
     t.index ["proyecto_id"], name: "index_py.etapas_on_proyecto_id"
     t.index ["tevento_id"], name: "index_py.etapas_on_tevento_id"
+  end
+
+  create_table "evaluadores", force: :cascade do |t|
+    t.bigint "persona_id", null: false
+    t.boolean "evalua"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["persona_id"], name: "index_py.evaluadores_on_persona_id"
   end
 
   create_table "financiadoras", force: :cascade do |t|
@@ -438,6 +454,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tvalidaciones", force: :cascade do |t|
+    t.string "nomtvalidacion"
+    t.string "clave", limit: 5
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -448,6 +471,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
+  end
+
+  create_table "validaciones", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.bigint "evaluador_id", null: false
+    t.bigint "tvalidacion_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluador_id"], name: "index_py.validaciones_on_evaluador_id"
+    t.index ["proyecto_id"], name: "index_py.validaciones_on_proyecto_id"
+    t.index ["tvalidacion_id"], name: "index_py.validaciones_on_tvalidacion_id"
   end
 
   add_foreign_key "academicos", "categorias"
@@ -466,12 +500,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
   add_foreign_key "convenios", "proyectos"
   add_foreign_key "cuentas", "personas"
   add_foreign_key "cuentas", "usuarios"
+  add_foreign_key "dictamenes", "proyectos"
   add_foreign_key "enlaces", "eneventos"
   add_foreign_key "enlaces", "proyectos"
   add_foreign_key "especies", "capitulos"
   add_foreign_key "especies", "recursos"
   add_foreign_key "etapas", "proyectos"
   add_foreign_key "etapas", "teventos"
+  add_foreign_key "evaluadores", "personas"
   add_foreign_key "financiadoras", "proyectos"
   add_foreign_key "fiscales", "capitulos"
   add_foreign_key "fiscales", "recursos"
@@ -500,4 +536,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_082316) do
   add_foreign_key "recursos", "proyectos"
   add_foreign_key "solicitados", "capitulos"
   add_foreign_key "solicitados", "presupuestos"
+  add_foreign_key "validaciones", "evaluadores"
+  add_foreign_key "validaciones", "proyectos"
+  add_foreign_key "validaciones", "tvalidaciones"
 end

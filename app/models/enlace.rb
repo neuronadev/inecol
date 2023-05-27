@@ -4,5 +4,6 @@ class Enlace < ApplicationRecord
   belongs_to :enevento
   has_rich_text :txtcoment
 
-  validates :txtcoment, presence: true
+  #validates :txtcoment, presence: true
+
 end

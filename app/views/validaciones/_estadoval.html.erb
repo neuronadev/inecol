@@ -1,0 +1,9 @@
+<%  if proyecto.validaciones.any? %>
+          <%  if !proyecto.validaciones.where(evaluador_id:evaluador.id).last.nil? %> 
+                  <%= proyecto.validaciones.where(evaluador_id:evaluador.id).last.tvalidacion.nomtvalidacion%>
+          <% else %>
+                  Sin respuesta 
+          <% end %>
+<% else %>         
+    ---
+<% end %>
