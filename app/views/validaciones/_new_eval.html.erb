@@ -1,0 +1,32 @@
+<div>Evaluacion del proyecto</div>
+<%= form_with(model: @validacion) do |form| %>
+     <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+     <%= form.hidden_field :evaluador_id, value:Evaluador.where(persona_id:current_usuario.cuenta.persona_id).first.id %>
+
+     <div class="md:items-center mb-3">
+          <div class="md:w-1/5">
+               <%= form.label :tvalidacion_id, 'Tipo evaluacion:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
+          </div>
+          <div class="md:w-2/5">
+               <%= form.select :tvalidacion_id,
+                                Tvalidacion.where(clave:['ACEP', 'REC']).map{|item| [item.nomtvalidacion, item.id]},
+                                {prompt: '-- Seleccione una opción --'},
+                                {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
+                %>   
+          </div>
+     </div>
+     <div class="md:items-center mb-3">
+          <div class="md:w-1/5">
+               <%= form.label :txtval, 'Comentarios:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
+          </div>
+          <div class="md:w-full">
+               <%= form.rich_text_area :txtval, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+          </div>
+     </div>
+     <div class="md:flex md:items-center mb-5 justify-end">
+           <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <%= inline_svg_tag 'svg/send' %>
+                    <div class="ml-2">Enviar</div>
+           </button>
+     </div>    
+<% end %>     

@@ -9,10 +9,12 @@
               </div>  
     </div>
   
-     <% if current_usuario.email == 'sara.sanchez@inecol.mx' %>
+     <% if current_usuario.cuenta.rol.clave == 'EL' %>
              <%= render 'index_enlace' %>  
-     <% else %> 
-             <%= render 'index' %>  
+     <% elsif current_usuario.cuenta.rol.clave == 'CAP' %> 
+              <%= render 'index' %>  
+     <% else %>         
+              <%= render 'index_eval' %>  
      <% end %>
 
 </div>    

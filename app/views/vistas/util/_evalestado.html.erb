@@ -1,0 +1,11 @@
+ <div class="text-blue-700 flex">
+     <%  if proyecto.validaciones.any? %>
+                <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                        <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                        <%= proyecto.validaciones.last.tvalidacion.nomtvalidacion %>
+                </span>
+     <% else %>
+             <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+             <span class="flex w-2.5 h-2.5 bg-teal-500 rounded-full mr-1.5 flex-shrink-0"></span>---</span>
+     <% end %>
+ </div>

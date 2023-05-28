@@ -3,6 +3,8 @@ class DictamenesController < ApplicationController
   end
 
   def new
+      @dictamen = Dictamen.new
+      @proyecto = Proyecto.find(params[:idpy])
   end
 
   def create

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_27_202508) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_053134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -142,7 +142,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_27_202508) do
     t.bigint "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "rol_id", null: false
     t.index ["persona_id"], name: "index_us.cuentas_on_persona_id"
+    t.index ["rol_id"], name: "index_cuentas_on_rol_id"
     t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
   end
 
@@ -416,6 +418,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_27_202508) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "nomrol"
+    t.string "clave"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "solicitados", force: :cascade do |t|
     t.bigint "presupuesto_id", null: false
     t.bigint "capitulo_id", null: false
@@ -499,6 +508,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_27_202508) do
   add_foreign_key "concurrentes", "recursos"
   add_foreign_key "convenios", "proyectos"
   add_foreign_key "cuentas", "personas"
+  add_foreign_key "cuentas", "roles"
   add_foreign_key "cuentas", "usuarios"
   add_foreign_key "dictamenes", "proyectos"
   add_foreign_key "enlaces", "eneventos"

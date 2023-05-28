@@ -3,12 +3,16 @@ class ProyectosController < ApplicationController
 
   def index
       @total_notifica_rp = 0
-      if current_usuario.email == 'sara.sanchez@inecol.mx'
+
+      if current_usuario.cuenta.rol.clave == 'EL'
              @proyectos = Proyecto.includes(etapas: :tevento).where('teventos.clave':'REV')
-      else
+      elsif current_usuario.cuenta.rol.clave == 'CAP'
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
+      else
+             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':'SOLV')           
       end
+
 
   end
 
@@ -132,8 +136,10 @@ class ProyectosController < ApplicationController
      def select_layout
         
         if !current_usuario.nil?
-             if current_usuario.email == 'sara.sanchez@inecol.mx'
+             if current_usuario.cuenta.rol.clave == 'EL'
                    return 'enlaces' 
+             elsif current_usuario.cuenta.rol.clave == 'EVAL'
+                   return 'validaciones'
              else
                    return 'proyectos'
              end

@@ -7,6 +7,7 @@ class ValidacionesController < ApplicationController
   def new
       @validacion = Validacion.new
       @proyecto = Proyecto.find(params[:idpy])
+      @tvalidacion = params[:tval]
   end
 
   def show
@@ -19,7 +20,12 @@ class ValidacionesController < ApplicationController
         if @validacion.save
                enevento = Enevento.where(clave:'EVAL').first
                Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
-               format.html { redirect_to validaciones_path(:idpy=>@proyecto.id) } 
+               if current_usuario.cuenta.rol.clave == 'EL'
+                    format.html { redirect_to validaciones_path(:idpy=>@proyecto.id) } 
+               end   
+               if current_usuario.cuenta.rol.clave == 'EVAL'
+                    format.html { redirect_to proyectos_path } 
+               end   
         else
                flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
                p '---------------------------------------------'

@@ -1,4 +1,4 @@
-<div class="w-full text-slate-700">
+<div class="w-full text-slate-700 mt-5">
       <div class="mt-3 flex align-middle border-b-2 border-slate-200 justify-between">
           <div class="flex w-1/3">
                <div><%= inline_svg_tag 'svg/adoc' %></div>
@@ -18,6 +18,7 @@
           </div>
       </div>
 </div>      
+<div class="w-full text-slate-700 mt-5">
 <% flash.each do |type, msg| %>
            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <%= msg %>
@@ -29,7 +30,7 @@
      <%= form.hidden_field :enevento_id, value:@enevento.id %>
      
      <div class="md:items-center mb-3">
-          <div class="md:w-1/5">
+          <div class="md:w-1/5 font-semibold">
                <%= form.label :txtcoment, 'Descripción de la solicitud:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
           </div>
           <div class="md:w-full">
@@ -43,3 +44,4 @@
            </button>
      </div>                        
 <% end %>
+</div>

@@ -1,6 +1,7 @@
 class VistasController < ApplicationController
     layout 'vistas'
     def resumen
+        
         @proyecto = Proyecto.find(params[:id])
 
         @total_notifica_rp = @proyecto.enlaces.includes(:enevento).where('eneventos.clave':'CORR').count
