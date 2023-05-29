@@ -9,5 +9,5 @@ class Recurso < ApplicationRecord
 
   has_many :concurrentes, dependent: :destroy, inverse_of: :recurso
   accepts_nested_attributes_for :concurrentes,  allow_destroy: true
- 
+ has_one_attached :doficio
 end

@@ -1,5 +1,16 @@
-<div class="nested-form-wrapper flex p-1"  >
+<div>
+   <div class="md:flex md:items-center mb-3">
+                    <div class="md:w-1/5">
+                        <div class='md:text-left mb-1 md:mb-0 pr-4'>Oficio del CINECOL:</div>
+                    </div>
+                    <div class="md:w-2/5">
+                         <%= f.file_field :doficio %>
+                    </div>
+        </div>
 
+</div>
+<div class="nested-form-wrapper flex p-1"  >
+       
         <div class="border border-gray-200 w-full">
             <div class="p-5">
                   <template data-nested-form-fcon-target="template" >

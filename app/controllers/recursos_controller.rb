@@ -68,7 +68,7 @@ class RecursosController < ApplicationController
   private
   def recurso_params
       params.require(:recurso).permit(
-                                        :proyecto_id,
+                                        :proyecto_id, :doficio,
                                         fiscales_attributes:[:id, :capitulo_id, :monto, :_destroy],
                                         especies_attributes:[:id, :capitulo_id, :monto, :_destroy],
                                         concurrentes_attributes:[:id, :capitulo_id, :monto, :_destroy]

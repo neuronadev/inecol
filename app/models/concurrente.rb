@@ -5,4 +5,6 @@ class Concurrente < ApplicationRecord
 
   validates :capitulo_id, presence: true 
   validates :monto, presence: true 
+
+  
 end

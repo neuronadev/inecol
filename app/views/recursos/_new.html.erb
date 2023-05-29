@@ -11,8 +11,8 @@
                             }) do |form|
     %>
 
-        <div class="mb-4 font-semibolder dark:border-gray-800">
-               Si el proyecto no tiene recursos aportados por el INECOL haga clic en el siguiente enlace <%= link_to 'Omitir este paso.', new_meta_path %>
+        <div class="mb-4 font-semibolder text-blue-800 dark:border-gray-800">
+               Si el proyecto no tiene recursos aportados por el INECOL haga clic en el siguiente enlace <%= link_to 'Omitir este paso.', new_meta_path, class:'text-red-800' %>
         </div>    
         <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
