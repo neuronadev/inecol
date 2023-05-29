@@ -1,6 +1,6 @@
 import numeral from "numeral"
 
-export default class SolicitaUtil{
+export class SolicitaUtil{
    constructor(){
          this.monto_limite = 0.0
    }

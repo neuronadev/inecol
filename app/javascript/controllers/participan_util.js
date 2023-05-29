@@ -1,6 +1,6 @@
 import numeral from "numeral"
 
-export default class PartUtil {
+export class PartUtil  {
     constructor(inputs_acad, inputs_tec) {
         this.inputs_acad = inputs_acad
         this.inputs_tec = inputs_tec

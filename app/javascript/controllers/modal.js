@@ -1,6 +1,6 @@
 import { Modal } from 'flowbite';
 
-export default class WModal {
+export class WModal {
    
     constructor(el){
         this.targetEl = el
