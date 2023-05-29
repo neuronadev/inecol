@@ -1,15 +1,12 @@
+import { Controller } from "@hotwired/stimulus"
 import numeral from "numeral"
 
-export class PartUtil  {
-    constructor(inputs_acad, inputs_tec) {
-        this.inputs_acad = inputs_acad
-        this.inputs_tec = inputs_tec
-
-        this.limite_porc_part = 1
-    }
+export class PartUtil extends Controller {
+      
     
     limiteMax(){
-        if ((this.suma_invest() + this.suma_tec()) > this.limite_porc_part ){
+        var limite_porc_part = 1 
+        if ((this.suma_invest() + this.suma_tec()) > limite_porc_part ){
                  return true 
          }else{
                  return false

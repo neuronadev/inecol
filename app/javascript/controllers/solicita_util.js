@@ -1,15 +1,16 @@
+import { Controller } from "@hotwired/stimulus"
 import numeral from "numeral"
 
-export class SolicitaUtil{
-   constructor(){
-         this.monto_limite = 0.0
-   }
+var monto_limite = 0.0
+
+export class SolicitaUtil extends Controller {
     limiteGasto(monto){
-        this.monto_limite = numeral(monto).value()
+
+        monto_limite = numeral(monto).value()
     }
 
    limiteMaxGasto(){
-        if (this.solSumaCapitulos() > parseFloat(this.monto_limite) ){
+        if (this.solSumaCapitulos() > parseFloat(monto_limite) ){
                 return true
         }else{
                 return false;

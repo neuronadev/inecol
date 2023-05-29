@@ -1,8 +1,8 @@
+import { Controller } from "@hotwired/stimulus"
 import numeral from "numeral"
 
-export class Formato{
-   constructor(){}
-   
+export class Formato extends Controller {
+  
    moneda(monto){
           return numeral(monto).format('$0,0.00')
    }

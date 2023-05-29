@@ -1,6 +1,7 @@
+import { Controller } from "@hotwired/stimulus"
 import { Modal } from 'flowbite';
 
-export class WModal {
+export class WModal extends Controller {
    
     constructor(el){
         this.targetEl = el
