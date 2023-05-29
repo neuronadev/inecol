@@ -33,7 +33,13 @@
        
        <div class="flex  text-gray-800 w-10/12">
                  <div class="flex justify-end w-4/6 font-semibold">Total:</div>
-                 <div class="flex justify-start w-2/6 font-semibold"><div class="ml-2" id='total_caps'>$ 0.00</div></div>
+                 <div class="flex justify-start w-2/6 font-semibold"><div class="ml-2" id='total_caps'>
+                           <% if @presupuesto.solicitados.any? %>
+                                 <%= @presupuesto.solicitados.sum(:monto) %>
+                           <% else %>
+                                  $ 0.00
+                           <% end %>
+                 </div></div>
        </div>
 
        <div class="md:flex md:items-center mt-1 mb-3 justify-end">
