@@ -1,13 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
-import { WModal } from './modal.js'
-
+//import { WModal } from './modal.js'
 var m = ''
 var wmodal = ''
 var token = document.querySelector('meta[name="csrf-token"]').content
 export default class extends Controller {
     connect() {
         m = document.getElementById('modalEl')
-        wmodal = new WModal(m)
+        //wmodal = new WModal(m)
      }
 
     mensaje(event){
@@ -21,7 +20,7 @@ export default class extends Controller {
        }
     }
     mwcerrar(event) {
-        wmodal.cerrar()
+        //wmodal.cerrar()
     }
     async enviarpy(proyecto){
         try {
