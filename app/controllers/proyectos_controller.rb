@@ -46,7 +46,7 @@ class ProyectosController < ApplicationController
                     @proyecto.build_mconvocatoria
                     @proyecto.protocolos.build
                     @proyecto.convenios.build
-                    #p @proyecto.errors
+                    p @proyecto.errors
                     flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
                     format.html { render :new, status: :bad_request }
             end
