@@ -1,4 +1,4 @@
-export class Presupuesto{
+export default class Presupuesto{
     constructor(clasifica, ovh, monto){
           this.clasifica = clasifica
           this.ovh = ovh
