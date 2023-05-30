@@ -21,14 +21,14 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: inecol
-  password: developer
+  password: s4Inecol.#18
   host: localhost
   port: 5432
   schema_search_path: public,usr,py,rh,us
 
 development:
   <<: *default
-  database: inecol_development
+  database: inecol_production
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
