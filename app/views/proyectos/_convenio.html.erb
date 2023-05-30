@@ -1,7 +1,11 @@
 <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
 
-    <%= form.fields_for :convenios do |f| %>
-       <%= f.file_field :dconvenio %>
+    <%= form.fields_for :convenio do |f| %>
+          <%= f.hidden_field :activo, value:true %> 
+          <%= f.file_field :dconvenios, multiple:true, direct_upload: true,
+                                                data: { upsf_target: "input",
+                                                        action: "change->upsf#uploadFile" 
+                                                    }  %>
     <% end %>
 
 </div>

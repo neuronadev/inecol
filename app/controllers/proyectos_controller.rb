@@ -27,8 +27,8 @@ class ProyectosController < ApplicationController
       @proyecto = Proyecto.new
       @proyecto.instituciones.build
       @proyecto.build_mconvocatoria
-      @proyecto.protocolos.build
-      @proyecto.convenios.build
+      #@proyecto.build_protocolo
+      #@proyecto.build_convenio
      
   end
 
@@ -42,11 +42,6 @@ class ProyectosController < ApplicationController
                    session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
-                    @proyecto.instituciones.build
-                    @proyecto.build_mconvocatoria
-                    @proyecto.protocolos.build
-                    @proyecto.convenios.build
-                    #p @proyecto.errors
                     flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
                     format.html { render :new, status: :bad_request }
             end
@@ -124,10 +119,12 @@ class ProyectosController < ApplicationController
                                        :tfconoc,
                                        :interinst,
                                        :persona_id,
+                                       :docprotocolo,
+                                       docconvenios: [],
                                        mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :dconvocatoria, :_destroy],
-                                       instituciones_attributes:[:id, :nominstitucion, :_destroy],
-                                       protocolos_attributes:[:id, :dprotocolo, :_destroy],
-                                       convenios_attributes:[:id, :dconvenio, :_destroy]
+                                       instituciones_attributes:[:id, :nominstitucion, :_destroy]
+                                       #protocolo_attributes:[:id, :dprotocolo, :activo],
+                                       #convenio_attributes:[:id, :dconvenio, :activo]
                                       
                                     )
   end

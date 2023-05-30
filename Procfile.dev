@@ -1,2 +1,2 @@
-web: bin/rails server -b 68.178.203.122  -p 8080
+web: bin/rails server -b 10.0.114.195 -p 3000
 css: bin/rails tailwindcss:watch

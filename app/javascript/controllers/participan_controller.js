@@ -26,7 +26,7 @@ export default class extends Controller {
       this.tipoPart(event.target.value).then(data=>{
               let p = event.target.closest('.nested-form-wrapper')
               let el = p.querySelector('.parttipo')
-              el.innerHTML = data.nomtipo
+              //el.innerHTML = data.nomtipo
       })
   }
 

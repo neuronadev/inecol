@@ -2,13 +2,13 @@
       <div class="p-5">
             <template data-nested-form-inv-target="template" >
                 <%= form.fields_for :pacademicos, Pacademico.new, child_index:'NEW_RECORD' do |pacad_fields|%>
-                     <%= render 'participantes/part_acad_form', f: pacad_fields %>
+                     <%= render 'participantes/part_acad_form', f: pacad_fields, rp:0 %>
                  <% end %>
             </template>
             
             <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                         <%= form.fields_for :pacademicos do |pacad_fields|%>
-                              <%= render 'participantes/part_acad_form', f: pacad_fields %>
+                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1 %>
                         <% end %>
             <% end %>
             <% if controller.action_name == 'edit' || controller.action_name == 'create' %>

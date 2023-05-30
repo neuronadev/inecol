@@ -19,15 +19,15 @@ class Proyecto < ApplicationRecord
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
 
-    has_many :protocolos, dependent: :destroy, inverse_of: :proyecto
-    accepts_nested_attributes_for :protocolos, reject_if: :all_blank, allow_destroy: true
+    #has_one :protocolo #, dependent: :destroy, inverse_of: :proyecto
+    #accepts_nested_attributes_for :protocolo, reject_if: :all_blank #, allow_destroy: true
+    has_one_attached :docprotocolo, dependent: :detach
 
-    has_many :convenios, dependent: :destroy, inverse_of: :proyecto
-    accepts_nested_attributes_for :convenios, reject_if: :all_blank, allow_destroy: true
+    #has_one :convenio #, dependent: :destroy, inverse_of: :proyecto
+    #accepts_nested_attributes_for :convenio #, reject_if: :all_blank, allow_destroy: true
+    has_many_attached :docconvenios, dependent: :detach
     
     has_many :etapas
-    has_many :protocolos
-    has_many :convenios
     has_many :enlaces
     has_many :validaciones
 
@@ -36,6 +36,8 @@ class Proyecto < ApplicationRecord
     validates :medio_id, presence: true
     validates :linea_id, presence: true
     validates :periodo, presence: true
+    validates :docprotocolo, presence: true
+    #validates :protocolo, presence: true
 
 
     medio = Medio.where(clave:'CONV').first

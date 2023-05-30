@@ -82,3 +82,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "inline_svg", "~> 1.9"
 
 gem "devise", "~> 4.9"
+
+gem 'active_storage_validations', '~> 1.0', '>= 1.0.3'
