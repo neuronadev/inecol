@@ -104,8 +104,9 @@
 
 
                 <% if  controller.action_name == 'create' %>  
-                       <% if !@proyecto.medio.nil? %> 
-                                <% if @proyecto.medio.clave == 'CONV' %>
+                       <% if !@proyecto.medio.nil? && @proyecto.medio.clave == 'CONV'
+                               p 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+                       %> 
                                     <div class="md:flex md:items-center mb-3" id='secc_convoca' style="display:flex;">
                                         <div class="md:w-1/5">
                                         
@@ -115,8 +116,9 @@
                                             <%= render 'convocatoria', form:form %>
                                         </div>
                                     </div>
-                                <% end %> 
-                        <% else %> 
+                        <% else 
+                                p 'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
+                        %> 
                                     <div class="md:flex md:items-center mb-3" id='secc_convoca' style="display:none;">
                                         <div class="md:w-1/5">
                                         
@@ -199,6 +201,14 @@
                                     <%= render 'instituciones', form:form %>
                                     </div> 
                         </div>
+                <% else %>        
+                         <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="display:none;" >
+                                    <div class="md:w-1/5">
+                                    </div>
+                                    <div class="md:w-4/5">
+                                    <%= render 'instituciones', form:form %>
+                                    </div> 
+                         </div>
                 <% end %>
 
                 <div class="md:flex md:items-center mb-3">

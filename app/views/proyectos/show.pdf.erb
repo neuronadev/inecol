@@ -1,0 +1,180 @@
+<div style="width:80%;">
+
+   <table style="width:100%;">
+      <tr>
+           <td> <strong> Nombre del Proyecto: </strong></td>
+           <td> <%= @proyecto.nombre %> </td>
+      </tr>
+      <tr>
+           <td> <strong> Objetivo: </strong></td>
+           <td> <%= @proyecto.objetivo %> </td>
+      </tr>
+      <tr>
+           <td> <strong> Tipo de Proyecto: </strong></td>
+           <td> <%= @proyecto.clasificacion.nomclasifica %> </td>
+      </tr>
+      <tr>
+           <td> <strong> Overhead: </strong></td>
+           <td> <% if @proyecto.overhead %>
+                        SI
+                  <% else%>
+                        NO
+                  <% end %> 
+            </td>
+      </tr>
+      <tr>
+           <td> <strong> Tipo Medio: </strong></td>
+           <td> <%= @proyecto.medio.nommedio %> </td>
+      </tr>
+      <% if @proyecto.medio.clave == 'CONV' %>
+            <tr>
+                <td> <strong>Convocatoria:</strong> </strong></td>
+                <td> 
+                        <table>
+                               <tr>
+                                  <td>Nombre:</td>
+                                  <td><%= @proyecto.mconvocatoria.nomconvocatoria %> </td>
+                               </tr>
+                               <tr>
+                                  <td> Enlace:</td>
+                                  <td><%= @proyecto.mconvocatoria.link %> </td>
+                               </tr>
+                        </table>
+                </td>
+            </tr>
+       <% end %>   
+       <tr>
+           <td> <strong> Tipo Investigación: </strong></td>
+           <td> <%= @proyecto.linea.nomlinea %> </td>
+      </tr>  
+      <tr>
+           <td> <strong> Periodo: </strong></td>
+           <td> <%= @proyecto.periodo %> </td>
+      </tr>
+      <tr>
+           <td> <strong> Transferencia de Conocimiento: </strong></td>
+           <td> <% if @proyecto.tfconoc %>
+                    SI
+                <% else%>
+                    NO
+                <% end %> </td>
+      </tr>
+      <tr>
+           <td> <strong> Interinstitucional: </strong></td>
+           <td> <% if @proyecto.interinst %>
+                    SI
+                <% else%>
+                    NO
+                <% end %>
+           </td>
+      </tr>
+      <% if @proyecto.interinst %>
+           <% @proyecto.instituciones.each do |inst| %>
+                  <tr><td></td><td> <%= inst.nominstitucion %> </td></tr>
+           <% end %>
+      <% end %>
+      
+   </table>
+
+</div>
+
+<div style="width:80%; margin-top:50px;">
+
+   <table style="width:100%">
+      <tr>
+         <td> <strong> Fuente Financiadora: </strong></td>
+         <td> <%= @proyecto.fuente.nomfuente %> </td>
+      </tr>
+      <tr>
+         <td> <strong> Nacionalidad: </strong></td>
+         <td> <%= @proyecto.fuente.nacionalidad.nomnacionalidad %> </td>
+      </tr>
+      <tr>
+         <td> <strong> País/Estado: </strong></td>
+         <td> <%= @proyecto.fuente.lugar.nomlugar %> </td>
+      </tr>
+      <tr>
+         <td> <strong> Nombre del Contacto: </strong></td>
+         <td> <%= @proyecto.fuente.nomcontacto %> </td>
+      </tr>
+      <tr>
+         <td> <strong> E-mail del Contacto: </strong></td>
+         <td> <%= @proyecto.fuente.emailcontacto %> </td>
+      </tr>
+   </table>
+</div>   
+
+<div style="width:80%; margin-top:50px;">
+
+   <table style="width:100%">
+           <tr> <td>Investigadores</td> </tr>
+           <tr> <td> 
+                       <table>  
+                             <thead>     
+                                  <tr><th>Nombre</th><th>Tipo</th><th>Responsable</th><th>Porcentaje</th></tr>
+                             </thead>
+                             <%  if !@proyecto.participante.pacademicos.nil? %>
+                                       <% @proyecto.participante.pacademicos.each do |a| %>
+                                                <tr> <td> <%= a.academico.persona.nombre %> </td> 
+                                                     <td> <%= a.academico.tacademico.nomtacademico %> </td>  
+                                                     <td> 
+                                                         <% if a.responsable %>
+                                                                  <strong>SI</strong>
+                                                         <% end %>
+                                                     </td> 
+                                                     <td> <%= a.porcentaje %> </td>
+                                                </tr>
+                                       <% end %>
+                             <% end %>
+                       </table>
+                </td>
+           </tr>
+   </table>
+
+</div>   
+
+<div style="width:80%; margin-top:20px;">
+
+   <table style="width:100%">
+           <tr> <td>Técnicos</td> </tr>
+           <tr> <td> 
+                       <table>  
+                             <thead>     
+                                  <tr><th>Nombre</th><th>Porcentaje</th></tr>
+                             </thead>
+                             <%  if !@proyecto.participante.ptecnicos.nil? %>
+                                       <% @proyecto.participante.ptecnicos.each do |a| %>
+                                                <tr> <td> <%= a.academico.persona.nombre %> </td> 
+                                                     <td> <%= a.porcentaje %> </td>
+                                                </tr>
+                                       <% end %>
+                             <% end %>
+                       </table>
+                </td>
+           </tr>
+   </table>
+
+</div>   
+
+<div style="width:80%; margin-top:20px;">
+
+   <table style="width:100%">
+           <tr> <td>Estudiantes</td> </tr>
+           <tr> <td> 
+                       <table>  
+                             <thead>     
+                                  <tr><th>Nombre</th><th>Nivel Estudios</th></tr>
+                             </thead>
+                             <%  if !@proyecto.participante.pestudiantes.nil? %>
+                                       <% @proyecto.participante.pestudiantes.each do |a| %>
+                                                <tr> <td> <%= a.nombre %> </td> 
+                                                     <td> <%= a.nivel.nomnivel %> </td>
+                                                </tr>
+                                       <% end %>
+                             <% end %>
+                       </table>
+                </td>
+           </tr>
+   </table>
+
+</div>  

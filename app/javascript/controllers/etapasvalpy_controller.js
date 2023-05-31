@@ -23,6 +23,7 @@ export default class extends Controller {
     mwcerrar(event) {
         wmodal.cerrar()
     }
+    
     async enviarpy(proyecto){
         try {
             var data = await fetch('/proyectos/enviar', {

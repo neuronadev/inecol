@@ -84,3 +84,5 @@ gem "inline_svg", "~> 1.9"
 gem "devise", "~> 4.9"
 
 gem 'active_storage_validations', '~> 1.0', '>= 1.0.3'
+gem 'wicked_pdf', '~> 2.6', '>= 2.6.3'
+gem 'wkhtmltopdf-binary', '~> 0.12.6.6'

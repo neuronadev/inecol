@@ -18,7 +18,20 @@ class ProyectosController < ApplicationController
 
   def show
       @proyecto = Proyecto.find(params[:id])
-      
+       respond_to do |format|
+            format.html
+            format.pdf do
+                render pdf: "Invoice No. #{@proyecto.id}",
+                page_size: 'A4',
+                template: "proyectos/show",
+                layout: "pdf",
+                orientation: "Portrait",
+                lowquality: false,
+                encoding: 'UTF-8',
+                zoom: 1,
+                dpi: 75
+            end
+        end
   end
 
   def new
