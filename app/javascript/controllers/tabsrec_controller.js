@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { Tabs } from "flowbite"
-import  Formato   from './formato'
+import  Formato   from 'controllers/formato'
 import numeral from "numeral"
 
 var formato = new Formato()

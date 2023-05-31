@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import  WModal  from './modal'
+import  WModal  from 'controllers/modal'
 
 var m = ''
 var wmodal = ''

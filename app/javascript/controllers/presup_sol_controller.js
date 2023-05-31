@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
-import  Presupuesto  from './presupuesto'
-import  SolicitaUtil   from './solicita_util'
-import  Formato   from './formato'
+import  Presupuesto  from 'controllers/presupuesto'
+import  SolicitaUtil   from 'controllers/solicita_util'
+import  Formato   from 'controllers/formato'
 
 var token = document.querySelector('meta[name="csrf-token"]').content
 var py_clasifca = ''
