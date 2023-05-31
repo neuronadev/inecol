@@ -1,6 +1,6 @@
 import numeral from "numeral"
 
-export class Formato{
+export default class Formato{
    constructor(){}
    
    moneda(monto){
