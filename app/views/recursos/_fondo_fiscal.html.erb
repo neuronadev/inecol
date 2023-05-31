@@ -19,7 +19,7 @@
                 <div class="nested-form-wrapper p-1" data-new-record="<%= f_apor.object.new_record? %>" >
                         <div class="w-2/12 flex justify-center items-center">
                             <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md", data-action="nested-form-fondo#remove">
-                                <%= inline_svg_tag 'svg/cruz' %>
+                                <%= inline_svg_tag 'svg/cruz.svg' %>
                            </button>
                         </div>  
                         <%= f_apor.hidden_field :fondo_id, value:1 %>
@@ -33,7 +33,7 @@
                          <% end %>
                         <div data-nested-form-ffis-target="targeta"></div>
                         <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-ffis#add">
-                                <%= inline_svg_tag 'svg/agregar-usuario' %>
+                                <%= inline_svg_tag 'svg/agregar-usuario.svg' %>
                                 <div class="flex mx-1.5">Agregar Capítulo...</div>
                         </button>
                         <%= f_apor.hidden_field :_destroy %>   

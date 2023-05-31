@@ -7,13 +7,13 @@
                   <div class="flex w-auto">
                           <% if current_usuario.cuenta.rol.clave == 'EL' %>
                              <%= link_to validaciones_path(:idpy=>@proyecto.id), class:'flex' do %>
-                                  <div><%= inline_svg_tag 'svg/regresar' %></div>
+                                  <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
                                  <div class="ml-1 text-sm font-semibold">Regresar</div>
                               <% end %>   
                           <% end %>    
                           <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
                              <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
-                                  <div><%= inline_svg_tag 'svg/regresar' %></div>
+                                  <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
                                  <div class="ml-1 text-sm font-semibold">Regresar</div>
                               <% end %>   
                           <% end %>    

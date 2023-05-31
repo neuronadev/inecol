@@ -1,7 +1,7 @@
 <div class="w-full text-slate-700 mt-5">
       <div class="mt-3 flex align-middle border-b-2 border-slate-200 justify-between">
           <div class="flex w-1/3">
-               <div><%= inline_svg_tag 'svg/adoc' %></div>
+               <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
 
                <% if @tipo == 'CORR' %>  
                     <div class="ml-1">Solictar cambios</div>
@@ -12,7 +12,7 @@
           </div>
           <div class="flex w-auto">
                  <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
-                    <div><%= inline_svg_tag 'svg/regresar' %></div>
+                    <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
                     <div class="ml-1 text-sm font-semibold">Regresar</div>
                  <% end %>   
           </div>
@@ -39,7 +39,7 @@
      </div>
      <div class="md:flex md:items-center mb-5 justify-end">
            <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                    <%= inline_svg_tag 'svg/send' %>
+                    <%= inline_svg_tag 'svg/send.svg' %>
                     <div class="ml-2">Enviar</div>
            </button>
      </div>                        

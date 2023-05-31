@@ -3,7 +3,7 @@
              <div>
                  <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), 'data-frame-target':'_top' do %>
                       <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
-                            <div> <%= inline_svg_tag 'svg/usuarios-alt' %></div> <div class="ml-2 text-sky-800">Validar proyecto</div>
+                            <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Validar proyecto</div>
                       </div>     
                  <% end %>    
               </div>  
