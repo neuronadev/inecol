@@ -36,16 +36,21 @@ class RecursosController < ApplicationController
 
   def update
     m = '$'
-    params[:recurso][:fiscales_attributes].each do |i, v|
-        params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+    if params[:recurso].has_key?("fiscales_attributes".to_sym)
+        params[:recurso][:fiscales_attributes].each do |i, v|
+            params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+        end
     end
-
-    params[:recurso][:especies_attributes].each do |i, v|
-      params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-    end
-    params[:recurso][:concurrentes_attributes].each do |i, v|
-        params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-    end
+    if params[:recurso].has_key?("especies_attributes".to_sym)
+            params[:recurso][:especies_attributes].each do |i, v|
+                params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            end
+    end      
+    if params[:recurso].has_key?("concurrentes_attributes".to_sym)
+            params[:recurso][:concurrentes_attributes].each do |i, v|
+                params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            end
+    end     
 
       @recurso = Recurso.find(params[:id]) 
       @recurso.update(recurso_params)
@@ -63,16 +68,21 @@ class RecursosController < ApplicationController
 
   def create
       m = '$'
-      params[:recurso][:fiscales_attributes].each do |i, v|
-          params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+      if params[:recurso].has_key?("fiscales_attributes".to_sym)
+            params[:recurso][:fiscales_attributes].each do |i, v|
+                params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            end
       end
-
-      params[:recurso][:especies_attributes].each do |i, v|
-        params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      end
-      params[:recurso][:concurrentes_attributes].each do |i, v|
-          params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      end
+      if params[:recurso].has_key?("especies_attributes".to_sym)
+            params[:recurso][:especies_attributes].each do |i, v|
+                params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            end
+      end      
+      if params[:recurso].has_key?("concurrentes_attributes".to_sym)
+            params[:recurso][:concurrentes_attributes].each do |i, v|
+                params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            end
+      end     
 
       @recurso = Recurso.new(recurso_params)
       @proyecto = Proyecto.find(@recurso.proyecto_id)

@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { PartUtil } from './participan_util.js'
+import  PartUtil  from 'controllers/participan_util'
 import numeral from "numeral"
 
 

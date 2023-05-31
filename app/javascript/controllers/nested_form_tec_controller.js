@@ -1,5 +1,5 @@
 import NestedForm from "stimulus-rails-nested-form";
-import { PartUtil } from './participan_util.js'
+import  PartUtil  from 'controllers/participan_util'
 
 export default class extends NestedForm {
   connect() {
