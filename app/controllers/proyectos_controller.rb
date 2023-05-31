@@ -111,6 +111,7 @@ class ProyectosController < ApplicationController
   private
   def proyecto_params
       params.require(:proyecto).permit(:nombre, 
+                                       :objetivo,
                                        :clasificacion_id,
                                        :overhead,
                                        :medio_id,

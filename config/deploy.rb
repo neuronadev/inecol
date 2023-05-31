@@ -3,7 +3,7 @@ lock "~> 3.17.2"
 
 set :application, "proyectos"
 set :repo_url, "https://github.com/neuronadev/inecol.git"
-set :branch, "main"
+set :branch, "dev_1_0"
 set :deploy_to, "/home/proyectos/app/"
 
 set :rvm_ruby_version, "ruby-3.0.0"

@@ -5,12 +5,12 @@ class ParticipantesController < ApplicationController
   def show
       @participante = Participante.find(params[:id])
       @proyecto = @participante.proyecto
-      @inv = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV')
-      @tec = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC')
+      @inv = @participante.pacademicos #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV')
+      @tec = @participante.ptecnicos #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC')
       @est = @participante.pestudiantes
 
-      @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
-      @tec_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('pacademicos.porcentaje')
+      @inv_sum = @participante.pacademicos.sum(:porcentaje) #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
+      @tec_sum = @participante.ptecnicos.sum(:porcentaje) #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('pacademicos.porcentaje')
       @tot_porc = @inv_sum.to_f + @tec_sum.to_f
   end
 

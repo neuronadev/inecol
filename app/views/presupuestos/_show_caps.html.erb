@@ -17,7 +17,7 @@
                               <%= s.capitulo.nomcapitulo %>
                         </th>
                         <td class="px-6 py-4 text-center">
-                              <%= s.monto %>
+                              <%= number_to_currency(s.monto) %>
                         </td>
                     
                     </tr>
@@ -26,7 +26,7 @@
         <tfoot class=" bg-gray-50 dark:bg-gray-700">
              <tr>
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">Total</th>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"><%= @sum_caps %> </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"><%= number_to_currency(@sum_caps) %> </td>
              </tr>
         </tfoot>
     </table>

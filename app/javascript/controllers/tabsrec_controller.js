@@ -1,6 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 import { Tabs } from "flowbite"
+import { Formato  } from './formato.js'
+import numeral from "numeral"
 
+var formato = new Formato()
 
 // Connects to data-controller="tabspr"
 export default class extends Controller {
@@ -30,6 +33,31 @@ export default class extends Controller {
             inactiveClasses: 'text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300',
         };
         const tabs = new Tabs(tabElements, options);
+    }
+
+    campoformat(event){
+          event.target.value = formato.moneda(event.target.value)
+    }
+
+    campounformat(event){
+         event.target.value = formato.unformat(event.target.value)  
+    }
+
+    sumaMonto(event){
+         var tffiscal = document.getElementById(event.params.ttarget) 
+         var monto = this.sumaMontoRec(event.params.tclas)
+         tffiscal.innerHTML = formato.moneda(monto)
+
+    }
+
+    sumaMontoRec(t_class){
+        var sum_caps = 0.0
+        var caps = document.getElementsByClassName(t_class)
+        Array.from(caps, (el) => {
+            let v = numeral(el.value).value()
+            sum_caps += v
+        })
+        return sum_caps   
     }
 
 }

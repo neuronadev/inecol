@@ -1,12 +1,25 @@
     <div class="md:flex md:items-center mt-3 mb-3">
         <div class="md:w-1/5">
             <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                Nombre:
+                Nombre del Proyecto:
             </div>    
         </div>
         <div class="md:w-4/5">
             <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
                 <%= @proyecto.nombre %>
+            </div> 
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mt-3 mb-3">
+        <div class="md:w-1/5">
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                Objetivo:
+            </div>    
+        </div>
+        <div class="md:w-4/5">
+            <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+                <%= @proyecto.objetivo %>
             </div> 
         </div>
     </div>
@@ -53,21 +66,20 @@
         </div>
     </div>
     </div>
-    
-     <div class="w-full md:flex md:items-center mb-3">
-            <div class="md:w-1/5">
-                <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                
-                </div>
+    <% if @proyecto.medio.clave == 'CONV' %>
+            <div class="w-full md:flex md:items-center mb-3">
+                    <div class="md:w-1/5">
+                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                        
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class=' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+                                <%= render 'lista_convocatoria' %>  
+                        </div>
+                    </div>
             </div>
-            <div class="w-full">
-                <div class=' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                    <% if @proyecto.medio.clave == 'CONV' %>
-                        <%= render 'lista_convocatoria' %>  
-                   <%end %> 
-                </div>
-            </div>
-    </div>
+    <% end %>
 
 
     <div class="md:flex md:items-center mb-3">
@@ -129,21 +141,37 @@
                 </div>
             </div>
     </div>
+    <% if @proyecto.interinst %>
+            <div class="w-full md:flex md:items-center mb-3">
+                    <div class="md:w-1/5">
+                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                        
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class=' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+                                <%= render 'lista_instituciones' %>  
+                        </div>
+                    </div>
+            </div>
+    <% end %>  
 
-    <div class="w-full md:flex md:items-center mb-3">
-            <div class="md:w-1/5">
-                <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                
+    <% if !@proyecto.docprotocolo.nil? %>
+
+            <div class="md:flex md:items-center mt-3 mb-3">
+                <div class="md:w-1/5">
+                    <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                        Protocolo:
+                    </div>    
+                </div>
+                <div class="md:w-4/5">
+                    <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
+                         <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition: "attachment", target:'_blank') %>  
+                    </div> 
                 </div>
             </div>
-            <div class="w-full">
-                <div class=' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                    <% if @proyecto.interinst %>
-                        <%= render 'lista_instituciones' %>  
-                   <%end %> 
-                </div>
-            </div>
-    </div>
+    <% end %>
+
 
    <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %>
         <div class="md:flex md:items-center mb-3 justify-end mt-5">

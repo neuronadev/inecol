@@ -8,8 +8,10 @@
   </div>
   <div class="w-3/12 flex justify-center">
     <%= f.text_field :monto, 
-                   class:'capmonto appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
-                    data:{action:'keydown->utils#keyEnter keyup->utils#formatPorcent'}
+                   class:'capaesp appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                   data:{action:'keydown->utils#keyEnter blur->tabsrec#campoformat focus->tabsrec#campounformat keydown->utils#onlynumbers keyup->tabsrec#sumaMonto', 
+                          tabsrec_tclas_param:'capaesp', 
+                          tabsrec_ttarget_param:'taesp'}
                    %>
   </div>
   <div class="w-2/12 flex justify-center items-center">

@@ -44,7 +44,7 @@ class MetasController < ApplicationController
 
   private
    def meta_params
-       params.require(:meta).permit(:proyecto_id, :objetivo, :esperado, :impacto, :comentario)
+       params.require(:meta).permit(:proyecto_id, :esperado, :impacto, :comentario)
    end
 
 end

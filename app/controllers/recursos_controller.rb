@@ -10,9 +10,9 @@ class RecursosController < ApplicationController
       #@aes = @recurso.aportados.includes(:fondo).where('fondos.clave':'AE').first
       #@fcon = @recurso.aportados.includes(:fondo).where('fondos.clave':'FC').first
 
-      #@tot_ffis = @recurso.aportados.includes(:apmontos).includes(:fondo).where('fondos.clave':'FF').sum('apmontos.monto')
-      #@tot_aes = @recurso.aportados.includes(:apmontos).includes(:fondo).where('fondos.clave':'AE').sum('apmontos.monto')
-      #@tot_fcon = @recurso.aportados.includes(:apmontos).includes(:fondo).where('fondos.clave':'FC').sum('apmontos.monto')
+      @tot_ffis = @recurso.fiscales.sum(:monto)
+      @tot_aes = @recurso.especies.sum(:monto)
+      @tot_fcon = @recurso.concurrentes.sum(:monto)
 
   end
 
@@ -35,6 +35,18 @@ class RecursosController < ApplicationController
   end
 
   def update
+    m = '$'
+    params[:recurso][:fiscales_attributes].each do |i, v|
+        params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+    end
+
+    params[:recurso][:especies_attributes].each do |i, v|
+      params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+    end
+    params[:recurso][:concurrentes_attributes].each do |i, v|
+        params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+    end
+
       @recurso = Recurso.find(params[:id]) 
       @recurso.update(recurso_params)
       respond_to do |format|
@@ -50,6 +62,18 @@ class RecursosController < ApplicationController
   end
 
   def create
+      m = '$'
+      params[:recurso][:fiscales_attributes].each do |i, v|
+          params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+      end
+
+      params[:recurso][:especies_attributes].each do |i, v|
+        params[:recurso][:especies_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+      end
+      params[:recurso][:concurrentes_attributes].each do |i, v|
+          params[:recurso][:concurrentes_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+      end
+
       @recurso = Recurso.new(recurso_params)
       @proyecto = Proyecto.find(@recurso.proyecto_id)
       respond_to do |format|

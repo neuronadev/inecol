@@ -16,7 +16,8 @@
            <div class="w-1/3">
                   <%= form.label :costo, 'Costo del Proyecto (sin IVA):', class:'block font-semibold  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
            </div>
-           <div class="w-4/6" data-controller="tooltip">
+           <div class="w-4/6">
+                  <div class="text-sm text-blue-800 font-semibold">Capture el monto de su proyecto sin IVA</div>
                   <%= form.text_field :costo, 
                       class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full 
                              py-2 px-2 text-gray-800 font-semibold leading-tight focus:outline-none focus:bg-white 

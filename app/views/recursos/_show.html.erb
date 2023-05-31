@@ -33,13 +33,13 @@
         </div>
         <div id="tabContentExample" class="mt-2">
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
-                        <%= render 'show_caps', items:@recurso.fiscales, total:0 %>
+                        <%= render 'show_caps', items:@recurso.fiscales, total:@tot_ffis %>
                     </div>
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
-                        <%= render 'show_caps', items:@recurso.especies, total:0 %>
+                        <%= render 'show_caps', items:@recurso.especies, total:@tot_aes %>
                     </div>
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
-                        <%= render 'show_caps', items:@recurso.concurrentes, total:0 %>
+                        <%= render 'show_caps', items:@recurso.concurrentes, total:@tot_fcon %>
                     </div>
             </div>
     </div>    

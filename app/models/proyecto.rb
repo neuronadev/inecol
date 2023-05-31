@@ -37,6 +37,7 @@ class Proyecto < ApplicationRecord
     validates :linea_id, presence: true
     validates :periodo, presence: true
     validates :docprotocolo, presence: true
+    validates :objetivo, presence: true
     #validates :protocolo, presence: true
 
 
