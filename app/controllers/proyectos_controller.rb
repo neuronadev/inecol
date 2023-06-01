@@ -21,11 +21,12 @@ class ProyectosController < ApplicationController
        respond_to do |format|
             format.html
             format.pdf do
-                render pdf: "Invoice No. #{@proyecto.id}",
+                render pdf: "Ficha #{@proyecto.id}",
                 page_size: 'A4',
                 template: "proyectos/show",
                 layout: "pdf",
-                orientation: "Portrait",
+                #orientation: "Portrait",
+                orientation: "Landscape",
                 lowquality: false,
                 encoding: 'UTF-8',
                 zoom: 1,

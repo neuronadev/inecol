@@ -14,6 +14,13 @@ class EnlacesController < ApplicationController
       @proyecto = Proyecto.find(params[:enlace][:proyecto_id])
       @enevento = Enevento.find(params[:enlace][:enevento_id])
       @tipo = @enevento.clave
+
+      if @proyecto.enlaces.last.enevento.clave == 'PROC'
+            enlace_last = Enlace.find(@proyecto.enlaces.last.id)
+            enlace_last.estado = 'C'
+            enlace_last.save
+      end
+
       respond_to do |format|
             if @enlace.save
                    format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
@@ -30,10 +37,14 @@ class EnlacesController < ApplicationController
 
   def atendido
       enlace = Enlace.find(params[:enlace_id])
+
       enlace_py = enlace.proyecto_id
       enevento = Enevento.where(clave:'SOLA').first
 
-      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id) 
+      enlace.estado = 'C'
+      enlace.save
+        
+      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
 
       data = {result:'ok'}
       respond_to do |format|
@@ -44,10 +55,14 @@ class EnlacesController < ApplicationController
 
   def enterado
     enlace = Enlace.find(params[:enlace_id])
+
     enlace_py = enlace.proyecto_id
     enevento = Enevento.where(clave:'PROC').first
 
-    Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id) 
+    enlace.estado = 'C'
+    enlace.save
+
+    Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
 
     data = {result:'ok'}
     respond_to do |format|

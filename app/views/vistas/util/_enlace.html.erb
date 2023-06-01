@@ -1,6 +1,6 @@
 <div class="flex mt-5 mb-1">
      <% if @proyecto.enlaces.any? %>
-          <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'SOLA' ||  @proyecto.enlaces.last.enevento.clave == 'PROC' %>
+          <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' %>
                   <div>
                         <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
                                  <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
@@ -17,9 +17,6 @@
                         <% end %>    
                   </div>
 
-                  <div class="flex  font-medium text-sm leading-tight ml-3" >
-                     <div> <%= inline_svg_tag 'svg/doc-acep-gris.svg' %></div> <div class="ml-2 text-gray-400">Dictamen</div>
-                  </div> 
 
                    <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
                            <div class="flex  font-medium text-sm leading-tight ml-3" >
@@ -49,9 +46,6 @@
                               </div>     
                      </div>
 
-                     <div class="flex  font-medium text-sm leading-tight ml-3" >
-                        <div> <%= inline_svg_tag 'svg/doc-acep-gris.svg' %></div> <div class="ml-2 text-gray-400">Dictamen</div>
-                     </div>
 
                      <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
                            <div class="flex  font-medium text-sm leading-tight ml-3" >
@@ -80,10 +74,6 @@
                                  <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Evaluadores</div>
                            </div>     
                         <% end %>    
-                     </div>
-
-                     <div class="flex  font-medium text-sm leading-tight ml-3" >
-                        <div> <%= inline_svg_tag 'svg/doc-acep-gris.svg' %></div> <div class="ml-2 text-gray-400">Dictamen</div>
                      </div>
 
                      <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 

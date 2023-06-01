@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_051422) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_201645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_051422) do
     t.string "estado", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "raiz"
     t.index ["enevento_id"], name: "index_py.enlaces_on_enevento_id"
     t.index ["proyecto_id"], name: "index_py.enlaces_on_proyecto_id"
   end

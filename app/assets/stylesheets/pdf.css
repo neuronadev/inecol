@@ -1,0 +1,65 @@
+.ficha-head{
+    width: 100%;
+    background-color: #e4e4e4;
+    font-weight: bold;
+}
+.ficha-head .txt1 {
+    background-color: #918f8f;
+    width: 33.3%;
+    font-size: 20px;
+    color: #ffffff;
+    padding: .2em;
+}
+.ficha-head .txt2 {
+    background-color: #c2c1c1;
+    width: 33.3%;
+    font-size: 16px;
+    color: #050505;
+    padding: .2em;
+    text-align: center;
+}
+.ficha-head .txt3 {
+    background-color: #c2c1c1;
+    width: 15%;
+    font-size: 16px;
+    color: #050505;
+    padding: .2em;
+    text-align: right;
+}
+.ficha-head .txt4 {
+    background-color: #c2c1c1;
+    width: 15%;
+    font-size: 16px;
+    color: #050505;
+    padding: .2em;
+    text-align: center;
+}
+
+.styled-table {
+    width: 100%;  
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
