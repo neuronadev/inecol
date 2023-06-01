@@ -26,3 +26,8 @@
     border: 1px solid #fcc;
 
  }
+
+ centered-div {
+    display: block;
+    text-align: center;
+  }
