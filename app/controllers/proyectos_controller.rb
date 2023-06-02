@@ -122,6 +122,14 @@ class ProyectosController < ApplicationController
       end
   end
  
+  def documento
+      p '-----------------------------------------'
+      p params
+      @tipo = Proyecto.find(params[:tipo])
+      proyecto = Proyecto.find(params[:idpy])
+
+  end
+
   private
   def proyecto_params
       params.require(:proyecto).permit(:nombre, 

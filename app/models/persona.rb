@@ -5,4 +5,9 @@ class Persona < ApplicationRecord
   def ap_nom
       return (apaterno||'') + ' ' + (amaterno||'') + ' ' + (nombre||'')
   end
+
+  def ap_nom_prop
+    return (apaterno||'').capitalize() + ' ' + (amaterno||'').capitalize() + ' ' + (nombre||'').capitalize()
+  end
+
 end

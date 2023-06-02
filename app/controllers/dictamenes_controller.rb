@@ -9,4 +9,6 @@ class DictamenesController < ApplicationController
 
   def create
   end
+
+  
 end

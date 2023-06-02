@@ -11,6 +11,8 @@ class ValidacionesController < ApplicationController
   end
 
   def show
+      @validacion = Validacion.find(params[:id])
+      @proyecto = Proyecto.find(@validacion.proyecto_id)
   end
 
   def create
@@ -24,7 +26,7 @@ class ValidacionesController < ApplicationController
                     format.html { redirect_to validaciones_path(:idpy=>@proyecto.id) } 
                end   
                if current_usuario.cuenta.rol.clave == 'EVAL'
-                    format.html { redirect_to proyectos_path } 
+                    format.html { redirect_to validacion_path(@validacion) } 
                end   
         else
                flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
