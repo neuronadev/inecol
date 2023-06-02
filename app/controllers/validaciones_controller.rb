@@ -39,7 +39,7 @@ class ValidacionesController < ApplicationController
 
   private
   def validacion_params
-      params.require(:validacion).permit(:proyecto_id, :evaluador_id, :tvalidacion_id, :txtval)
+      params.require(:validacion).permit(:proyecto_id, :evaluador_id, :tvalidacion_id, :txtval, :docficha)
   end
 
 end

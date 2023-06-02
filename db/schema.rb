@@ -201,16 +201,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_201645) do
     t.index ["persona_id"], name: "index_py.evaluadores_on_persona_id"
   end
 
-  create_table "financiadoras", force: :cascade do |t|
-    t.bigint "proyecto_id", null: false
-    t.text "nomfinanciadora"
-    t.string "nomcontacto"
-    t.string "emailcontacto"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["proyecto_id"], name: "index_py.financiadoras_on_proyecto_id"
-  end
-
   create_table "fiscales", force: :cascade do |t|
     t.bigint "capitulo_id", null: false
     t.decimal "monto", precision: 16, scale: 2
@@ -520,7 +510,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_201645) do
   add_foreign_key "etapas", "proyectos"
   add_foreign_key "etapas", "teventos"
   add_foreign_key "evaluadores", "personas"
-  add_foreign_key "financiadoras", "proyectos"
   add_foreign_key "fiscales", "capitulos"
   add_foreign_key "fiscales", "recursos"
   add_foreign_key "fuentes", "lugares"

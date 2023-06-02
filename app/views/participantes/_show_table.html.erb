@@ -1,0 +1,97 @@
+
+<div class="font-semibold">Participantes del INECOL</div>
+
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-700">
+        
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Investigadores            
+                </th>
+                <td class="p-5">  
+                       <table class="w-full text-sm text-left text-gray-700 dark:text-gray-700">
+                              <tbody> 
+                                 <tr>
+                                      <th class="text-center">Nombre</th>
+                                      <th class="text-center">Tipo</th>
+                                      <th class="text-center">Responsable</th>
+                                      <th class="text-center">(%)</th>
+                                 </tr>
+                              </tbody>
+                              <% @inv.each do |part_inv| %>
+                                 <tr class="p-2">
+                                      <td> <%= part_inv.academico.persona.ap_nom_prop %> </td>
+                                      <td class="text-center"> <%= part_inv.academico.tacademico.nomtacademico %> </td>
+                                      <td class="text-center">  
+                                           <% if part_inv.responsable %>
+                                              <div class="flex justify-center"><%= inline_svg_tag 'svg/controlar.svg' %></div>
+                                           <% end %>
+                                      </td>
+                                      <td class="text-center"> <%= part_inv.porcentaje %> </td>
+                                 </tr>
+                              <% end %>   
+                       </table>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Técnicos
+                </th>
+                <td class="p-5">  
+                        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-700">
+                              <tbody> 
+                                 <tr>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                 </tr>
+                              </tbody>
+                              <% @tec.each do |part_tec| %>
+                                 <tr class="p-2">
+                                      <td> <%= part_tec.academico.persona.ap_nom_prop %> </td>
+                                      <td class="text-center">  </td>
+                                      <td class="text-center">  </td>
+                                      <td class="text-center"> <%= part_tec.porcentaje %> </td>
+                                 </tr>
+                              <% end %>   
+                       </table>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      Estudiantes            
+                </th>
+                <td class="p-5">  
+                       <table class="w-full text-sm text-left text-gray-700 dark:text-gray-700">
+                              <tbody> 
+                                 <tr>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                      <th class="text-center"></th>
+                                 </tr>
+                              </tbody>
+                              <% @est.each do |part_est| %>
+                                 <tr class="p-2">
+                                      <td> <%= part_est.nombre %> </td>
+                                      <td class="text-center">  <%= part_est.nivel.nomnivel %> </td>
+                                      <td class="text-center">   </td>
+                                      <td class="text-center"> </td>
+                                 </tr>
+                              <% end %>   
+                       </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+ <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %> 
+            <div class="md:flex md:items-center mb-3 justify-end mt-5">
+                <%= link_to edit_participante_path(@participante.id), 
+                        class:'text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' do %>
+                        Editar Información
+                <% end %>
+            </div>
+        <% end %>    

@@ -10,7 +10,7 @@ class ProyectosController < ApplicationController
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       else
-             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':'SOLV')           
+             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC'])
       end
 
 

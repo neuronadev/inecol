@@ -18,11 +18,20 @@
                              </div>   
                         <% end %>
                    </div> 
-                   <div class="ml-1">
-                         <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_eval_content'} do %>
-                              <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/controlar-gray.svg' %></div> <div class="ml-1">Dictamen</div></div>
-                         <% end %>  
-                   </div>
+                     <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                             <div class="ml-1">
+                                   <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_eval_content'} do %>
+                                        <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/controlar-gray.svg' %></div> <div class="ml-1">Ver Dictamen</div></div>
+                                   <% end %>  
+                              </div>
+                     <% else %>
+                              <div class="ml-1">
+                                   <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_eval_content'} do %>
+                                        <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/controlar-gray.svg' %></div> <div class="ml-1">Dictamen</div></div>
+                                   <% end %>  
+                              </div>
+                     <% end %>    
+
                </div>    
           </div>
           <div class="flex w-auto">

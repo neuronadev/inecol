@@ -23,7 +23,11 @@
                  <%= turbo_frame_tag 'py_eval_content', class:'w-full' do %>
                        <div class="mt-5">
                             <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
-                                     <%= render 'new_eval' %>
+
+                                        <%= render 'new_eval' %>
+
+                                        
+                            
                             <% end %>
                             <% if current_usuario.cuenta.rol.clave == 'EL' %>
                                      <%= render 'new' %>

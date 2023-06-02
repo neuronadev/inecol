@@ -38,20 +38,10 @@
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   Fecha Validación
+                   Fecha dictamen
                 </th>
                 <td class="px-6 py-4">
-                    <%= @validacion.created_at.strftime('%d-%m-%Y') %>
-                </td>
-            </tr>    
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   Validación
-                </th>
-                <td class="px-6 py-4">
-                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
-                          <%= @validacion.tvalidacion.nomtvalidacion %>
-                    </span>      
+                    <%= @dictamen.created_at.strftime('%d-%m-%Y') %>
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -59,9 +49,23 @@
                    Observaciones
                 </th>
                 <td class="px-6 py-4">
-                    <%= @validacion.txtval %>
+                    <%= @dictamen.txtdictamen %>
                 </td>
             </tr>    
+
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   Documento
+                </th>
+                <td class="px-6 py-4">
+                         <% if @dictamen.docdictamen.attached? %>
+                               <%= link_to @dictamen.docdictamen.filename, rails_blob_path(@dictamen.docdictamen, disposition: 'inline'), target: :_blank %>
+                        <% else %>                     
+                                <div class="font-semibold text-gray-600 italic ml-4"> No se incluyó ningún documento.</div>
+                        <% end %>
+                </td>
+            </tr>    
+           
            
         </tbody>
     </table>

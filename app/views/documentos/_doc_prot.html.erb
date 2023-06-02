@@ -1,1 +1,7 @@
-protovol.o
+<div class="flex justify-center items-center mt-10">
+   <div>
+          <div class="font-semibold">Protocolo:</div>
+          <div class="ml-4"> <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition: 'inline'), target: :_blank %></div>
+   </div>
+</div>
+

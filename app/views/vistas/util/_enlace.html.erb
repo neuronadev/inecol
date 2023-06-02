@@ -88,5 +88,34 @@
                            </div>
                      <% end %>
             <% end %> 
+            <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                     <div>
+                           
+                         <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
+                                    <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-gray-400">Solicitar cambios</div>
+                         </div>   
+                           
+                    </div>     
+                     
+                     <div>
+                        <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                           <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                                 <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Evaluadores</div>
+                           </div>     
+                        <% end %>    
+                     </div>
+
+                     <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
+                           <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                 <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-gray-800">Mensajes enviados</div>
+                           </div>
+                     <% end %>
+
+                      <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                           <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                 <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
+                           </div>
+                     <% end %>
+            <% end %> 
     <% end %>        
 </div>

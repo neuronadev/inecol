@@ -29,6 +29,9 @@
       <% if current_usuario.cuenta.rol.clave == 'EL' %>
                <%= render 'proyectos/notifi_el' %> 
       <% end %>   
+      <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
+               <%= render 'proyectos/notifi_eval' %> 
+      <% end %> 
 
 
 

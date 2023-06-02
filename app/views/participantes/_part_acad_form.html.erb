@@ -1,7 +1,7 @@
 <div class="nested-form-wrapper flex p-1" data-new-record="<%= f.object.new_record? %>" >
           <div class="w-3/6 flex justify-center">     
                     <%= f.select :academico_id,
-                         Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.ap_nom, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
+                         Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.ap_nom_prop, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
                          {include_blank: true},
                          { 
                            data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante'}
