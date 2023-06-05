@@ -30,18 +30,16 @@
  </div>    
  <div class='w-1/2'> 
      <div class="relative z-0 p-6 group" data-controller="uploadfile">
-            
-            <%= form.file_field :dconvocatoria, direct_upload: true,
-                   data: { uploadfile_target: "input",
-                           action: "change->uploadfile#uploadFile" 
-                        },
-                  class:"block p-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 
-                        dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400",
-                        'aria-describedby':"user_avatar_help"
-            %>
-            <div data-uploadfile-target="progress"></div>
-            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Opciona. Archivo de la convocatoria.</div>
-            
+          <% if controller.action_name == 'new' %>
+                  <%= form.file_field :dconvocatoria, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+          <% end %>  
+          <% if controller.action_name == 'edit' %>
+                  <%= form.file_field :dconvocatoria, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                  <% if @proyecto.dconvocatoria.attached? %>
+                         <%= link_to @proyecto.dconvocatoria.filename, rails_blob_path(@proyecto.dconvocatoria, disposition:'inline'), target:'_blank', class:'item_file' %>
+                         <button class='item_file ml-2' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.dconvocatoria.id %>'>Eliminar</button>
+                  <% end %>
+          <% end %>    
      </div>
  </div>    
 </div>

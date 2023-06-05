@@ -1,0 +1,67 @@
+<div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+   <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+       <tr>
+           <td style="width:50%">
+                 <table style="width:100%">
+                       <tr>
+                            <td><strong>Presupuesto</strong></td>
+                       </tr>
+               
+                      <% @proyecto.presupuesto.solicitados.each do |prep| %>
+                             <tr>
+                                 <td ><strong> <%= prep.capitulo.nomcapitulo %> </strong></td>
+                                 <td ><strong> <%= number_to_currency(prep.monto) %> </strong></td>
+                             </tr>
+                      <% end %>          
+                      <tr>
+                               <td ><strong> Subtotal </strong></td>
+                               <td ><strong> <%= number_to_currency(@proyecto.presupuesto.solicitados.sum(:monto)) %> </strong></td>
+                      </tr>
+                      <tr>
+                               <td ><strong> 20% Overhead </strong></td>
+                               <td ><strong> <%= number_to_currency(@proyecto.presupuesto.overhead) %> </strong></td>
+                      </tr>
+                      <tr>
+                               <td ><strong> 10% Estímulos </strong></td>
+                               <td ><strong> <%= number_to_currency(@proyecto.presupuesto.estimulo) %> </strong></td>
+                      </tr>
+                      <tr>
+                               <td ><strong> Subtotal </strong></td>
+                               <td ><strong> <%= number_to_currency(@proyecto.presupuesto.costo) %> </strong></td>
+                      </tr>
+                      <tr>
+                               <td ><strong> IVA </strong></td>
+                               <td ><strong> <%= number_to_currency(@proyecto.presupuesto.iva) %> </strong></td>
+                      </tr>
+                      
+                 </table>
+           </td>
+           <td style="width:50% ">
+                  <table style="width:100%">
+                         <tr>
+                             <td><strong>Periodo de ejecución</strong></td>
+                         </tr>
+                         <tr>
+                             <td><%= @proyecto.periodo %></td>
+                         </tr>
+                         <tr>
+                             <td><strong>Proyecto Reservado</strong></td>
+                             <td>  </td>
+                         
+                             <td><strong>No proyecto INECOL</strong></td>
+                             <td>  </td>
+                         </tr>
+                         <tr>
+                             <td><strong>Aceptado</strong></td>
+                             <td>  </td>
+                             
+                             <td><strong>No Aceptado</strong></td>
+                             <td>  </td>
+                         </tr>
+
+                  </table>
+           </td>
+
+       </tr>
+   </table> 
+</div>

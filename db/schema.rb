@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_201645) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_015921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -146,6 +146,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_201645) do
     t.index ["persona_id"], name: "index_us.cuentas_on_persona_id"
     t.index ["rol_id"], name: "index_cuentas_on_rol_id"
     t.index ["usuario_id"], name: "index_us.cuentas_on_usuario_id"
+  end
+
+  create_table "dhistoricos", force: :cascade do |t|
+    t.string "name"
+    t.string "record_type"
+    t.bigint "record_id"
+    t.bigint "blob_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dictamenes", force: :cascade do |t|

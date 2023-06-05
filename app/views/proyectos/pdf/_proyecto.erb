@@ -7,11 +7,23 @@
                     <table style="border: 1px solid black; border-spacing: 5px;">
                               <tr>   
                                    <td>Por Convocatoria</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                       <% if @proyecto.medio.clave == 'CONV' %>
+                                              <span> <strong>X</strong> </span>
+                                       <% end %>
+                                   </td>
                                    <td >Por Demanda</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                           <% if @proyecto.medio.clave == 'DEM' %>
+                                              <span> <strong>X</strong> </span>
+                                           <% end %>
+                                   </td>
                                    <td>Por Iniciativa Propia</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                          <% if @proyecto.medio.clave == 'PROP' %>
+                                                <span> <strong>X</strong> </span>
+                                          <% end %>
+                                   </td>
                               </tr>
                     </table>
                </td>
@@ -19,9 +31,17 @@
                     <table style="border: 1px solid black; border-spacing: 5px;">
                               <tr>
                                    <td>Básico</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                          <% if @proyecto.linea.clave == 'AP' %>
+                                                <span> <strong>X</strong> </span>
+                                          <% end %>
+                                   </td>
                                    <td>Aplicado</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                            <% if @proyecto.linea.clave == 'BA' %>
+                                                   <span> <strong>X</strong> </span>
+                                          <% end %>
+                                   </td>
                               </tr>
                     </table>
 
@@ -33,11 +53,19 @@
           <table> 
              <tr> 
                                    <td>Transferencia de Conocimiento </td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align:center; background-color: #ffffff;">
+                                            <% if @proyecto.tfconoc %>
+                                                <span> <strong>X</strong> </span>
+                                          <% end %>
+                                   </td>
              </tr> 
              <tr>
                                    <td>Interinstitucional</td>
-                                   <td style="width:50px;  background-color: #ffffff;"></td>
+                                   <td style="width:50px; text-align:center; background-color: #ffffff;">
+                                          <% if @proyecto.interinst == 'AP' %>
+                                                <span> <strong>X</strong> </span>
+                                          <% end %>
+                                   </td>
              </tr>  
           </table>     
      </td>
@@ -47,41 +75,64 @@
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0;">Nombre del Proyecto</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff;"></td>
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff;">
+                  <%= @proyecto.nombre %>
+        </td>
     </tr>
 </table>
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0;">Objetivo</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff;"></td>
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff;">
+               <%= @proyecto.objetivo %>
+        </td>
     </tr>
 </table>
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0;">Institución, Gobierno o Empresa</td>
-        <td style="padding: 5px 0; width:35%; background-color: #ffffff;"></td>
+        <td style="padding: 5px 0; width:55%; background-color: #ffffff;">
+                 <%= @proyecto.fuente.nomfuente %>
+        </td>
+       
+        <% if @proyecto.fuente.nacionalidad.clave == 'NAC' %>
+                         <td style="padding: 5px 0;">Nacional</td>
+                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff;">
+                                   <span> <strong>X</strong> </span>
+                         </td>
 
-        <td style="padding: 5px 0;">Nacional</td>
-        <td style="padding: 5px 0; width:10%; background-color: #ffffff;"></td>
+                         <td style="padding: 5px 0;">Estado</td>
+                         <td style="padding: 5px 0; width:10%; background-color: #ffffff;">
+                                   <span> <strong>  <%= @proyecto.fuente.lugar.nomlugar %> </strong> </span>
+                         </td>
+        <% end %>
+         <% if @proyecto.fuente.nacionalidad.clave == 'EXT' %>
+                         <td style="padding: 5px 0;">Extranjera</td>
+                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff;">
+                                   <span> <strong>X</strong> </span>
+                         </td>
 
-        <td style="padding: 5px 0;">Estado</td>
-        <td style="padding: 5px 0; width:10%; background-color: #ffffff;"></td>
-
-        <td style="padding: 5px 0;">Extranjera</td>
-        <td style="padding: 5px 0; width:10%; background-color: #ffffff;"></td>
-
+                         <td style="padding: 5px 0;">País</td>
+                         <td style="padding: 5px 0; width:10%; background-color: #ffffff;">
+                                   <span> <strong>  <%= @proyecto.fuente.lugar.nomlugar %> </strong> </span>
+                         </td>
+        <% end %>
     </tr>
 </table>
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0;">Nombre Contacto Contraparte</td>
-        <td style="padding: 5px 0; width:50%; background-color: #ffffff;"></td>
+        <td style="padding: 5px 0; width:50%; background-color: #ffffff;">
+                   <span>  <%= @proyecto.fuente.nomcontacto %>  </span>
+        </td>
 
         <td style="padding: 5px 0;">Correo Electrónico</td>
-        <td style="padding: 5px 0; width:20%; background-color: #ffffff;"></td>
+        <td style="padding: 5px 0; width:20%; background-color: #ffffff;">
+                 <span>  <%= @proyecto.fuente.emailcontacto %>  </span>
+        </td>
     </tr>
 </table>
 
@@ -102,9 +153,11 @@
 
                          <td style="vertical-align: top;">
                               <table style="width:100%;">
-                                   <tr><td>ddddddddddddddddddddddddddddd</td>
-                                        <td style="text-align: center;">50%</td>
-                                   </tr>    
+                                   <% @proyecto.participante.pacademicos.each do |acad| %>
+                                          <tr><td> <%= acad.academico.persona.ap_nom_prop  %> </td>
+                                               <td style="text-align: center;"> <%= acad.porcentaje  %></td>
+                                          </tr>    
+                                   <% end %>    
                                   
                               </table>
                          </td>   
@@ -116,9 +169,12 @@
 
                          <td style="vertical-align: top;">
                               <table style="width:100%;">
-                                   <tr><td>ddddddddddddddddddddddddddddd</td>
-                                        <td style="text-align: center;">50%</td>
-                                   </tr>    
+                                   
+                                     <% @proyecto.participante.ptecnicos.each do |tec| %>
+                                          <tr><td> <%= tec.academico.persona.ap_nom_prop  %> </td>
+                                               <td style="text-align: center;"> <%= tec.porcentaje  %></td>
+                                          </tr>    
+                                   <% end %>     
                                     
                               </table>
                          </td>   
@@ -130,9 +186,10 @@
 
                          <td style="vertical-align: top;">
                               <table style="width:100%;">
-                                   <tr><td>ddddddddddddddddddddddddddddd</td>
-                                   </tr>    
-                                  
+                                   <% @proyecto.participante.pestudiantes.each do |est| %>
+                                          <tr><td> <%= est.nombre  %> </td>
+                                          </tr>    
+                                   <% end %>    
                               </table>
                          </td>   
                     </tr>
@@ -143,95 +200,3 @@
 </table>
 
 </div>
-
-<div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
-   <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
-       <tr>
-           <td>
-               dfsdf
-           </td>
-           <td>
-              sdfsd
-           </td>
-
-       </tr>
-   </table> 
-</div>
-
-
-
-<table class="styled-table">
-      <tr>
-           <td> <strong> Nombre del Proyecto: </strong></td>
-           <td> <%= proyecto.nombre %> </td>
-      </tr>
-      <tr>
-           <td> <strong> Objetivo: </strong></td>
-           <td> <%= proyecto.objetivo %> </td>
-      </tr>
-      <tr>
-           <td> <strong> Tipo de Proyecto: </strong></td>
-           <td> <%= proyecto.clasificacion.nomclasifica %> </td>
-      </tr>
-      <tr>
-           <td> <strong> Overhead: </strong></td>
-           <td> <% if proyecto.overhead %>
-                        SI
-                  <% else%>
-                        NO
-                  <% end %> 
-            </td>
-      </tr>
-      <tr>
-           <td> <strong> Tipo Medio: </strong></td>
-           <td> <%= proyecto.medio.nommedio %> </td>
-      </tr>
-      <% if proyecto.medio.clave == 'CONV' %>
-            <tr>
-                <td> <strong>Convocatoria:</strong> </strong></td>
-                <td> 
-                        <table>
-                               <tr>
-                                  <td>Nombre:</td>
-                                  <td><%= proyecto.mconvocatoria.nomconvocatoria %> </td>
-                               </tr>
-                               <tr>
-                                  <td> Enlace:</td>
-                                  <td><%= proyecto.mconvocatoria.link %> </td>
-                               </tr>
-                        </table>
-                </td>
-            </tr>
-       <% end %>   
-       <tr>
-           <td> <strong> Tipo Investigación: </strong></td>
-           <td> <%= proyecto.linea.nomlinea %> </td>
-      </tr>  
-      <tr>
-           <td> <strong> Periodo: </strong></td>
-           <td> <%= proyecto.periodo %> </td>
-      </tr>
-      <tr>
-           <td> <strong> Transferencia de Conocimiento: </strong></td>
-           <td> <% if proyecto.tfconoc %>
-                    SI
-                <% else%>
-                    NO
-                <% end %> </td>
-      </tr>
-      <tr>
-           <td> <strong> Interinstitucional: </strong></td>
-           <td> <% if proyecto.interinst %>
-                    SI
-                <% else%>
-                    NO
-                <% end %>
-           </td>
-      </tr>
-      <% if proyecto.interinst %>
-           <% proyecto.instituciones.each do |inst| %>
-                  <tr><td></td><td> <%= inst.nominstitucion %> </td></tr>
-           <% end %>
-      <% end %>
-      
-   </table>

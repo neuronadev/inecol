@@ -1,0 +1,2 @@
+class Dhistorico < ApplicationRecord
+end

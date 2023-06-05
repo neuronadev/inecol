@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'documentos/protocolo'
   get 'documentos/convenio'
+  post 'documentos/removatach'
   
   devise_for :usuarios
   resources :proyectos do

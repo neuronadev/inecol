@@ -1,12 +1,52 @@
 import { Controller } from "@hotwired/stimulus"
 import { DirectUpload } from "activestorage";
-
+var token = document.querySelector('meta[name="csrf-token"]').content
 // Connects to data-controller="upsf"
 export default class extends Controller {
   static targets = ["input", "progress"];
   connect() {}
-  uploadFile() {
+
+ delFile(event){
+       let items = event.target.closest('#div_file').querySelectorAll(".item_file")
+       console.log(items)
+       for ( let i = 0; i < items.length; i++ ){
+              if ( i == 0 ){
+                    items[i].style.display = 'flex'
+                    items[i].value = ''
+              }else{
+                    items[i].remove()
+              }
+       }
+  }
+  delFileEdit(event){
+      let items = event.target.closest('#div_file').querySelectorAll(".item_file")
+      for ( let i = 0; i < items.length; i++ ){
+           if ( i == 0 ){
+                 items[i].style.display = 'flex'
+                 items[i].value = ''
+           }else{
+                 items[i].remove()
+           }
+      }
+      this.deldoc(event.params.idpy).then(result=>{ alert('Archivo Eliminado') })
+  }
+
+  async deldoc(id){
+    try {
+          var data = await fetch('/documentos/removatach', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept':'application/json', 'X-CSRF-Token':token },
+          body: JSON.stringify({ doc_id:id})
+      })
+           .then(response => response.json())
+           return data
+
+      } catch (e) { alert(e) }
+  }
+
+  uploadFile(event) {
     Array.from(this.inputTarget.files).forEach((file) => {
+          console.log(file) 
           const upload = new DirectUpload(
                                             file,
                                             this.inputTarget.dataset.directUploadUrl,
@@ -23,24 +63,41 @@ export default class extends Controller {
                                      // uploaded blob to some model here and skip hidden input.
                           }
           });
-      file.value=''
-     });
+      
+    });
+    event.target.style.display = 'none'
+    event.target.value = ''
   }
+
+
 
   createLinkFile(blob) {
     const elementLink = document.createElement('a')
     let textLink = document.createTextNode(blob.filename)
     let url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`;
+
     elementLink.appendChild(textLink)
     elementLink.href = url
     elementLink.target = '_blank'
+    elementLink.classList.add('item_file')
     this.element.appendChild(elementLink);
+
+    let btn = document.createElement("button");
+
+    btn.innerHTML = " Eliminar";
+    btn.type = "button";
+    btn.classList.add('item_file')
+    btn.dataset.action ='upsf#delFile'
+    this.element.appendChild(btn);
+
+
   }
 
 
   // add blob id to be submitted with the form
   createHiddenBlobInput(blob) {
     const hiddenField = document.createElement("input");
+    hiddenField.classList.add('item_file')
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("value", blob.signed_id);
     hiddenField.name = this.inputTarget.name;

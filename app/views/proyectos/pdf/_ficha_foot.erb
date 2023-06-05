@@ -1,0 +1,31 @@
+<div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+   <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+        <tr>   
+            <td>Observaciones</td>
+            <td style="width:90%; text-align: left; background-color: #ffffff;">
+                 <% if !@proyecto.meta.comentario.nil? %>
+                        <%= @proyecto.meta.comentario %>
+                 <% end %>
+             </td>
+       </tr>
+
+   </table>
+</div>   
+
+<div style="width:100%;height: 100px;  background-color: #e4e4e4; padding:5px 0;">
+   <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+        <tr>   
+            <td style="width:15%;">
+                      <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+                           <tr>
+                                <td style="width:100%; text-align: center;">Fecha</td>
+                           </tr>
+                      </table>
+            </td>
+            <td style="width:70%; text-align: center;">
+                      Firmas
+             </td>
+       </tr>
+
+   </table>
+</div>   

@@ -4,5 +4,13 @@
 
    <%= render partial: '/proyectos/pdf/proyecto', formats:[:html], locals:{proyecto:@proyecto} %>
 
+   <%= render partial: '/proyectos/pdf/presupuesto', formats:[:html], locals:{proyecto:@proyecto} %>
+
+   <%= render partial: '/proyectos/pdf/ficha_foot', formats:[:html], locals:{proyecto:@proyecto} %>
+   
+   <div class="page-break"></div>
+
+   <%= render partial: '/proyectos/pdf/metas', formats:[:html], locals:{proyecto:@proyecto} %>
+
 
 </div>
