@@ -25,7 +25,7 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-3/4 mt-5">
     <table class="w-full">
            <tr> 
-               <td class="text-right font-semibold"><div>Gran Total: <%= @tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f  %></div> </td>
+               <td class="text-right font-semibold"><div>Gran Total: <%= number_to_currency(@tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f)  %></div> </td>
            </tr>
     </table>
 </div>    

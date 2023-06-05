@@ -11,5 +11,17 @@
                    <%= proyecto.etapas.last.tevento.nomtevento %>
                 </span>
      <% end %>
+     <% if proyecto.etapas.last.tevento.clave == 'ACEP' %>
+            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                   <%= proyecto.etapas.last.tevento.nomtevento %>
+                </span>
+     <% end %>
+     <% if proyecto.etapas.last.tevento.clave == 'RECH' %>
+            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                   <%= proyecto.etapas.last.tevento.nomtevento %>
+                </span>
+     <% end %>
  
  </div>

@@ -79,14 +79,15 @@ export default class extends Controller {
     elementLink.appendChild(textLink)
     elementLink.href = url
     elementLink.target = '_blank'
-    elementLink.classList.add('item_file')
+    elementLink.classList.add('item_file','text-blue-700')
     this.element.appendChild(elementLink);
 
     let btn = document.createElement("button");
 
     btn.innerHTML = " Eliminar";
     btn.type = "button";
-    btn.classList.add('item_file')
+    btn.classList.add('item_file','p-2','text-red-700')
+
     btn.dataset.action ='upsf#delFile'
     this.element.appendChild(btn);
 

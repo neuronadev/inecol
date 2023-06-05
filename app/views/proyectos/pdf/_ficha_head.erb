@@ -3,6 +3,10 @@
           <td class="txt1">Instituto de Ecología A.C.</td>
           <td class="txt2">Ficha de Propuesta de Proyectos Externos</td>
           <td class="txt3">Número de Registro</td>
-          <td class="txt4"></td>
+          <td class="txt4">
+                 <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>             
+                    <span class="font-semibold"> <%= @proyecto.dictamen.numregistro %> </span>
+                 <% end %>
+          </td>
     </tr>
 </table>

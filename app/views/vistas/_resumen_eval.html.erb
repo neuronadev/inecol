@@ -1,0 +1,39 @@
+<div data-controller="etapasvalpy tabseval" class="w-full">
+      <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
+            <div class="w-full">  
+                            <%= render 'vistas/util/evaluador' %> 
+            </div>
+      </div>
+         
+      
+      <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="profile-tab-example" type="button" role="tab" aria-controls="profile-example" aria-selected="false">Validación</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab-example" type="button" role="tab" aria-controls="dashboard-example" aria-selected="false">Proyecto</button>
+                </li>
+            </ul>
+        </div>
+      <div id="tabContentExample">
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
+                 <%= render 'proyectos/notifi_eval' %> 
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
+                        <div class='flex w-full'>
+                                   <div class='w-1/4'>
+                                        <%= render 'secciones' %>
+                                    </div>
+                                    <div class='w-full'>
+                                        <%= turbo_frame_tag "py_content_secc" do %>
+                                        <%= render 'seccion' %>
+                                        <% end %>
+
+                                    </div>
+                        </div>
+            </div>
+      </div>
+      
+      <%= render 'vistas/util/modal_enviar' %>
+</div>      

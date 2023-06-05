@@ -1,52 +1,9 @@
-<div data-controller="etapasvalpy" class="w-full">
-      <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
-            <div class="w-9/12">  
-                 <% if current_usuario.cuenta.rol.clave == 'EL' %>
-                            <%= render 'vistas/util/enlace' %>  
-                 <% elsif current_usuario.cuenta.rol.clave == 'CAP' %>
-                            <%= render 'vistas/util/acad' %> 
-                 <% else %>
-                            <%= render 'vistas/util/evaluador' %> 
-                 <% end %>
-            
-            </div>
-      </div>
-      
-      
-      <div class='flex w-full mb-2'>
-           <% if current_usuario.cuenta.rol.clave == 'CAP' %>
-                 <%= render 'vistas/util/pyestado', proyecto:@proyecto %>
-           <% end %>   
-           <% if current_usuario.cuenta.rol.clave == 'EL' %>
-                 <%= render 'vistas/util/elestado', proyecto:@proyecto %>
-           <% end %>      
-
-      </div>  
-      
-      <% if current_usuario.cuenta.rol.clave == 'CAP' %>
-            <%= render 'proyectos/notifi_corr' %>
-      <% end %>
-      <% if current_usuario.cuenta.rol.clave == 'EL' %>
-               <%= render 'proyectos/notifi_el' %> 
-      <% end %>   
-      <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
-               <%= render 'proyectos/notifi_eval' %> 
-      <% end %> 
+ <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
+           <%= render 'vistas/resumen_eval' %>
+ <% else %>
+           <%= render 'vistas/resumen_general' %>
+ <% end %> 
 
 
 
-      <div class='flex w-full'>
-      
-         <div class='w-1/4'>
-            <%= render 'secciones' %>
-         </div>
-         <div class='w-3/4'>
-            <%= turbo_frame_tag "py_content_secc" do %>
-               <%= render 'seccion' %>
-            <% end %>
-
-         </div>
-      </div>
-      <%= render 'vistas/util/modal_enviar' %>
-</div>      
 

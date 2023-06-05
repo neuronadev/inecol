@@ -1,4 +1,4 @@
-<div class="flex mt-5 mb-1">
+<div class="flex mt-5 mb-1 border-b-2 border-slate-200 p-2">
       <div>
             <%
                 validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_015921) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_182320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -162,7 +162,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_015921) do
     t.string "numregistro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tvalidacion_id", null: false
     t.index ["proyecto_id"], name: "index_py.dictamenes_on_proyecto_id"
+    t.index ["tvalidacion_id"], name: "index_dictamenes_on_tvalidacion_id"
   end
 
   create_table "eneventos", force: :cascade do |t|
@@ -512,6 +514,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_015921) do
   add_foreign_key "cuentas", "roles"
   add_foreign_key "cuentas", "usuarios"
   add_foreign_key "dictamenes", "proyectos"
+  add_foreign_key "dictamenes", "tvalidaciones"
   add_foreign_key "enlaces", "eneventos"
   add_foreign_key "enlaces", "proyectos"
   add_foreign_key "especies", "capitulos"
