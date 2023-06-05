@@ -26,7 +26,7 @@ class Proyecto < ApplicationRecord
 
     #has_one :convenio #, dependent: :destroy, inverse_of: :proyecto
     #accepts_nested_attributes_for :convenio #, reject_if: :all_blank, allow_destroy: true
-    has_many_attached :docconvenios, dependent: :detach
+    has_many_attached :docconvenios
     
     has_many :etapas
     has_many :enlaces

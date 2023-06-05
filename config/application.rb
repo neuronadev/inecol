@@ -18,6 +18,7 @@ module Inecol
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+     config.active_storage.replace_on_assign_to_many = false
      config.after_initialize do
           ActionText::ContentHelper.allowed_attributes.add 'style'
           ActionText::ContentHelper.allowed_attributes.add 'controls'

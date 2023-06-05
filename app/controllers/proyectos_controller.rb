@@ -144,7 +144,7 @@ class ProyectosController < ApplicationController
                                        :persona_id,
                                        :docprotocolo,
                                        :dconvocatoria,
-                                       docconvenios: [],
+                                       docconvenios:[],
                                        mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :_destroy],
                                        instituciones_attributes:[:id, :nominstitucion, :_destroy]
                                        #protocolo_attributes:[:id, :dprotocolo, :activo],
