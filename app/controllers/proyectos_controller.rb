@@ -56,7 +56,7 @@ class ProyectosController < ApplicationController
                    session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
-                    flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                     format.html { render :new, status: :bad_request }
             end
       end

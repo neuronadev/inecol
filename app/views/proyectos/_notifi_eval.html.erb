@@ -12,7 +12,7 @@
                 <div class="ml-2"> <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %> </div>
           </div>
           <div class="flex">
-                <div class="font-semibold">Fecha de captura:</div>
+                <div class="font-semibold">Fecha de Captura:</div>
                 <div class="ml-2"> <%= @proyecto.created_at.strftime("%d-%m-%Y") %> </div>
           </div>
           
@@ -20,12 +20,12 @@
 
 
      <div class="flex mt-5">
-                <div class="font-semibold">Fecha de solicitud:</div>
+                <div class="font-semibold">Fecha de Solicitud:</div>
                 <div class="ml-2"> <%= validacion.created_at.strftime("%d-%m-%Y") %> </div>
           </div>
      <div><span class="font-semibold">Archivo:</span> 
             <% if  validacion.docficha.attached? %>
-                <%= link_to validacion.docficha.filename, rails_blob_path(validacion.docficha, disposition: 'inline'), target: :_blank %>
+                <%= link_to validacion.docficha.filename, rails_blob_path(validacion.docficha, disposition: 'inline'), class:'text-blue-700', target: :_blank %>
             <% else %>      
                     No se inlcuyen archivos.
             <% end %>

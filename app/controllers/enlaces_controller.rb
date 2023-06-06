@@ -25,7 +25,7 @@ class EnlacesController < ApplicationController
             if @enlace.save
                    format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
             else
-                   flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+                   flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                    format.html { render :new, status: :bad_request }
             end
       end

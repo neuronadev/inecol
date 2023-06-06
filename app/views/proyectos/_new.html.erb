@@ -1,7 +1,9 @@
         <% flash.each do |type, msg| %>
-           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <%= msg %>
-           </div>
+                <% if type == 'error' %>
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <%= msg %>
+                    </div>
+                <% end %>    
         <% end %>
 
         <%= form_with(model: @proyecto,
@@ -135,7 +137,7 @@
 
                 <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :linea_id, 'Tipo Investigacion:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :linea_id, 'Tipo Investigación:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
                         <%= form.select :linea_id,
@@ -218,7 +220,7 @@
                      <div class="md:w-2/5 p-0">
                         <div class='font-semibold'>Protocolo:</div>
                             <div id = "div_file" class="md:w-full" data-controller="upsf">
-                                    <% if controller.action_name == 'new' %>
+                                    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                                         <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                     <% end %>  
                                     <% if controller.action_name == 'edit' %>
@@ -239,7 +241,7 @@
                     
                     <div class="md:w-2/5 p-0">
                         <div class='font-semibold'>Convenio o algún otro documento legal:</div>
-                             <% if controller.action_name == 'new' %>
+                             <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                                 <div id = "div_file" class="md:w-full p-2" data-controller="upsf">
                                        <%= form.file_field :docconvenios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                 </div>       

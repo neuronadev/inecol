@@ -10,7 +10,7 @@
                    <div>
                         <% if !@proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').any? %>
                            <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'SOLV').first.id) do %>
-                                <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/evaluacion.svg' %></div> <div>Enviar a evaluacion</div></div>
+                                <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/evaluacion.svg' %></div> <div>Enviar a evaluación</div></div>
                             <% end %>  
                         <% else %>   
                              <div class="flex w-full ml-1">

@@ -1,9 +1,11 @@
 <div class="w-full" data-controller="tabsrec utils">
-    <% flash.each do |type, msg| %>
-           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <%= msg %>
-           </div>
-    <% end %> 
+      <% flash.each do |type, msg| %>
+                <% if type == 'error' %>
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <%= msg %>
+                    </div>
+                <% end %>    
+        <% end %>  
     <%= form_with(model:@recurso,
                         data:{ 
                                 controller:'nested-form-ffis nested-form-fesp nested-form-fcon',

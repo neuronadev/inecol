@@ -60,7 +60,7 @@ class RecursosController < ApplicationController
            else
                p '---------------------------Errors------------------'
                @recurso.errors
-               flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+               flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                format.html { render :edit, status: :bad_request }
            end
       end
@@ -93,7 +93,7 @@ class RecursosController < ApplicationController
           else
                p '---------------------------Errors------------------'
                p @recurso.errors
-              flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+              flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
               format.html { render :new, status: :bad_request }
           end
       end    

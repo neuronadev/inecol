@@ -24,7 +24,7 @@ class DictamenesController < ApplicationController
                    Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
                    format.html { redirect_to dictamen_path(@dictamen) } 
             else
-                   flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+                   flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                    format.html { render :new, status: :bad_request }
             end
       end

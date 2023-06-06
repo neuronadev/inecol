@@ -29,7 +29,7 @@ class ValidacionesController < ApplicationController
                     format.html { redirect_to validacion_path(@validacion) } 
                end   
         else
-               flash.now[:notice] = 'La infomación esta incompleta, favor de revisar los errores'
+               flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                p '---------------------------------------------'
                p @validacion.errors
                format.html { render :new, status: :bad_request }
