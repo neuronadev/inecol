@@ -1,25 +1,25 @@
-<table style="width:100%; background-color: #e4e4e4;">
+<table style="width:100%; background-color:#efefef;">
  <tr>
      <td>
           <table> 
             <tr>
               <td > 
-                    <table style="border: 1px solid black; border-spacing: 5px;">
+                    <table style="border: 1px solid #a9a9a9; border-spacing: 5px;">
                               <tr>   
-                                   <td>Por Convocatoria</td>
-                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Por Convocatoria</td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                        <% if @proyecto.medio.clave == 'CONV' %>
                                               <span> <strong>X</strong> </span>
                                        <% end %>
                                    </td>
-                                   <td >Por Demanda</td>
-                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Por Demanda</td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                            <% if @proyecto.medio.clave == 'DEM' %>
                                               <span> <strong>X</strong> </span>
                                            <% end %>
                                    </td>
-                                   <td>Por Iniciativa Propia</td>
-                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Por Iniciativa Propia</td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                           <% if @proyecto.medio.clave == 'PROP' %>
                                                 <span> <strong>X</strong> </span>
                                           <% end %>
@@ -28,16 +28,16 @@
                     </table>
                </td>
                <td >
-                    <table style="border: 1px solid black; border-spacing: 5px;">
+                    <table style="border: 1px solid #a9a9a9; border-spacing: 5px;">
                               <tr>
-                                   <td>Básico</td>
-                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Básico</td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                           <% if @proyecto.linea.clave == 'AP' %>
                                                 <span> <strong>X</strong> </span>
                                           <% end %>
                                    </td>
-                                   <td>Aplicado</td>
-                                   <td style="width:50px; text-align: center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Aplicado</td>
+                                   <td style="width:50px; text-align: center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                             <% if @proyecto.linea.clave == 'BA' %>
                                                    <span> <strong>X</strong> </span>
                                           <% end %>
@@ -52,16 +52,16 @@
      <td>
           <table> 
              <tr> 
-                                   <td>Transferencia de Conocimiento </td>
-                                   <td style="width:50px; text-align:center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Transferencia de Conocimiento </td>
+                                   <td style="width:50px; text-align:center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                             <% if @proyecto.tfconoc %>
                                                 <span> <strong>X</strong> </span>
                                           <% end %>
                                    </td>
              </tr> 
              <tr>
-                                   <td>Interinstitucional</td>
-                                   <td style="width:50px; text-align:center; background-color: #ffffff;">
+                                   <td style="font-weight: bold;">Interinstitucional</td>
+                                   <td style="width:50px; text-align:center; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                           <% if @proyecto.interinst == 'AP' %>
                                                 <span> <strong>X</strong> </span>
                                           <% end %>
@@ -74,8 +74,8 @@
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
-        <td style="padding: 5px 0;">Nombre del Proyecto</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff;">
+        <td style="padding: 5px 0; font-weight: bold;">Nombre del Proyecto</td>
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                   <%= @proyecto.nombre %>
         </td>
     </tr>
@@ -83,8 +83,8 @@
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
-        <td style="padding: 5px 0;">Objetivo</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff;">
+        <td style="padding: 5px 0; font-weight: bold;">Objetivo</td>
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                <%= @proyecto.objetivo %>
         </td>
     </tr>
@@ -92,30 +92,30 @@
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
-        <td style="padding: 5px 0;">Institución, Gobierno o Empresa</td>
-        <td style="padding: 5px 0; width:55%; background-color: #ffffff;">
+        <td style="padding: 5px 0; font-weight: bold;">Institución, Gobierno o Empresa</td>
+        <td style="padding: 5px 0; width:47%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                  <%= @proyecto.fuente.nomfuente %>
         </td>
        
         <% if @proyecto.fuente.nacionalidad.clave == 'NAC' %>
-                         <td style="padding: 5px 0;">Nacional</td>
-                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff;">
+                         <td style="padding: 5px 0; font-weight: bold;">Nacional</td>
+                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                    <span> <strong>X</strong> </span>
                          </td>
 
-                         <td style="padding: 5px 0;">Estado</td>
-                         <td style="padding: 5px 0; width:10%; background-color: #ffffff;">
+                         <td style="padding: 5px 0; font-weight: bold;">Estado</td>
+                         <td style="padding: 5px 0; width:18%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                                    <span> <strong>  <%= @proyecto.fuente.lugar.nomlugar %> </strong> </span>
                          </td>
         <% end %>
          <% if @proyecto.fuente.nacionalidad.clave == 'EXT' %>
-                         <td style="padding: 5px 0;">Extranjera</td>
-                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff;">
+                         <td style="padding: 5px 0; font-weight: bold;">Extranjera</td>
+                         <td style="padding: 5px 0; text-align:center; width:5%; background-color: #ffffff; border: 1px solid #a9a9a9;">
                                    <span> <strong>X</strong> </span>
                          </td>
 
-                         <td style="padding: 5px 0;">País</td>
-                         <td style="padding: 5px 0; width:10%; background-color: #ffffff;">
+                         <td style="padding: 5px 0; font-weight: bold;">País</td>
+                         <td style="padding: 5px 0; width:18%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                                    <span> <strong>  <%= @proyecto.fuente.lugar.nomlugar %> </strong> </span>
                          </td>
         <% end %>
@@ -124,13 +124,13 @@
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
-        <td style="padding: 5px 0;">Nombre Contacto Contraparte</td>
-        <td style="padding: 5px 0; width:50%; background-color: #ffffff;">
+        <td style="padding: 5px 0; font-weight: bold;">Nombre Contacto Contraparte</td>
+        <td style="padding: 5px 0; width:47%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                    <span>  <%= @proyecto.fuente.nomcontacto %>  </span>
         </td>
 
-        <td style="padding: 5px 0;">Correo Electrónico</td>
-        <td style="padding: 5px 0; width:20%; background-color: #ffffff;">
+        <td style="padding: 5px 0; font-weight: bold;">Correo Electrónico</td>
+        <td style="padding: 5px 0; width:20%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                  <span>  <%= @proyecto.fuente.emailcontacto %>  </span>
         </td>
     </tr>
@@ -138,53 +138,38 @@
 
 
 <div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
-<table style="width:90%; background-color: #e4e4e4; padding:5px 0;">
+<table style="width:90%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
     <tr>
         <td style="width:60%;">
-           <table style="width:100%;">
+           <table style="width:100%;  border-collapse: collapse;">
                     <tr>
-                        <td> Participantes del INECOL: </td>
-                        <td style="text-align: right; padding-right: 10px;"> Porc </td>
+                        <td style="font-weight: bold;"> Participantes del INECOL: </td>
+                        <td style="text-align: right; padding-right: 1px;"> Participación</td>
                     </tr>
-                    <tr>
-                         <td style="vertical-align: top;">
+                    <tr style="">
+                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
                               Investigadores
                          </td>   
 
-                         <td style="vertical-align: top;">
-                              <table style="width:100%;">
-                                   <% @proyecto.participante.pacademicos.each do |acad| %>
-                                          <tr><td> <%= acad.academico.persona.ap_nom_prop  %> </td>
-                                               <td style="text-align: center;"> <%= acad.porcentaje  %></td>
-                                          </tr>    
-                                   <% end %>    
-                                  
-                              </table>
+                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
+                              <%= render partial: '/proyectos/pdf/parts_inv', formats:[:html] %>
                          </td>   
                     </tr>
                     <tr>
-                         <td style="vertical-align: top;">
+                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
                               Técnicos
                          </td>   
 
-                         <td style="vertical-align: top;">
-                              <table style="width:100%;">
-                                   
-                                     <% @proyecto.participante.ptecnicos.each do |tec| %>
-                                          <tr><td> <%= tec.academico.persona.ap_nom_prop  %> </td>
-                                               <td style="text-align: center;"> <%= tec.porcentaje  %></td>
-                                          </tr>    
-                                   <% end %>     
-                                    
-                              </table>
+                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
+                               <%= render partial: '/proyectos/pdf/parts_tec', formats:[:html] %>
                          </td>   
                     </tr>
                     <tr>
-                         <td style="vertical-align: top;">
+                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
                               Estudiantes
                          </td>   
 
-                         <td style="vertical-align: top;">
+                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9; background-color: #FFFFFF;">
                               <table style="width:100%;">
                                    <% @proyecto.participante.pestudiantes.each do |est| %>
                                           <tr><td> <%= est.nombre  %> </td>
@@ -195,7 +180,7 @@
                     </tr>
                </table>      
           </td>     
-          <td style="vertical-align: top;">DDDDDD</td>
+          <td style="vertical-align: top;"></td>
      </tr>     
 </table>
 
