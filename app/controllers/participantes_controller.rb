@@ -24,7 +24,7 @@ class ParticipantesController < ApplicationController
   def edit
       @participante = Participante.find(params[:id]) 
       @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
-      @tec_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('pacademicos.porcentaje')
+      @tec_sum = @participante.ptecnicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('ptecnicos.porcentaje')
       @tot_porc = @inv_sum.to_f + @tec_sum.to_f
   end
 

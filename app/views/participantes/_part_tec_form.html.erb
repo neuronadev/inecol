@@ -2,7 +2,7 @@
           <div class="w-3/6 flex justify-center">     
                     <%= f.select :academico_id,
                          Academico.includes(:tacademico).where('tacademicos.clave':['TEC']).all.map{|item| [item.persona.ap_nom_prop, item.id] if item.tacademico.clave == 'TEC' },
-                         {include_blank: true},
+                         {prompt: '--Seleccione un Técnico--'},
                          { 
                          data:{controller:'slim', slim_target:'field'}
                          }

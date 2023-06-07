@@ -13,14 +13,27 @@
                               <% end %>
                    <% end %>
                    <% if controller.action_name == 'edit' %>
-                             <%= form.fields_for :ptecnicos, form.object.pacademicos.includes(academico: :tacademico).where('tacademicos.clave':'TEC') do |ptec_fields|%>
+                             <%= form.fields_for :ptecnicos, form.object.ptecnicos.includes(academico: :tacademico).where('tacademicos.clave':'TEC') do |ptec_fields|%>
                                     <%= render 'participantes/part_tec_form', f: ptec_fields %>
                               <% end %>   
                    <% end %>
 
                   <div data-nested-form-tec-target="target"></div>
                   
-                   <div class="w-full flex mt-3 "> 
+                  <div class="flex mt-5 font-semibold">
+                      <div class="w-8/12"></div>
+                      <div>Total:</div>
+                      <div class="text-center w-32" id="stptec">
+                            <% if controller.action_name == 'new' %> 
+                                            0.0 % 
+                            <% end %>
+                            <% if controller.action_name == 'edit' %> 
+                                            <%= @tec_sum.to_s %> % 
+                            <% end %>
+                      </div>
+                  </div>
+
+                  <div class="w-full flex mt-3 "> 
                         <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-tec#add">
                               <%= inline_svg_tag 'svg/agregar-usuario.svg' %>
                               <div class="flex mx-1.5">Agregar Técnico...</div>

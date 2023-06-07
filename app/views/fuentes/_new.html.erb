@@ -15,21 +15,21 @@
 
             <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :nomfuente, 'Fuente Financiadora:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :nomfuente, 'Institución, Gobierno o Empresa:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-3/5">
-                    <%= form.text_field :nomfuente, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
+                    <%= form.text_field :nomfuente, class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
                     </div>
             </div>
             <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :nacionalidad_id, 'Nacionalidad:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :nacionalidad_id, 'Nacionalidad:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
                         <%= form.select :nacionalidad_id,
                                                 Nacionalidad.all.map{|item| [item.nomnacionalidad, item.id]},
                                                 {prompt: '-- Seleccione una opción --'},
-                                                {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name', 
+                                                {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name', 
                                                         'data-action':'change->fuente#onNacionalidad'
                                                 }
                         %>   
@@ -37,31 +37,31 @@
         </div>
         <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :lugar_id, 'País/Estado:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :lugar_id, 'País/Estado:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
                         <%= form.select :lugar_id,
                                                 Lugar.where(tiponac:'NAC').all.map{|item| [item.nomlugar, item.id]},
                                                 {prompt: '-- Seleccione una opción --'},
-                                                {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
+                                                {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
 
                         %>   
                     </div>
         </div>
         <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :nomcontacto, 'Nombre del Contacto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :nomcontacto, 'Nombre Contacto Contraparte:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
-                    <%= form.text_field :nomcontacto, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
+                    <%= form.text_field :nomcontacto, class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
                     </div>
             </div>
             <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
-                        <%= form.label :emailcontacto, 'E-mail del Contacto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        <%= form.label :emailcontacto, 'Correo Electrónico:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
-                    <%= form.text_field :emailcontacto, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
+                    <%= form.text_field :emailcontacto, class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
                     </div>
             </div>
             <div class="md:flex md:items-center mb-3 justify-end">

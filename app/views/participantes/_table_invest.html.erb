@@ -1,0 +1,50 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+           Investigadores
+
+        </caption>
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tipo
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Responsable
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Porcentaje
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+             <% @inv.each do |part_inv| %>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <%= part_inv.academico.persona.ap_nom_prop %>
+                        </th>
+                        <td class="px-6 py-4">
+                             <%= part_inv.academico.tacademico.nomtacademico %>
+                        </td>
+                        <td class="px-6 py-4">
+                              <% if part_inv.responsable %>
+                                  <div class="flex justify-center"><%= inline_svg_tag 'svg/controlar.svg' %></div>
+                              <% end %>
+                        </td>
+                        <td class="px-6 py-4">
+                              <%= sprintf("%.0f", part_inv.porcentaje) %>
+                        </td>
+                    </tr>
+               <% end %>     
+         </tbody>
+         <tfoot>
+                <tr>
+                     <td colspan="3" class="font-bold px-6 py-4" style="text-align:right;">Total: </td>
+                     <td class="font-bold px-6 py-4"> <%= sprintf("%.0f", @inv.sum(:porcentaje)) %> </td>
+                </tr>
+         </tfoot>
+    </table>
+</div>

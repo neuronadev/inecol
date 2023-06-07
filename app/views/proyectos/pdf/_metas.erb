@@ -12,42 +12,38 @@
 </div>   
 
 <div style="width:100%; background-color: #e4e4e4; padding:2px 0;">
-   <div style="font-weight: bold;">Desglose de Recursos Aportados por el INECOL</div>
+   <div style="font-weight: bold; background-color: #909090; padding:7px 0;">Desglose de Recursos Aportados por el INECOL</div>
    
    <div style="font-weight: bold; margin-top:10px;">Fondos Fiscales</div>
-       <table style=" width:100%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
-            <% @proyecto.recurso.fiscales.each do |fis| %>
-                <tr style="background-color: #FFFFFF;">
-                    <td style="width:15%; font-weight: bold; padding:5px;"><%= fis.capitulo.nomcapitulo %></td>
-                    <td style="width:5%; font-weight: bold; padding:5px; text-align:right;">$</td>
-                    <td style="width:10%; font-weight: bold; padding:5px;"><%=  fis.monto %></td>
-                </tr>
-            <% end %>    
-       </table>
+
+   <div>
+         <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.fiscales} %>
    </div>    
 
-    <div style="font-weight: bold; margin-top:10px;">Aportación en Especie</div>
-       <table style=" width:100%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
-            <% @proyecto.recurso.especies.each do |esp| %>
-                <tr style="background-color: #FFFFFF;">
-                    <td style="width:15%; font-weight: bold; padding:5px;"><%= esp.capitulo.nomcapitulo %></td>
-                    <td style="width:5%; font-weight: bold; padding:5px; text-align:right;">$</td>
-                    <td style="width:10%; font-weight: bold; padding:5px;"><%=  esp.monto %></td>
-                </tr>
-            <% end %>    
-       </table>
+   <div style="font-weight: bold; margin-top:10px;">Aportación en Especie</div>
+
+   <div>
+           <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.especies} %>
    </div>   
 
    <div style="font-weight: bold; margin-top:10px;">Fondos Concurrentes</div>
-       <table style=" width:80%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
-            <% @proyecto.recurso.concurrentes.each do |con| %>
-                <tr style="background-color: #FFFFFF;">
-                    <td style="width:15%; font-weight: bold; padding:5px;"><%= con.capitulo.nomcapitulo %></td>
-                    <td style="width:5%; font-weight: bold; padding:5px; text-align:right;">$</td>
-                    <td style="width:10%; font-weight: bold; padding:5px;"><%=  con.monto %></td>
-                </tr>
-            <% end %>    
-       </table>
+   <div>
+           <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.concurrentes} %>
    </div>   
+    
+   <%
+       total = 0.0
+       if @proyecto.recurso.fiscales.any?
+            total += @proyecto.recurso.fiscales.sum(:monto)
+       end
+       if @proyecto.recurso.especies.any?
+            total += @proyecto.recurso.especies.sum(:monto)
+       end
+       if @proyecto.recurso.concurrentes.any?
+            total += @proyecto.recurso.concurrentes.sum(:monto)
+       end
+   %>
+
+   <%= render partial: '/proyectos/pdf/recurso_total', formats:[:html], locals:{gtotal:total} %>
 
 </div>   

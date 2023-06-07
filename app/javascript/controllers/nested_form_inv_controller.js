@@ -13,9 +13,7 @@ export default class extends NestedForm {
 
   remove(event){
      var partUtil = new PartUtil('', '')
-     
      super.remove(event);
-
      partUtil.mostrar_suma_porc()
   }
 

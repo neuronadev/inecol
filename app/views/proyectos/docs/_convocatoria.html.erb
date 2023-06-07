@@ -1,0 +1,18 @@
+<% if controller.action_name == 'new' %>
+        <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+<% end %>  
+
+<% if controller.action_name == 'create' %>
+        <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+<% end %>
+
+<% if controller.action_name == 'edit' %>
+       <% if @proyecto.dconvocatoria.attached? %>
+                       <%= form.file_field :dconvocatoria, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                       <%= link_to @proyecto.dconvocatoria.filename, rails_blob_path(@proyecto.dconvocatoria, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                      <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.docprotocolo.id %>'>Eliminar</button>
+        <% else %>
+                   <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+        <% end %>
+
+<% end %>    
