@@ -1,33 +1,29 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Capítulo
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Monto
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-           <% @presupuesto.solicitados.each do |s|  %>
-                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <%= s.capitulo.nomcapitulo %>
-                        </th>
-                        <td class="px-6 py-4 text-center">
-                              <%= number_to_currency(s.monto) %>
-                        </td>
-                    
+<div class="flex w-full justify-center">
+ 
+  <div class="w-3/4">
+        <table class="border-collapse border border-slate-400 w-full">
+              <thead>
+                    <tr>
+                    <th class="border border-slate-300 bg-gray-300">Capítulo</th>
+                    <th class="border border-slate-300 bg-gray-300">Monto</th>
                     </tr>
-             <% end %>       
-        </tbody>
-        <tfoot class=" bg-gray-50 dark:bg-gray-700">
-             <tr>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">Total</th>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"><%= number_to_currency(@sum_caps) %> </td>
-             </tr>
-        </tfoot>
-    </table>
+              </thead>
+              <tbody>
+                    <% @presupuesto.solicitados.each do |s|  %>
+                            <tr>
+                                <td class="border border-slate-300"><%= s.capitulo.nomcapitulo %></td>
+                                <td class="border border-slate-300 text-center"> <%= number_to_currency(s.monto) %></td>
+                            </tr>
+                            
+                    <% end %>        
+              </tbody>
+              <tfoot>
+                    <tr>  
+                        <td class="text-right font-semibold">Total:</td>
+                        <td class="text-center font-semibold"><%= number_to_currency(@sum_caps)%></td>
+                    </tr>
+              </tfoot>
+        </table>
+   </div>     
+
 </div>

@@ -1,0 +1,10 @@
+<div class="flex w-full justify-center mt-5">
+ <div class="w-3/4">
+    <table class="w-full">
+            <tr>  
+                    <td colspan="3" class="text-right font-semibold">Total Porcentaje de Participación:</td>
+                    <td class="text-center font-semibold"><%= sprintf("%.0f", @tec.sum(:porcentaje)+@inv.sum(:porcentaje) ) %></td>
+          </tr>
+    </table>
+ </div>  
+</div>   

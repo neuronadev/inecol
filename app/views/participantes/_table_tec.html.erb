@@ -1,0 +1,44 @@
+<div class="flex w-full justify-center mt-5">
+ 
+  <div class="w-3/4">
+         <div class="flex w-full text-blue-600 font-semibold">Técnicos</div>
+        <table class="border-collapse border border-slate-400 w-full">
+        <thead>
+            <tr>
+            <th class="border border-slate-300 bg-gray-300">Nombre</th>
+            <th class="border border-slate-300 bg-gray-300">Categoria</th>
+            <th class="border border-slate-300 bg-gray-300">Responsable</th>
+            <th class="border border-slate-300 bg-gray-300">Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% if @tec.any? %>  
+                        <% @tec.each do |part_tec| %>
+                            <tr>
+                                <td class="border border-slate-300"><%= part_tec.academico.persona.ap_nom_prop %></td>
+                                <td class="border border-slate-300 text-center"><%= part_tec.academico.tacademico.nomtacademico %></td>
+                                <td class="border border-slate-300 text-center">
+                                </td>
+                                <td class="border border-slate-300 text-center"><%= sprintf("%.0f",part_tec.porcentaje) %></td>
+                            </tr>
+                        <% end %>
+                <% else %>
+                            <tr>
+                                <td class="border border-slate-300 text-gray-600 italic">No se incluyeron Técnicos </td>
+                                <td class="border border-slate-300 text-center"></td>
+                                <td class="border border-slate-300 text-center">
+                                            <div class="flex justify-center"></div>
+                                </td>
+                                <td class="border border-slate-300 text-center"></td>
+                            </tr>
+                <% end %>        
+        </tbody>
+        <tfoot>
+              <tr>  
+                   <td colspan="3" class="text-right font-semibold">Total:</td>
+                   <td class="text-center font-semibold"><%= sprintf("%.0f", @tec.sum(:porcentaje)) %></td>
+              </tr>
+        </tfoot>
+        </table>
+   </div>     
+</div>

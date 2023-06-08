@@ -8,7 +8,7 @@
                 <%= form.select :moneda_id,
                         Moneda.all.map{|item| [item.nommoneda, item.id]},
                             {prompt: '-- Seleccione --'},
-                            {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
+                            {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}
             %>     
         </div>
   </div>
@@ -19,8 +19,9 @@
            <div class="w-4/6">
                   <div class="text-sm text-blue-800 font-semibold">Capture el monto de su proyecto sin IVA</div>
                   <%= form.text_field :costo, 
+                      autocomplete: 'off',
                       class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full 
-                             py-2 px-2 text-gray-800 font-semibold leading-tight focus:outline-none focus:bg-white 
+                             py-1 px-1 text-gray-800 font-semibold leading-tight focus:outline-none focus:bg-white 
                              focus:border-purple-500 text-center',
                       data:{action:'blur->presup-sol#campoformat focus->presup-sol#campounformat keydown->utils#onlynumbers click->tooltip#txtHelp' }
                   %>
@@ -53,7 +54,7 @@
         <%= form.label :tproyecto, 'Total Proyecto:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
       </div>
       <div class="md:w-2/5">
-        <%= form.text_field :tproyecto, readonly:true, class:'text-center bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+        <%= form.text_field :tproyecto, readonly:true, class:'text-center bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
       </div>
     </div>
 

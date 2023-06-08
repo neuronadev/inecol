@@ -1,105 +1,62 @@
+<div class="flex w-full justify-center ">
+    <div class="w-3/4 border-b border-slate-300">
+         <table class="w-full">
+                
+                <tr>
+                    <td class=" p-2 text-center font-semibold">Costo del Proyecto SIN IVA</td>
+                    <td class="p-2 font-semibold text-left"><%= number_to_currency(@presupuesto.costo) %>  <%= @presupuesto.moneda.clave %> </td>
+                </tr>    
+         </table>
+    </div>     
+</div>    
 
-    <div class="w-full text-slate-700">
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            Moneda:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= @presupuesto.moneda.nommoneda %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            Costo del Proyecto:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.costo) %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            IVA:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.iva) %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            Total Proyecto:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.tproyecto) %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            20% Overhead:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.overhead) %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            10% Estímulos:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.estimulo) %>
-                        </div> 
-                    </div>
-            </div>
-            <div class="md:flex md:items-center mt-3 mb-3">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                            Total para Gastos:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                            <%= number_to_currency(@presupuesto.tgastos) %>
-                        </div> 
-                    </div>
-            </div>
+<div class="flex w-full justify-center">
+    <div class="flex w-3/4  border-b border-slate-300">
+           <div class="flex w-1/2 justify-center border-r border-slate-300">      
+                   <table class="w-3/4">
+                        <tr>
+                            <td class="p-2 text-right w-5">IVA</td>
+                            <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva) %> </td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 text-right w-5">Total del Proyecto</td>
+                            <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto) %> </td>
+                        </tr>
+                   </table>      
+           </div>
+           <div class="flex w-1/2 justify-center">      
+                   <table class="w-3/4">
+                        <tr>
+                            <td class="p-2 text-right w-5">20% Overhead</td>
+                            <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead) %> </td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 text-right w-5">10% Estímulos</td>
+                            <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo) %> </td>
+                        </tr>
+                   </table>      
+           </div>
+    </div>     
+</div>    
+<div class="flex w-full justify-center">
+    <div class="w-3/4">
+         <table class="w-full">
+                <tr>
+                    <td class=" p-2 text-center font-semibold">Total para Gastos</td>
+                    <td class=" p-2 font-semibold text-center"><%= number_to_currency(@presupuesto.tgastos) %></td>
+                </tr>    
+         </table>
+    </div>     
+</div>    
 
+<div class="flex w-full justify-center mt-5">
+   <div class="w-3/4">
+           <div class="text-center font-semibold">Desgloce de Gastos</div>   
+    </div>    
+</div>
 
-            <div class="md:flex md:items-top mt-3 mb-3 mt-2">
-                    <div class="md:w-1/5">
-                        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
-                                Desglose de Gastos:
-                        </div>    
-                    </div>
-                    <div class="md:w-4/5">
-                        <div class='appearance-none py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'>
-                                 <%= render 'show_caps' %>
-                        </div> 
-                    </div>
-            </div>
-    </div> 
-    
+<%= render 'presupuestos/show_caps' %> 
+
     <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %> 
         <div class="md:flex md:items-center mb-3 justify-end mt-5">
              <%= link_to edit_presupuesto_path(@presupuesto.id), 

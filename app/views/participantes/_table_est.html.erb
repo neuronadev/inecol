@@ -1,0 +1,29 @@
+<div class="flex w-full justify-center mt-5">
+ 
+  <div class="w-3/4">
+         <div class="flex w-full text-blue-600 font-semibold">Estudiantes</div>
+        <table class="border-collapse border border-slate-400 w-full">
+        <thead>
+            <tr>
+            <th class="border border-slate-300 bg-gray-300">Nombre</th>
+            <th class="border border-slate-300 bg-gray-300">Nivel</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% if @est.any? %>  
+                        <% @est.each do |part_est| %>
+                            <tr>
+                                <td class="border border-slate-300"><%= part_est.nombre %></td>
+                                <td class="border border-slate-300 text-center"><%= part_est.nivel.nomnivel %></td>
+                            </tr>
+                        <% end %>
+                <% else %>
+                            <tr>
+                                <td class="border border-slate-300 text-gray-600 italic">No se incluyeron estudiantes</td>
+                                <td class="border border-slate-300 text-center"></td>
+                            </tr>
+                <% end %>        
+        </tbody>
+       </table>
+   </div>     
+</div>
