@@ -56,18 +56,27 @@
         <div id="tabContentExample" class="mt-2">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile-example" role="tabpanel" aria-labelledby="profile-tab-example">
                         <%= render 'recursos/apor_ffis', f: form %>
+                        <div class="flex">
+                            <div class="w-4/6 text-right font-semibold" >Total:</div>
+                            <div class="w-1/12 text-center font-semibold" id="tffiscal">$ 0.00</div>
+                        </div>    
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
                         <%= render 'recursos/apor_fesp', f: form %>
+                        <div class="flex">
+                            <div class="w-4/6 text-right font-semibold" >Total:</div>
+                            <div class="w-1/12 text-center font-semibold" id="taesp">$ 0.00</div>
+                        </div> 
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings-example" role="tabpanel" aria-labelledby="settings-tab-example">
                          <%= render 'recursos/apor_fcon', f: form %>
+                         <div class="flex">
+                            <div class="w-4/6 text-right font-semibold" >Total:</div>
+                            <div class="w-1/12 text-center font-semibold" id="tfcon">$ 0.00</div>
+                        </div> 
                 </div>
         </div>
         
-       <%= render "sumas_rec" %>  
-
-
         <div class="md:flex md:items-center mb-3 justify-end">
             <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                 

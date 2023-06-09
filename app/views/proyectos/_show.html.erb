@@ -1,6 +1,6 @@
     <div class="md:flex md:items-center mt-3 mb-3">
         <div class="md:w-1/5">
-            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
                 Nombre del Proyecto:
             </div>    
         </div>
@@ -13,7 +13,7 @@
 
     <div class="md:flex md:items-center mt-3 mb-3">
         <div class="md:w-1/5">
-            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
                 Objetivo:
             </div>    
         </div>
@@ -26,7 +26,7 @@
 
     <div class="md:flex md:items-center mb-3">
         <div class="md:w-1/5">
-            <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+            <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
             Tipo de Proyecto:
             </div>
         </div>
@@ -39,7 +39,7 @@
 
     <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/5">
-        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
         Overhead:
         </div>
     </div>
@@ -56,7 +56,7 @@
 
     <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/5">
-        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
         Tipo Medio:
         </div>
     </div>
@@ -84,7 +84,7 @@
 
     <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/5">
-        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
         Tipo Investigación:
         </div>
     </div>
@@ -95,7 +95,7 @@
     </div>
     </div>
 
-    <div class="md:flex md:items-center mb-3">
+    <div class="md:flex md:items-center mb-3 font-semibold">
         <div class="md:w-1/5">
             <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
                 Periodo:
@@ -110,7 +110,7 @@
 
     <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/5">
-        <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+        <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
         Transferencia de Conocimiento:
         </div>
     </div>
@@ -127,7 +127,7 @@
 
     <div class="md:flex md:items-center mb-3">
             <div class="md:w-1/5">
-                <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
                 Interinstitucional:
                 </div>
             </div>
@@ -156,11 +156,11 @@
             </div>
     <% end %>  
 
-    <% if !@proyecto.docprotocolo.nil? %>
+    <% if @proyecto.docprotocolo.attached? %>
 
             <div class="md:flex md:items-center mt-3 mb-3">
                 <div class="md:w-1/5">
-                    <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                    <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
                         Protocolo:
                     </div>    
                 </div>
@@ -175,7 +175,7 @@
     <% if @proyecto.docconvenios.any? %>
             <div class="md:flex md:items-center mt-3 mb-3">
                    <div class="md:w-1/5">
-                         <div class='block  md:text-right mb-1 md:mb-0 pr-4'>
+                         <div class='block  md:text-right mb-1 md:mb-0 pr-4 font-semibold'>
                                  Convenio o Algún Documento Legal :
                          </div>    
                    </div>

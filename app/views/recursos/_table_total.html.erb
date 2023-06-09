@@ -1,0 +1,11 @@
+<div class="flex w-full justify-center mt-5">
+    <div class="w-3/4">
+            <table class="border-collapse border border-slate-400">
+                <tr>
+                        <td class="border border-slate-300 p-1 text-right font-semibold" style="width:600px; " >Total:</td>
+                        <td class="border border-slate-300 text-center p-1 font-semibold" style="width:300px;"><%= number_to_currency(@tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f)  %></td>
+                </tr>
+                
+            </table>
+    </div>
+</div>    

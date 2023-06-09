@@ -6,7 +6,8 @@ export default class extends Controller {
  
   repetidos(event){
        var value = event.target.value
-       var itemscapsol = document.getElementsByClassName('itemcapsol')
+       var wraper = event.target.closest('#wraper_caps')       
+       var itemscapsol = wraper.getElementsByClassName('itemcapsol')
        var repetido = 0
        if ( itemscapsol.length > 1 ){
              for (let i = 0; i < itemscapsol.length; i++ ){

@@ -1,0 +1,50 @@
+<div class="flex w-full justify-center">
+ 
+  <div class="w-3/4 mt-3">
+         <div class="w-full font-semibold">
+               <% if tipo == 'ffis' %>
+                     Fondos Fiscales
+               <% end %>   
+               <% if tipo == 'aes' %>
+                     Aportación en Especie  
+               <% end %>   
+               <% if tipo == 'fcon' %>
+                       Fondos concurrentes  
+                       <% if @recurso.doficio.attached? %>
+                            <div class="flex ml-5"> 
+                                  <div class=''>
+                                       Oficio del CIINECOL:
+                                   </div>    
+                                    <div class='ml-1 text-blue-600'>
+                                            <%= link_to @recurso.doficio.filename, rails_blob_path(@recurso.doficio, disposition: "attachment", target:'_blank') %>  
+                                   </div>
+                             </div>
+                         <% else %>    
+                                <div class="flex ml-5 italic font-gray-400"> No se incluyo el oficio del CIINECOL</div>
+                        <% end %>
+               <% end %>  
+        </div>
+        <table class="border-collapse border border-slate-400">
+            <thead>
+                <tr>
+                <th class="border border-slate-300 bg-gray-300">Capítulo</th>
+                <th class="border border-slate-300 bg-gray-300">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.each do |item| %>
+                    <tr>
+                        <td class="border border-slate-300 p-1" style="width:600px;" ><%= item.capitulo.nomcapitulo %></td>
+                        <td class="border border-slate-300 text-center p-1" style="width:300px;"><%= number_to_currency(item.monto) %></td>
+                    </tr>
+                <% end %>            
+            </tbody>
+            <tfoot>
+                <tr>  
+                    <td class="text-right font-semibold">Total:</td>
+                    <td class="text-center font-semibold"><%= number_to_currency(total) %></td>
+                </tr>
+            </tfoot>
+        </table>
+   </div>     
+</div>

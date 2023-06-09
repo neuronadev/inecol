@@ -2,20 +2,32 @@
    Fondo concurrrente
 </div>
 <div>
-   <div class="md:flex md:items-center mb-3">
+   <div class="md:flex md:items-center mb-3 ml-3">
                     <div class="md:w-1/5">
                         <div class='md:text-left mb-1 md:mb-0 pr-4'>Oficio del CIINECOL:</div>
                     </div>
                     <div class="md:w-2/5">
-                         <%= f.file_field :doficio %>
+                          <div id = "div_file" class="md:w-full " data-controller="upsf">
+                                <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+                                      <%= f.file_field :doficio,  class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"}  %>
+                                <% end %>  
+                                <% if controller.action_name == 'edit' %>
+                                        <% if @recurso.doficio.attached? %>
+                                                <%= f.file_field :doficio, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                <%= link_to @recurso.doficio.filename, rails_blob_path(@recurso.doficio, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                                <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @recurso.doficio.id %>'>Eliminar</button>
+                                        <% else %>
+                                                <%= f.file_field :doficio,  class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"}  %>
+                                        <% end %>
+                                <% end %>     
+                          </div>
                     </div>
-        </div>
-
+   </div>
 </div>
 <div class="nested-form-wrapper flex p-1"  >
        
         <div class="border border-gray-200 w-full">
-            <div class="p-5">
+            <div class="p-5" id="wraper_caps" data-controller="caps">
                   <template data-nested-form-fcon-target="template" >
                       <%= f.fields_for :concurrentes, Concurrente.new, child_index:'NEW_RECORD' do |fc_fields|%>
                           <%= render 'recursos/fcon_fields', f: fc_fields %>

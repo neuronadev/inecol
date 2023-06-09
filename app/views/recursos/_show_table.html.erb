@@ -1,34 +1,12 @@
+<%= render 'table_cap', items:@recurso.fiscales, total:@tot_ffis, tipo:'ffis' %>
 
-<div class="font-semibold mt-2">Recursos aportados por el INECOL</div>
+<%= render 'table_cap', items:@recurso.especies, total:@tot_aes, tipo:'aes' %>
 
-<div>
-       <div class="font-semibold mt-2"> Fondos Fiscales </div>
-       <div>
-              <%= render 'show_caps', items:@recurso.fiscales, total:@tot_ffis %>
-       </div>
-</div>
+<%= render 'table_cap', items:@recurso.concurrentes, total:@tot_fcon, tipo:'fcon' %>
 
-<div>
-       <div class="font-semibold mt-2"> Aportación en Especie </div>
-       <div>
-              <%= render 'show_caps', items:@recurso.especies, total:@tot_aes %>
-       </div>
-</div>
+<%= render 'table_total' %>
 
-<div>
-       <div class="font-semibold mt-2"> Fondos Concurrentes </div>
-       <div>
-              <%= render 'show_caps', items:@recurso.concurrentes, total:@tot_fcon %>
-       </div>
-</div>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-3/4 mt-5">
-    <table class="w-full">
-           <tr> 
-               <td class="text-right font-semibold"><div>Gran Total: <%= number_to_currency(@tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f)  %></div> </td>
-           </tr>
-    </table>
-</div>    
  <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %> 
         <div class="md:flex md:items-center mb-3 justify-end mt-5">
         <%= link_to edit_recurso_path(@recurso.id), 
