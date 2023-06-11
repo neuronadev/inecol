@@ -1,6 +1,6 @@
 <div class="flex w-full justify-center">
  
-  <div class="w-3/4 mt-3">
+  <div class="w-full mt-3">
          <div class="w-full font-semibold">
                <% if tipo == 'ffis' %>
                      Fondos Fiscales
@@ -32,12 +32,19 @@
                 </tr>
             </thead>
             <tbody>
-                <% items.each do |item| %>
-                    <tr>
-                        <td class="border border-slate-300 p-1" style="width:600px;" ><%= item.capitulo.nomcapitulo %></td>
-                        <td class="border border-slate-300 text-center p-1" style="width:300px;"><%= number_to_currency(item.monto) %></td>
-                    </tr>
-                <% end %>            
+                  <% if items.any?  %>
+                        <% items.each do |item| %>
+                            <tr>
+                                <td class="border border-slate-300 p-1" style="width:600px;" ><%= item.capitulo.nomcapitulo %></td>
+                                <td class="border border-slate-300 text-center p-1" style="width:300px;"><%= number_to_currency(item.monto) %></td>
+                            </tr>
+                        <% end %>            
+                   <% else %>
+                            <tr>
+                                <td class="border border-slate-300 p-1" style="width:600px;" ></td>
+                                <td class="border border-slate-300 text-center p-1" style="width:300px;"></td>
+                            </tr>
+                   <% end %> 
             </tbody>
             <tfoot>
                 <tr>  

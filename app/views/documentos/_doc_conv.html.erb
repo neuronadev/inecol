@@ -1,14 +1,16 @@
+<div class="w-full p-1  bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Convenio, Contrato o algún otro Documento Legal</h5>
 
-
-<div class="flex justify-center items-center mt-10">
-   <div>
-        <div class="font-semibold">Convenio o algún otro documento:</div>
-              <% if @proyecto.docconvenios.attached? %>
-                     <% @proyecto.docconvenios.each do |doc| %>
-                            <div class="ml-4"> <%= link_to doc.filename, rails_blob_path(doc, disposition: 'inline'), target: :_blank %></div>                
-                     <% end %>
-              <% else %>                     
-                     <div class="font-semibold text-gray-600 italic ml-4"> El proyecto no incluye este tipo de documentos.</div>
-              <% end %>
-       </div>
+              <div class="flex justify-center items-center mt-10">
+              <div>
+                     <div class="font-semibold">Archivo(s):</div>
+                            <% if @proyecto.docconvenios.attached? %>
+                                   <% @proyecto.docconvenios.each do |doc| %>
+                                          <div class="ml-4 text-blue-700"> <%= link_to doc.filename, rails_blob_path(doc, disposition: 'inline'), target: :_blank %></div>                
+                                   <% end %>
+                            <% else %>                     
+                                   <div class="font-semibold text-gray-600 italic ml-4"> El proyecto no incluye este tipo de documentos.</div>
+                            <% end %>
+                     </div>
+              </div>
 </div>
