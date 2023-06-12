@@ -7,6 +7,11 @@
               </template>
               
               <%= form.fields_for :solicitados do |sol_fields|%>
+                    <%
+                        if controller.action_name == 'edit' 
+                            sol_fields.object.monto = number_to_currency(sol_fields.object.monto.to_s)
+                        end
+                    %>
                     <%= render 'presupuestos/sol_form', f: sol_fields %>
               <% end %>
  

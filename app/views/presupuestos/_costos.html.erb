@@ -1,3 +1,16 @@
+
+<%  
+
+ if controller.action_name == 'edit' 
+    form.object.costo = number_to_currency(form.object.costo.to_s)
+    form.object.iva = number_to_currency(form.object.iva.to_s)
+    form.object.tproyecto = number_to_currency(form.object.tproyecto.to_s)
+    form.object.overhead = number_to_currency(form.object.overhead.to_s)
+    form.object.estimulo = number_to_currency(form.object.estimulo.to_s)
+    form.object.tgastos = number_to_currency(form.object.tgastos.to_s)
+ end 
+%>
+
 <div class="flex w-full ">
 
   <div class="md:flex md:items-center mb-3 w-4/12">
@@ -23,7 +36,7 @@
                       class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full 
                              py-1 px-1 text-gray-800 font-semibold leading-tight focus:outline-none focus:bg-white 
                              focus:border-purple-500 text-center',
-                      data:{action:'blur->presup-sol#campoformat focus->presup-sol#campounformat keydown->utils#onlynumbers click->tooltip#txtHelp' }
+                      data:{action:'blur->presup-sol#campoformat focus->presup-sol#campounformat keydown->utils#onlynumbers click->tooltip#txtHelp'}
                   %>
                   <div id="tip_costo" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                         Tooltip content

@@ -36,7 +36,7 @@
                  <div class="flex justify-end w-4/6 font-semibold">Total:</div>
                  <div class="flex justify-start w-2/6 font-semibold"><div class="ml-2" id='total_caps'>
                            <% if @presupuesto.solicitados.any? %>
-                                 <%= @presupuesto.solicitados.sum(:monto) %>
+                                 <%= number_to_currency (@presupuesto.solicitados.sum(:monto)) %>
                            <% else %>
                                   $ 0.00
                            <% end %>

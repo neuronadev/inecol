@@ -1,3 +1,9 @@
+<%
+  if controller.action_name == 'edit' 
+       f.object.monto = number_to_currency(f.object.monto.to_s)
+  end
+%>
+
 <div class="nested-form-wrapper flex p-1" data-new-record="<%= f.object.new_record? %>" >
   <div class="w-4/6 flex justify-center">
     <%= f.select :capitulo_id,
