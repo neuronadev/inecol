@@ -1,121 +1,130 @@
-<div class="flex mt-5 mb-1">
-     <% if @proyecto.enlaces.any? %>
-          <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' %>
-                  <div>
-                        <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                                 <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
-                                    <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-sky-800">Solicitar cambios</div>
-                                 </div>   
-                           <% end %>      
-                     </div>     
-                  
-                  <div>
-                        <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                           <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Evaluadores</div>
-                           </div>     
-                        <% end %>    
-                  </div>
-
-
-                   <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-gray-800">Mensajes enviados</div>
-                           </div>
-                   <% end %>
-
-                    <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
-                           </div>
-                     <% end %>
-
-         <% end %>
-         <% if @proyecto.enlaces.last.enevento.clave == 'CORR' %>
-                     <div>
-                           <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
-                                       <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-sky-800">Solicitar cambios</div>
-                                    </div>   
-                              <% end %>      
-                        </div>     
-                     
-                     <div>
-                              <div class="flex font-medium text-sm leading-tight ml-3" >
-                                    <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-gray-400">Evaluadores</div>
+<div class="w-full flex justify-end">
+        
+        <div class="flex mt-5 mb-1 w-3/4 justify-between">
+            <div >
+                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex' do %>
+                        <%= inline_svg_tag 'svg/hogar.svg' %>
+                        <span class='text-sm text-blue-800 font-semibold ml-1'>Inicio</span>
+                  <% end %>      
+            </div>  
+            <% if @proyecto.enlaces.any? %>
+                  <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' %>
+                              <div>
+                                    <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                          <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
+                                                <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-blue-800">Solicitar cambios</div>
+                                          </div>   
+                                    <% end %>      
                               </div>     
-                     </div>
+                              
+                              <div>
+                                    <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
+                                    </div>     
+                                    <% end %>    
+                              </div>
 
 
-                     <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-gray-800">Mensajes enviados</div>
-                           </div>
-                     <% end %>
+                              <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
+                                    </div>
+                              <% end %>
 
-                      <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
-                           </div>
-                     <% end %>
-            <% end %> 
-            <% if @proyecto.enlaces.last.enevento.clave == 'EVAL' %>
-                     <div>
-                           <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                              <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Descargar</div>
+                                    </div>
+                              <% end %>
+
+                  <% end %>
+                  <% if @proyecto.enlaces.last.enevento.clave == 'CORR' %>
+                              <div>
+                                    <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                                <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
+                                                <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-blue-800">Solicitar cambios</div>
+                                                </div>   
+                                          <% end %>      
+                                    </div>     
+                              
+                              <div>
+                                          <div class="flex font-medium text-sm leading-tight ml-3" >
+                                                <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-gray-400">Evaluadores</div>
+                                          </div>     
+                              </div>
+
+
+                              <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
+                                    </div>
+                              <% end %>
+
+                              <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Descargar</div>
+                                    </div>
+                              <% end %>
+                        <% end %> 
+                        <% if @proyecto.enlaces.last.enevento.clave == 'EVAL' %>
+                              <div>
+                                    <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                                <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
+                                                <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-blue-800">Solicitar cambios</div>
+                                                </div>   
+                                          <% end %>      
+                                    </div>     
+                              
+                              <div>
+                                    <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
+                                    </div>     
+                                    <% end %>    
+                              </div>
+
+                              <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
+                                    </div>
+                              <% end %>
+
+                              <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Descargar</div>
+                                    </div>
+                              <% end %>
+                        <% end %> 
+                        <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                              <div>
+                                    
                                     <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
-                                       <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-sky-800">Solicitar cambios</div>
+                                                <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-gray-400">Solicitar cambios</div>
                                     </div>   
-                              <% end %>      
-                        </div>     
-                     
-                     <div>
-                        <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                           <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Evaluadores</div>
-                           </div>     
-                        <% end %>    
-                     </div>
+                                    
+                              </div>     
+                              
+                              <div>
+                                    <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
+                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
+                                    </div>     
+                                    <% end %>    
+                              </div>
 
-                     <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-gray-800">Mensajes enviados</div>
-                           </div>
-                     <% end %>
+                              <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
+                                    </div>
+                              <% end %>
 
-                      <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
-                           </div>
-                     <% end %>
-            <% end %> 
-            <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
-                     <div>
-                           
-                         <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
-                                    <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-gray-400">Solicitar cambios</div>
-                         </div>   
-                           
-                    </div>     
-                     
-                     <div>
-                        <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                           <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Evaluadores</div>
-                           </div>     
-                        <% end %>    
-                     </div>
-
-                     <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-gray-800">Mensajes enviados</div>
-                           </div>
-                     <% end %>
-
-                      <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
-                           <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                 <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
-                           </div>
-                     <% end %>
-            <% end %> 
-    <% end %>        
-</div>
+                              <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                    <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                          <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Descargar</div>
+                                    </div>
+                              <% end %>
+                        <% end %> 
+            <% end %>        
+        </div>
+</div>        

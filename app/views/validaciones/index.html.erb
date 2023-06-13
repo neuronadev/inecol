@@ -4,30 +4,41 @@
           <div class="flex w-full ">
                <div class="flex w-1/3"> 
                     <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
-                    <div class="ml-1">Evaluadores</div>
+                    <div class="ml-1 font-semibold">Evaluadores</div>
                </div>    
                <div class="flex justify-between w-1/3">     
                    <div>
                         <% if !@proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').any? %>
-                           <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'SOLV').first.id) do %>
-                                <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/evaluacion.svg' %></div> <div>Enviar a evaluación</div></div>
+                           <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'SOLV').first.id)  do %>
+                                <div class="flex w-full ml-1">
+                                         <%= inline_svg_tag 'svg/evaluacion_blue.svg' %>
+                                         <span class='text-sm text-blue-800 font-semibold ml-1'>Enviar a evaluación</span>
+                                </div>
                             <% end %>  
                         <% else %>   
                              <div class="flex w-full ml-1">
-                                <div><%= inline_svg_tag 'svg/evaluacion.svg' %></div><div class='text-gray-400 class="ml-1"'>Enviar a evaluación</div>
+                                         <%= inline_svg_tag 'svg/evaluacion.svg' %>
+                                         <span class='text-sm text-gray-400 font-semibold ml-1'>Enviar a evaluación</span>
                              </div>   
                         <% end %>
                    </div> 
                      <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
                              <div class="ml-1">
                                    <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_eval_content'} do %>
-                                        <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/controlar-gray.svg' %></div> <div class="ml-1">Ver Dictamen</div></div>
+                                   
+                                           <div class="flex w-full ml-1">
+                                                 <%= inline_svg_tag 'svg/controlar-gray.svg' %>
+                                                 <span class="text-blue-800">Ver Dictamen</span>
+                                            </div>
                                    <% end %>  
                               </div>
                      <% else %>
                               <div class="ml-1">
                                    <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_eval_content'} do %>
-                                        <div class="flex w-full ml-1"><div><%= inline_svg_tag 'svg/controlar-gray.svg' %></div> <div class="ml-1">Dictamen</div></div>
+                                        <div class="flex w-full ml-1">
+                                               <%= inline_svg_tag 'svg/controlar-blue.svg' %>
+                                               <span class="text-sm text-blue-800 font-semibold ml-1">Dictamen</span>
+                                        </div>       
                                    <% end %>  
                               </div>
                      <% end %>    

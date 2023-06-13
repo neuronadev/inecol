@@ -71,11 +71,22 @@
      </td>
  </tr>
 </table>
+<% if !@proyecto.mconvocatoria.nil? %>
+     <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+          <tr>
+               <td style="padding: 5px 0; font-weight: bold; text-align:left;">Nombre de la Convocatoria</td>
+               <td style="width:30%; background-color: #ffffff; border: 1px solid #a9a9a9;"> <%= @proyecto.mconvocatoria.nomconvocatoria %> </td>
+
+               <td style="padding: 5px 0; font-weight: bold;">Link de la Convocatoria</td>
+               <td style="width:35%; background-color: #ffffff; border: 1px solid #a9a9a9;"> <%= @proyecto.mconvocatoria.link %> </td>
+          </tr>
+     </table>
+<% end %>
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0; font-weight: bold;">Nombre del Proyecto</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9;">
                   <%= @proyecto.nombre %>
         </td>
     </tr>
@@ -138,50 +149,64 @@
 
 
 <div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
-<table style="width:90%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
-    <tr>
-        <td style="width:60%;">
-           <table style="width:100%;  border-collapse: collapse;">
-                    <tr>
-                        <td style="font-weight: bold;"> Participantes del INECOL: </td>
-                        <td style="text-align: right; padding-right: 1px;"> Participación</td>
-                    </tr>
-                    <tr style="">
-                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
-                              Investigadores
-                         </td>   
+     <table style="width:90%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">
+         <tr>
+            <td style="width:60%;">
+                    <table style="width:100%;  border-collapse: collapse;">
+                         <tr>
+                              <td style="font-weight: bold;"> Participantes del INECOL: </td>
+                              <td style="text-align: right; padding-right: 1px;"> Participación</td>
+                         </tr>
+                         <tr style="">
+                              <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
+                                   Investigadores
+                              </td>   
 
-                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
-                              <%= render partial: '/proyectos/pdf/parts_inv', formats:[:html] %>
-                         </td>   
-                    </tr>
-                    <tr>
-                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
-                              Técnicos
-                         </td>   
+                              <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
+                                   <%= render partial: '/proyectos/pdf/parts_inv', formats:[:html] %>
+                              </td>   
+                         </tr>
+                         <tr>
+                              <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
+                                   Técnicos
+                              </td>   
 
-                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
-                               <%= render partial: '/proyectos/pdf/parts_tec', formats:[:html] %>
-                         </td>   
-                    </tr>
-                    <tr>
-                         <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
-                              Estudiantes
-                         </td>   
+                              <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9;">
+                                   <%= render partial: '/proyectos/pdf/parts_tec', formats:[:html] %>
+                              </td>   
+                         </tr>
+                         <tr>
+                              <td style="width:30%; vertical-align: top; border: 1px solid #a9a9a9;">
+                                   Estudiantes
+                              </td>   
 
-                         <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9; background-color: #FFFFFF;">
-                              <table style="width:100%;">
-                                   <% @proyecto.participante.pestudiantes.each do |est| %>
-                                          <tr><td> <%= est.nombre  %> </td>
-                                          </tr>    
-                                   <% end %>    
-                              </table>
-                         </td>   
-                    </tr>
-               </table>      
-          </td>     
-          <td style="vertical-align: top;"></td>
-     </tr>     
-</table>
+                              <td style="width:70%; vertical-align: top; border: 1px solid #a9a9a9; background-color: #FFFFFF;">
+                                   <table style="width:100%;">
+                                        <% @proyecto.participante.pestudiantes.each do |est| %>
+                                             <tr><td> <%= est.nombre  %> </td>
+                                             </tr>    
+                                        <% end %>    
+                                   </table>
+                              </td>   
+                         </tr>
+                    </table>      
+               </td>     
+               <td style="width:100%; vertical-align: top;">
+                 <% if @proyecto.instituciones.any? %> 
+                         <table style="width:100%;">      
+                              <tr>
+                                   <td colspan="2" style="font-weight: bold; text-align:center;"> Instituciones Participantes</td>
+                              </tr>
+                                 <% @proyecto.instituciones.each do |item| %> 
+                                        <tr>
+                                             <td style="width:5%;"></td>
+                                             <td style="width:30%; border: 1px solid #a9a9a9; background-color: #FFFFFF;"><%= item.nominstitucion %></td>
+                                        </tr>
+                                 <% end %>       
+                         </table>
+                  <% end %>  
+               </td>
+          </tr>     
+     </table>
 
 </div>
