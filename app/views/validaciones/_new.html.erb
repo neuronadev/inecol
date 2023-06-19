@@ -1,5 +1,6 @@
-<div>Abrir el proyecto para revision por parte de los Evaluadores.</div>
-
+<div class="p-4 mb-4 font-semibold text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+  Abrir el proyecto para revisión por parte de los Evaluadores.
+</div>
 <div class="mt-5">
      <%= form_with(model: @validacion) do |form| %>
           <%= form.hidden_field :proyecto_id, value:@proyecto.id %>

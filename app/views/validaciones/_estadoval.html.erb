@@ -1,9 +1,11 @@
 <%  if proyecto.validaciones.any? %>
           <%  if !proyecto.validaciones.where(evaluador_id:evaluador.id).last.nil? %> 
-                  <%= proyecto.validaciones.where(evaluador_id:evaluador.id).last.tvalidacion.nomtvalidacion%>
+                  <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                      <span class="font-medium"><%= proyecto.validaciones.where(evaluador_id:evaluador.id).last.tvalidacion.nomtvalidacion%></span>
+                  </div>
           <% else %>
-                  Sin respuesta 
+                 <span class="bg-yellow-100 font-semibold text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 ">Sin respuesta</span>
           <% end %>
 <% else %>         
-    ---
+      <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">---</span>
 <% end %>

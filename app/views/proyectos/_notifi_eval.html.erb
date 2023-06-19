@@ -1,5 +1,5 @@
 <%
-         validacion = @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last
+      validacion = @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last
 %>
 <div class="p-5 mb-3 text-sm rounded-lg bg-blue-50 " role="alert">
      <div>
@@ -11,11 +11,6 @@
                 <div class="font-semibold">Responsable Técnico:</div>
                 <div class="ml-2"> <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %> </div>
           </div>
-          <div class="flex">
-                <div class="font-semibold">Fecha de Captura:</div>
-                <div class="ml-2"> <%= @proyecto.created_at.strftime("%d-%m-%Y") %> </div>
-          </div>
-
           <div class="flex">
                 <div class="font-semibold">Ficha del Proyecto:</div>
                 <div class="ml-2"> 

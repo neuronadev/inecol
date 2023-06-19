@@ -64,10 +64,22 @@
                          <tr>
                              <td style='width:10%'></td>
                              <td style="width:5%; text-align:left; "><strong>Aceptado</strong></td>
-                             <td style="width:10%; text-align:left; background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;">  </td>
+                             <td style="width:10%; text-align:center; background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;"> 
+                                       <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>             
+                                             <%  if @proyecto.dictamen.tvalidacion.clave == 'ACEP' %>
+                                                     <span class="font-semibold"> X </span>
+                                             <% end %>   
+                                       <% end %>
+                              </td>
                              
                              <td style="width:5%; text-align:left; "><strong>No Aceptado</strong></td>
-                             <td style="width:10%; text-align:left; background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;">  </td>
+                             <td style="width:10%; text-align:left; background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;">
+                                      <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>             
+                                             <%  if @proyecto.dictamen.tvalidacion.clave == 'REC' %>
+                                                     <span class="font-semibold"> X </span>
+                                             <% end %>   
+                                       <% end %>
+                             </td>
                          </tr>
 
                   </table>

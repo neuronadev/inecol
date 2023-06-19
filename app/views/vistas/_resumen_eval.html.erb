@@ -21,17 +21,18 @@
                  <%= render 'proyectos/notifi_eval' %> 
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard-example" role="tabpanel" aria-labelledby="dashboard-tab-example">
-                        <div class='flex w-full'>
-                                   <div class='w-1/4'>
+                    <div class='flex w-full'>
+                             <div class='w-1/4'>
                                         <%= render 'secciones' %>
-                                    </div>
-                                    <div class='w-full'>
+                              </div>
+
+                              <div class='w-full'>
                                         <%= turbo_frame_tag "py_content_secc" do %>
                                         <%= render 'seccion' %>
                                         <% end %>
 
-                                    </div>
-                        </div>
+                              </div>
+                    </div>
             </div>
       </div>
       

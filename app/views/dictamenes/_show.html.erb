@@ -1,6 +1,6 @@
 
-<div class="relative overflow-x-auto">
-    <table class="w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
+<div class="relative overflow-x-auto flex justify-center">
+    <table class="w-3/4 text-left text-gray-800 dark:text-gray-800">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                     Nombre del Proyecto
                 </th>
                 <td class="px-6 py-4">
@@ -21,7 +21,7 @@
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                    Responsable
                 </th>
                 <td class="px-6 py-4">
@@ -29,7 +29,7 @@
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                     Fecha de Captura
                 </th>
                 <td class="px-6 py-4">
@@ -37,23 +37,31 @@
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   Fecha dictamen
+                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
+                   Número de Registro
+                </th>
+                <td class="px-6 py-4">
+                    <%= @dictamen.numregistro %>
+                </td>
+            </tr>   
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
+                   Fecha Dictamen
                 </th>
                 <td class="px-6 py-4">
                     <%= @dictamen.created_at.strftime('%d-%m-%Y') %>
                 </td>
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                    Dictamen
                 </th>
                 <td class="px-6 py-4">
-                    <%= @dictamen.tvalidacion.nomtvalidacion %>
+                     <strong> <%= @dictamen.tvalidacion.nomtvalidacion %> </strong>
                 </td>
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                    Observaciones
                 </th>
                 <td class="px-6 py-4">
@@ -62,12 +70,12 @@
             </tr>    
 
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
                    Documento
                 </th>
                 <td class="px-6 py-4">
                          <% if @dictamen.docdictamen.attached? %>
-                               <%= link_to @dictamen.docdictamen.filename, rails_blob_path(@dictamen.docdictamen, disposition: 'inline'), target: :_blank %>
+                               <%= link_to @dictamen.docdictamen.filename, rails_blob_path(@dictamen.docdictamen, disposition: 'inline'), class:"text-blue-800", target: :_blank %>
                         <% else %>                     
                                 <div class="font-semibold text-gray-600 italic ml-4"> No se incluyó ningún documento.</div>
                         <% end %>

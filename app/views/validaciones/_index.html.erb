@@ -1,14 +1,22 @@
+ <% if @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').any? %> 
+       <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-800" role="alert">
+             <span class="font-medium">El proyecto se encuentra abierto para Evaluación.
+                       La solicitud se hizo en la <strong>fecha: <%= @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last.created_at.strftime("%d-%m-%Y")  %></strong></span>
+       </div>          
+<% end %>  
+  
+
 <div class="relative overflow-x-auto mt-5">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-800 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-center">
                     Nombre
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Estado validacion
+                <th scope="col" class="px-6 py-3 text-center">
+                    Estado validación
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-center">
                     
                 </th>
             </tr>
@@ -17,14 +25,14 @@
 
           <% @evaluadores.each do |e| %>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-4 font-semibold font-medium text-gray-900 whitespace-nowrap dark:text-white">
                          <%= e.persona.nom_espacio %>
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-center">
                          <%= render 'estadoval', proyecto:@proyecto, evaluador:e %> 
                     </td>
-                    <td class="px-6 py-4">
-                        ---
+                    <td class="px-6 py-4 text-center">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">---</span>
                     </td>
                 </tr>
           <% end %>      
