@@ -9,6 +9,8 @@ class ProyectosController < ApplicationController
       elsif current_usuario.cuenta.rol.clave == 'CAP'
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
+      elsif current_usuario.cuenta.rol.clave == 'PLAN'
+             @proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
       else
              @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC'])
       end
@@ -161,6 +163,8 @@ class ProyectosController < ApplicationController
                    return 'enlaces' 
              elsif current_usuario.cuenta.rol.clave == 'EVAL'
                    return 'validaciones'
+             elsif current_usuario.cuenta.rol.clave == 'PLAN'
+                   return 'planeacion'
              else
                    return 'proyectos'
              end

@@ -1,0 +1,32 @@
+<div class="min-h-screen bg-gray-100">
+  <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
+    <div class="flex h-screen flex-col justify-between pt-2 pb-6">
+      <div>
+        <div class="w-max p-2.5">
+          <img src="https://tailus.io/images/logo.svg" class="w-32" alt="">
+        </div>
+        <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
+          <li class="min-w-max" data-action='click->menup#onClickItem'>
+
+              <%= link_to proyectos_path, class:"menupactivo relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white",
+                   data:{turbo_frame: 'pycontent'} do %> 
+                        <%= inline_svg_tag 'svg/dashboard.svg' %>
+                        <span class="group-hover:text-gray-700">Inicio</span>
+             <% end %>
+
+          </li>
+        
+         
+        </ul>
+      </div>
+      <div class="w-max -mb-3">
+        <a href="#" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+          <%= link_to destroy_usuario_session_path,  data: {turbo_method: :delete}, class:"bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600" do %> 
+                      <%= inline_svg_tag 'svg/salir-alt.svg' %>
+                      <span class="group-hover:text-gray-700">Salir</span>
+             <% end %>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

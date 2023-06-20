@@ -5,6 +5,7 @@ class VistasController < ApplicationController
         @proyecto = Proyecto.find(params[:id])
         @total_notifica_rp = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').count  
         @total_notifica_sola = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'SOLA').count
+        
 
         #@total_notifica_rp = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').count
         #@total_notifica_sola = @proyecto.enlaces.includes(:enevento).where('eneventos.clave':'SOLA').count

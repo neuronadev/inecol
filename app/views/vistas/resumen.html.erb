@@ -1,7 +1,9 @@
  <% if current_usuario.cuenta.rol.clave == 'EVAL' %>
-           <%= render 'vistas/resumen_eval' %>
+             <%= render 'vistas/resumen_eval' %>
+ <% elsif current_usuario.cuenta.rol.clave == 'PLAN' %>
+             <%= render 'vistas/resumen_plan' %>
  <% else %>
-           <%= render 'vistas/resumen_general' %>
+             <%= render 'vistas/resumen_general' %>
  <% end %> 
 
 

@@ -12,7 +12,12 @@ Rails.application.routes.draw do
             post 'medclave'
             post 'enviar'
         end
+        resources :mtoautorizados
   end
+resources :mtoautorizados
+  #resources :proyectos do
+  #         resources :mtoautorizados
+  #end
 
   resources :fuentes do
         collection do
@@ -51,6 +56,7 @@ Rails.application.routes.draw do
 
   resources :validaciones 
   resources :dictamenes
+  
 
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

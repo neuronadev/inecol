@@ -1,0 +1,53 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+    <table class="w-full text-sm text-left text-gray-800 dark:text-gray-800">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Nombre del Proyecto
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Responsable
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Fecha Dictamen
+                </th>
+
+                <th scope="col" class="px-6 py-3 text-center">
+                    Número Registro
+                </th>
+               
+                <th scope="col" class="px-6 py-3 text-center">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+             <% if @proyectos.any? %>
+                    <%  @proyectos.each do |py| 
+                        @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop
+                    %>
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                                <%= py.nombre %>
+                            </th>
+                            <td class="px-6 py-4 text-center">
+                                 <%= @resp %>
+                                 
+                            </td>
+                            <td class="px-6 py-4">
+                                 <%= py.dictamen.created_at.strftime("%d-%m-%Y")  %>
+                            </td>
+                             <td class="px-6 py-4 text-center">
+                                  <%= py.dictamen.numregistro %>
+                            </td>
+                            <td class="px-6 py-4">
+                                       <%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                            </td>
+                        </tr>
+                     <% end %>   
+             <% else %>           
+                     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>
+            <% end %>            
+        </tbody>
+    </table>
+</div>
