@@ -1,6 +1,46 @@
-<%= form_with model:@mtoautorizado do |f| %>
+<%= form_with model:@mtoautorizado, url:[@proyecto, @mtoautorizado], class:'w-full' do |f| %>
+     <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
+     <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+           <div class="font-semibold border-b dark:bg-gray-800 dark:border-gray-700 p-2"> Monto Autorizado</div>
+           <table class="w-full text-gray-800 dark:text-gray-800 mt-2">
+                   <tbody>
+                            <tr class="bg-white ">
+                                <td scope="row" class="p-2 text-right w-1/5 font-semibold ">
+                                    Fecha de Inicio:
+                                </td>
+                                <td class="text-left p-2">
+                                     <%= f.date_field :finicio, class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700' %> 
+                                </td>
+                            </tr>    
+                            <tr class="bg-white ">
+                                <td scope="row" class="p-2 text-right w-1/6 font-semibold ">
+                                    Fecha de Termino:
+                                </td>
+                                <td class="text-left p-2">
+                                    <%= f.date_field :ftermino, class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700' %> 
+                                </td>
+                            </tr> 
+                            <tr class="bg-white ">
+                                <td scope="row" class="p-2 text-right w-1/6 font-semibold ">
+                                    Monto Autorizado:
+                                </td>
+                                <td class="text-left p-2">
+                                     <%= f.text_field :monto, 
+                                         class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700', 
+                                         data:{controller:'formatoinput utils', action:'keydown->utils#keyEnter keyup->formatoinput#stopTyping keydown->utils#onlynumbers blur->formatoinput#f_moneda focus->formatoinput#unf_moneda' } 
+                                         %> 
+                                </td>
+                            </tr> 
+                            <tr> 
+                                <td colspan="2" class="text-right p-2">
+                                       <%= f.submit "Aceptar", class:"focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" %>
+                                </td>
+                            </tr>
+                   </tbody>
+           </table>
+     </div>      
+    
 
 
-
-    <%= f.submit %>
+   
 <% end %>

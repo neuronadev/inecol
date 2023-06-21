@@ -23,9 +23,13 @@
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                   <li>
                      <% if @proyecto.mtoautorizado.nil? %> 
-                         <%= link_to new_proyecto_mtoautorizado_path(@proyecto), 'data-frame-target':'_top', class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
-                              <span class='font-semibold'>Autorizado</span>
-                         <% end %>      
+                             <%= link_to new_proyecto_mtoautorizado_path(@proyecto), 'data-frame-target':'_top', class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                 <span class='font-semibold'>Autorizado</span>
+                             <% end %>      
+                     <% else %>                         
+                             <%= link_to proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado), 'data-frame-target':'_top', class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                 <span class='font-semibold'>Autorizado</span>
+                             <% end %>      
                      <% end %>    
                   </li>
                   <li>
