@@ -13,8 +13,10 @@ Rails.application.routes.draw do
             post 'enviar'
         end
         resources :mtoautorizados
+        resources :mtoejercidos
   end
 resources :mtoautorizados
+resources :mtoejercidos
   #resources :proyectos do
   #         resources :mtoautorizados
   #end

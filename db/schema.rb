@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_20_210720) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_23_155549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -310,6 +310,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_210720) do
     t.index ["proyecto_id"], name: "index_py.mtoautorizados_on_proyecto_id"
   end
 
+  create_table "mtoejercidos", force: :cascade do |t|
+    t.date "fecha"
+    t.decimal "monto", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "proyecto_id", null: false
+    t.index ["proyecto_id"], name: "index_mtoejercidos_on_proyecto_id"
+  end
+
   create_table "nacionalidades", force: :cascade do |t|
     t.string "nomnacionalidad"
     t.string "clave", limit: 3
@@ -541,6 +550,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_210720) do
   add_foreign_key "mconvocatorias", "proyectos"
   add_foreign_key "metas", "proyectos"
   add_foreign_key "mtoautorizados", "proyectos"
+  add_foreign_key "mtoejercidos", "proyectos"
   add_foreign_key "pacademicos", "academicos"
   add_foreign_key "pacademicos", "participantes"
   add_foreign_key "participantes", "proyectos"

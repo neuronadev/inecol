@@ -14,9 +14,23 @@ class MtoautorizadosController < ApplicationController
   end
 
   def edit
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @mtoautorizado = Mtoautorizado.find(params[:id])
   end
 
   def update
+      m = '$'
+      params[:mtoautorizado][:monto] = params[:mtoautorizado][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+      @mtoautorizado = Mtoautorizado.find(params[:id])
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @mtoautorizado.update(mtoautorizado_params)
+      respond_to do |format|
+           if @mtoautorizado.save
+               format.html { redirect_to proyecto_mtoautorizado_path(@proyecto, @mtoautorizado) }
+           else
+               format.html { render :edit, status: :bad_request }
+           end
+      end
   end
 
   def create

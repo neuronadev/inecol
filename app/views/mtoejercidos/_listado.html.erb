@@ -1,0 +1,22 @@
+<table class="border-collapse border border-slate-400 w-full">
+        <thead>
+            <tr>
+                <th class="border border-slate-300 bg-gray-300">Fecha</th>
+                <th class="border border-slate-300 bg-gray-300">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%  @proyecto.mtoejercidos.each do |item| %>
+                   <tr>
+                        <td class="border border-slate-300 text-center p-1"><%= item.fecha.strftime('%d-%m-%Y') %></td>
+                        <td class="border border-slate-300 text-center p-1"><%= number_to_currency(item.monto) %></td>
+                   </tr>
+            <% end %>
+        </tbody> 
+        <tfoot>
+              <tr>  
+                   <td class="text-right font-semibold p-2">Total:</td>
+                   <td class="text-center font-semibold p-2"><%= number_to_currency(@proyecto.mtoejercidos.sum(:monto)) %></td>
+              </tr>
+        </tfoot>   
+</table>        
