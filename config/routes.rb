@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'documentos/protocolo'
   get 'documentos/convenio'
   post 'documentos/removatach'
@@ -14,9 +15,11 @@ Rails.application.routes.draw do
         end
         resources :mtoautorizados
         resources :mtoejercidos
+        resources :mtoconcurrentes
   end
 resources :mtoautorizados
 resources :mtoejercidos
+resources :mtoconcurrentes
   #resources :proyectos do
   #         resources :mtoautorizados
   #end

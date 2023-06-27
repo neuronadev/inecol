@@ -1,0 +1,16 @@
+<turbo-frame id="pycontent" class="w-full">
+        <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
+            <div class="w-full">  
+                     <%= render 'vistas/util/planeacion' %> 
+            </div>
+        </div>
+
+         <div class='flex w-full justify-center'>
+              <div class='w-3/4'>
+                     <%= turbo_frame_tag "montos_py" do %>
+                           <%= render 'show'  %>
+                     <% end %> 
+              </div>
+         </div>     
+
+</turbo-frame>

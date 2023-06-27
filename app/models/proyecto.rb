@@ -17,6 +17,7 @@ class Proyecto < ApplicationRecord
     has_one :dictamen
     has_one :mtoautorizado
     has_many :mtoejercidos
+    has_one :mtoconcurrente
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
