@@ -5,8 +5,12 @@
                 <div class="ml-3 text-slate-700 font-semibold">Listado de Proyectos</div>
               </div>  
               <div>
+                  <button type="button" data-controller="correo" data-action="click->correo#enviar" >Enviar</button>
+              </div>
+              <div>
                  <div>   <%= render 'notificacion' %> </div>
               </div>  
+
     </div>
   
      <% if current_usuario.cuenta.rol.clave == 'EL' %>

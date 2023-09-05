@@ -1,2 +1,2 @@
-web: bin/rails server -b 10.0.114.195 -p 3000
+web: bin/rails server -b 10.0.110.241 -p 3000
 css: bin/rails tailwindcss:watch

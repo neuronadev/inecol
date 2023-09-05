@@ -59,9 +59,14 @@ resources :mtoconcurrentes
              end
   end
 
+
   resources :validaciones 
   resources :dictamenes
-  
+  resources :correos do
+             collection do
+                post 'enviarmail'
+             end
+  end
 
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
