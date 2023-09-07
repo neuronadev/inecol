@@ -82,6 +82,13 @@ class ProyectosController < ApplicationController
 
   end
 
+  def continuar
+       @p = Proyecto.find(params[:idp]) 
+       session[:proyecto_id] = @p.id
+       session[:step] = @p.cap_paso
+       redirect_to action:"show", id:@p
+  end
+
   def institucion
       @idx = (Time.now.to_f*1000.0).to_i
       respond_to do |format|

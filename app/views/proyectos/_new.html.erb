@@ -211,11 +211,12 @@
                                     </div> 
                          </div>
                 <% end %>
+                
 
                  <%= render 'proyectos/docs/protocolo', form:form %>
                  <%= render 'proyectos/docs/convenio', form:form %>
                 
-                <div class="md:flex md:items-center mb-5 justify-end">
+                <div class="md:flex md:items-center justify-end border-t-2 border-gray-100 p-2">
                     <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                         <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" 
                             data-turbo-frame= 'py_content_action'

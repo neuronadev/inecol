@@ -12,6 +12,7 @@ Rails.application.routes.draw do
             post 'tipoclasifica'
             post 'medclave'
             post 'enviar'
+            get 'continuar'
         end
         resources :mtoautorizados
         resources :mtoejercidos

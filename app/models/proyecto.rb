@@ -49,5 +49,38 @@ class Proyecto < ApplicationRecord
     validates :mconvocatoria, presence: true, :if => lambda {|attr| medio_id == medio.id  }
     validates :instituciones, presence: true, :if => lambda {|attr| interinst  }
         
+    def cap_completo
+        p = Proyecto.find(self.id)
+        if p.fuente.nil?
+               false
+        elsif p.participante.nil?
+               false
+        elsif p.presupuesto.nil?
+               false
+        elsif p.meta.nil?
+               false
+        else
+               true
+        end
+    end
+    def cap_paso
+        p = Proyecto.find(self.id)
+        if p.fuente.nil?
+               1
+        elsif p.participante.nil?
+               2
+        elsif p.presupuesto.nil?
+               3
+        elsif !p.recurso.nil?
+                5
+        elsif p.recurso.nil? && p.meta.nil?
+                4
+        elsif p.recurso.nil? && !p.meta.nil?                
+                6
+        else                
+               0
+        end
+    end
+
 
 end

@@ -17,13 +17,14 @@
   <body>
     <main class="container mx-auto flex">
          <%= render "layouts/interfaz/proyectos" %>
-         <div class="flex justify-center w-full">
-             <div class="flex w-4/5">
-                  <%= turbo_frame_tag 'pycontent',  data:{turbo_cache:false}, class:'w-full' do %>
-                       <%= yield %>
-                  <% end %>
-             </div>   
-         </div> 
+              <div class="flex justify-center w-full">
+                      <div class="flex w-4/5">
+                            <%= turbo_frame_tag 'pycontent',  data:{turbo_cache:false}, class:'w-full' do %>
+                                <%= yield %>
+                            <% end %>
+                      </div>   
+              </div> 
+
     </main>
   </body>
 </html>
