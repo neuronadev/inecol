@@ -21,19 +21,17 @@ export default class extends Controller {
                 this.delInputsInterInst()
          }
    }
-   onMedio(event){
-   
+   async onMedio(event){
       if ( event.target.value != '' ){
-            var data = this.tipoMedio(event.target.value)
-            data.then(val => {
-                  if ( val.clave == 'CONV' ){
-                       this.showMedio()
-                       this.docConve(val.clave)
-                  } else{
-                       this.hiddeMedio() 
-                       this.docConve(val.clave)
-                  }  
-            })
+            var data = await this.tipoMedio(event.target.value)
+            console.log(data.clave)
+            if (data.clave == 'CONV') {
+                  this.showMedio()
+                  this.docConve(data.clave)
+            } else {
+                  this.hiddeMedio()
+                  this.docConve(data.clave)
+            }  
       }else{
             this.hiddeMedio()
       }     

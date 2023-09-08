@@ -59,6 +59,8 @@ class ProyectosController < ApplicationController
                    session[:step] = 1
                    format.html { redirect_to new_fuente_path } 
             else
+                    @proyecto.build_mconvocatoria(nomconvocatoria:params[:proyecto][:mconvocatoria_attributes][:nomconvocatoria],
+                                                  link:params[:proyecto][:mconvocatoria_attributes][:link])
                     flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                     format.html { render :new, status: :bad_request }
             end

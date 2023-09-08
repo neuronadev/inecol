@@ -8,7 +8,7 @@
                                     <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                                         <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                     <% end %>  
-                                    <% if controller.action_name == 'edit' %>
+                                    <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
                                         <% if @proyecto.docprotocolo.attached? %>
                                                 <%= form.file_field :docprotocolo, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                                 <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
