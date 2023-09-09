@@ -15,7 +15,11 @@ export default class extends Controller {
         this.proyecto(proyecto)
     }
     campoformat(event){
-          event.target.value = formato.moneda(event.target.value)
+        if ( event.target.value.length > 0){
+              event.target.value = formato.moneda(event.target.value)
+        }else{
+            event.target.value = '' 
+        }  
     }
 
     campounformat(event){

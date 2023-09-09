@@ -18,3 +18,10 @@
 
 */
 @import 'actiontext.css';
+
+input::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  font-size: 11px;
+  color: red;
+}
