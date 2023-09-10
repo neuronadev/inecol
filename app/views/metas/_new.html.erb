@@ -1,4 +1,4 @@
-
+<div class="p-5">
        <%= form_with(model:@meta) do |form| %>
                 <% if controller.action_name == 'new' %> 
                      <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
@@ -59,3 +59,4 @@
                 </div>
  
         <% end %>
+</div>        

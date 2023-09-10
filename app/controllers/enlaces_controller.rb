@@ -2,6 +2,10 @@ class EnlacesController < ApplicationController
   def index
   end
 
+  def show
+      @enlace = Enlace.find(params[:id])
+  end
+
   def new
     @enlace = Enlace.new
     @proyecto = Proyecto.find(params[:idpy])
@@ -23,7 +27,8 @@ class EnlacesController < ApplicationController
 
       respond_to do |format|
             if @enlace.save
-                   format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
+                   #format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
+                   format.html { redirect_to enlace_path(@enlace) }
             else
                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                    format.html { render :new, status: :bad_request }

@@ -6,7 +6,7 @@
                      <div class="font-semibold">Archivo(s):</div>
                             <% if @proyecto.docconvenios.attached? %>
                                    <% @proyecto.docconvenios.each do |doc| %>
-                                          <div class="ml-4 text-blue-700"> <%= link_to doc.filename, rails_blob_path(doc, disposition: 'inline'), target: :_blank %></div>                
+                                          <div class="ml-4 text-blue-700"> <%= link_to doc.filename, rails_blob_path(doc, disposition: 'inline'), target: :_blank %></div>
                                    <% end %>
                             <% else %>                     
                                    <div class="font-semibold text-gray-600 italic ml-4"> El proyecto no incluye este tipo de documentos.</div>

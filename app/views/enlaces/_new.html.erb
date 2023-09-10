@@ -4,7 +4,7 @@
                <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
 
                <% if @tipo == 'CORR' %>  
-                    <div class="ml-1">Solictar cambios</div>
+                    <div class="ml-1">Solictar cambios en la información del proyecto</div>
                <% end %> 
                <% if @tipo == 'EVAL' %>  
                     <div class="ml-1">Abrir proyecto a evaluadores</div>
@@ -17,7 +17,8 @@
                  <% end %>   
           </div>
       </div>
-</div>      
+</div> 
+
 <div class="w-full text-slate-700 mt-5">
           <% flash.each do |type, msg| %>
                          <% if type == 'error' %>
@@ -31,8 +32,14 @@
      <%= form.hidden_field :estado, value:'A' %>
      <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
      <%= form.hidden_field :enevento_id, value:@enevento.id %>
-     
-     <div class="md:items-center mb-3">
+      
+     <div>
+           <div> Proyecto: <strong><%= @proyecto.nombre %></strong> </div>
+           <div> Responsable: <strong><%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %></strong> </div>
+     </div>
+ 
+
+     <div class="md:items-center mb-3 mt-5">
           <div class="md:w-1/5 font-semibold">
                <%= form.label :txtcoment, 'Descripción de la solicitud:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
           </div>

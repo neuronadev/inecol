@@ -17,31 +17,39 @@
    <div style="font-weight: bold; margin-top:10px;">Fondos Fiscales</div>
 
    <div>
-         <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.fiscales} %>
+         <% if !@proyecto.recurso.nil? %> 
+             <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.fiscales} %>
+        <% end %>     
    </div>    
 
    <div style="font-weight: bold; margin-top:10px;">Aportación en Especie</div>
 
    <div>
-           <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.especies} %>
+         <% if !@proyecto.recurso.nil? %> 
+            <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.especies} %>
+         <% end %>   
    </div>   
 
    <div style="font-weight: bold; margin-top:10px;">Fondos Concurrentes</div>
    <div>
-           <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.concurrentes} %>
+        <% if !@proyecto.recurso.nil? %> 
+             <%= render partial: '/proyectos/pdf/recursos', formats:[:html], locals:{items:@proyecto.recurso.concurrentes} %>
+        <% end %>     
    </div>   
     
    <%
        total = 0.0
-       if @proyecto.recurso.fiscales.any?
-            total += @proyecto.recurso.fiscales.sum(:monto)
-       end
-       if @proyecto.recurso.especies.any?
-            total += @proyecto.recurso.especies.sum(:monto)
-       end
-       if @proyecto.recurso.concurrentes.any?
-            total += @proyecto.recurso.concurrentes.sum(:monto)
-       end
+        if !@proyecto.recurso.nil?
+                if @proyecto.recurso.fiscales.any?
+                        total += @proyecto.recurso.fiscales.sum(:monto)
+                end
+                if @proyecto.recurso.especies.any?
+                        total += @proyecto.recurso.especies.sum(:monto)
+                end
+                if @proyecto.recurso.concurrentes.any?
+                        total += @proyecto.recurso.concurrentes.sum(:monto)
+                end
+        end        
    %>
 
    <%= render partial: '/proyectos/pdf/recurso_total', formats:[:html], locals:{gtotal:total} %>

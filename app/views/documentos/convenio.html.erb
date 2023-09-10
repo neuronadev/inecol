@@ -9,7 +9,11 @@
         
         <div class="mt-5">
               <%= turbo_frame_tag 'py_content_secc' do %>
-                        <%= render "doc_conv" %>
+                    <%  if current_usuario.cuenta.rol.clave == 'EL' %>
+                              <%= render "documentos/doc_conv_el" %>
+                    <% else %>
+                              <%= render "documentos/doc_conv" %>
+                    <% end %> 
              <% end %> 
         </div>
         

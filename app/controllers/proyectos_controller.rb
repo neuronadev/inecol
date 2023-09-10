@@ -77,7 +77,14 @@ class ProyectosController < ApplicationController
       @proyecto.update(proyecto_params)
       respond_to do |format|
            if @proyecto.save
-               format.html { redirect_to proyecto_path(@proyecto) }
+               #format.html { redirect_to proyecto_path(@proyecto) }
+                  if current_usuario.cuenta.rol.clave == 'EL' && params[:el_prot] == 'elprot_edit'
+                        format.html {render 'documentos/protocolo'}
+                  elsif current_usuario.cuenta.rol.clave == 'EL' && params[:el_odoc] == 'elodoc_edit'
+                        format.html {render 'documentos/convenio'}
+                  else
+                        format.html { redirect_to proyecto_path(@proyecto) }
+                  end
            else
                format.html { render :edit, status: :bad_request }
            end
@@ -130,7 +137,7 @@ class ProyectosController < ApplicationController
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
        ##enviar email al seguimiento de proyectos### 
          param_email={nproyecto: proyecto.nombre, responsable: proyecto.persona.nom_espacio }
-         data = Util::Email.proyecto_enlace("sara.sanchez@inecol.mx", "antonio.francisco@inecol.mx", param_email, "d-a588d4f9befe40cdb1aa4d32b02d20f4")
+         data = Util::Email.proyecto_enlace("antonio.francisco@inecol.mx", "antonio.francisco@inecol.mx", param_email, "d-a588d4f9befe40cdb1aa4d32b02d20f4")
        #########################  
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

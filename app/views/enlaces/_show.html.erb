@@ -1,0 +1,18 @@
+<div class="w-full text-slate-700 mt-5">
+      <div class="mt-3 flex align-middle border-b-2 border-slate-200 justify-between">
+          
+          <div class="flex w-auto">
+                 <%= link_to resumen_vistas_path(:id=>@enlace.proyecto_id), class:'flex' do %>
+                    <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
+                    <div class="ml-1 text-sm font-semibold">Regresar</div>
+                 <% end %>   
+          </div>
+      </div>
+</div> 
+
+<div class="mt-5 border-2 border-gray-100 p-5">
+    <div> <strong>Mensaje envíado</strong>
+    <div>
+    <%= @enlace.txtcoment %>
+    </div>
+</div>    
