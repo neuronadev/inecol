@@ -57,9 +57,10 @@ class ParticipantesController < ApplicationController
                           flash.now[:error] = @participante.errors.where(:base).first.full_message
                   else
                           flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-                  end        
-                  p '------------Errores------------'
-                  p @participante.errors
+                  end
+                  @inv_sum = !params[:participante][:pacademicos_attributes].nil? ? SumParts.new(params[:participante][:pacademicos_attributes]).suma : 0.0
+                  @tec_sum = !params[:participante][:ptecnicos_attributes].nil? ? SumParts.new(params[:participante][:ptecnicos_attributes]).suma : 0.0
+                  @tot_porc = @inv_sum + @tec_sum
                   format.html { render :new, status: :bad_request }
             end
        end    
@@ -83,4 +84,21 @@ class ParticipantesController < ApplicationController
                         pestudiantes_attributes:[:id, :nombre, :nivel_id, :_destroy]
                      )
   end
+end
+
+class SumParts
+     def initialize(part)
+         @part = part
+     end
+     def suma
+         s = 0.0
+         if !@part.nil?
+               @part.each do |i,v|
+                      if !v[:porcentaje].nil?
+                              s += v[:porcentaje].to_f
+                      end  
+               end
+         end
+         return s
+     end
 end

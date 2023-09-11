@@ -57,6 +57,7 @@ class PresupuestosController < ApplicationController
 
   def create
       #m = Tipomoneda.find(params[:tipomoneda_id].to_i)
+      @solicitado_p = 0.0
       m = '$'
       params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -67,6 +68,10 @@ class PresupuestosController < ApplicationController
          
       params[:presupuesto][:solicitados_attributes].each do |i, v|
              params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+             v_mto = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+             if !v_mto.nil?
+                  @solicitado_p += v_mto.to_f
+             end
       end
      
 

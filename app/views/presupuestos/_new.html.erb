@@ -35,11 +35,15 @@
        <div class="flex  text-gray-800 w-10/12">
                  <div class="flex justify-end w-4/6 font-semibold">Total:</div>
                  <div class="flex justify-start w-2/6 font-semibold"><div class="ml-2" id='total_caps'>
-                           <% if @presupuesto.solicitados.any? %>
-                                 <%= number_to_currency (@presupuesto.solicitados.sum(:monto)) %>
-                           <% else %>
-                                  $ 0.00
-                           <% end %>
+                          <% if controller.action_name == 'create' %>
+                                         <%= @solicitado_p %>
+                          <% end %>   
+                          <% if controller.action_name == 'edit' || controller.action_name == 'update' %> 
+                                   <% if @presupuesto.solicitados.any? %>
+                                        <%= number_to_currency (@presupuesto.solicitados.sum(:monto)) %>
+                                   <% end %>
+
+                          <% end %>
                  </div></div>
        </div>
 

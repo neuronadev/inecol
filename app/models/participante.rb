@@ -42,10 +42,9 @@ class TotalPart
                            end    
                   end
           end 
-          puts "---------------------------------------------------------------------------------------------------" 
-          puts sum_t
+          
           if sum_t != 100.0
-               @part.errors.add :base, :invalid, message:"Error en el el total de participación. Este valor deve ser 100%"
+               @part.errors.add :base, :invalid, message:"Error en el porcentaje total de participación, este valor debe ser igual a 100%"
           end     
       end
 end

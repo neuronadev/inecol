@@ -4,19 +4,24 @@
       <div class="p-5">
             <template data-nested-form-inv-target="template" >
                 <%= form.fields_for :pacademicos, Pacademico.new, child_index:'NEW_RECORD' do |pacad_fields|%>
-                     <%= render 'participantes/part_acad_form', f: pacad_fields, rp:0 %>
+                     <%= render 'participantes/part_acad_form', f: pacad_fields, rp:0, idx:0 %>
                  <% end %>
                  
             </template>
             
             <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+                        <% idx = 1 %>
                         <%= form.fields_for :pacademicos do |pacad_fields|%>
-                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1 %>
+                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1, idx:idx %>
+                              <% idx = idx+1 %>
                         <% end %>
+                        
             <% end %>
             <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
+                        <% idx = 1 %>
                         <%= form.fields_for :pacademicos, form.object.pacademicos.includes(academico: :tacademico).where('tacademicos.clave':['INV','CAT']) do |pacad_fields|%>
-                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1 %>
+                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:0, idx:idx %>
+                              <% idx = idx+1 %>
                         <% end %>
             <% end %>
             <div data-nested-form-inv-target="target"></div>
@@ -24,16 +29,16 @@
                       <div class="w-8/12"></div>
                       <div>Total:</div>
                       <div class="text-center w-32" id="stpinvest">
-                            <% if controller.action_name == 'new' %> 
+                           <% if controller.action_name == 'new' %> 
                                    0.0 % 
                            <% end %>
-                           <% if controller.action_name == 'edit' %> 
+                           <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
                                 <%= @inv_sum.to_s %> % 
                            <% end %>
                       </div>
             </div>
             <div class="w-full flex mt-3 "> 
-                   <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md", data-action="nested-form-inv#add">
+                   <button type="button" class="inline-flex items-center px-2 py-2 bg-sky-600 hover:bg-sky-800 text-white text-sm font-medium rounded-md" data-action="nested-form-inv#add">
                          <%= inline_svg_tag 'svg/agregar-usuario.svg' %>
                          <div class="flex mx-1.5">Agregar Investigador...</div>
                   </button>

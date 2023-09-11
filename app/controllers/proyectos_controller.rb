@@ -69,6 +69,9 @@ class ProyectosController < ApplicationController
 
   def edit
       @proyecto = Proyecto.find(params[:id])
+      if @proyecto.mconvocatoria.nil?
+           @proyecto.build_mconvocatoria
+      end
       
   end
 
@@ -137,7 +140,8 @@ class ProyectosController < ApplicationController
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
        ##enviar email al seguimiento de proyectos### 
          param_email={nproyecto: proyecto.nombre, responsable: proyecto.persona.nom_espacio }
-         data = Util::Email.proyecto_enlace("antonio.francisco@inecol.mx", "antonio.francisco@inecol.mx", param_email, "d-a588d4f9befe40cdb1aa4d32b02d20f4")
+         data = Util::Email.proyecto_enlace("antonio.francisco@inecol.mx", "proyecto.extreno@inecol.mx", param_email, "d-a588d4f9befe40cdb1aa4d32b02d20f4")
+         #p data
        #########################  
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

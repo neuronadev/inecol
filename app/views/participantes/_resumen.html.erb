@@ -6,7 +6,7 @@
                                         <% if controller.action_name == 'new' %> 
                                             0.0 % 
                                         <% end %>
-                                        <% if controller.action_name == 'edit' %> 
+                                        <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
                                             <%= @inv_sum.to_s %> % 
                                         <% end %>
                                 </span>        
@@ -19,7 +19,7 @@
                                         <% if controller.action_name == 'new' %> 
                                             0.0 % 
                                         <% end %>
-                                        <% if controller.action_name == 'edit' %> 
+                                        <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
                                             <%= @tec_sum.to_s %> % 
                                         <% end %>
                                  </span>       
@@ -32,7 +32,7 @@
                                         <% if controller.action_name == 'new' %> 
                                             0.0 % 
                                         <% end %>
-                                        <% if controller.action_name == 'edit' %> 
+                                        <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
                                             <%= @tot_porc.to_s %> % 
                                         <% end %>
                                 </span>        

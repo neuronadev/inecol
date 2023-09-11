@@ -78,8 +78,13 @@
                         %>   
                     </div>
                 </div>
+                <%
+                
+                
+                
+                %>
                 <% if controller.action_name == 'new' || controller.action_name == 'edit' %>
-                        <div class="md:flex md:items-center mb-3" id='secc_convoca' style=" <%= controller.action_name == 'edit' ? 'display:flex;' : 'display:none;' %>  ">
+                        <div class="md:flex md:items-center mb-3" id='secc_convoca' style=" <%= controller.action_name == 'edit' ? !@proyecto.medio.nil? ? @proyecto.medio.clave == 'CONV' ? 'display:flex;' : 'display:none;' : 'display:none;': 'display:none;' %>  ">
                                     <div class="md:w-1/5"></div>
                                     <div class="md:w-2/3 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight 
                                                 focus:outline-none focus:bg-white focus:border-purple-500">
@@ -87,13 +92,13 @@
                                     </div>
                         </div>
                 <% end %>
-                <% if controller.action_name == 'create' || controller.action_name == 'update' && !@proyecto.medio.nil? && @proyecto.medio.clave == 'CONV' %>
-                        <div class="md:flex md:items-center mb-3" id='secc_convoca' style="display:flex;">
-                                    <div class="md:w-1/5"></div>
-                                    <div class="md:w-2/3 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight 
-                                                    focus:outline-none focus:bg-white focus:border-purple-500">
-                                            <%= render 'convocatoria', form:form %>
-                                    </div>
+                <% if controller.action_name == 'create' || controller.action_name == 'update' %>
+                        <div class="md:flex md:items-center mb-3" id='secc_convoca' style="<%= !@proyecto.medio.nil? ? @proyecto.medio.clave == 'CONV' ? 'display:flex;' : 'display:none;' : 'display:none;'   %>" >
+                                            <div class="md:w-1/5"></div>
+                                            <div class="md:w-2/3 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight 
+                                                            focus:outline-none focus:bg-white focus:border-purple-500">
+                                                    <%= render 'convocatoria', form:form %>
+                                            </div>
                         </div>
                 <% end %>
 
@@ -149,7 +154,7 @@
                 </div>
 
                 <% if controller.action_name == 'new' || controller.action_name == 'edit' %>
-                         <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="<%= controller.action_name == 'edit' ? 'display:flex;' : 'display:none;' %>" >
+                         <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="<%= controller.action_name == 'edit' && @proyecto.interinst == true ? 'display:flex;' : 'display:none;' %>" >
                                     <div class="md:w-1/5">
                                     </div>
                                     <div class="md:w-4/5">
@@ -157,8 +162,8 @@
                                     </div> 
                          </div>
                 <% end %> 
-                <% if controller.action_name == 'create' || controller.action_name == 'update' && @proyecto.interinst %>
-                         <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" >
+                <% if controller.action_name == 'create' || controller.action_name == 'update' %>
+                         <div id="secc_institucion" data-controller="institucion" class="md:flex md:items-center mb-3" style="<%= @proyecto.interinst == true ? 'display:flex;': 'display:none;'  %>" >
                                     <div class="md:w-1/5">
                                     </div>
                                     <div class="md:w-4/5">
@@ -167,9 +172,8 @@
                          </div>
                 <% end %>
                 
-
-                 <%= render 'proyectos/docs/protocolo', form:form %>
-                 <%= render 'proyectos/docs/convenio', form:form %>
+                <%= render 'proyectos/docs/protocolo', form:form %>
+                <%= render 'proyectos/docs/convenio', form:form %>
                 
                 <div class="md:flex md:items-center justify-end border-t-2 border-gray-100 p-2">
                     <% if controller.action_name == 'new' || controller.action_name == 'create' %>
