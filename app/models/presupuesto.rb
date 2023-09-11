@@ -9,5 +9,28 @@ class Presupuesto < ApplicationRecord
   validates :moneda_id, presence: true
   validates :solicitados, presence: true
   
+   validate do |presupuesto|
+        SumCap.new(presupuesto).validate
+   end
 
+
+end
+
+class SumCap
+     def initialize(prep)
+         @prep = prep
+     end
+     def validate
+         suma = 0.0
+         if !@prep.solicitados.nil?
+                @prep.solicitados.each do |item|
+                       if !item.monto.nil? && item._destroy == false
+                              suma += item.monto
+                       end
+                end
+         end
+         if @prep.tgastos != suma
+              @prep.errors.add :base, :invalid, message:"La suma total de los capitulos debe ser igual al total para gastos."
+         end     
+     end
 end

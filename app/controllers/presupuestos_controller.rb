@@ -45,7 +45,12 @@ class PresupuestosController < ApplicationController
            if @presupuesto.save
                format.html { redirect_to presupuesto_path(@presupuesto) }
            else
-               format.html { render :edit, status: :bad_request }
+                if @presupuesto.errors.where(:base).any?
+                     flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
+                else
+                     flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                end  
+                format.html { render :edit, status: :bad_request }
            end
       end
   end
@@ -72,7 +77,11 @@ class PresupuestosController < ApplicationController
                    session[:step] += 1
                    format.html { redirect_to new_recurso_path } 
             else
-                   flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    if @presupuesto.errors.where(:base).any?
+                           flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
+                    else
+                           flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    end  
                    format.html { render :new, status: :bad_request }
             end
       end

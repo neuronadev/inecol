@@ -35,6 +35,11 @@ class ParticipantesController < ApplicationController
            if @participante.save
                format.html { redirect_to participante_path(@participante) }
            else
+               if @participante.errors.where(:base).any?
+                       flash.now[:error] = @participante.errors.where(:base).first.full_message
+               else
+                       flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+               end      
                format.html { render :edit, status: :bad_request }
            end
       end
@@ -48,7 +53,11 @@ class ParticipantesController < ApplicationController
                   session[:step] += 1
                   format.html { redirect_to new_presupuesto_path } 
             else
-                  flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                  if @participante.errors.where(:base).any?
+                          flash.now[:error] = @participante.errors.where(:base).first.full_message
+                  else
+                          flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                  end        
                   p '------------Errores------------'
                   p @participante.errors
                   format.html { render :new, status: :bad_request }

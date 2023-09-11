@@ -15,4 +15,37 @@ class Participante < ApplicationRecord
   validates :pacademicos, presence: true
   validates_associated :ptecnicos
   
+   validate do |participante|
+         TotalPart.new(participante).validate
+   end
+
+end
+
+class TotalPart
+      def initialize(part)
+           @part = part
+      end
+
+      def validate
+          sum_t = 0.0 
+          if !@part.pacademicos.nil?
+                  @part.pacademicos.each do |item|
+                           if !item.porcentaje.nil? && item._destroy == false
+                                 sum_t += item.porcentaje
+                           end    
+                  end
+          end 
+          if !@part.ptecnicos.nil?
+                  @part.ptecnicos.each do |item|
+                           if !item.porcentaje.nil? && item._destroy == false
+                                  sum_t += item.porcentaje
+                           end    
+                  end
+          end 
+          puts "---------------------------------------------------------------------------------------------------" 
+          puts sum_t
+          if sum_t != 100.0
+               @part.errors.add :base, :invalid, message:"Error en el el total de participación. Este valor deve ser 100%"
+          end     
+      end
 end

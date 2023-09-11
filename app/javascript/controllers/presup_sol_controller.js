@@ -28,6 +28,7 @@ export default class extends Controller {
 
     sumaMontoCaps(event){
         var total_caps = document.getElementById('total_caps')
+        solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
         if ( solUtil.limiteMaxGasto() ){
               event.target.value = ''
               alert("El monto total de capitulos no debe ser mayor al total para gastos")  
