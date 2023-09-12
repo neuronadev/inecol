@@ -4,17 +4,47 @@
         </div>
         <div class="md:w-2/5 p-0">
                         <div class='font-semibold'>Protocolo:</div>
-                            <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">
-                                    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
-                                        <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                           
+                                    <% if controller.action_name == 'new' %>
+                                            <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">
+                                                    <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                            </div>        
                                     <% end %>  
+                                    <% if controller.action_name == 'create' %>
+                                                <% 
+                                                        if !params[:proyecto][:docprotocolo].blank?
+                                                                item = params[:proyecto][:docprotocolo]
+                                                                b = ActiveStorage::Blob.find_signed(item)
+                                                %>
+                                                                <div class="ml-5" id="div_file" data-controller="upsf">
+                                                                                <%= form.file_field :docprotocolo, class:'item_file', style:'display:none;',  direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                                                <%= link_to b.filename, rails_blob_path(b, disposition:'inline'), target:'_blank', class:'item_file text-sky-700' %>
+                                                                                <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='0'>Eliminar</button>
+                                                                                <input class="item_file" type="hidden" value="<%= item %>" name="proyecto[docprotocolo]">
+                                                                </div>
+                                                <%    
+                                                        else
+                                                %>
+                                                                <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">
+                                                                    <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                                </div> 
+                                                <%                               
+                                                        end
+                                                %> 
+                                    <% end %>
+
                                     <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
                                         <% if @proyecto.docprotocolo.attached? %>
-                                                <%= form.file_field :docprotocolo, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                                                <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
-                                                <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.docprotocolo.id %>'>Eliminar</button>
+                                                 <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">
+                                                       <%= form.file_field :docprotocolo, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                       <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                                       <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.docprotocolo.id %>'>Eliminar</button>
+                                                 </div>  
+                                        <% else %>    
+                                                  <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">  
+                                                       <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                  </div>  
                                         <% end %>
                                     <% end %>  
-                            </div>
         </div>       
 </div>

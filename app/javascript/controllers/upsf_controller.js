@@ -28,7 +28,11 @@ export default class extends Controller {
                  items[i].remove()
            }
       }
-      this.deldoc(event.params.idpy).then(result=>{ alert('Archivo Eliminado') })
+      if ( parseInt(event.params.idpy) > 0 ){
+                this.deldoc(event.params.idpy).then(result=>{ alert('Archivo Eliminado') })
+      }else{
+                alert('Archivo Eliminado')
+      }
   }
 
   async deldoc(id){
@@ -46,13 +50,13 @@ export default class extends Controller {
 
   uploadFile(event) {
     Array.from(this.inputTarget.files).forEach((file) => {
-          console.log(file) 
           const upload = new DirectUpload(
                                             file,
                                             this.inputTarget.dataset.directUploadUrl,
                                             this // callback directUploadWillStoreFileWithXHR(request)
                                          );
           upload.create((error, blob) => {
+                          console.log(blob)
                           if (error){
                                      console.log(error);
                           } else {

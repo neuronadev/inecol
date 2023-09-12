@@ -1,18 +1,43 @@
 <% if controller.action_name == 'new' %>
-        <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+        <div id = "div_file" class="md:w-full" data-controller="upsf"> 
+           <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+        </div>   
 <% end %>  
 
 <% if controller.action_name == 'create' %>
-        <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                 <% 
+                       if !params[:proyecto][:dconvocatoria].blank?
+                                  item = params[:proyecto][:dconvocatoria]
+                                  b = ActiveStorage::Blob.find_signed(item)
+                        %>
+                                  <div class="ml-5" id="div_file" data-controller="upsf">
+                                         <%= form.file_field :dconvocatoria, class:'item_file', style:'display:none;',  direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                         <%= link_to b.filename, rails_blob_path(b, disposition:'inline'), target:'_blank', class:'item_file text-sky-700' %>
+                                         <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='0'>Eliminar</button>
+                                         <input class="item_file" type="hidden" value="<%= item %>" name="proyecto[dconvocatoria]">
+                                    </div>
+                        <%    
+                          else
+                        %>
+                                     <div id = "div_file" class="md:w-full ml-3" data-controller="upsf">
+                                           <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                      </div> 
+                        <%                               
+                          end
+                        %> 
 <% end %>
 
 <% if controller.action_name == 'edit' %>
        <% if @proyecto.dconvocatoria.attached? %>
+                <div id = "div_file" class="md:w-full" data-controller="upsf">  
                        <%= form.file_field :dconvocatoria, class:'item_file', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                        <%= link_to @proyecto.dconvocatoria.filename, rails_blob_path(@proyecto.dconvocatoria, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
-                      <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.docprotocolo.id %>'>Eliminar</button>
+                       <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.dconvocatoria.id %>'>Eliminar</button>
+                </div>       
         <% else %>
+                <div id = "div_file" class="md:w-full" data-controller="upsf"> 
                    <%= form.file_field :dconvocatoria, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                 </div>  
         <% end %>
 
 <% end %>    

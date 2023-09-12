@@ -1,18 +1,52 @@
-<div class="md:flex md:items-center mb-3" id="conv_files" style="display:flex;">
+<%
+   v = 'display:flex;'
+   if controller.action_name == 'create'
+          if !params[:proyecto][:medio_id].blank? 
+                  m = Medio.find(params[:proyecto][:medio_id].to_i) 
+                  if m.clave == 'CONV'
+                        v = 'display:none;'
+                  end
+          end              
+   end
+
+%>
+
+<div class="md:flex md:items-center mb-3" id="conv_files" style="<%= v %>">
         <div class="md:w-1/5">
             <div class='md:text-right mb-1 md:mb-0 pr-4'></div>
         </div>
                    
         <div class="md:w-3/5 p-0">
                <div class='font-semibold'>Convenio, Contrato o algún otro Documento Legal:</div>
-                    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+                    <% if controller.action_name == 'new' %>
                                 <div id = "div_file" class="md:w-full p-2" data-controller="upsf">
                                        <%= form.file_field :docconvenios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                 </div>       
                                 <div id = "div_file" class=" md:w-full p-2" data-controller="upsf">
                                        <%= form.file_field :docconvenios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                 </div>    
-                    <% end %>   
+                    <% end %>  
+                    <% if controller.action_name == 'create' %>
+                                    <% 
+                                        params[:proyecto][:docconvenios].each do |item|
+                                                if !item.blank? 
+                                                        b = ActiveStorage::Blob.find_signed(item)
+                                    %>
+                                                       <div class="ml-5" id="div_file" data-controller="upsf">
+                                                                <%= form.file_field :docconvenios, class:'item_file', style:'display:none;',  multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                                                <%= link_to b.filename, rails_blob_path(b, disposition:'inline'), target:'_blank', class:'item_file text-sky-700' %>
+                                                                <button class='item_file ml-2 text-red-700' data-action='click->upsf#delFileEdit' data-upsf-idpy-param='0'>Eliminar</button>
+                                                                <input class="item_file" type="hidden" value="<%= item %>" name="proyecto[docconvenios][]">
+                                                       </div>
+                                    <%                           
+                                                end    
+                                        end
+                                    %> 
+                                    <div id = "div_file" class="md:w-full p-2" data-controller="upsf">
+                                       <%= form.file_field :docconvenios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                   </div>     
+                    <% end %>
+
                     <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
                                        <% if @proyecto.docconvenios.attached? %>
                                                 <% @proyecto.docconvenios.each do |doc| %>

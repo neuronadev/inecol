@@ -17,9 +17,11 @@
                 <% if @proyecto.interinst %>
                     <%= render "proyectos/tr_condicion", v:'proyectos/lista_instituciones' %>
                 <% end %>
-                
+               
         </tbody>     
-        </table>   
+        </table>
+        <%= render 'proyectos/docs/s_protocolo' %>
+        <%= render 'proyectos/docs/s_convenio' %>   
         
         <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %>
                 <div class="md:flex md:items-center mb-3 justify-end mt-5">
