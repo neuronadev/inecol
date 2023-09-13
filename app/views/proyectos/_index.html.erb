@@ -1,20 +1,20 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nombre del Proyecto
+                <th scope="col" class="p-1">
+                   <div class="flex justify-center"> Nombre del Proyecto</div>
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Fecha de Registro
+                <th scope="col" class="">
+                    <div class="flex justify-center"> Fecha de Registro </div>
                 </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Estado
+                <th scope="col" class="p-1">
+                    <div class="flex justify-center">Estado</div>
                 </th>
                
-                <th scope="col" class="px-6 py-3">
-                    Acciones
+                <th scope="col" class="p-1">
+                   <div class="flex justify-center"> Acciones</div>
                 </th>
             </tr>
         </thead>
@@ -22,22 +22,22 @@
              <% if @proyectos.any? %>
                     <% @proyectos.each do |py| %>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                            <th scope="row" class=" font-medium text-gray-900 dark:text-white p-2">
                                 <%= py.nombre %>
                                
                             </th>
-                            <td class="px-6 py-4">
-                                <%= py.created_at.strftime("%d-%m-%Y")  %>
+                            <td class=" font-semibold p-2">
+                                <div class="flex justify-center"><%= py.created_at.strftime("%d-%m-%Y")  %></div>
                             </td>
-                            <td class="px-6 py-4">
-                                <%= render 'vistas/util/pyestado', proyecto:py %>
+                            <td class="p-2">
+                                <div class="flex justify-center"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
                             </td>
                             
-                            <td class="px-6 py-4">
+                            <td class="p-2">
                                 <div class="flex-row">
                                     <% if py.cap_completo %>
                                             <% if py.etapas.last.tevento.clave == 'CAP' %> 
-                                                <div><%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %></div>
+                                                <%= render "proyectos/menus/index_opt_captura", py:py %>
                                             <% else %>    
                                                 <div><%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %></div>
                                             <% end %>    

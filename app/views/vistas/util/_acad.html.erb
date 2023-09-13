@@ -1,7 +1,7 @@
 <div class="flex mt-5 mb-1">
      <% if @proyecto.etapas.last.tevento.clave == 'CAP' %>
         <div class="flex hover:cursor-pointer font-medium text-sm leading-tight" data-action='click->etapasvalpy#mensaje' data-etapasvalpy-proyecto-param = "<%= @proyecto.id %>" >
-           <div> <%= inline_svg_tag 'svg/mover.svg' %></div> <div class="ml-2 text-rose-600">Enviar proyecto</div>
+           <div> <%= inline_svg_tag 'svg/mover.svg' %></div> <div class="ml-2 text-rose-600">Habilitar revisión</div>
         </div>
       <% else %>  
            <div class="flex font-medium text-sm leading-tight" >
