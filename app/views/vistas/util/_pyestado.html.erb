@@ -1,27 +1,24 @@
- <div class="text-blue-700 flex">
-     <% if proyecto.etapas.last.tevento.clave == 'CAP' %>
-           <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
-                  <%= proyecto.etapas.last.tevento.nomtevento %>
-                </span>
-     <% end %>
-     <% if proyecto.etapas.last.tevento.clave == 'REV' %>
-            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
-                   <%= proyecto.etapas.last.tevento.nomtevento %>
-                </span>
-     <% end %>
-     <% if proyecto.etapas.last.tevento.clave == 'ACEP' %>
-            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
-                   <%= proyecto.etapas.last.tevento.nomtevento %>
-                </span>
-     <% end %>
-     <% if proyecto.etapas.last.tevento.clave == 'RECH' %>
-            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
-                   <%= proyecto.etapas.last.tevento.nomtevento %>
-                </span>
-     <% end %>
- 
- </div>
+<%
+  color = '' 
+  if proyecto.etapas.last.tevento.clave == 'CAP'
+      color = 'bg-blue-600'
+  end
+  if proyecto.etapas.last.tevento.clave == 'REV'
+      color = 'bg-green-600'
+  end
+  if proyecto.etapas.last.tevento.clave == 'ACEP'
+      color = 'bg-green-600'
+  end
+  if proyecto.etapas.last.tevento.clave == 'RECH'
+      color = 'bg-red-600'
+  end
+
+%>
+ <div class="flex">
+          <div class="flex items-center text-sm">
+             <span class="w-2.5 h-2.5 <%= color %> rounded-full mr-1.5 flex-shrink-0"></span>
+          </div>  
+          <div class="flex items-center text-sm">
+             <%= proyecto.etapas.last.tevento.nomtevento %>
+          </div>
+</div>

@@ -2,53 +2,46 @@
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
-                <th scope="col" class="p-1">
-                   <div class="flex justify-center"> Nombre del Proyecto</div>
+                <th scope="col" class="p-1" style="text-align: center;">
+                    Nombre del Proyecto
                 </th>
-                <th scope="col" class="">
-                    <div class="flex justify-center"> Fecha de Registro </div>
+                <th scope="col" class="p-1" style="text-align: center;">
+                     Fecha de Registro
                 </th>
 
-                <th scope="col" class="p-1">
-                    <div class="flex justify-center">Estado</div>
+                <th scope="col" class="p-1" style="text-align: center;">
+                    Estado
                 </th>
                
-                <th scope="col" class="p-1">
-                   <div class="flex justify-center"> Acciones</div>
+                <th scope="col" class="p-1" style="text-align: center;">
+                    Acciones
                 </th>
             </tr>
         </thead>
         <tbody>
              <% if @proyectos.any? %>
-                    <% @proyectos.each do |py| %>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class=" font-medium text-gray-900 dark:text-white p-2">
-                                <%= py.nombre %>
-                               
-                            </th>
-                            <td class=" font-semibold p-2">
-                                <div class="flex justify-center"><%= py.created_at.strftime("%d-%m-%Y")  %></div>
-                            </td>
-                            <td class="p-2">
-                                <div class="flex justify-center"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
-                            </td>
-                            
-                            <td class="p-2">
-                                <div class="flex-row">
-                                    <% if py.cap_completo %>
-                                            <% if py.etapas.last.tevento.clave == 'CAP' %> 
-                                                <%= render "proyectos/menus/index_opt_captura", py:py %>
-                                            <% else %>    
-                                                <div><%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %></div>
-                                            <% end %>    
-                                    <% else %>  
-                                                <div><%= link_to 'Continuar captura', continuar_proyectos_path(:idp=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %></div>
-
-                                    <% end %>
-                                </div>    
-                            </td>
-                        </tr>
-                     <% end %>   
+                                <% @proyectos.each do |py| %>
+                                     <% if py.etapas.last.tevento.clave != 'DEL' %>
+                                            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                                <th scope="row" class=" font-medium text-gray-900 dark:text-white p-2">
+                                                    <%= py.nombre %>
+                                                
+                                                </th>
+                                                <td class=" font-semibold p-2">
+                                                    <div class="flex justify-center"><%= py.created_at.strftime("%d-%m-%Y")  %></div>
+                                                </td>
+                                                <td class="p-2">
+                                                    <div class="flex"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
+                                                </td>
+                                                
+                                                <td class="p-2">
+                                                    <div class="flex-row">
+                                                        <%= render "proyectos/menus/index_opt_captura", py:py %>
+                                                    </div>    
+                                                </td>
+                                            </tr>
+                                      <% end %>      
+                                <% end %>   
              <% else %>           
                      <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>
             <% end %>            

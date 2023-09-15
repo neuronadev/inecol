@@ -1,23 +1,23 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="p-1 text-center">
                     Nombre del Proyecto
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="p-1 text-center">
                     Fecha de Registro
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="p-1 text-center">
                     Responsable
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="p-1 text-center">
                     Estado
                 </th>
                
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="p-1 text-center">
                     Acciones
                 </th>
             </tr>
@@ -28,19 +28,19 @@
                         @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop
                     %>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                            <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
                                 <%= py.nombre %>
                             </th>
-                            <td class="px-6 py-4 text-center">
+                            <td class="p-2 text-center">
                                  <%= py.created_at.strftime("%d-%m-%Y")  %>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="p-2">
                                  <%= @resp %>
                             </td>
-                             <td class="px-6 py-4 text-center">
+                             <td class="p-2 text-center">
                                 <%= render 'vistas/util/elestado', proyecto:py %>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="p-2">
                                 <% if py.etapas.last.tevento.clave == 'CAP' %> 
                                        <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
                                 <% else %>    

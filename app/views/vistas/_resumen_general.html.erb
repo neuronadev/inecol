@@ -1,10 +1,10 @@
 <div data-controller="etapasvalpy" class="w-full">
-      <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
+      <div class='flex w-full justify-center mb-2 '>
             <div class="w-full">  
                  <% if current_usuario.cuenta.rol.clave == 'EL' %>
                             <%= render 'vistas/util/enlace' %>  
                  <% elsif current_usuario.cuenta.rol.clave == 'CAP' %>
-                            <%= render 'vistas/util/acad' %> 
+                         <!--   <%= render 'vistas/util/acad' %> -->
                  <% else %>
                             <%= render 'vistas/util/planeacion' %> 
                  <% end %>
@@ -12,7 +12,7 @@
             </div>
       </div>
       
-      
+     <!-- 
       <div class='flex w-full mb-2'>
            <% if current_usuario.cuenta.rol.clave == 'CAP' %>
                  <%= render 'vistas/util/pyestado', proyecto:@proyecto %>
@@ -22,7 +22,7 @@
            <% end %>      
 
       </div>  
-      
+      -->
       <% if current_usuario.cuenta.rol.clave == 'CAP' %>
             <%= render 'proyectos/notifi_corr' %>
       <% end %>
@@ -40,7 +40,8 @@
          <div class='w-1/4'>
             <%= render 'secciones' %>
          </div>
-         <div class='w-full'>
+
+         <div class='w-full '>
             <%= turbo_frame_tag "py_content_secc" do %>
                <%= render 'seccion' %>
             <% end %>

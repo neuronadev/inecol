@@ -148,6 +148,15 @@ class ProyectosController < ApplicationController
       end
   end
  
+  def eliminar
+       proyecto = Proyecto.find(params[:id])
+       evento = Tevento.where(clave:'DEL').first
+       Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
+       respond_to do |format|
+           format.json { render json:@proyecto.to_json }
+       end
+  end
+
   def documento
       @tipo = Proyecto.find(params[:tipo])
       proyecto = Proyecto.find(params[:idpy])

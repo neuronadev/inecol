@@ -1,22 +1,46 @@
-<div class="flex ml-4">
-    <%= link_to resumen_vistas_path(:id=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
-            <div class="flex items-center"><%= inline_svg_tag 'svg/lapiz.svg' %></div>
-            <span class="ml-1 flex items-center"> Editar </span>
+<% if py.cap_completo %>
+    <% if py.etapas.last.tevento.clave == 'CAP' %> 
+          <div class="flex ml-4">
+               <%= link_to resumen_vistas_path(:id=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/lapiz.svg' %></div>
+                         <span class="ml-1 flex items-center"> Editar </span>
+               <% end %>
+          </div>
+
+          <div class="flex ml-4" data-controller="etapasvalpy">
+                    <% if py.etapas.last.tevento.clave == 'CAP' %>
+                         <div class="flex hover:cursor-pointer font-medium text-sm leading-tight text-blue-600 dark:text-blue-500 hover:underline" data-action='click->etapasvalpy#mensaje' data-etapasvalpy-proyecto-param = "<%= py.id %>" >
+                             <div class="flex items-center"><%= inline_svg_tag 'svg/rehacer.svg' %></div>
+                             <span class="ml-1 flex items-center"> Habilitar revisión </span> 
+                         </div> 
+                    <% else %>  
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/rehacer.svg' %></div>
+                         <span class="ml-1 flex items-center"> Proyecto en revisión </span>
+                    <% end %> 
+
+          </div>
+          <div class="flex ml-4" data-controller="etapasvalpy">
+                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight text-red-600 dark:text-red-500 hover:underline" data-action='click->etapasvalpy#msgeliminar' data-etapasvalpy-proyecto-param = "<%= py.id %>" >
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/basura.svg' %></div>
+                         <span class="ml-1 flex items-center"> Eliminar </span>
+                    </div>
+          </div>
     <% end %>
-</div>
-
-<div class="flex ml-4" data-controller="etapasvalpy">
-    
-
-     <% if py.etapas.last.tevento.clave == 'CAP' %>
-           <div class="flex hover:cursor-pointer font-medium text-sm leading-tight text-blue-600 dark:text-blue-500 hover:underline" data-action='click->etapasvalpy#mensaje' data-etapasvalpy-proyecto-param = "<%= py.id %>" >
-              <div class="flex items-center"><%= inline_svg_tag 'svg/rehacer.svg' %></div>
-              <span class="ml-1 flex items-center"> Habilitar revisión </span> 
-           </div> 
-      <% else %>  
-             <div class="flex items-center"><%= inline_svg_tag 'svg/rehacer.svg' %></div>
-             <span class="ml-1 flex items-center"> Proyecto en revisión </span>
-        </div> 
-     <% end %> 
-
-</div>
+    <% if py.etapas.last.tevento.clave == 'REV' %> 
+          <div class="flex ml-4">
+               <%= link_to resumen_vistas_path(:id=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/ver.svg' %></div>
+                         <span class="ml-1 flex items-center"> Ver </span>
+               <% end %>
+          </div>
+    <% end %>
+<% else %>  
+     <% if py.etapas.last.tevento.clave != 'DEL' %> 
+          <div class="flex ml-4">
+               <%= link_to continuar_proyectos_path(:idp=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/editar_c.svg' %></div>
+                         <span class="ml-1 flex items-center"> Continuar... </span>
+               <% end %>
+          </div>
+     <% end %>     
+<% end %>    

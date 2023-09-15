@@ -23,6 +23,29 @@ export default class extends Controller {
     mwcerrar(event) {
         wmodal.cerrar()
     }
+
+    msgeliminar(event){
+        var fr_el = document.getElementById('pycontent')
+        if (window.confirm("¿Desea eliminar esta información?")) {
+            this.eliminarpy(event.params.proyecto).then(result => {
+                fr_el.src = '/proyectos/'
+                fr_el.reload()
+            })
+        }
+    }
+
+    async eliminarpy(proyecto){
+            try {
+                var data = await fetch('/proyectos/eliminar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-Token': token },
+                    body: JSON.stringify({ id: proyecto })
+                })
+               .then(response => response.json())
+                return data
+
+            } catch (e) { alert(e) }
+    }
     
     async enviarpy(proyecto){
         try {

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
             post 'medclave'
             post 'enviar'
             get 'continuar'
+            post 'eliminar'
         end
         resources :mtoautorizados
         resources :mtoejercidos

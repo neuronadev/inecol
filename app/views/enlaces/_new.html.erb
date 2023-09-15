@@ -1,57 +1,60 @@
-<div class="w-full text-slate-700 mt-5">
-      <div class="mt-3 flex align-middle border-b-2 border-slate-200 justify-between">
-          <div class="flex w-1/3">
-               <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
 
-               <% if @tipo == 'CORR' %>  
-                    <div class="ml-1">Solictar cambios en la información del proyecto</div>
-               <% end %> 
-               <% if @tipo == 'EVAL' %>  
-                    <div class="ml-1">Abrir proyecto a evaluadores</div>
-               <% end %> 
-          </div>
-          <div class="flex w-auto">
-                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
-                    <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
-                    <div class="ml-1 text-sm font-semibold">Regresar</div>
-                 <% end %>   
-          </div>
-      </div>
+<div class="w-full text-slate-700 mt-5">
+               <div class="mt-3 flex align-middle justify-between">
+                    <div class="flex w-1/3">
+                         <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
+
+                         <% if @tipo == 'CORR' %>  
+                              <div class="ml-1 font-semibold">Solictar cambios en la información del proyecto</div>
+                         <% end %> 
+                         <% if @tipo == 'EVAL' %>  
+                              <div class="ml-1 font-semibold">Abrir proyecto a evaluadores</div>
+                         <% end %> 
+                    </div>
+                    <div class="flex w-auto">
+                         <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
+                              <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
+                              <div class="ml-1 text-sm font-semibold">Regresar</div>
+                         <% end %>   
+                    </div>
+               </div>
 </div> 
+<div class="border border-gray-200 rounded-lg shadow sm:p-3 dark:bg-gray-800 dark:border-gray-700">
 
-<div class="w-full text-slate-700 mt-5">
-          <% flash.each do |type, msg| %>
-                         <% if type == 'error' %>
-                              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                   <%= msg %>
+          <div class="w-full text-slate-700 mt-5">
+                    <% flash.each do |type, msg| %>
+                                   <% if type == 'error' %>
+                                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                             <%= msg %>
+                                        </div>
+                                   <% end %>    
+                    <% end %>   
+
+                    <%= form_with(model: @enlace) do |form| %>
+                         <%= form.hidden_field :estado, value:'A' %>
+                         <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+                         <%= form.hidden_field :enevento_id, value:@enevento.id %>
+                         
+                         <div>
+                              <div> Proyecto: <strong><%= @proyecto.nombre %></strong> </div>
+                              <div> Responsable: <strong><%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %></strong> </div>
+                         </div>
+                    
+
+                         <div class="md:items-center mb-3 mt-5">
+                              <div class="md:w-1/5 font-semibold">
+                                   <%= form.label :txtcoment, 'Descripción de la solicitud:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
                               </div>
-                         <% end %>    
-          <% end %>   
-
-<%= form_with(model: @enlace) do |form| %>
-     <%= form.hidden_field :estado, value:'A' %>
-     <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
-     <%= form.hidden_field :enevento_id, value:@enevento.id %>
-      
-     <div>
-           <div> Proyecto: <strong><%= @proyecto.nombre %></strong> </div>
-           <div> Responsable: <strong><%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %></strong> </div>
-     </div>
- 
-
-     <div class="md:items-center mb-3 mt-5">
-          <div class="md:w-1/5 font-semibold">
-               <%= form.label :txtcoment, 'Descripción de la solicitud:', class:'block  md:text-left mb-1 md:mb-2 ', for:'inline-full-name' %>
+                              <div class="md:w-full" data-controller="trix">
+                                   <%= form.rich_text_area :txtcoment, class:'trix-editor',  data: { trix_target: 'editor' } %>
+                              </div>
+                         </div>
+                         <div class="md:flex md:items-center mb-5 justify-end">
+                              <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                        <%= inline_svg_tag 'svg/send.svg' %>
+                                        <div class="ml-2">Enviar</div>
+                              </button>
+                         </div>                        
+                    <% end %>
           </div>
-          <div class="md:w-full" data-controller="trix">
-               <%= form.rich_text_area :txtcoment, class:'trix-editor',  data: { trix_target: 'editor' } %>
-          </div>
-     </div>
-     <div class="md:flex md:items-center mb-5 justify-end">
-           <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                    <%= inline_svg_tag 'svg/send.svg' %>
-                    <div class="ml-2">Enviar</div>
-           </button>
-     </div>                        
-<% end %>
-</div>
+</div>          
