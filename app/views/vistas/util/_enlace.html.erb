@@ -16,13 +16,53 @@
                                           </div>   
                                     <% end %>      
                               </div>     
-                              
-                              <div>
-                                    <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                             
+                              <div data-controller="mnueval">
+                                    
+                                    <button id="dropdownBtnEval" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
                                           <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
-                                    </div>     
-                                    <% end %>    
+                                          <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                          </svg>
+                                    </button>
+
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownBtnOpts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                                             <li>
+                                                   <% if !@proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').any? %>
+                                                            <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'SOLV').first.id), class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  do %>
+                                                                  <div class="flex w-full ml-1">
+                                                                        <%= inline_svg_tag 'svg/evaluacion_blue.svg' %>
+                                                                        <span class='text-sm text-blue-800 ml-1'>Enviar a evaluación</span>
+                                                                  </div>
+                                                            <% end %>  
+                                                    <% else %>   
+                                                            <div class="flex w-full ml-1">
+                                                                        <%= inline_svg_tag 'svg/evaluacion.svg' %>
+                                                                        <span class='text-sm text-gray-400'>Ver evaluación</span>
+                                                            </div>   
+                                                   <% end %>
+                                             </li>
+                                             <li>
+                                                   <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                                                                   <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_eval_content'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                                              <div class="flex w-full ml-1">
+                                                                                    <%= inline_svg_tag 'svg/controlar-gray.svg' %>
+                                                                                    <span class="text-sm text-blue-800 ml-1">Ver Dictamen</span>
+                                                                              </div>
+                                                                   <% end %>  
+                                                   <% else %>
+                                                                  <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_eval_content'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                                        <div class="flex w-full ml-1">
+                                                                              <%= inline_svg_tag 'svg/controlar-blue.svg' %>
+                                                                              <span class="text-sm text-blue-800 ml-1">Dictamen</span>
+                                                                        </div>       
+                                                                  <% end %>  
+                                                   <% end %>      
+                                             </li>
+                                          </ul>
+                                    </div>   
                               </div>
 
 
@@ -74,14 +114,46 @@
                                                 <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-blue-800">Solicitar cambios</div>
                                                 </div>   
                                           <% end %>      
-                                    </div>     
-                              
-                              <div>
-                                    <%= link_to validaciones_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %>
-                                    <div class="flex hover:cursor-pointer font-medium text-sm leading-tight ml-3" >
+                              </div>     
+                               
+                              <div data-controller="mnueval">
+                                    <button id="dropdownBtnEval" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
                                           <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
-                                    </div>     
-                                    <% end %>    
+                                          <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                          </svg>
+                                    </button>
+
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownBtnOpts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                                             <li>
+                                                   <%= link_to validaciones_path(:idpy=>@proyecto.id), class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  do %>
+                                                                  <div class="flex w-full ml-1">
+                                                                        <%= inline_svg_tag 'svg/evaluacion_blue.svg' %>
+                                                                        <span class='text-sm text-blue-800 ml-1'>Ver evaluación</span>
+                                                                  </div>
+                                                    <% end %>  
+                                             </li>
+                                             <li>
+                                                   <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                                                                   <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_eval_content'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                                              <div class="flex w-full ml-1">
+                                                                                    <%= inline_svg_tag 'svg/controlar-gray.svg' %>
+                                                                                    <span class="text-sm text-blue-800 ml-1">Ver Dictamen</span>
+                                                                              </div>
+                                                                   <% end %>  
+                                                   <% else %>
+                                                                  <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_eval_content'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                                        <div class="flex w-full ml-1">
+                                                                              <%= inline_svg_tag 'svg/controlar-blue.svg' %>
+                                                                              <span class="text-sm text-blue-800 ml-1">Dictamen</span>
+                                                                        </div>       
+                                                                  <% end %>  
+                                                   <% end %>      
+                                             </li>
+                                          </ul>
+                                    </div>   
                               </div>
 
                               <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 
@@ -111,6 +183,38 @@
                                           <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
                                     </div>     
                                     <% end %>    
+                              </div>
+                              <div data-controller="mnueval">
+                                    <button id="dropdownBtnEval" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
+                                          <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
+                                          <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                          </svg>
+                                    </button>
+
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownBtnOpts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                                             <li>
+                                                   <%= link_to validaciones_path(:idpy=>@proyecto.id), class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  do %>
+                                                                  <div class="flex w-full ml-1">
+                                                                        <%= inline_svg_tag 'svg/evaluacion_blue.svg' %>
+                                                                        <span class='text-sm text-blue-800 ml-1'>Ver evaluación</span>
+                                                                  </div>
+                                                    <% end %>  
+                                             </li>
+                                             <li>
+                                                   <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                                                                   <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_eval_content'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                                              <div class="flex w-full ml-1">
+                                                                                    <%= inline_svg_tag 'svg/controlar-gray.svg' %>
+                                                                                    <span class="text-sm text-blue-800 ml-1">Ver Dictamen</span>
+                                                                              </div>
+                                                                   <% end %>  
+                                                   <% end %>      
+                                             </li>
+                                          </ul>
+                                    </div>   
                               </div>
 
                               <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), 'data-frame-target':'_top' do %> 

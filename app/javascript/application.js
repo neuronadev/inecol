@@ -4,3 +4,11 @@ import "controllers"
 import 'flowbite'
 import "trix"
 import "@rails/actiontext"
+
+
+window.process = {
+    env: {
+        NODE_ENV: 'development'
+    }
+}
+
