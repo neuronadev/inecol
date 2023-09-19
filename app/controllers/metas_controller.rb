@@ -33,8 +33,9 @@ class MetasController < ApplicationController
       respond_to do |format|
           if @meta.save
                #session[:step] += 1
-               session[:step] += 0
-               format.html { redirect_to resumen_vistas_path(:id=>@meta.proyecto_id) }
+               session[:step] += 1
+               #format.html { redirect_to resumen_vistas_path(:id=>@meta.proyecto_id) }
+               format.html { redirect_to @meta }
           else
                 @proyecto = Proyecto.find(session[:proyecto_id]) 
                format.html { render :new, status: :bad_request }

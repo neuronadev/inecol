@@ -1,4 +1,4 @@
-<div class="p-5">
+<div>
        <%= form_with(model:@meta) do |form| %>
                 <% if controller.action_name == 'new' %> 
                      <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
@@ -44,8 +44,10 @@
                     <% if controller.action_name == 'new' %>
                     
                         <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                                data-turbo-frame="pycontent">
-                            Finalizar captura
+                                data-turbo-frame= 'py_content_action' >
+                                
+                                <span class="ml-2">Guardar</span>
+                                <%= inline_svg_tag 'svg/disco.svg', class:"ml-2" %> 
                             
                         </button>
                     <% end %>

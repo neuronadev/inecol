@@ -89,11 +89,12 @@ class RecursosController < ApplicationController
       respond_to do |format|
           if @recurso.save
               session[:step] += 1
-              format.html { redirect_to new_meta_path }
+              #format.html { redirect_to new_meta_path }
+              format.html { redirect_to @recurso }
           else
                p '---------------------------Errors------------------'
                p @recurso.errors
-              flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+              flash.now[:error] = 'La información esta incompleta, favor de revisar los errores'
               format.html { render :new, status: :bad_request }
           end
       end    

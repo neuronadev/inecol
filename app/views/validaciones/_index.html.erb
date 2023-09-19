@@ -6,9 +6,9 @@
 <% end %>  
   
 
-<div class="relative overflow-x-auto mt-5">
-    <table class="w-full text-sm text-left text-gray-800 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+        <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3 text-center">
                     Nombre
@@ -16,9 +16,7 @@
                 <th scope="col" class="px-6 py-3 text-center">
                     Estado validación
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    
-                </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -31,10 +29,23 @@
                     <td class="px-6 py-4 text-center">
                          <%= render 'estadoval', proyecto:@proyecto, evaluador:e %> 
                     </td>
-                    <td class="px-6 py-4 text-center">
-                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">---</span>
-                    </td>
+                    
                 </tr>
+                <!--
+                <tr>
+                     <td colspan="3">
+                            <%  if @proyecto.validaciones.any? %>
+                                    <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
+                                             <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
+                                                      <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
+                                             <% end %>       
+                                    <% else %>   
+                                                
+                                    <% end %>
+                            <% end %>        
+                     </td>
+                </tr>
+                -->
           <% end %>      
           
         </tbody>

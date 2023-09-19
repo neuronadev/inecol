@@ -24,12 +24,36 @@
         <%= render 'proyectos/docs/s_convenio' %>   
         
         <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %>
-                <div class="md:flex md:items-center mb-3 justify-end mt-5">
+            <div class="md:flex md:items-center mb-3 justify-end mt-5">
+                <div class="flex">
                     <%= link_to edit_proyecto_path(@proyecto), 
                             class:'text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' do %>
                         Editar Información
+                        <%= inline_svg_tag 'svg/lapiz_white.svg', class:"ml-2" %>
                     <% end %>
                 </div>
+                 <%  if session[:step] == 1 %>
+                    <div class='flex'> 
+                            <%= link_to new_fuente_path, 
+                                         "data-turbo-frame":'py_content_action',
+                                        class:'text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' do %>
+                                        Siguiente
+                                        <%= inline_svg_tag 'svg/flecha-peq-der.svg' %>
+                             <% end %> 
+                    </div>
+                <% end %>
 
+                <%  if session[:step] == 2 || session[:step] == 3 || session[:step] == 4 || session[:step] == 5 || session[:step] == 6 %>
+                        <div class='flex'> 
+                            <%= link_to fuente_path(@proyecto.fuente.id), 
+                                         "data-turbo-frame":'py_content_action',
+                                        class:'text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' do %>
+                                        Siguiente
+                                        <%= inline_svg_tag 'svg/flecha-peq-der.svg' %>
+                             <% end %> 
+                      </div>
+                <% end %>
+           </div>
         <% end %>
+
 </div>        

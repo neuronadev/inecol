@@ -35,7 +35,8 @@ class FuentesController < ApplicationController
       respond_to do |format|
           if @fuente.save
                 session[:step] += 1
-                format.html { redirect_to new_participante_path } 
+                #format.html { redirect_to new_participante_path } 
+                format.html { redirect_to @fuente } 
           else
                 flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                 format.html { render :new, status: :bad_request }

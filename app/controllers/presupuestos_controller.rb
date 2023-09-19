@@ -43,7 +43,7 @@ class PresupuestosController < ApplicationController
       @presupuesto.update(presupuesto_params)
       respond_to do |format|
            if @presupuesto.save
-               format.html { redirect_to presupuesto_path(@presupuesto) }
+                format.html { redirect_to presupuesto_path(@presupuesto) }
            else
                 if @presupuesto.errors.where(:base).any?
                      flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
@@ -56,40 +56,52 @@ class PresupuestosController < ApplicationController
   end
 
   def create
-      #m = Tipomoneda.find(params[:tipomoneda_id].to_i)
-      @solicitado_p = 0.0
-      m = '$'
-      params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      params[:presupuesto][:overhead] = params[:presupuesto][:overhead].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      params[:presupuesto][:estimulo] = params[:presupuesto][:estimulo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      params[:presupuesto][:tgastos] = params[:presupuesto][:tgastos].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-         
-      params[:presupuesto][:solicitados_attributes].each do |i, v|
-             params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-             v_mto = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-             if !v_mto.nil?
-                  @solicitado_p += v_mto.to_f
-             end
-      end
-     
-
-      @presupuesto = Presupuesto.new(presupuesto_params)
-      @proyecto = Proyecto.find(@presupuesto.proyecto_id)
-      respond_to do |format|
-            if @presupuesto.save
-                   session[:step] += 1
-                   format.html { redirect_to new_recurso_path } 
-            else
-                    if @presupuesto.errors.where(:base).any?
-                           flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
-                    else
-                           flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-                    end  
-                   format.html { render :new, status: :bad_request }
+   
+   if !params[:tproyecto].present?
+            @solicitado_p = 0.0
+            m = '$'
+            params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            params[:presupuesto][:overhead] = params[:presupuesto][:overhead].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            params[:presupuesto][:estimulo] = params[:presupuesto][:estimulo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+            params[:presupuesto][:tgastos] = params[:presupuesto][:tgastos].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+                
+            params[:presupuesto][:solicitados_attributes].each do |i, v|
+                    params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+                    v_mto = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+                    if !v_mto.nil?
+                        @solicitado_p += v_mto.to_f
+                    end
             end
-      end
+            
+
+            @presupuesto = Presupuesto.new(presupuesto_params)
+            @proyecto = Proyecto.find(@presupuesto.proyecto_id)
+            respond_to do |format|
+                    if @presupuesto.save
+                        session[:step] += 1
+                        #format.html { redirect_to new_recurso_path } 
+                        format.html { redirect_to @presupuesto } 
+                    else
+                            if @presupuesto.errors.where(:base).any?
+                                flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
+                            else
+                                flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                            end  
+                        format.html { render :new, status: :bad_request }
+                    end
+            end
+    else
+        respond_to do |format|   
+             session[:step] += 1
+             @proyecto = Proyecto.find(params[:proyecto_id])
+             m = Moneda.where(clave:'MXN').first
+             @presupuesto = Presupuesto.create!(costo:0.0, tgastos:0.0, proyecto_id:@proyecto.id, moneda_id:m.id, solicitados_attributes:[capitulo_id:1,monto:0.0] )
+             format.html { redirect_to new_recurso_path } 
+        end     
+    end
+
   end
 
   def pyclasifica

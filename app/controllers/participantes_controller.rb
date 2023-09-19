@@ -51,7 +51,8 @@ class ParticipantesController < ApplicationController
        respond_to do |format|
             if @participante.save
                   session[:step] += 1
-                  format.html { redirect_to new_presupuesto_path } 
+                  #format.html { redirect_to new_presupuesto_path } 
+                  format.html { redirect_to @participante } 
             else
                   if @participante.errors.where(:base).any?
                           flash.now[:error] = @participante.errors.where(:base).first.full_message
