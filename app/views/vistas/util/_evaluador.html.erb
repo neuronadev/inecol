@@ -1,43 +1,43 @@
  <div class="flex mt-5 mb-1 w-3/4 justify-start">
-            <div>
-                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex' do %>
-                        <%= inline_svg_tag 'svg/hogar.svg' %>
-                        <span class='text-sm text-blue-800 font-semibold ml-1'>Inicio</span>
+      <div class="flex h-10">
+            <div class="flex items-center p-1 ">
+                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                        <%= inline_svg_tag 'svg/flecha-izquierda.svg' %>
                   <% end %>      
             </div>  
-            
-            <div class="ml-3">
-                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex' do %>
-                        <%= inline_svg_tag 'svg/proyecto1.svg' %>
-                        <span class='text-sm text-blue-800 font-semibold ml-1'>Proyecto</span>
-                  <% end %>      
-            </div>  
-
-            <div class="ml-3">
-                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex' do %>
+      </div>      
+      <div class="flex ml-5 h-10">
+             <div class="flex ml-3 items-center p-1">
+                 <%= link_to notifica_vistas_path(:id=>@proyecto.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/mensajes1.svg' %>
                         <span class='text-sm text-blue-800 font-semibold ml-1'>Solicitud</span>
                   <% end %>      
             </div>  
 
+            <div class="flex ml-3 items-center rounded ">
+                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                        <%= inline_svg_tag 'svg/proyecto1.svg' %>
+                        <span class='text-sm text-blue-800 font-semibold ml-1'>Proyecto</span>
+                  <% end %>      
+            </div>             
+
             <%
                 validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
             %>
             <% if validacion.nil? %>               
-                  <div class="ml-3">
-                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), 'data-frame-target':'_top' do %>
-                        <div class="flex hover:cursor-pointer font-medium text-sm leading-tight" >
-                              <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Validar proyecto</div>
-                        </div>     
-                        <% end %>    
-                  </div>  
+              <div class="flex ml-3 items-center p-1">
+                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                                <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
+                                <span class='text-sm text-blue-800 font-semibold ml-1'>Validar</span>
+                        <% end %>  
+               </div>  
              <% else %>   
-                  <div class="ml-3">
-                    <%= link_to validacion_path(validacion.id), 'data-frame-target':'_top' do %>
-                      <div class="flex hover:cursor-pointer font-medium text-sm leading-tight" >
-                            <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-sky-800">Ver validación</div>
-                      </div>     
-                     <% end %>    
-                </div>   
-            <% end %>    
+                  <div class="flex ml-3 items-center p-1">
+                        <%= link_to validacion_path(validacion.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                                <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
+                                <span class='text-sm text-blue-800 font-semibold ml-1'>Ver Validación</span>
+                        <% end %>  
+                  </div>  
+            <% end %>
+      </div>      
 </div>            

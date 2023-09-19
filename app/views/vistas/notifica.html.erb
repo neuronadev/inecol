@@ -6,16 +6,13 @@
       </div>
          
       <div class="p-4 mb-4 font-semibold text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-           <span class="font-medium"> Información del Proyecto.</span>
+           <span class="font-medium"> Solicitud de evaluación.</span>
       </div>   
       
       <div class='flex w-full'>
-           <div class='w-1/4'>
-                 <%= render 'secciones' %>
-            </div>
             <div class='w-full'>
                    <%= turbo_frame_tag "py_content_secc" do %>
-                            <%= render 'seccion' %>
+                            <%= render 'proyectos/notifi_eval' %> 
                     <% end %>
             </div>
       </div>

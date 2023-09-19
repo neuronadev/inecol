@@ -44,7 +44,7 @@
                                 <% if py.etapas.last.tevento.clave == 'CAP' %> 
                                        <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
                                 <% else %>    
-                                       <%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                                       <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
                                 <% end %>                            
                             </td>
                         </tr>

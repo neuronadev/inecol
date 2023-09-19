@@ -50,6 +50,7 @@ resources :mtoconcurrentes
             collection do
                 get 'resumen'
                 get 'secproyecto'
+                get 'notifica'
             end
   end
   
