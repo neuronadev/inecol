@@ -44,7 +44,11 @@ resources :mtoconcurrentes
              end
   end
 
-  resources :recursos
+  resources :recursos do
+            collection do
+                get 'omitir'
+            end
+  end
   resources :metas
   resources :vistas do
             collection do

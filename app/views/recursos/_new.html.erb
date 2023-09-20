@@ -15,7 +15,7 @@
 
       <%  if controller.action_name == 'new' %>
             <div class="p-4 mb-4 font-semibold text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                Si el proyecto no tiene recursos aportados por el INECOL, haga clic en el siguiente enlace <%= link_to 'Omitir este paso.', new_meta_path, class:'text-red-800' %>
+                Si el proyecto no tiene recursos aportados por el INECOL, haga clic en el siguiente enlace <%= link_to 'Omitir este paso.', omitir_recursos_path(:idpy=>@proyecto.id), class:'text-red-800' %>
             </div>
       <% end %>      
         <% if controller.action_name == 'new' || controller.action_name == 'create' %>

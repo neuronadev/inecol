@@ -20,6 +20,7 @@ class ProyectosController < ApplicationController
   end
 
   def show
+    
       @proyecto = Proyecto.find(params[:id])
        respond_to do |format|
             format.html

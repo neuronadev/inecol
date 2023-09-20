@@ -16,6 +16,13 @@ class RecursosController < ApplicationController
 
   end
 
+  def omitir
+      @proyecto = Proyecto.find(params[:idpy])
+      @recurso = Recurso.create!(proyecto_id:@proyecto.id, omitir:true)
+      session[:step] += 1
+      redirect_to new_meta_path
+  end
+
   def new
       @proyecto = Proyecto.find(session[:proyecto_id])
       @recurso = Recurso.new
