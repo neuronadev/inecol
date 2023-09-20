@@ -10,7 +10,7 @@ pin "slim-select", to: "https://ga.jspm.io/npm:slim-select@2.5.0/dist/slimselect
 pin "flowbite", to: "https://ga.jspm.io/npm:flowbite@1.6.5/lib/esm/index.js"
 pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.7/lib/index.js"
 pin "numbro", to: "https://ga.jspm.io/npm:numbro@2.3.6/dist/numbro.min.js"
-pin "numeral", to: "https://ga.jspm.io/npm:numeral@2.0.6/numeral.js"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
 pin "activestorage", to: "https://ga.jspm.io/npm:activestorage@5.2.8-1/app/assets/javascripts/activestorage.js"
+pin "numeral", to: "https://ga.jspm.io/npm:numeral@2.0.6/numeral.js"

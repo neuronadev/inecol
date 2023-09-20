@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_035345) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_193311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -298,6 +298,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_035345) do
     t.string "clave", limit: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "locale", limit: 20
+    t.string "currency", limit: 10
   end
 
   create_table "mtoautorizados", force: :cascade do |t|

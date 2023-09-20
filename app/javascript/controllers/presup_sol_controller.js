@@ -8,19 +8,40 @@ var py_clasifca = ''
 var py_ovh = ''
 var solUtil = new SolicitaUtil()
 var formato = new Formato()
-
+var moneda_data = ''
 export default class extends Controller {
     connect() {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
         this.proyecto(proyecto)
     }
+
     campoformat(event){
-        if ( event.target.value.length > 0){
-              event.target.value = formato.moneda(event.target.value)
+        /*if ( event.target.value.length > 0){
+              event.target.value = formato.moneda(event.target.value, moneda_data.locale, moneda_data.currency)
         }else{
             event.target.value = '' 
-        }  
+        } */
+        var costo = document.getElementById('presupuesto_costo')
+        var costo_tmp = costo.value
+        
+        if (costo.value.length > 0) {
+            costo.value = ''      
+            costo.value = formato.moneda(costo_tmp, moneda_data.locale, moneda_data.currency)
+        } else {
+            costo.value = ''
+        }    
     }
+
+    itemformat(event){
+
+         if ( event.target.value.length > 0){
+               event.target.value = formato.moneda(event.target.value, moneda_data.locale, moneda_data.currency)
+         }else{
+                event.target.value = '' 
+         }
+    
+        }
+
 
     campounformat(event){
          event.target.value = formato.unformat(event.target.value)  
@@ -33,7 +54,7 @@ export default class extends Controller {
               event.target.value = ''
               alert("El monto total de capitulos no debe ser mayor al total para gastos")  
         }else{
-              total_caps.innerHTML = formato.moneda(solUtil.solSumaCapitulos())
+              total_caps.innerHTML = formato.moneda(solUtil.solSumaCapitulos(), moneda_data.locale, moneda_data.currency)
         }
 
     }
@@ -57,6 +78,33 @@ export default class extends Controller {
     setTgasto(event){
         solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
     }
+
+  
+    async TipoMoneda(event) { 
+        let idmoneda = event.target.value
+        var data = ''
+          if ( idmoneda != ''){
+                try {
+                        data = await fetch('/monedas/data', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-Token': token },
+                        body: JSON.stringify({ 'idmoneda': idmoneda })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                                moneda_data = data
+                                if (document.getElementById('presupuesto_costo').value.length > 0) {
+                                     this.campoformat()
+                                     this.costos()
+                                }
+                                
+                        })
+            
+                } catch (e) { alert(e) }
+              
+          }       
+    }  
+
 
     async proyecto(proyecto){
         try {
@@ -85,6 +133,8 @@ export default class extends Controller {
         var porcEstimulo = 0.0
         var tGastos = 0.0
         
+       
+
         if (clasifica.includes(py_clasifca) && Boolean(py_ovh) ){
                iva = presupuesto.iva()
                tProyecto = presupuesto.tProyecto()
@@ -96,11 +146,11 @@ export default class extends Controller {
                tGastos = costo.value
         }
 
-        document.getElementById('presupuesto_iva').value =  formato.moneda(iva)
-        document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto)
-        document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead)
-        document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo)
-        document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos)
+        document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
+        document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
+        document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
+        document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
+        document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
  
     }
 

@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get 'documentos/protocolo'
   get 'documentos/convenio'
   post 'documentos/removatach'
-  
+  post 'monedas/data'
+
   devise_for :usuarios
   resources :proyectos do
         collection do
