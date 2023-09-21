@@ -1,4 +1,4 @@
-<div class="md:flex md:items-center mb-3">
+<div class="md:flex md:items-center mb-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
   <div class="md:w-2/5">
     <%= form.label :estimulo, '10% Estímulo:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
   </div>

@@ -6,23 +6,24 @@ export default class Formato{
    }
    
    moneda(monto, locale_p='es-MX', currency_p='MXN'){
-           //return '€ ' + numeral(monto).format('0.0,00')
-     
-      var resultd = (numeral(monto).value()).toLocaleString(locale_p, {
+          return currency_p + ' ' + numeral(monto).format('0,0.00')
+
+      /*var resultd = (numeral(monto).value()).toLocaleString(locale_p, {
          style: 'currency',
          currencyDisplay: 'code',
          currency: currency_p
-      });
+      });*/
       
       return resultd
    }
 
    unformat(monto){
-    return numeral(monto).value()
+     
+      return numeral(monto).value()
    }
 
    settingFormat(){
-     
+      numeral.locale('es-ES');
       numeral.locale('fr');
 
    }

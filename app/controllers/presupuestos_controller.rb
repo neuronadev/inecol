@@ -27,7 +27,8 @@ class PresupuestosController < ApplicationController
   end
 
   def update
-      m = '$'
+      moneda = Moneda.find(params[:presupuesto][:moneda_id]) 
+      m = moneda.currency
       params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -59,7 +60,8 @@ class PresupuestosController < ApplicationController
    
    if !params[:tproyecto].present?
             @solicitado_p = 0.0
-            m = '$'
+            moneda = Moneda.find(params[:presupuesto][:moneda_id]) 
+            m = moneda.currency
             params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
             params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
             params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')

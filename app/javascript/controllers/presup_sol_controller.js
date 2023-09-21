@@ -64,22 +64,30 @@ export default class extends Controller {
         var monto_costo = document.getElementById('presupuesto_costo')
 
         if (moneda_sel.value != ''){
-            if (monto_costo.value != '') {
+            if (monto_costo.value.length > 0) {
                   this.costos()
                   this.setTgasto()
             }else{
-                  alert('Debe ingresar el monto del costo del proyecto') 
+                  this.resetCostos()
             }
         }else{
                alert('Debe seleccionar un tipo de moneda')
         }
     } 
 
+    resetCostos(){
+        document.getElementById('presupuesto_iva').value = 0.0
+        document.getElementById('presupuesto_tproyecto').value = 0.0
+        document.getElementById('presupuesto_overhead').value = 0.0
+        document.getElementById('presupuesto_estimulo').value = 0.0
+        document.getElementById('presupuesto_tgastos').value = 0.0
+    }
+
     setTgasto(event){
         solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
     }
 
-  
+     
     async TipoMoneda(event) { 
         let idmoneda = event.target.value
         var data = ''
@@ -96,6 +104,7 @@ export default class extends Controller {
                                 if (document.getElementById('presupuesto_costo').value.length > 0) {
                                      this.campoformat()
                                      this.costos()
+                                     this.itemsCaps()
                                 }
                                 
                         })
@@ -105,6 +114,19 @@ export default class extends Controller {
           }       
     }  
 
+    itemsCaps(){
+        var caps = document.getElementsByClassName('capmonto')
+        Array.from(caps, (el) => {
+           let id_input_d = el.id.replace("monto", "_destroy");
+           let input_d = document.getElementById(id_input_d)
+           if ( input_d.value == 'false' ){
+                el.value = formato.moneda(el.value, moneda_data.locale, moneda_data.currency)
+           }    
+        })
+        var total_caps = document.getElementById('total_caps')
+        solUtil.limiteGasto(document.getElementById('presupuesto_tgastos').value)
+        total_caps.innerHTML = formato.moneda(solUtil.solSumaCapitulos(), moneda_data.locale, moneda_data.currency)
+    } 
 
     async proyecto(proyecto){
         try {
@@ -143,6 +165,7 @@ export default class extends Controller {
                tGastos = presupuesto.tGastos()
         }
         if (clasifica.includes(py_clasifca) && !Boolean(py_ovh)) {
+               tProyecto = costo.value
                tGastos = costo.value
         }
 
