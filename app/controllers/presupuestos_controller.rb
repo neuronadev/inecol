@@ -6,6 +6,7 @@ class PresupuestosController < ApplicationController
       @presupuesto = Presupuesto.find(params[:id]) 
       @proyecto = @presupuesto.proyecto
       @sum_caps = @presupuesto.solicitados.sum(:monto)
+      @moneda = @presupuesto.moneda
   end
 
   def new
@@ -24,11 +25,15 @@ class PresupuestosController < ApplicationController
 
   def edit
       @presupuesto = Presupuesto.find(params[:id])  
+      @proyecto = Proyecto.find(@presupuesto.proyecto_id)
   end
 
   def update
+      @presupuesto = Presupuesto.find(params[:id])
+      
       moneda = Moneda.find(params[:presupuesto][:moneda_id]) 
       m = moneda.currency
+
       params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -40,7 +45,7 @@ class PresupuestosController < ApplicationController
              params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       end
 
-      @presupuesto = Presupuesto.find(params[:id])
+     
       @presupuesto.update(presupuesto_params)
       respond_to do |format|
            if @presupuesto.save
@@ -60,8 +65,13 @@ class PresupuestosController < ApplicationController
    
    if !params[:tproyecto].present?
             @solicitado_p = 0.0
-            moneda = Moneda.find(params[:presupuesto][:moneda_id]) 
-            m = moneda.currency
+            if params[:presupuesto][:moneda_id].present?
+                      moneda = Moneda.find(params[:presupuesto][:moneda_id]) 
+                      m = moneda.currency
+            else
+                      m = ''
+            end
+
             params[:presupuesto][:costo] = params[:presupuesto][:costo].gsub(m,'').gsub(',','').gsub(/\s+/,'')
             params[:presupuesto][:iva] = params[:presupuesto][:iva].gsub(m,'').gsub(',','').gsub(/\s+/,'')
             params[:presupuesto][:tproyecto] = params[:presupuesto][:tproyecto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -91,7 +101,20 @@ class PresupuestosController < ApplicationController
                             else
                                 flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                             end  
-                        format.html { render :new, status: :bad_request }
+
+                            items_caps = false
+                            if  params[:presupuesto][:solicitados_attributes].present?
+                                   params[:presupuesto][:solicitados_attributes].each do |i, v|
+                                          if params[:presupuesto][:solicitados_attributes][i][:capitulo_id].nil?
+                                                 items_caps = true
+                                          end
+                                   end
+                            end        
+
+                            if !items_caps
+                                   @presupuesto.solicitados.build
+                            end  
+                            format.html { render :new, status: :bad_request }
                     end
             end
     else

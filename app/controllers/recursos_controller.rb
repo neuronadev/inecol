@@ -39,10 +39,16 @@ class RecursosController < ApplicationController
 
   def edit
       @recurso = Recurso.find(params[:id]) 
+      @proyecto = Proyecto.find(@recurso.proyecto_id)
   end
 
   def update
-    m = '$'
+    @recurso = Recurso.find(params[:id]) 
+    @proyecto = Proyecto.find(@recurso.proyecto_id)
+    
+    moneda = Moneda.find( @proyecto.presupuesto.moneda.id ) 
+    m = moneda.currency
+
     if params[:recurso].has_key?("fiscales_attributes".to_sym)
         params[:recurso][:fiscales_attributes].each do |i, v|
             params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -59,7 +65,7 @@ class RecursosController < ApplicationController
             end
     end     
 
-      @recurso = Recurso.find(params[:id]) 
+      
       @recurso.update(recurso_params)
       respond_to do |format|
            if @recurso.save
@@ -74,7 +80,11 @@ class RecursosController < ApplicationController
   end
 
   def create
-      m = '$'
+
+      @proyecto = Proyecto.find(params[:recurso][:proyecto_id])
+      moneda = Moneda.find( @proyecto.presupuesto.moneda.id ) 
+      m = moneda.currency
+
       if params[:recurso].has_key?("fiscales_attributes".to_sym)
             params[:recurso][:fiscales_attributes].each do |i, v|
                 params[:recurso][:fiscales_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')

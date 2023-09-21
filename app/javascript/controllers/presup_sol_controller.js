@@ -4,15 +4,22 @@ import  SolicitaUtil   from 'controllers/solicita_util'
 import  Formato   from 'controllers/formato'
 
 var token = document.querySelector('meta[name="csrf-token"]').content
+var clasifica = ['PSERV', 'INCUR', 'CREC']
 var py_clasifca = ''
 var py_ovh = ''
 var solUtil = new SolicitaUtil()
 var formato = new Formato()
 var moneda_data = ''
 export default class extends Controller {
-    connect() {
+    
+    async connect() {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
-        this.proyecto(proyecto)
+        var idmoneda = document.getElementById('presupuesto_moneda_id').value
+        
+        if ( idmoneda != '' ){
+              await this.Tmoneda(idmoneda)
+        }
+        await this.proyecto(proyecto)
     }
 
     campoformat(event){
@@ -112,7 +119,32 @@ export default class extends Controller {
                 } catch (e) { alert(e) }
               
           }       
-    }  
+    } 
+    async Tmoneda(idmoneda) {
+        var data = ''
+        if (idmoneda != '') {
+            try {
+                data = await fetch('/monedas/data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-Token': token },
+                    body: JSON.stringify({ 'idmoneda': idmoneda })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        moneda_data = data
+                        if (document.getElementById('presupuesto_costo').value.length > 0) {
+                            this.campoformat()
+                            this.costos()
+                            this.itemsCaps()
+                        }
+                    })
+
+            } catch (e) { alert(e) }
+
+        }
+    } 
+    
+    
 
     itemsCaps(){
         var caps = document.getElementsByClassName('capmonto')
@@ -144,8 +176,7 @@ export default class extends Controller {
     }
 
     costos() {
-        var clasifica = ['PSERV','INCUR', 'CREC']
-
+       
         var costo = document.getElementById('presupuesto_costo')
         var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
 

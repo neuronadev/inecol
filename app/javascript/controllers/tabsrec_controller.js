@@ -4,11 +4,13 @@ import  Formato   from 'controllers/formato'
 import numeral from "numeral"
 
 var formato = new Formato()
-
+var token = document.querySelector('meta[name="csrf-token"]').content
+var currency = ''
 // Connects to data-controller="tabspr"
 export default class extends Controller {
 
     connect() {
+        currency = document.getElementById('currency').value
 
         const tabElements = [
             {
@@ -36,17 +38,17 @@ export default class extends Controller {
     }
 
     campoformat(event){
-          event.target.value = formato.moneda(event.target.value)
+          event.target.value = formato.moneda(event.target.value, '', currency)
     }
 
     campounformat(event){
-         event.target.value = formato.unformat(event.target.value)  
+         event.target.value = formato.unformat(event.target.value)
     }
 
     sumaMonto(event){
          var tffiscal = document.getElementById(event.params.ttarget) 
          var monto = this.sumaMontoRec(event.params.tclas)
-         tffiscal.innerHTML = formato.moneda(monto)
+        tffiscal.innerHTML = formato.moneda(monto, '', currency)
 
     }
 
