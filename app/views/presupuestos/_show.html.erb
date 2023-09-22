@@ -19,11 +19,11 @@
                             <table class="w-full">
                                     <tr>
                                         <td class="p-2 text-right w-5">IVA</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva) %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva, :unit=>'EUR ') %> </td>
                                     </tr>
                                     <tr>
                                         <td class="p-2 text-right w-5">Total del Proyecto</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto) %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto, :unit=>'EUR ') %> </td>
                                     </tr>
                             </table>      
                     </div>
@@ -31,11 +31,11 @@
                             <table class="w-full">
                                     <tr>
                                         <td class="p-2 text-right w-5">20% Overhead</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead) %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead, :unit=>'EUR ') %> </td>
                                     </tr>
                                     <tr>
                                         <td class="p-2 text-right w-5">10% Estímulos</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo) %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo, :unit=>'EUR ') %> </td>
                                     </tr>
                             </table>      
                     </div>
@@ -46,7 +46,7 @@
                     <table class="w-full">
                             <tr>
                                 <td class=" p-2 text-center font-semibold">Total para Gastos</td>
-                                <td class=" p-2 font-semibold text-center"><%= number_to_currency(@presupuesto.tgastos) %></td>
+                                <td class=" p-2 font-semibold text-center"><%= number_to_currency(@presupuesto.tgastos, :unit=>'EUR ') %></td>
                             </tr>    
                     </table>
                 </div>     
