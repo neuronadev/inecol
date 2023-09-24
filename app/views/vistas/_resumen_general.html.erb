@@ -24,7 +24,7 @@
       </div>  
       -->
       <% if current_usuario.cuenta.rol.clave == 'CAP' %>
-            <%= render 'proyectos/notifi_corr' %>
+              <%= render 'proyectos/notifi_corr' %>
       <% end %>
       <% if current_usuario.cuenta.rol.clave == 'EL' %>
                <%= render 'proyectos/notifi_el' %> 
@@ -49,5 +49,5 @@
          </div>
       </div>
       
-      <%= render 'vistas/util/modal_enviar' %>
+      
 </div>      

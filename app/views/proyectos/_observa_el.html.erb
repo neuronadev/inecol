@@ -1,0 +1,19 @@
+<% if @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').any? %>
+        <div class="flex ml-4">
+                         <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
+                                   <div class="flex items-center"><%= inline_svg_tag 'svg/ver.svg' %></div>
+                                   <span class="ml-1 flex items-center"> Ir al proyecto </span>
+                         <% end %>
+        </div>
+        <%  @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').each do |item| %>
+                 <div class="p-3 mb-2 mt-3 bg-red-100 border border-red-200 rounded-lg shadow dark:bg-red-800 dark:border-re-700" role="alert" data-controller="notifica">                   
+                        <h5 class="mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white">Atender la siguiente observación</h5>
+                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                 <%= item.txtcoment %>
+                         </p>
+                                 
+                 </div>
+        <% end %>
+        
+<% end %>
+

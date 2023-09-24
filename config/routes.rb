@@ -15,6 +15,7 @@ Rails.application.routes.draw do
             post 'enviar'
             get 'continuar'
             post 'eliminar'
+            get 'observa'
         end
         resources :mtoautorizados
         resources :mtoejercidos

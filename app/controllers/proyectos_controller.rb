@@ -104,6 +104,15 @@ class ProyectosController < ApplicationController
        redirect_to action:"show", id:@p
   end
 
+  def observa
+      @proyecto = Proyecto.find(params[:id]) 
+  end
+
+  def atendida
+        @proyecto = Proyecto.find(params[:id]) 
+        
+  end
+
   def institucion
       @idx = (Time.now.to_f*1000.0).to_i
       respond_to do |format|

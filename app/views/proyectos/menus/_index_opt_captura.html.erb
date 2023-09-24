@@ -21,19 +21,28 @@
           </div>
           <div class="flex ml-4" data-controller="etapasvalpy">
                     <div class="flex hover:cursor-pointer font-medium text-sm leading-tight text-red-600 dark:text-red-500 hover:underline" data-action='click->etapasvalpy#msgeliminar' data-etapasvalpy-proyecto-param = "<%= py.id %>" >
-                         <div class="flex items-center"><%= inline_svg_tag 'svg/basura.svg' %></div>
-                         <span class="ml-1 flex items-center"> Eliminar </span>
+                         <div class="flex items-center"><%= inline_svg_tag 'svg/basura.svg' %> <span class="ml-1 flex items-center"> Eliminar </span></div>
+                         
                     </div>
           </div>
     <% end %>
+   
     <% if py.etapas.last.tevento.clave == 'REV' %> 
-          <div class="flex ml-4">
-               <%= link_to resumen_vistas_path(:id=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
-                         <div class="flex items-center"><%= inline_svg_tag 'svg/ver.svg' %></div>
-                         <span class="ml-1 flex items-center"> Ver </span>
-               <% end %>
-          </div>
+          <% if py.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').any? %>
+                        <%= link_to observa_proyectos_path(:id=>py.id), class:"flex justify-center font-medium text-red-600 dark:text-red-500 hover:underline" do %>
+                                   <div class="flex items-center"><%= inline_svg_tag 'svg/ver.svg' %></div>
+                                   <span class="ml-1 flex items-center"> Ver </span>
+                         <% end %>
+          <% else %>
+                    <div class="flex ml-4">
+                         <%= link_to resumen_vistas_path(:id=>py.id), class:"flex font-medium text-blue-600 dark:text-blue-500 hover:underline" do %>
+                                   <div class="flex items-center"><%= inline_svg_tag 'svg/ver.svg' %></div>
+                                   <span class="ml-1 flex items-center"> Ver </span>
+                         <% end %>
+                    </div>
+          <% end %>          
     <% end %>
+
 <% else %>  
      <% if py.etapas.last.tevento.clave != 'DEL' %> 
           <div class="flex ml-4">
