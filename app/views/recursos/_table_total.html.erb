@@ -3,7 +3,7 @@
             <table class="">
                 <tr>
                         <td class="border  p-1 text-right font-semibold" style="width:600px; " >Total:</td>
-                        <td class="border  text-center p-1 font-semibold" style="width:300px;"><%= number_to_currency(@tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f)  %></td>
+                        <td class="border  text-center p-1 font-semibold" style="width:300px;"><%= number_to_currency(@tot_ffis.to_f + @tot_aes.to_f + @tot_fcon.to_f, :unit=>@moneda.currency + ' ')  %></td>
                 </tr>
                 
             </table>

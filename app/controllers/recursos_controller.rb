@@ -5,7 +5,7 @@ class RecursosController < ApplicationController
   def show
       @recurso = Recurso.find(params[:id])
       @proyecto = @recurso.proyecto
-
+      @moneda = @proyecto.presupuesto.moneda
       #@ffis = @recurso.aportados.includes(:fondo).where('fondos.clave':'FF').first
       #@aes = @recurso.aportados.includes(:fondo).where('fondos.clave':'AE').first
       #@fcon = @recurso.aportados.includes(:fondo).where('fondos.clave':'FC').first
@@ -30,7 +30,9 @@ class RecursosController < ApplicationController
       @recurso.fiscales.build
       @recurso.especies.build
       @recurso.concurrentes.build
-
+      @t_ffiscales = 0.0
+      @t_especie = 0.0
+      @t_concur = 0.0
       #@ff_id = Fondo.where(clave:'FF').first.id
       #@ae_id = Fondo.where(clave:'AE').first.id
       #@fc_id = Fondo.where(clave:'FC').first.id
@@ -40,6 +42,22 @@ class RecursosController < ApplicationController
   def edit
       @recurso = Recurso.find(params[:id]) 
       @proyecto = Proyecto.find(@recurso.proyecto_id)
+      @moneda = @proyecto.presupuesto.moneda
+
+      @t_ffiscales = 0.0
+      @t_especie = 0.0
+      @t_concur = 0.0
+      if !@recurso.omitir
+          if @recurso.fiscales.any?
+               @t_ffiscales = @recurso.fiscales.sum(:monto)
+          end
+          if @recurso.especies.any?
+               @t_especie = @recurso.especies.sum(:monto)
+          end
+          if @recurso.concurrentes.any?
+              @t_concur = @recurso.concurrentes.sum(:monto)
+       end
+      end    
   end
 
   def update

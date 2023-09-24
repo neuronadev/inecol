@@ -1,6 +1,6 @@
 <%
   if controller.action_name == 'edit' 
-       f.object.monto = number_to_currency(f.object.monto.to_s)
+       f.object.monto = number_to_currency(f.object.monto, :unit=>@moneda.currency + ' ')
   end
 %>
 
