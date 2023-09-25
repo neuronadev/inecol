@@ -17,23 +17,23 @@
                 <div class="flex w-full  border-b border-slate-300">
                     <div class="flex w-1/2 justify-center border-r border-slate-300">      
                             <table class="w-full">
-                                    <tr>
+                                    <tr  style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">IVA</td>
                                         <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' ') %> </td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2 text-right w-5">Total del Proyecto</td>
+                                        <td class="p-2 text-right w-5 font-semibold">Total del Proyecto</td>
                                         <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto, :unit=>@moneda.currency + ' ') %> </td>
                                     </tr>
                             </table>      
                     </div>
                     <div class="flex w-1/2 justify-center">      
                             <table class="w-full">
-                                    <tr>
+                                    <tr style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">20% Overhead</td>
                                         <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' ') %> </td>
                                     </tr>
-                                    <tr>
+                                    <tr style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">10% Estímulos</td>
                                         <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' ') %> </td>
                                     </tr>

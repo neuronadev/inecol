@@ -29,9 +29,9 @@ export default class extends Controller {
            }
       }
       if ( parseInt(event.params.idpy) > 0 ){
-                this.deldoc(event.params.idpy).then(result=>{ alert('Archivo Eliminado') })
+                this.deldoc(event.params.idpy).then(result=>{ alert('Seleccione el archivo.') })
       }else{
-                alert('Archivo Eliminado')
+                alert('Seleccione el archivo.')
       }
   }
 

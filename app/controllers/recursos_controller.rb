@@ -30,12 +30,14 @@ class RecursosController < ApplicationController
       @recurso.fiscales.build
       @recurso.especies.build
       @recurso.concurrentes.build
+
+      @moneda = @proyecto.presupuesto.moneda
+      
       @t_ffiscales = 0.0
       @t_especie = 0.0
       @t_concur = 0.0
-      #@ff_id = Fondo.where(clave:'FF').first.id
-      #@ae_id = Fondo.where(clave:'AE').first.id
-      #@fc_id = Fondo.where(clave:'FC').first.id
+      
+
       
   end
 
