@@ -71,22 +71,11 @@
      </td>
  </tr>
 </table>
-<% if !@proyecto.mconvocatoria.nil? %>
-     <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
-          <tr>
-               <td style="padding: 5px 0; font-weight: bold; text-align:left;">Nombre de la Convocatoria</td>
-               <td style="width:30%; background-color: #ffffff; border: 1px solid #a9a9a9;"> <%= @proyecto.mconvocatoria.nomconvocatoria %> </td>
-
-               <td style="padding: 5px 0; font-weight: bold;">Link de la Convocatoria</td>
-               <td style="width:35%; background-color: #ffffff; border: 1px solid #a9a9a9;"> <%= @proyecto.mconvocatoria.link %> </td>
-          </tr>
-     </table>
-<% end %>
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
         <td style="padding: 5px 0; font-weight: bold;">Nombre del Proyecto</td>
-        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9;">
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                   <%= @proyecto.nombre %>
         </td>
     </tr>
@@ -147,6 +136,18 @@
     </tr>
 </table>
 
+<% if !@proyecto.mconvocatoria.nil? %>
+     <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+          <tr>
+               <td style="width:20%; padding: 5px 0; font-weight: bold; text-align:left;">Nombre de la Convocatoria</td>
+               <td style="width:80%; background-color: #ffffff; border: 1px solid #a9a9a9;  padding: 5px;"> <%= @proyecto.mconvocatoria.nomconvocatoria %> </td>
+          </tr>
+          <tr>
+               <td style="width:20%; padding: 5px 0; font-weight: bold;">Link de la Convocatoria</td>
+               <td style="width:80%; background-color: #ffffff; border: 1px solid #a9a9a9;  padding: 5px;"> <%= @proyecto.mconvocatoria.link %> </td>
+          </tr>
+     </table>
+<% end %>
 
 <div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
      <table style="width:90%; background-color: #e4e4e4; padding:5px 0;  border-collapse: collapse;">

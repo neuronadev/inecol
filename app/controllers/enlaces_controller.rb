@@ -43,14 +43,18 @@ class EnlacesController < ApplicationController
   def atendido
       enlace = Enlace.find(params[:enlace_id])
 
+      #########################################################################
       enlace_py = enlace.proyecto_id
       enevento = Enevento.where(clave:'SOLA').first
 
       enlace.estado = 'C'
       enlace.save
-        
-      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
-
+      e1 = Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'C', raiz:enlace.id) 
+      #########################################################################
+      enevento_proc = Enevento.where(clave:'PROC').first
+      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento_proc.id, estado:'C', raiz:e1.id) 
+      ########################################################################
+            
       data = {result:'ok'}
       respond_to do |format|
           format.json { render json:data.to_json }

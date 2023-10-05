@@ -10,14 +10,27 @@ export default class extends Controller {
        this.enlaceUpdateAtendido(event.params.idenlace).then(result => {
                 var el = event.target.closest('[role="alert"]')
                 el.remove()
+                var listItems = document.querySelectorAll('.items_corr li');
+
+                if ( listItems.length == 0 ){
+                        var body = document.getElementsByTagName('body')[0];
+                        body.lastElementChild.remove()
+                        
+                        var m = document.getElementById("pycontent")
+                        m.reload()
+                }
             })
+       
   }
 
   enlaceEnterado(event){
-    this.enlaceUpdateEnterado(event.params.idenlace).then(result => {
+         this.enlaceUpdateEnterado(event.params.idenlace).then(result => {
              var el = event.target.closest('[role="alert"]')
-             el.remove()
+            el.remove()
          })
+         //var listItems = document.querySelectorAll('.items_sola li');
+         //console.log(listItems.length)
+
 }
 
   async enlaceUpdateAtendido(id_enlace){

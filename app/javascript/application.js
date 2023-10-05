@@ -6,6 +6,13 @@ import "trix"
 import "@rails/actiontext"
 
 
+
+addEventListener("trix-initialize", (event) => {
+    configTrix();
+    extendTrix(event);
+    console.log("Event trix")
+})
+
 window.process = {
     env: {
         NODE_ENV: 'development'

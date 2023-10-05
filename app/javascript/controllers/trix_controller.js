@@ -13,6 +13,10 @@ export default class extends Controller {
     this.reloadOriginalContent()
   }
 
+  openfile(){
+      console.log("open file")
+  }
+
   initTrix () {
     if (this.hasForegroundColorPickerTarget) { return }
 
