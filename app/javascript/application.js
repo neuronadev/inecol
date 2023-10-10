@@ -8,9 +8,9 @@ import "@rails/actiontext"
 
 
 addEventListener("trix-initialize", (event) => {
-    configTrix();
-    extendTrix(event);
-    console.log("Event trix")
+    //configTrix();
+    //extendTrix(event);
+    //console.log("Event trix")
 })
 
 window.process = {

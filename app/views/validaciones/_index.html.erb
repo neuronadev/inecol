@@ -8,7 +8,7 @@
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
-        <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
+        <thead class="text-medium text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3 text-center">
                     Nombre
@@ -22,8 +22,8 @@
         <tbody>
 
           <% @evaluadores.each do |e| %>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-semibold font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <tr class="bg-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                          <%= e.persona.nom_espacio %>
                     </th>
                     <td class="px-6 py-4 text-center">
@@ -31,13 +31,13 @@
                     </td>
                     
                 </tr>
-                <!--
-                <tr>
-                     <td colspan="3">
+                
+                <tr class="font-medium border-b dark:bg-gray-800 dark:border-gray-700">
+                     <th  class="px-8" scope="row" colspan="2">
                             <%  if @proyecto.validaciones.any? %>
                                     <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
                                              <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
-                                                      <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
+                                                     Comentarios: <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
                                              <% end %>       
                                     <% else %>   
                                                 
@@ -45,7 +45,7 @@
                             <% end %>        
                      </td>
                 </tr>
-                -->
+                
           <% end %>      
           
         </tbody>

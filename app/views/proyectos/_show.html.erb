@@ -20,10 +20,13 @@
                
         </tbody>     
         </table>
-        <% if controller.action_name != 'show'  %>
-            <%= render 'proyectos/docs/s_protocolo' %>
-            <%= render 'proyectos/docs/s_convenio' %>   
-        <% end %>     
+
+         <% if current_usuario.cuenta.rol.clave == 'CAP' %>
+               <%= render 'proyectos/docs/s_protocolo' %>
+               <%= render 'proyectos/docs/s_convenio' %>   
+         <% end %>    
+        
+
         
         <% if @proyecto.etapas.last.tevento.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'EL' || @proyecto.enlaces.last.enevento.clave == 'CORR' %>
             <div class="md:flex md:items-center mb-3 justify-end mt-5">
