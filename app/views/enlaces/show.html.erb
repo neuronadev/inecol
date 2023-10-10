@@ -1,6 +1,7 @@
-<%= turbo_frame_tag 'pycontent', class:'w-full' do %>
+<%= turbo_frame_tag 'py_content_sub', class:'w-full' do %>
+     <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
       <div class="mt-5">
           <%= render 'show' %>
       </div>
-
+     <% end %>
 <% end %>

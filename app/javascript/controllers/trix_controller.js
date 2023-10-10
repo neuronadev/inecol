@@ -32,7 +32,7 @@ export default class extends Controller {
 
   openForegroundColorPicker () {
     this.foregroundColorPickerTarget.click()
-    console.log(this.foregroundColorPickerTarget)
+    
   }
 
   openBackgroundColorPicker () {

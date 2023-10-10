@@ -34,20 +34,17 @@
       <% end %> 
 
 
+      <%= turbo_frame_tag 'py_content_sub', class:'w-full' do %>
+            <div class='flex w-full'>
+            
+                  <div class='w-1/4'>
+                        <%= render 'secciones' %>
+                  </div>
 
-      <div class='flex w-full'>
-      
-         <div class='w-1/4'>
-            <%= render 'secciones' %>
-         </div>
+                  <div class='w-full'>
+                        <%= render 'seccion' %>
+                  </div>
+            </div>
+      <% end %>
 
-         <div class='w-full '>
-            <%= turbo_frame_tag "py_content_secc" do %>
-               <%= render 'seccion' %>
-            <% end %>
-
-         </div>
-      </div>
-      
-      
 </div>      

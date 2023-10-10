@@ -1,21 +1,21 @@
- <div class="flex mt-5 mb-1 w-3/4 justify-start">
+ <div class="flex mt-5 mb-1 w-3/4 justify-start" data-controller="menueval">
       <div class="flex h-10">
-            <div class="flex items-center p-1 ">
+            <div class="flex items-center p-1">
                  <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/flecha-izquierda.svg' %>
                   <% end %>      
             </div>  
       </div>      
-      <div class="flex ml-5 h-10">
-             <div class="flex ml-3 items-center p-1">
-                 <%= link_to notifica_vistas_path(:id=>@proyecto.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+      <div id="items_menu" class="flex ml-5 h-10">
+             <div id="itemopt" data-nom="solicitud" class="itemmenu flex ml-3 items-center p-1  bg-gray-200  rounded " data-action="click->menueval#clkOpcion">
+                 <%= link_to notifica_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/mensajes1.svg' %>
                         <span class='text-sm text-blue-800 font-semibold ml-1'>Solicitud</span>
                   <% end %>      
             </div>  
 
-            <div class="flex ml-3 items-center rounded ">
-                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+            <div id="itemopt" data-nom="proyecto" class="itemmenu flex ml-3 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/proyecto1.svg' %>
                         <span class='text-sm text-blue-800 font-semibold ml-1'>Proyecto</span>
                   <% end %>      
@@ -25,15 +25,15 @@
                 validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
             %>
             <% if validacion.nil? %>               
-              <div class="flex ml-3 items-center p-1">
-                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+              <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
                                 <span class='text-sm text-blue-800 font-semibold ml-1'>Validar</span>
                         <% end %>  
                </div>  
              <% else %>   
-                  <div class="flex ml-3 items-center p-1">
-                        <%= link_to validacion_path(validacion.id), 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                  <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                        <%= link_to validacion_path(validacion.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
                                 <span class='text-sm text-blue-800 font-semibold ml-1'>Ver Validación</span>
                         <% end %>  
