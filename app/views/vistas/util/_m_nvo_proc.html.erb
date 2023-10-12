@@ -1,4 +1,4 @@
-<div>
+<div id="itemopt" data-nom="solcambio" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
       <%= link_to new_enlace_path(:tipo=>'CORR',:idpy=>@proyecto.id), data:{turbo_frame: "py_content_sub"} do %>
              <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
                             <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-blue-800">Solicitar cambios</div>
@@ -6,7 +6,7 @@
       <% end %>      
 </div>     
    
-<div data-controller="mnueval">
+<div id="itemopt" data-nom="evaluador" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion" data-controller="mnueval">
                     
     <button id="dropdownBtnEval" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
             <div> <%= inline_svg_tag 'svg/usuarios-alt.svg' %></div> <div class="ml-2 text-blue-800">Evaluadores</div>
@@ -53,15 +53,17 @@
       </ul>
     </div>   
 </div>
-
-<%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_content_sub'} do %> 
-      <div class="flex  font-medium text-sm leading-tight ml-3" >
-            <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
-      </div>
-<% end %>
-
-<%= link_to proyecto_path(@proyecto, format: :pdf),  target:'_blank'  do %> 
-      <div class="flex  font-medium text-sm leading-tight ml-3" >
-            <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Ficha</div>
-      </div>
-<% end %>
+<div id="itemopt" data-nom="menenvio" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+      <%= link_to mensaje_enlaces_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_content_sub'} do %> 
+            <div class="flex  font-medium text-sm leading-tight ml-3" >
+                  <div> <%= inline_svg_tag 'svg/mensajes.svg' %></div> <div class="ml-2 text-blue-800">Mensajes enviados</div>
+            </div>
+      <% end %>
+</div>
+<div id="itemopt" data-nom="ficha" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+      <%= link_to proyecto_path(@proyecto, format: :pdf),  target:'_blank'  do %> 
+            <div class="flex  font-medium text-sm leading-tight ml-3" >
+                  <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Ficha</div>
+            </div>
+      <% end %>
+</div>      
