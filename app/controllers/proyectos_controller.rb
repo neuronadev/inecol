@@ -83,7 +83,7 @@ class ProyectosController < ApplicationController
       respond_to do |format|
            if @proyecto.save
                #format.html { redirect_to proyecto_path(@proyecto) }
-                  if current_usuario.cuenta.rol.clave == 'EL' && params[:el_prot] == 'elprot_edit'
+                  if (current_usuario.cuenta.rol.clave == 'EL' || current_usuario.cuenta.rol.clave == 'EVAL' ) && params[:el_prot] == 'elprot_edit'
                         format.html {render 'documentos/protocolo'}
                   elsif current_usuario.cuenta.rol.clave == 'EL' && params[:el_odoc] == 'elodoc_edit'
                         format.html {render 'documentos/convenio'}

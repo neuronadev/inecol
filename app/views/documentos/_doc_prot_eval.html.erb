@@ -1,0 +1,17 @@
+<%= turbo_frame_tag 'py_content_secc_docs' do %>
+    <div class="border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex w-full p-2">
+            <div class="flex-col w-full font-semibold flex"> 
+                <div class="ml-3">Protocolo:</div>
+                    <div class="flex w-full">
+                            <div class="md:w-full ml-5 p-2">
+                                    <% if @proyecto.docprotocolo.attached? %>
+                                                <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %>
+                                    <% end %>
+                            </div>
+                            <div class="md:w-full ml-5 p-2"> <%= link_to "Editar", evaleditprot_path(:idpy=>@proyecto.id), 'data-frame-target':'py_content_secc_docs' %> </div>
+                    </div>
+            </div>     
+        </div>  
+    </div>
+<% end %>    

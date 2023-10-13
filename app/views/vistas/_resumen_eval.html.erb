@@ -8,16 +8,15 @@
       <div class="p-4 mb-4 font-semibold text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
            <span class="font-medium"> Información del Proyecto.</span>
       </div>   
-      
-      <div class='flex w-full'>
-           <div class='w-1/4'>
-                 <%= render 'secciones' %>
+      <%= turbo_frame_tag 'py_content_sub', class:'w-full' do %>      
+            <div class='flex w-full'>
+            <div class='w-1/4'>
+                  <%= render 'secciones' %>
+                  </div>
+                  <div class='w-full'>
+                              <%= render 'seccion' %>
+                  </div>
             </div>
-            <div class='w-full'>
-                   <%= turbo_frame_tag "py_content_secc" do %>
-                            <%= render 'seccion' %>
-                    <% end %>
-            </div>
-      </div>
-
+      <% end %>
 </div>
+

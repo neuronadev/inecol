@@ -10,7 +10,9 @@
         <div class="mt-5">
               <%= turbo_frame_tag 'py_content_secc' do %>
                     <%  if current_usuario.cuenta.rol.clave == 'EL' %>
-                            <%= render "documentos/doc_prot_el" %>
+                             <%= render "documentos/doc_prot_el" %>
+                    <% elsif current_usuario.cuenta.rol.clave == 'EVAL' %>
+                             <%= render "documentos/doc_prot_eval" %>
                     <% else %>
                             <%= render "documentos/doc_prot" %>
                     <% end %>        

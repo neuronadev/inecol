@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   
   get 'documentos/protocolo'
   get 'documentos/convenio'
+  get  'evaleditprot', to: 'documentos#editprotocolo'
+  
   post 'documentos/removatach'
   post 'monedas/data'
+
 
   devise_for :usuarios
   resources :proyectos do

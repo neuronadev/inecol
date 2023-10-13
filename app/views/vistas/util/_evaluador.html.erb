@@ -8,14 +8,14 @@
       </div>      
       <div id="items_menu" class="flex ml-5 h-10">
              <div id="itemopt" data-nom="solicitud" class="itemmenu flex ml-3 items-center p-1  bg-gray-200  rounded " data-action="click->menueval#clkOpcion">
-                 <%= link_to notifica_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
+                 <%= link_to notifica_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/mensajes1.svg' %>
                         <span class='text-sm text-blue-800 font-semibold ml-1'>Solicitud</span>
                   <% end %>      
             </div>  
 
             <div id="itemopt" data-nom="proyecto" class="itemmenu flex ml-3 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
-                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
+                 <%= link_to resumen_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                         <%= inline_svg_tag 'svg/proyecto1.svg' %>
                         <span class='text-sm text-blue-800 font-semibold ml-1'>Proyecto</span>
                   <% end %>      
@@ -26,14 +26,14 @@
             %>
             <% if validacion.nil? %>               
               <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
-                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
+                        <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
                                 <span class='text-sm text-blue-800 font-semibold ml-1'>Validar</span>
                         <% end %>  
                </div>  
              <% else %>   
                   <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
-                        <%= link_to validacion_path(validacion.id), data:{turbo_frame: "py_content_secc"}, class:'flex px-2 py-2' do %>
+                        <%= link_to validacion_path(validacion.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
                                 <span class='text-sm text-blue-800 font-semibold ml-1'>Ver Validación</span>
                         <% end %>  

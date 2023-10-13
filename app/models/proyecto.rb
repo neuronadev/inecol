@@ -35,6 +35,8 @@ class Proyecto < ApplicationRecord
     has_many :enlaces
     has_many :validaciones
 
+    has_rich_text :commeval
+
     validates :nombre, presence: true
     validates :clasificacion_id, presence: true
     validates :medio_id, presence: true

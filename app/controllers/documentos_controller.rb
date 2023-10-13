@@ -7,6 +7,10 @@ class DocumentosController < ApplicationController
        @proyecto = Proyecto.find(params[:idpy]) 
   end
 
+  def editprotocolo
+      @proyecto = Proyecto.find(params[:idpy]) 
+  end
+
   def removatach
         attachment = ActiveStorage::Attachment.find(params[:doc_id])
         if !attachment.nil?
