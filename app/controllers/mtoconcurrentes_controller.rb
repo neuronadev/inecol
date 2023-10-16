@@ -5,18 +5,23 @@ class MtoconcurrentesController < ApplicationController
   def show
        @proyecto = Proyecto.find(params[:proyecto_id])
        @mtoconcurrente = Mtoconcurrente.find(params[:id])
+       @moneda = @proyecto.presupuesto.moneda
   end
 
   def new
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoconcurrente = Mtoconcurrente.new
+      @moneda_sym = @proyecto.presupuesto.moneda.currency
   end
 
   def create
-      m = '$'
-      params[:mtoconcurrente][:monto] = params[:mtoconcurrente][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
-      @mtoconcurrente = Mtoconcurrente.new(mtoconcurrente_params)
       @proyecto = Proyecto.find(params[:proyecto_id])
+      m = @proyecto.presupuesto.moneda.currency
+
+      params[:mtoconcurrente][:monto] = params[:mtoconcurrente][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
+
+      @mtoconcurrente = Mtoconcurrente.new(mtoconcurrente_params)
+      
       respond_to do |format|
           if @mtoconcurrente.save
                 format.html { redirect_to proyecto_mtoconcurrente_path(@proyecto, @mtoconcurrente) }
@@ -30,13 +35,15 @@ class MtoconcurrentesController < ApplicationController
   def edit
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoconcurrente = Mtoconcurrente.find(params[:id])
+      @moneda_sym = @proyecto.presupuesto.moneda.currency
   end
 
   def update
-      m = '$'
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      m = @proyecto.presupuesto.moneda.currency
       params[:mtoconcurrente][:monto] = params[:mtoconcurrente][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       @mtoconcurrente = Mtoconcurrente.find(params[:id])
-      @proyecto = Proyecto.find(params[:proyecto_id])
+      
       @mtoconcurrente.update(mtoconcurrente_params)
       respond_to do |format|
           if @mtoconcurrente.save

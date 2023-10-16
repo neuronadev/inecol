@@ -1,9 +1,9 @@
 <div data-controller="etapasvalpy" class="w-full">
-      <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
+     <div class='flex w-full justify-center mb-2 border-b-2 border-slate-200'>
             <div class="w-full">  
                             <%= render 'vistas/util/evaluador' %> 
             </div>
-      </div>
+     </div>
     
      <%= turbo_frame_tag "py_content_sub" do %>
             <div class='flex w-full'>
@@ -11,5 +11,5 @@
                        <%= render 'proyectos/notifi_eval' %> 
                   </div>
             </div>
-      <% end %>
+     <% end %>
 </div>

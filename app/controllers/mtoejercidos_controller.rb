@@ -1,6 +1,7 @@
 class MtoejercidosController < ApplicationController
   def index
        @proyecto = Proyecto.find(params[:proyecto_id])
+       @moneda = @proyecto.presupuesto.moneda
   end
 
   def show
@@ -9,6 +10,7 @@ class MtoejercidosController < ApplicationController
   def new
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoejercido = Mtoejercido.new 
+      @moneda_sym = @proyecto.presupuesto.moneda.currency
   end
 
   def edit
@@ -18,10 +20,12 @@ class MtoejercidosController < ApplicationController
   end
 
   def create
-        m = '$'
+        @proyecto = Proyecto.find(params[:proyecto_id])
+        m = @proyecto.presupuesto.moneda.currency
+
         params[:mtoejercido][:monto] = params[:mtoejercido][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
         @mtoejercido = Mtoejercido.new(mtoejercido_params)
-        @proyecto = Proyecto.find(params[:proyecto_id])
+        
         respond_to do |format|
             if @mtoejercido.save
                    format.html { redirect_to proyecto_mtoejercidos_path(@proyecto) }

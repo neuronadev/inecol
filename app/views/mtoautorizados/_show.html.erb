@@ -13,7 +13,7 @@
                     </tr>
                     <tr>
                        <td class="border-b border-slate-300 p-2 text-right w-2/4 font-semibold">Monto Autorizado:</td>
-                       <td class="border-b border-slate-300 text-left ml-3 font-semibold"><%= number_to_currency(@mtoautorizado.monto) %></td>
+                       <td class="border-b border-slate-300 text-left ml-3 font-semibold"><%= number_to_currency(@mtoautorizado.monto, :unit=>@moneda.currency + ' ') %></td>
                     </tr>
                     <tr> 
                        <td colspan="2" class="text-right py-5">

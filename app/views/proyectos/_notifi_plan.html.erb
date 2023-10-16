@@ -1,0 +1,66 @@
+<%
+      validacion = @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last
+%>
+
+<div class="w-full p-1  bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+     <h5 class="mb-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Proyecto</h5>
+     <p class="mb-1 font-normal text-gray-500 dark:text-gray-400">Información</p>
+
+     <table class="table-auto w-full ">
+         <tbody>
+                   <%= render "proyectos/tr", titulo:'Nombre del Proyecto:', valor: @proyecto.nombre  %>
+                   <%= render "proyectos/tr", titulo:'Responsable Técnico:', valor: @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %>
+                   <%= render "proyectos/tr", titulo:'Tipo Moneda:', valor: @proyecto.presupuesto.moneda.nommoneda  %>
+                   
+                   <tr class="bg-gray-300">
+                        <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Autorizado</td>
+                   </tr>
+                   <% if !@proyecto.mtoautorizado.nil? %> 
+                        <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                              <%= render 'mtoautorizados/vautorizado' %>
+                           </td>
+                        <tr>
+                   <% else %>
+                          <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                                 <span class="italic">Sin asignar</span>
+                           </td>
+                        <tr>
+                   <% end %>
+                   <tr class="bg-gray-300">
+                        <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Ejercido</td>
+                   </tr>
+                   <% if @proyecto.mtoejercidos.any? %> 
+                        <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                              <%= render 'mtoautorizados/vejercido' %>
+                           </td>
+                        <tr>
+                   <% else %>
+                          <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                                 <span class="italic">Sin asignar</span>
+                           </td>
+                        <tr>
+                   <% end %>
+                   <tr class="bg-gray-300">
+                        <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Concurrente </td>
+                   </tr>
+                   <% if !@proyecto.mtoconcurrente.nil? %> 
+                        <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                              <%= render 'mtoautorizados/vconcurrente' %>
+                           </td>
+                        <tr>
+                   <% else %>
+                          <tr>
+                           <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
+                                 <span class="italic">Sin asignar</span>
+                           </td>
+                        <tr>
+                   <% end %>
+
+         </tbody>   
+      </table>
+</div> 

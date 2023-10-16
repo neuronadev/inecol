@@ -1,0 +1,12 @@
+<table class="w-full text-sm text-center text-gray-800 dark:text-gray-400">
+    <thead>  
+        <tr>
+            <th class="text-center">Monto</th>
+        </tr>
+    </thead>  
+    <tbody>
+            <tr>
+                <td class="text-center p-1"> <%= number_to_currency(@proyecto.mtoconcurrente.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %> </td>
+            </tr>
+    </tbody>
+</table> 

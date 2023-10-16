@@ -1,0 +1,28 @@
+<table class="w-full text-sm text-center text-gray-800 dark:text-gray-400">
+    <thead>  
+        <tr>
+            <th class="text-center">No.</th>  
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Monto</th>
+        </tr>
+    </thead>  
+    <tbody>
+             <tbody>
+            <%  i = 1
+                @proyecto.mtoejercidos.each do |item| %>
+                   <tr>
+                        <td class="text-center p-1"> <%= i %> </td>
+                        <td class="text-center p-1"><%= item.fecha.strftime('%d-%m-%Y') %></td>
+                        <td class="text-center p-1"><%= number_to_currency(item.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %></td>
+                   </tr>
+            <%  i +=1
+               end %>
+        </tbody> 
+        <tfoot>
+              <tr class="boder border-t border-slate-300">  
+                   <td colspan="2" class="text-right font-semibold p-2">Total:</td>
+                   <td class="text-center font-semibold p-2"><%= number_to_currency(@proyecto.mtoejercidos.sum(:monto), :unit=>@proyecto.presupuesto.moneda.currency + ' ') %></td>
+              </tr>
+        </tfoot>   
+    </tbody>
+</table>

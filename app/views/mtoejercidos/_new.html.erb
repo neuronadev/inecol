@@ -1,5 +1,6 @@
 <%= form_with model:@mtoejercido, url:[@proyecto, @mtoejercido], class:'w-full' do |f| %>
      <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
+     <input type="hidden" name="tmoneda" id="tmoneda" value="<%= @moneda_sym %>">
      <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
            <div class="font-semibold border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800"> Monto Ejercido</div>
            <table class="w-full text-gray-800 dark:text-gray-800 mt-2">

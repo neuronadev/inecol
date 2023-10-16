@@ -6,23 +6,28 @@ class MtoautorizadosController < ApplicationController
   def show
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoautorizado = Mtoautorizado.find(params[:id])
+      @moneda = @proyecto.presupuesto.moneda
   end
 
   def new
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoautorizado = Mtoautorizado.new
+      @moneda_sym = @proyecto.presupuesto.moneda.currency
   end
 
   def edit
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoautorizado = Mtoautorizado.find(params[:id])
+      @moneda_sym = @proyecto.presupuesto.moneda.currency
   end
 
   def update
-      m = '$'
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      m = @proyecto.presupuesto.moneda.currency
+      
       params[:mtoautorizado][:monto] = params[:mtoautorizado][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       @mtoautorizado = Mtoautorizado.find(params[:id])
-      @proyecto = Proyecto.find(params[:proyecto_id])
+      
       @mtoautorizado.update(mtoautorizado_params)
       respond_to do |format|
            if @mtoautorizado.save
@@ -34,10 +39,12 @@ class MtoautorizadosController < ApplicationController
   end
 
   def create
-        m = '$'
+        @proyecto = Proyecto.find(params[:proyecto_id])
+        m = @proyecto.presupuesto.moneda.currency
+        
         params[:mtoautorizado][:monto] = params[:mtoautorizado][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
         @mtoautorizado = Mtoautorizado.new(mtoautorizado_params)
-        @proyecto = Proyecto.find(params[:proyecto_id])
+        
         respond_to do |format|
             if @mtoautorizado.save
                    format.html { redirect_to proyecto_mtoautorizado_path(@proyecto, @mtoautorizado) }

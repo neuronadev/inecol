@@ -9,7 +9,9 @@ export default class extends Controller {
 
   f_moneda(event){
     var formato = new Formato()
-    event.target.value = formato.moneda(event.target.value)
+    var moneda = document.getElementById('tmoneda').value
+    event.target.value = formato.moneda(event.target.value, '', moneda)
+
   }
 
   unf_moneda(event){
@@ -17,12 +19,12 @@ export default class extends Controller {
     event.target.value = formato.unformat(event.target.value)  
   }
   stopTyping(event){
+      var moneda = document.getElementById('tmoneda').value
       var formato = new Formato()
       clearTimeout(timer);
       const waitTime = 3000
       timer = setTimeout(() => {
-           event.target.value = formato.moneda(event.target.value)
-           console.log("Se ha concluido la escritura...")
+           event.target.value = formato.moneda(event.target.value, '', moneda)
       }, waitTime);
   }
   
