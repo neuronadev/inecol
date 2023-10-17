@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_193311) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -400,6 +400,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_193311) do
     t.index ["proyecto_id"], name: "index_py.presupuestos_on_proyecto_id"
   end
 
+  create_table "prorrogas", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.prorrogas_on_proyecto_id"
+  end
+
   create_table "protocolos", force: :cascade do |t|
     t.bigint "proyecto_id", null: false
     t.boolean "activo"
@@ -573,6 +581,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_193311) do
   add_foreign_key "pestudiantes", "participantes"
   add_foreign_key "presupuestos", "monedas"
   add_foreign_key "presupuestos", "proyectos"
+  add_foreign_key "prorrogas", "proyectos"
   add_foreign_key "protocolos", "proyectos"
   add_foreign_key "proyectos", "clasificaciones"
   add_foreign_key "proyectos", "lineas"

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+   
   get 'documentos/protocolo'
   get 'documentos/convenio'
   get  'evaleditprot', to: 'documentos#editprotocolo'
@@ -20,9 +20,19 @@ Rails.application.routes.draw do
             post 'eliminar'
             get 'observa'
         end
-        resources :mtoautorizados
+        member do
+            get 'planconv'
+            post 'cplanconv'
+            get 'eplanconv'
+        end
+        resources :mtoautorizados do
+                  member do
+                      get 'preview'
+                  end
+        end
         resources :mtoejercidos
         resources :mtoconcurrentes
+        resources :prorrogas
   end
 resources :mtoautorizados
 resources :mtoejercidos

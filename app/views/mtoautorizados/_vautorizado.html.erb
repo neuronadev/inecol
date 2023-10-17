@@ -1,16 +1,4 @@
-<table class="w-full text-sm text-center text-gray-800 dark:text-gray-400">
-    <thead>  
-        <tr>
-            <th class="text-center">Fecha de Inicio</th>
-            <th class="text-center">Fecha de Termino</th>
-            <th class="text-center">Monto</th>
-        </tr>
-    </thead>  
-    <tbody>
-            <tr>
-                <td class="text-center p-1"> <%= @proyecto.mtoautorizado.finicio.strftime("%d-%m-%Y") %> </td>
-                <td class="text-center p-1"> <%= @proyecto.mtoautorizado.ftermino.strftime("%d-%m-%Y") %> </td>
-                <td class="text-center p-1"> <%= number_to_currency(@proyecto.mtoautorizado.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %> </td>
-            </tr>
-    </tbody>
-</table>    
+
+<%= turbo_frame_tag "monto_autorizado", src:preview_proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado) do %>
+    
+<% end %>    

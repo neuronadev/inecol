@@ -11,6 +11,12 @@
                        <td class="border-b border-slate-300 p-2 text-right w-2/4 font-semibold">Fecha de Termino:</td>
                        <td class="border-b border-slate-300 text-left ml-3"><%= @mtoautorizado.ftermino.strftime("%d-%m-%Y") %></td>
                     </tr>
+                    <% if @proyecto.prorrogas.any? %>
+                          <tr>
+                              <td class="border-b border-slate-300 p-2 text-right w-2/4 font-semibold">Prorroga:</td>
+                              <td class="border-b border-slate-300 text-left ml-3"><%= @proyecto.prorrogas.last.fecha.strftime("%d-%m-%Y") %></td>
+                          </tr>
+                    <% end %>
                     <tr>
                        <td class="border-b border-slate-300 p-2 text-right w-2/4 font-semibold">Monto Autorizado:</td>
                        <td class="border-b border-slate-300 text-left ml-3 font-semibold"><%= number_to_currency(@mtoautorizado.monto, :unit=>@moneda.currency + ' ') %></td>

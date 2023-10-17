@@ -18,6 +18,7 @@ class Proyecto < ApplicationRecord
     has_one :mtoautorizado
     has_many :mtoejercidos
     has_one :mtoconcurrente
+    has_many :prorrogas
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
@@ -26,6 +27,7 @@ class Proyecto < ApplicationRecord
     #accepts_nested_attributes_for :protocolo, reject_if: :all_blank #, allow_destroy: true
     has_one_attached :docprotocolo, dependent: :detach
     has_one_attached :dconvocatoria, dependent: :detach
+    has_one_attached :planconv, dependent: :detach #Convenio firmado
 
     #has_one :convenio #, dependent: :destroy, inverse_of: :proyecto
     #accepts_nested_attributes_for :convenio #, reject_if: :all_blank, allow_destroy: true

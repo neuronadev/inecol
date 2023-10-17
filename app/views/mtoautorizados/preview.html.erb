@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "monto_autorizado" do %>
+       <table class="w-full text-sm text-center text-gray-800 dark:text-gray-400">
+        <thead>  
+            <tr>
+                <th class="text-center">Fecha de Inicio</th>
+                <th class="text-center">Fecha de Termino</th>
+                <th class="text-center">Monto</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>  
+        <tbody>
+                <tr>
+                    <td class="text-center p-1"> <%= @proyecto.mtoautorizado.finicio.strftime("%d-%m-%Y") %> </td>
+                    <td class="text-center p-1"> 
+                          <% if !@proyecto.prorrogas.any? %>  
+                                 <%= @proyecto.mtoautorizado.ftermino.strftime("%d-%m-%Y") %> 
+                          <% else %>       
+                                 <%= @proyecto.prorrogas.last.fecha.strftime("%d-%m-%Y") %> 
+                          <% end %>
+                    </td>
+                    <td class="text-center p-1">
+                                    <%= number_to_currency(@proyecto.mtoautorizado.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %> 
+                    </td>
+                    <td class="text-center p-1">
+                        <%= render 'mtoautorizados/rwmenu' %>  
+                    </th>
+                </tr>
+        </tbody>
+    </table>    
+<% end %>

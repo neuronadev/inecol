@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "plan_conv" do %>
+     <% if @proyecto.planconv.attached? %>
+          <div class="flex"> 
+                <div><%= link_to @proyecto.planconv.filename, rails_blob_path(@proyecto.planconv, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %></div>
+                <div class="ml-5 text-green-800 font-semibold">
+                       <%= link_to 'Editar', eplanconv_proyecto_path(@proyecto) %>
+                </div>
+          </div>   
+     <% else %>
+             <%= render 'proyectos/planconvup' %>
+    <% end %>
+<% end %>

@@ -11,6 +11,12 @@
                    <%= render "proyectos/tr", titulo:'Nombre del Proyecto:', valor: @proyecto.nombre  %>
                    <%= render "proyectos/tr", titulo:'Responsable Técnico:', valor: @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %>
                    <%= render "proyectos/tr", titulo:'Tipo Moneda:', valor: @proyecto.presupuesto.moneda.nommoneda  %>
+                   <tr class="">
+                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Convenio Firmado:</td>
+                         <td class="p-2 border-b border-slate-300">
+                              <%= render 'proyectos/planconv' %>
+                         </td>
+                   </tr>
                    
                    <tr class="bg-gray-300">
                         <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Autorizado</td>

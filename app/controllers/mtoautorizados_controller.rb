@@ -9,6 +9,12 @@ class MtoautorizadosController < ApplicationController
       @moneda = @proyecto.presupuesto.moneda
   end
 
+  def preview
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @mtoautorizado = Mtoautorizado.find(params[:id])
+      @moneda = @proyecto.presupuesto.moneda
+  end
+
   def new
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoautorizado = Mtoautorizado.new
