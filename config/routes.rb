@@ -70,6 +70,8 @@ resources :mtoconcurrentes
                 get 'resumen'
                 get 'secproyecto'
                 get 'notifica'
+                get 'aceptado'
+
             end
   end
   

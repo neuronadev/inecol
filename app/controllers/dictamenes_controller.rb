@@ -14,10 +14,18 @@ class DictamenesController < ApplicationController
 
   def create
       @dictamen = Dictamen.new(dictamen_params)
+      @tvalidacion = Tvalidacion.find(params[:tvalidacion_id])
       @proyecto = Proyecto.find(params[:dictamen][:proyecto_id])
-      enevento = Enevento.where(clave:'DICT').first
-      tevento = Tevento.where(clave:'ACEP').first
 
+      enevento = Enevento.where(clave:'DICT').first  #Eventos de enlace
+
+      if @tvalidacion.clave == 'ACEP'
+            tevento = Tevento.where(clave:'ACEP').first
+      else
+            tevento = Tevento.where(clave:'RECH').first
+      end      
+
+      
       respond_to do |format|
             if @dictamen.save
                    Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)

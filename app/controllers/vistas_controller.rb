@@ -23,6 +23,9 @@ class VistasController < ApplicationController
     def notifica
          @proyecto = Proyecto.find(params[:id])
     end
+    def aceptado
+         @proyecto = Proyecto.find(params[:id])
+    end
     
     def secproyecto
         @proyecto = Proyecto.find(params[:id])

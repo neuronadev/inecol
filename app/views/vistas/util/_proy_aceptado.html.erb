@@ -1,0 +1,60 @@
+<div class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700" data-controller="menueval ">
+   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 py-2" >
+       <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 ml-3 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+       </button>
+       <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+          <ul id="items_menu" class="flex flex-col font-medium p-1 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm  md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+               <li>
+                    <div class="flex items-center p-1">
+                        <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex px-2 py-2' do %>
+                            <%= inline_svg_tag 'svg/flecha-izquierda.svg' %>
+                        <% end %>      
+                    </div>     
+               </li>
+               <li id="itemopt" data-nom="dictamen" class="itemmenu flex ml-3 items-center p-1  bg-gray-200  rounded " data-action="click->menueval#clkOpcion">
+                        <%= link_to aceptado_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
+                              <%= inline_svg_tag 'svg/mensajes1.svg' %>
+                              <span class='text-sm text-blue-800 font-semibold ml-1'>Dictamen</span>
+                        <% end %>    
+               </li> 
+               <li id="itemopt" data-nom="proyecto" class="itemmenu flex ml-3 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                        <%= link_to resumen_vistas_path(:id=>@proyecto.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
+                                    <%= inline_svg_tag 'svg/proyecto1.svg' %>
+                                    <span class='text-sm text-blue-800 font-semibold ml-1'>Proyecto</span>
+                        <% end %>      
+               </li>
+               <%  if @proyecto.etapas.last.tevento.clave == 'ACEP' %>             
+                  <li id="itemopt" data-nom="seguimiento" class="itemmenu flex ml-3 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                        <div data-controller="dropdown">
+                              <button id="dropdownButton" class="flex items-center justify-between w-full py-2 ml-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent" type="button">
+                                    <%= inline_svg_tag 'svg/calendario-lineas.svg' %>
+                                    <span class='text-blue-800 text-sm font-semibold ml-1'>Seguimiento</span>
+                                    <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                    </svg>
+                              </button>
+                              <!-- Dropdown menu -->
+                              <div id="dropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownButton">
+                                          <li>
+                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar avances</a>
+                                          </li>
+                                          <li>
+                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Informes</a>
+                                          </li>
+                                          <li>
+                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proyecto finalizado</a>
+                                          </li>
+                                    </ul>
+                              </div>
+                        </div>
+                  </li>   
+               <% end %>   
+          </ul> 
+       </div>   
+   </div>      
+</div>
