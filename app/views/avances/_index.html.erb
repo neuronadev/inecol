@@ -1,0 +1,31 @@
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left ">
+        <thead class="text-sm text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-1 py-1 text-center">
+                     Fecha
+                </th>
+                <th scope="col" class="px-1 py-1 text-center">
+                     Porcentaje
+                </th>
+                <th scope="col" class="px-1 py-1 text-center">
+                      Descripción
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+               <% if @avances.any? %>
+                  <% @avances.each do |item| %>
+                      <tr>
+                          <td class="px-1 py-1 text-center"><%= item.fecha.strftime('%m-%d-%Y') %></td>
+                          <td class="px-1 py-1 text-center"><%= item.porcentaje %></td>
+                          <td class="px-1 py-1 text-center"> <%= item.txtavance %> </td>
+                      </tr>
+                  <% end %>  
+                <% else %>   
+                       <tr>
+                          <td class="px-1 py-1 text-center italic" colspan="3">No se han registrado avances</td>
+                      </tr>   
+               <% end %>
+        </tbody>    
+    </table>        

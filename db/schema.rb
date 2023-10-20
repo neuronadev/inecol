@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_182050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fondo_id"], name: "index_py.aportados_on_fondo_id"
+  end
+
+  create_table "avances", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.avances_on_proyecto_id"
   end
 
   create_table "capitulos", force: :cascade do |t|
@@ -241,6 +250,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
     t.index ["lugar_id"], name: "index_py.fuentes_on_lugar_id"
     t.index ["nacionalidad_id"], name: "index_py.fuentes_on_nacionalidad_id"
     t.index ["proyecto_id"], name: "index_py.fuentes_on_proyecto_id"
+  end
+
+  create_table "informes", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.bigint "tinforme_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.informes_on_proyecto_id"
+    t.index ["tinforme_id"], name: "index_py.informes_on_tinforme_id"
   end
 
   create_table "instituciones", force: :cascade do |t|
@@ -491,6 +509,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tinformes", force: :cascade do |t|
+    t.string "nomtinforme"
+    t.string "clave", limit: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "orden"
+  end
+
   create_table "tparticipantes", force: :cascade do |t|
     t.string "nomtparticipante"
     t.string "clave", limit: 5
@@ -546,6 +572,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
   add_foreign_key "apmontos", "aportados"
   add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
+  add_foreign_key "avances", "proyectos"
   add_foreign_key "concurrentes", "capitulos"
   add_foreign_key "concurrentes", "recursos"
   add_foreign_key "convenios", "proyectos"
@@ -566,6 +593,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_161440) do
   add_foreign_key "fuentes", "lugares"
   add_foreign_key "fuentes", "nacionalidades"
   add_foreign_key "fuentes", "proyectos"
+  add_foreign_key "informes", "proyectos"
+  add_foreign_key "informes", "tinformes"
   add_foreign_key "instituciones", "proyectos"
   add_foreign_key "mconvocatorias", "proyectos"
   add_foreign_key "metas", "proyectos"

@@ -41,13 +41,19 @@
                               <div id="dropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownButton">
                                           <li>
-                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar avances</a>
+                                              <%= link_to proyecto_avances_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                   Reportar avances
+                                              <% end %>    
                                           </li>
                                           <li>
-                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Informes</a>
+                                               <%= link_to proyecto_informes_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                    Informes
+                                               <% end %>    
                                           </li>
                                           <li>
-                                          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proyecto finalizado</a>
+                                               <%= link_to finalizar_proyecto_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                    Finalizar proyecto
+                                               <% end %>    
                                           </li>
                                     </ul>
                               </div>

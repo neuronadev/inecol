@@ -1,0 +1,31 @@
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left ">
+        <thead class="text-sm text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-1 py-1 text-center">
+                     Informe
+                </th>
+                <th scope="col" class="px-1 py-1 text-center">
+                      Documento
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+               <% if @informes.any? %>
+                  <% @informes.each do |item| %>
+                      <tr>
+                          <td class="px-1 py-1 text-center"><%= item.tinforme.nomtinforme %></td>
+                          <td class="px-1 py-1 text-center">
+                              <% if item.dinforme.attached? %>
+                                    <%= link_to item.dinforme.filename, rails_blob_path(item.dinforme, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                              <% end %>
+                          </td>
+                      </tr>
+                  <% end %>  
+               <% else %>   
+                       <tr>
+                          <td class="px-1 py-1 text-center italic" colspan="2">No se han registrado informes</td>
+                      </tr>
+               <% end %>
+        </tbody>    
+    </table>  
