@@ -16,6 +16,12 @@
                 <th scope="col" class="px-6 py-3 text-center">
                     Estado validación
                 </th>
+                 <th scope="col" class="px-6 py-3 text-center">
+                    Fecha de solicitud
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Fecha limite
+                </th>
                 
             </tr>
         </thead>
@@ -29,11 +35,17 @@
                     <td class="px-6 py-4 text-center">
                          <%= render 'estadoval', proyecto:@proyecto, evaluador:e %> 
                     </td>
-                    
+                    <td class="px-6 py-4 text-center">
+                         <%= @proyecto.solicitud.fecha_sol.strftime('%d-%m-%Y') %>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                         <%= @proyecto.solicitud.fecha_lim.strftime('%d-%m-%Y') %>
+                    </td>
                 </tr>
                 
+                
                 <tr class="font-medium border-b dark:bg-gray-800 dark:border-gray-700">
-                     <th  class="px-8" scope="row" colspan="2">
+                     <th  class="px-8" scope="row" colspan="4">
                             <%  if @proyecto.validaciones.any? %>
                                     <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
                                              <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
@@ -45,6 +57,7 @@
                             <% end %>        
                      </td>
                 </tr>
+
                 
           <% end %>      
           

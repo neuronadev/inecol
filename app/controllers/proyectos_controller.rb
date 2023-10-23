@@ -42,16 +42,25 @@ class ProyectosController < ApplicationController
   def finalizar
       @proyecto = Proyecto.find(params[:id])
   end
+
+  def sfinalizar
+      @proyecto = Proyecto.find(params[:id])
+  end
+
   def cfinalizar
        @proyecto = Proyecto.find(params[:id])
-       
+       tevento = Tevento.where(clave:'FIN').first
+       @proyecto.txtlogro = params[:txtlogro]
+       @proyecto.dfiniquito = params[:dfiniquito]
+
        respond_to do |format|
            if @proyecto.save
-                 format.html { redirect_to @proyecto }
+                 Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                 format.html { redirect_to sfinalizar_proyecto_path(@proyecto) }
            else
                  format.html { render :planconv, status: :bad_request }
            end
-      end
+       end
   end
    
 

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
             get 'eplanconv'
             get 'finalizar'
             post 'cfinalizar'
+            get 'sfinalizar'
         end
         resources :mtoautorizados do
                   member do

@@ -21,6 +21,7 @@ class Proyecto < ApplicationRecord
     has_many :prorrogas
     has_many :avances
     has_many :informes
+    has_one :solicitud
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true
@@ -30,7 +31,7 @@ class Proyecto < ApplicationRecord
     has_one_attached :docprotocolo, dependent: :detach
     has_one_attached :dconvocatoria, dependent: :detach
     has_one_attached :planconv, dependent: :detach #Convenio firmado
-    has_one_attached :dfinquito, dependent: :detach #Documento finiquito
+    has_one_attached :dfiniquito, dependent: :detach #Documento finiquito
 
 
     #has_one :convenio #, dependent: :destroy, inverse_of: :proyecto

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_20_182050) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_23_204701) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -495,6 +495,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_182050) do
     t.index ["presupuesto_id"], name: "index_py.solicitados_on_presupuesto_id"
   end
 
+  create_table "solicitudes", force: :cascade do |t|
+    t.bigint "proyecto_id", null: false
+    t.date "fecha_sol"
+    t.date "fecha_lim"
+    t.string "estado", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proyecto_id"], name: "index_py.solicitudes_on_proyecto_id"
+  end
+
   create_table "tacademicos", force: :cascade do |t|
     t.string "nomtacademico"
     t.string "clave", limit: 5
@@ -621,6 +631,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_182050) do
   add_foreign_key "recursos", "proyectos"
   add_foreign_key "solicitados", "capitulos"
   add_foreign_key "solicitados", "presupuestos"
+  add_foreign_key "solicitudes", "proyectos"
   add_foreign_key "validaciones", "evaluadores"
   add_foreign_key "validaciones", "proyectos"
   add_foreign_key "validaciones", "tvalidaciones"

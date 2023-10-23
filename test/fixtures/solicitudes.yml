@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto: one
+  fecha_sol: 2023-10-23
+  fecha_lim: 2023-10-23
+  estado: MyString
+
+two:
+  proyecto: two
+  fecha_sol: 2023-10-23
+  fecha_lim: 2023-10-23
+  estado: MyString

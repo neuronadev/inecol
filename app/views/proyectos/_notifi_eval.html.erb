@@ -20,7 +20,8 @@
                                 <% end %>
                         </td>
                    </tr>
-                   <%= render "proyectos/tr", titulo:'Fecha de Solicitud:', valor:validacion.created_at.strftime("%d-%m-%Y") %>
+                   <%= render "proyectos/tr", titulo:'Fecha de Solicitud:', valor:@proyecto.solicitud.fecha_sol.strftime("%d-%m-%Y") %>
+                   <%= render "proyectos/tr", titulo:'Fecha Limite de Evaluación:', valor:@proyecto.solicitud.fecha_lim.strftime("%d-%m-%Y") %>
                    <tr class="">
                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Archivo:</td>
                         <td class="p-2 border-b border-slate-300">

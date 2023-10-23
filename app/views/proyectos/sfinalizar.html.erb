@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "py_content_sub" do %>
+   <div class="mt-3 p-3 font-semibold">Proyecto finalizado</div>
+     <div class="w-full p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">   
+
+                    <table class="w-full text-sm text-left ">
+                        <tbody>  
+                        <tr>
+                                <td>Documento finiquito:</td>
+                                <td>
+                                    <% if @proyecto.dfiniquito.attached? %>
+                                                <%= link_to  @proyecto.dfiniquito.filename, rails_blob_path( @proyecto.dfiniquito, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                    <% end %>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>Logros alcanzados:</td>
+                                <td>  <%= @proyecto.txtlogro %> </td>
+                        </tr>
+                        </tbody>   
+                    </table>
+
+      </div>
+    </div>  
+<% end %>   
