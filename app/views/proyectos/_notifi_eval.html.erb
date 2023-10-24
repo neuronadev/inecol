@@ -9,7 +9,7 @@
      <table class="table-auto w-full ">
          <tbody>
                    <%= render "proyectos/tr", titulo:'Nombre del Proyecto:', valor: @proyecto.nombre  %>
-                   <%= render "proyectos/tr", titulo:'Responsable Técnico:', valor: @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %>
+                   <%= render "proyectos/tr", titulo:'Responsable Técnico:', valor: @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>
                    <tr class="">
                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Ficha del Proyecto:</td>
                         <td class="p-2 border-b border-slate-300">
@@ -21,7 +21,13 @@
                         </td>
                    </tr>
                    <%= render "proyectos/tr", titulo:'Fecha de Solicitud:', valor:@proyecto.solicitud.fecha_sol.strftime("%d-%m-%Y") %>
-                   <%= render "proyectos/tr", titulo:'Fecha Limite de Evaluación:', valor:@proyecto.solicitud.fecha_lim.strftime("%d-%m-%Y") %>
+                   <tr class="">
+                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Fecha Limite Evaluación:</td>
+                        <td class="p-2 border-b border-slate-300">
+                             <span class="bg-green-500 p-2 font-semibold"><%= @proyecto.solicitud.fecha_lim.strftime("%d-%m-%Y") %></span>
+                             <span class="italic font-semibold text-sm text-red-500">Fecha limite para emitir una evaluación</span>
+                        </td>
+                   </tr>
                    <tr class="">
                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Archivo:</td>
                         <td class="p-2 border-b border-slate-300">

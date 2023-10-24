@@ -12,7 +12,7 @@
                     <% @presupuesto.solicitados.each do |s|  %>
                             <tr>
                                 <td class="border border-slate-300"><%= s.capitulo.nomcapitulo %></td>
-                                <td class="border border-slate-300 text-center"> <%= number_to_currency(s.monto, :unit=>@moneda.currency + ' ') %></td>
+                                <td class="border border-slate-300 text-center"> <%= number_to_currency(s.monto, :unit=>@moneda.currency + ' $ ') %></td>
                             </tr>
                             
                     <% end %>        
@@ -20,7 +20,7 @@
               <tfoot>
                     <tr>  
                         <td class="text-right font-semibold">Total:</td>
-                        <td class="text-center font-semibold"><%= number_to_currency(@sum_caps, :unit=>@moneda.currency + ' ')%></td>
+                        <td class="text-center font-semibold"><%= number_to_currency(@sum_caps, :unit=>@moneda.currency + ' $ ')%></td>
                     </tr>
               </tfoot>
         </table>

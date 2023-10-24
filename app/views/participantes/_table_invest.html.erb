@@ -21,14 +21,14 @@
                                               <div class="flex justify-center"><%= inline_svg_tag 'svg/controlar.svg' %></div>
                                 <% end %>
                     </td>
-                    <td class="border border-slate-300 text-center"><%= sprintf("%.0f",part_inv.porcentaje) %></td>
+                    <td class="border border-slate-300 text-center"><%= sprintf("%.0f",part_inv.porcentaje) %> <span>%</span> </td>
                 </tr>
             <% end %>            
         </tbody>
         <tfoot>
               <tr>  
                    <td colspan="3" class="text-right font-semibold">Total:</td>
-                   <td class="text-center font-semibold"><%= sprintf("%.0f", @inv.sum(:porcentaje)) %></td>
+                   <td class="text-center font-semibold"><%= sprintf("%.0f", @inv.sum(:porcentaje)) %> <span>%</span> </td>
               </tr>
         </tfoot>
         </table>

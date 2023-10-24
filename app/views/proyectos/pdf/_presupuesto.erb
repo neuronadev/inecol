@@ -10,38 +10,38 @@
                       <% @proyecto.presupuesto.solicitados.each do |prep| %>
                              <tr>
                                  <td style="width:35%;"> <%= prep.capitulo.nomcapitulo %> </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
-                                 <td style="width:5%; text-align:right;"> <%= number_to_currency(prep.monto, :unit => " ") %> </td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
+                                 <td style="width:5%; text-align:right;"> <%= number_to_currency(prep.monto, :unit => "") %> </td>
                              </tr>
                       <% end %>         
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> Subtotal </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%= number_to_currency(@proyecto.presupuesto.solicitados.sum(:monto), :unit => "") %> </td>
                       </tr> 
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> <span style="margin-left:60px;">20% Overhead</span> </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%= number_to_currency(@proyecto.presupuesto.overhead, :unit => "") %> </td>
                       </tr>
                        <tr>
                                  <td style="width:35%; font-weight: bold;"> <span style="margin-left:60px;">10% Estímulos</span> </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%= number_to_currency(@proyecto.presupuesto.estimulo, :unit => "") %> </td>
                       </tr>
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> Subtotal </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%=  number_to_currency(@proyecto.presupuesto.costo,:unit => "") %> </td>
                       </tr> 
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> IVA (en su caso) </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%=  number_to_currency(@proyecto.presupuesto.iva,:unit => "") %> </td>
                       </tr>
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> Total </td>
-                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %></td>
+                                 <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
                                  <td style="width:5%; text-align:right;"> <%=  number_to_currency(@proyecto.presupuesto.tproyecto,:unit => "") %> </td>
                       </tr>
                       
