@@ -28,15 +28,15 @@ class ProyectosController < ApplicationController
   end
 
   def cplanconv
-       #@proyecto = Proyecto.find(params[:id])
-       #@proyecto.planconv = params[:planconv]
-       #respond_to do |format|
-       #    if @proyecto.save
-       #          format.html { redirect_to planconv_proyecto_path(@proyecto) }
-       #    else
-       #          format.html { render :planconv, status: :bad_request }
-       #    end
-      #end
+       @proyecto = Proyecto.find(params[:id])
+       @proyecto.planconv = params[:planconv]
+       respond_to do |format|
+           if @proyecto.save
+                 format.html { redirect_to planconv_proyecto_path(@proyecto) }
+           else
+                 format.html { render :planconv, status: :bad_request }
+           end
+      end
   end
 
   def finalizar

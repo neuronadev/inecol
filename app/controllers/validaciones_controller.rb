@@ -1,4 +1,4 @@
-require 'fechaslim'
+
 class ValidacionesController < ApplicationController
   def index
       @proyecto = Proyecto.find(params[:idpy])

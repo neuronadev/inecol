@@ -14,7 +14,7 @@ class DictamenesController < ApplicationController
 
   def create
       @dictamen = Dictamen.new(dictamen_params)
-      @tvalidacion = Tvalidacion.find(params[:tvalidacion_id])
+      @tvalidacion = Tvalidacion.find(params[:dictamen][:tvalidacion_id])
       @proyecto = Proyecto.find(params[:dictamen][:proyecto_id])
 
       enevento = Enevento.where(clave:'DICT').first  #Eventos de enlace
