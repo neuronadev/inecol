@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
- 
+  get 'reportes/index'
+  get 'reportes/recurso'
+  get 'reportes/interinst'
+  get 'reportes/cconvenio'
      
   get 'documentos/protocolo'
   get 'documentos/convenio'

@@ -1,0 +1,14 @@
+
+<% 
+   str = ''
+   t = e.proyecto.instituciones.count
+   x = 1
+   e.proyecto.instituciones.each do |i| 
+         str += i.nominstitucion
+         if x < t
+             str += ', '
+         end
+         x += 1
+   end
+%>
+<%= str %>

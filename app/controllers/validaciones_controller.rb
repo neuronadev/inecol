@@ -21,7 +21,7 @@ class ValidacionesController < ApplicationController
   def create
       @validacion = Validacion.new(validacion_params)
       @proyecto = Proyecto.find(params[:validacion][:proyecto_id])
-      
+
       respond_to do |format|
         if @validacion.save
                enevento = Enevento.where(clave:'EVAL').first
@@ -38,7 +38,7 @@ class ValidacionesController < ApplicationController
                p '---------------------------------------------'
                p @validacion.errors
                format.html { render :new, status: :bad_request }
-        end
+       end
       end
   end
 
