@@ -1,0 +1,21 @@
+<%= turbo_frame_tag 'pycontent', class:'w-full' do %>
+  <div class="w-full text-slate-700">
+      <div class="mt-3 flex align-middle ">
+          <div class="flex w-full">
+            <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
+            <div class="ml-1 font-semibold">Proyectos de Investigación Financiados con Recursos Externos</div>
+          </div>
+          <div class="flex w-2/3 justify-between">
+
+          </div> 
+      </div>
+      
+      <div class="mt-5 border-2 border-gray-100 p-5 w-full">
+        <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
+              <%= render "rep_inter" %>
+        <% end %>    
+      </div>
+
+  </div>  
+
+<% end %>

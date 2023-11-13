@@ -1,9 +1,9 @@
 
 <% 
    str = ''
-   t = e.proyecto.instituciones.count
+   t = p.instituciones.count
    x = 1
-   e.proyecto.instituciones.each do |i| 
+   p.instituciones.each do |i| 
          str += i.nominstitucion
          if x < t
              str += ', '

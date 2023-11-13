@@ -7,6 +7,7 @@ class ReportesController < ApplicationController
   end
 
   def interinst
+      @proyectos = Proyecto.where(interinst:true)
   end
 
   def cconvenio
