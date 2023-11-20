@@ -115,6 +115,7 @@ class PresupuestosController < ApplicationController
                                    @presupuesto.solicitados.build
                             end  
                             format.html { render :new, status: :bad_request }
+                            
                     end
             end
     else

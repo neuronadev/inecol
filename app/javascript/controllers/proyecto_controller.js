@@ -67,8 +67,8 @@ export default class extends Controller {
         } catch (e) { alert(e) }
    }
 
-   onClasifica(event){
-        this.activeMedios()
+   async onClasifica(event){
+        /*this.activeMedios()
         var data_medio = this.idxConvocatoria('CONV')
         data_medio.then(val=>{ 
                  let idx_medio = val.medio_id 
@@ -86,10 +86,69 @@ export default class extends Controller {
                          this.activeOVH(val.ovh)
 
                  })
-           })
-        
-        
+           })*/
+           this.activeMedios()
+           var data_medio = await this.idxConvocatoria('CONV').then( r => { return r })
+           let idx_medio = data_medio.medio_id
+           var data_clasif = await this.tipoClasifica(event.target.value).then( c => { return c } )
+           if (data_clasif.clave == 'CREC'){
+                  let tpl_conv = `<div>
+                                          <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
+                                                <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
+                                                <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto con Overhead</div>
+                                          </div>
+                                  </div>
+                                  <div class="ml-5">
+                                         <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadFalse">
+                                             <div id="iconFalse" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
+                                             <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto sin Overhead</div>
+                                         </div>
+                                   </div>`
+                  document.getElementById("sel_overhead").innerHTML = tpl_conv            
+           }
+           if ( data_clasif.clave == 'PSERV' || data_clasif.clave == 'INCUR' ){
+                  let tpl_conv = `<div>
+                                                <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
+                                                      <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
+                                                      <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto con Overhead</div>
+                                                </div>
+                                    </div>
+                                    <div class="ml-5" style="display:none;">
+                                          <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadFalse">
+                                                <div id="iconFalse" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
+                                                <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto sin Overhead</div>
+                                          </div>
+                                    </div>`
+                  document.getElementById("sel_overhead").innerHTML = tpl_conv                  
+                  this.onOverheadTrue(event)
+                  if ( data_clasif.clave == 'PSERV' ){
+                        for ( let i = 0; i < options.length; i++ ) {
+                              if (Number(options[i].value) == idx_medio ){
+                                    options[i].disabled = true
+                                    medios.options.selectedIndex = 0
+                                    this.hiddeMedio()
+                              }
+                        }
+                  }      
+          }
+          if (data_clasif.clave == 'SNREC'){
+                  document.getElementById("sel_overhead").innerHTML = '<span class="italic font-semibold ">No aplica Overhead</span>'
+                  document.getElementById("proyecto_overhead").value=0
+          }
+           
    }
+
+   onOverheadTrue(event){
+        document.getElementById("iconTrue").innerHTML = "<img src='/assets/checked.png'>"
+        document.getElementById("iconFalse").innerHTML = ""
+        document.getElementById("proyecto_overhead").value=1
+   }
+   onOverheadFalse(event){
+      document.getElementById("iconFalse").innerHTML = "<img src='/assets/checked.png'>"
+      document.getElementById("iconTrue").innerHTML = ""
+      document.getElementById("proyecto_overhead").value=0
+   }
+
    chkOvh(event){
          var clasifica = document.getElementById('proyecto_clasificacion_id').value
          if (clasifica != ''){

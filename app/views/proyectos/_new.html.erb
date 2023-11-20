@@ -50,17 +50,29 @@
                                                 {class:'appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',
                                                 'data-action':'change->proyecto#onClasifica'
                                                 }
-
                             %>   
                         </div> 
-                        <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
-                                <%= form.check_box :overhead,
-                                        class:'relative align-middle float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]',
-                                        data:{action:'click->proyecto#chkOvh'}
-                                %>
-                                <%= form.label :overhead, class:'inline-block font-semibold pl-[0.15rem] hover:cursor-pointer ' %>
-                        </div>            
+                                 
                     </div>
+                </div>
+
+                <div class="md:flex md:items-center mb-3">
+                         <%=  form.hidden_field :overhead, value:'0' %>
+                         <div class="md:w-1/5">
+                         
+                         </div>
+                        <div id="sel_overhead" class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
+                                <div class="flex">
+                                           <div class=" md:flex md:items-center w-6 border-2 border-solid rounded"></div>
+                                           <div class=" w-fit md:flex md:items-center ml-2 italic text-gray-600">Proyecto con Overhead</div>
+                                </div>
+                                <div class="ml-5">
+                                       <div class="flex">
+                                           <div class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
+                                           <div class=" w-fit md:flex md:items-center ml-2 italic text-gray-600">Proyecto sin Overhead</div>
+                                       </div>
+                                </div>    
+                        </div>      
                 </div>
 
                 <div class="md:flex md:items-center mb-3">
@@ -129,27 +141,56 @@
                     <div class="md:w-1/5">
                     
                     </div>
-                    <div class="md:w-4/5">
-                            <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
+                    <div class="flex md:w-4/5" data-controller="tiptrans">
+                            <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-fit md:flex md:items-center mx-1.5">
                                 <%= form.check_box :tfconoc,
                                         class:'relative align-middle float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]'
                                 %>
                                 <%= form.label :tfconoc, 'Transferencia de Conocimiento', class:'inline-block font-semibold pl-[0.15rem] hover:cursor-pointer ' %>
-                        </div>     
+                            </div>
+                           <button
+                                id="tipTrans"
+                                type="button"
+                                class="rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                 <%= inline_svg_tag 'svg/pregunta.svg' %>
+                            </button>
+                            <div
+                                id="tipTransCont"
+                                role="tooltip"
+                                class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
+                            >
+                                Transmisión del conocimiento a los sectores gubernamental, social y productivo.
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            
                     </div> 
                 </div>
 
                 <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
                     </div>
-                    <div class="md:w-4/5">
-                            <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
+                    <div class="flex md:w-4/5" data-controller="tipinter">  
+                            <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-fit md:flex md:items-center mx-1.5">
                                 <%= form.check_box :interinst,
                                         class:'relative align-middle float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]',
                                         'data-action':'click->proyecto#onInterInst'
                                 %>
                                 <%= form.label :interinst, 'Interinstitucional', class:'inline-block pl-[0.15rem] font-semibold hover:cursor-pointer ' %>
-                        </div>     
+                            </div> 
+                            <button
+                                id="tipInter"
+                                type="button"
+                                class="rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                 <%= inline_svg_tag 'svg/pregunta.svg' %>
+                            </button>
+                            <div
+                                id="tipInterCont"
+                                role="tooltip"
+                                class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
+                            >
+                                 Proyectos en colaboración con otras instituciones u organizaciones.
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>  
                     </div> 
                 </div>
 

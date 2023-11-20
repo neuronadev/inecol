@@ -3,6 +3,7 @@
           <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
           <%= form.hidden_field :evaluador_id, value:Evaluador.where(persona_id:current_usuario.cuenta.persona_id).first.id %>
           <%= form.hidden_field :tvalidacion_id, value:@tvalidacion%>
+          <!--
           <div class="md:flex md:items-center mb-3"> 
                <div class="md:w-1/5 font-semibold">
                          <%= form.label :docficha, 'Documento:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
@@ -11,6 +12,7 @@
                          <%= form.file_field :docficha, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                </div>
           </div>    
+          -->
           <% if current_usuario.cuenta.rol.clave == 'EL' %>
                  <div class="md:flex md:items-center mb-3"> 
                     <div class="md:w-1/5 font-semibold">
@@ -22,7 +24,7 @@
                  </div>    
                  <div class="md:flex md:items-center mb-3"> 
                     <div class="md:w-1/5 font-semibold">
-                              <%= label_tag 'Fecha limite:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
+                              <%= label_tag 'Fecha límite:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
                     </div>
                     <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
                               <%= date_field_tag 'flim', nil, class: '', value:@fecha_limite %>
