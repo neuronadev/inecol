@@ -45,18 +45,20 @@ class PresupuestosController < ApplicationController
              params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       end
 
-     
+      @error_type_montos = false 
       @presupuesto.update(presupuesto_params)
+      @proyecto = Proyecto.find(params[:presupuesto][:proyecto_id])
       respond_to do |format|
            if @presupuesto.save
                 format.html { redirect_to presupuesto_path(@presupuesto) }
            else
-                if @presupuesto.errors.where(:base).any?
-                     flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
+                if !@presupuesto.errors.where(:base).blank?
+                     flash.now[:montos] = @presupuesto.errors.where(:base).first.full_message
+                     @error_type_montos = true
                 else
                      flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                 end  
-                format.html { render :edit, status: :bad_request }
+                format.html { render :edit, status: :bad_request}
            end
       end
   end
@@ -97,7 +99,7 @@ class PresupuestosController < ApplicationController
                         format.html { redirect_to @presupuesto } 
                     else
                             if @presupuesto.errors.where(:base).any?
-                                flash.now[:error] = @presupuesto.errors.where(:base).first.full_message
+                                flash.now[:montos] = @presupuesto.errors.where(:base).first.full_message
                             else
                                 flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                             end  
@@ -115,6 +117,7 @@ class PresupuestosController < ApplicationController
                                    @presupuesto.solicitados.build
                             end  
                             format.html { render :new, status: :bad_request }
+                            
                             
                     end
             end

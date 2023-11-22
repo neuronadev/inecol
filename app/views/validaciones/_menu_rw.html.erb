@@ -1,5 +1,15 @@
- <div class="flex">
-    <div> <%= inline_svg_tag 'svg/comentario.svg' %></div> 
-    <div class="ml-1">Ver</div>
- </div>
- 
+  <%  if @proyecto.validaciones.any? %>
+      <% if !@proyecto.validaciones.where(evaluador_id:evl.id).last.nil? %> 
+               <% if !@proyecto.validaciones.where(evaluador_id:evl.id).last.txtval.blank? %>  
+                        <div class="flex cursor-pointer text-blue-800" data-action="click->valcomm#shwComm" data-valcomm-ideval-param="<%= 'com-' + evl.id.to_s %>">
+                           <div> <%= inline_svg_tag 'svg/comentario.svg' %></div> 
+                           <div class="ml-1 text-sm">Comentarios</div>
+                        </div>
+               <% else %>         
+                        <div class="flex">
+                           <div> <%= inline_svg_tag 'svg/comentario.svg' %></div> 
+                           <div class="ml-1 test-sm italic">Sin comentarios</div>
+                        </div>
+               <% end %>       
+      <% end %>
+<% end %>    

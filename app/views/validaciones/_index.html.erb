@@ -6,7 +6,7 @@
 <% end %>  
   
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5" data-controller="valcomm">
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-medium text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
@@ -47,17 +47,17 @@
                     </td>
                 </tr>
                                 
-                <tr class="font-medium border-b dark:bg-gray-800 dark:border-gray-700">
-                     <th  class="px-8" scope="row" colspan="4">
-                            <%  if @proyecto.validaciones.any? %>
-                                    <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
-                                             <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
-                                                     Comentarios: <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
-                                             <% end %>       
-                                    <% else %>   
-                                                
-                                    <% end %>
-                            <% end %>        
+                <tr id="com-<%= e.id %>" class="font-medium border-b dark:bg-gray-800 dark:border-gray-700" style="display:none;">
+                     <td class="px-8" scope="row" colspan="5">
+                           <div class="mb-3 p-5 border">
+                                <%  if @proyecto.validaciones.any? %>
+                                        <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
+                                                <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
+                                                        Comentarios: <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
+                                                <% end %>       
+                                        <% end %>
+                                <% end %>
+                           </div>     
                      </td>
                 </tr>
                 

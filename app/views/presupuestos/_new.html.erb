@@ -1,11 +1,13 @@
 
 <div class="w-full" data-controller="presup-sol utils">
    <% flash.each do |type, msg| %>
-           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <%= msg %>
-                
-           </div>
+               <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                  <%= msg %>
+               </div> 
    <% end %>
+
+  
+
   <%= form_with(model:@presupuesto,
                     data:{ 
                             controller:'nested-form-sol',
@@ -16,8 +18,8 @@
        <% if controller.action_name == 'new' || controller.action_name == 'create' %>  
               <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
        <% end %> 
-       <% if controller.action_name == 'edit' %>  
-              <%= form.hidden_field :proyecto_id, value:@presupuesto.proyecto_id %>
+       <% if controller.action_name == 'edit' || controller.action_name == 'update' %>  
+              <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
        <% end %> 
 
        <%= render 'costos', form:form %>
