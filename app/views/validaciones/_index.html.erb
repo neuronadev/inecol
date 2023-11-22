@@ -22,6 +22,7 @@
                 <th scope="col" class="px-6 py-3 text-center">
                     Fecha límite
                 </th>
+                <th></th>
                 
             </tr>
         </thead>
@@ -41,9 +42,11 @@
                     <td class="px-6 py-4 text-center">
                          <%= @proyecto.solicitud.fecha_lim.strftime('%d-%m-%Y') %>
                     </td>
+                    <td class="text-center p-1">
+                        <%= render 'validaciones/menu_rw', evl:e %>  
+                    </td>
                 </tr>
-                
-                
+                                
                 <tr class="font-medium border-b dark:bg-gray-800 dark:border-gray-700">
                      <th  class="px-8" scope="row" colspan="4">
                             <%  if @proyecto.validaciones.any? %>
@@ -57,7 +60,6 @@
                             <% end %>        
                      </td>
                 </tr>
-
                 
           <% end %>      
           
