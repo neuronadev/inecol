@@ -45,7 +45,7 @@ class PresupuestosController < ApplicationController
              params[:presupuesto][:solicitados_attributes][i][:monto] = v[:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
       end
 
-      @error_type_montos = false 
+
       @presupuesto.update(presupuesto_params)
       @proyecto = Proyecto.find(params[:presupuesto][:proyecto_id])
       respond_to do |format|
@@ -54,7 +54,6 @@ class PresupuestosController < ApplicationController
            else
                 if !@presupuesto.errors.where(:base).blank?
                      flash.now[:montos] = @presupuesto.errors.where(:base).first.full_message
-                     @error_type_montos = true
                 else
                      flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                 end  
