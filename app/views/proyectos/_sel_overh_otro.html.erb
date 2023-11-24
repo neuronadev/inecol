@@ -1,0 +1,47 @@
+<% if @proyecto.clasificacion.clave == 'CREC' %>
+        <div>
+                <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
+                    <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded">
+                               <% if @proyecto.overhead == true %>
+                                         <%= inline_svg_tag 'svg/checked.svg' %>
+                               <% end %>
+
+                     </div>
+                    <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto con Overhead</div>
+                </div>
+        </div>
+        <div class="ml-5">
+                <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadFalse">
+                    <div id="iconFalse" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> 
+                             <% if @proyecto.overhead == false %>
+                                         <%= inline_svg_tag 'svg/checked.svg' %>
+                            <% end %>
+                    </div>
+                    <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto sin Overhead</div>
+                </div>
+        </div>
+<% end %>        
+
+<% if @proyecto.clasificacion.clave == 'PSERV' || @proyecto.clasificacion.clave == 'INCUR' %>
+        <div>
+                    <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
+                            <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> 
+                                   <% if @proyecto.overhead == true %>
+                                         <%= inline_svg_tag 'svg/checked.svg' %>
+                                   <% end %>
+                            </div>
+                            <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto con Overhead</div>
+                    </div>
+        </div>
+        <div class="ml-5" style="display:none;">
+                <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadFalse">
+                    <div id="iconFalse" class=" md:flex md:items-center w-6 border-2 border-solid rounded">
+                    </div>
+                    <div class=" w-fit md:flex md:items-center ml-2 font-semibold">Proyecto sin Overhead</div>
+                </div>
+        </div>
+<% end %>  
+
+<% if @proyecto.clasificacion.clave == 'SNREC' %>
+       <span class="italic font-semibold ">No aplica Overhead</span>
+<% end %>

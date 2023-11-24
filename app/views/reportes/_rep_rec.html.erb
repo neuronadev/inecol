@@ -58,7 +58,7 @@
                                         <%= e.proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>                            
                                    </td>
                                    <td class="p-2">  
-                                        <%= e.proyecto.dictamen.txtdictamen if !e.proyecto.dictamen.nil? %>
+                                        <%= e.proyecto.avances.last.txtavance if !e.proyecto.avances.blank? %>
                                    </td>
                          </tr>  
 

@@ -57,21 +57,16 @@
                 </div>
 
                 <div class="md:flex md:items-center mb-3">
-                         <%=  form.hidden_field :overhead, value:'0' %>
-                         <div class="md:w-1/5">
-                         
-                         </div>
+                        <%=  form.hidden_field :overhead, value:'0' %>
+
+                        <div class="md:w-1/5"></div>
                         <div id="sel_overhead" class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
-                                <div class="flex">
-                                           <div class=" md:flex md:items-center w-6 border-2 border-solid rounded"></div>
-                                           <div class=" w-fit md:flex md:items-center ml-2 italic text-gray-600">Proyecto con Overhead</div>
-                                </div>
-                                <div class="ml-5">
-                                       <div class="flex">
-                                           <div class=" md:flex md:items-center w-6 border-2 border-solid rounded"> </div>
-                                           <div class=" w-fit md:flex md:items-center ml-2 italic text-gray-600">Proyecto sin Overhead</div>
-                                       </div>
-                                </div>    
+                                  <% if controller.action_name == 'new' || controller.action_name == 'create' %>  
+                                         <%= render 'proyectos/sel_overh_new' %>
+                                  <% else %>
+                                         <%= render 'proyectos/sel_overh_otro' %> 
+                                  <% end %>
+
                         </div>      
                 </div>
 
