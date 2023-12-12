@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluador: one
+  proyecto: one
+  firmado: false
+  data: MyText
+
+two:
+  evaluador: two
+  proyecto: two
+  firmado: false
+  data: MyText

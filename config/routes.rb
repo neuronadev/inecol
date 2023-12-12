@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'reportes/index'
   get 'reportes/recurso'
   get 'reportes/interinst'
@@ -100,7 +101,13 @@ resources :mtoconcurrentes
                 post 'enviarmail'
              end
   end
-
+ 
+  resources :firmas do
+        collection do
+            post 'generar'
+        end
+  end
+   
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

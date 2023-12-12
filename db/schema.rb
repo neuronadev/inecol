@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_23_204701) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_12_053748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -219,6 +219,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_204701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["persona_id"], name: "index_py.evaluadores_on_persona_id"
+  end
+
+  create_table "firmas", force: :cascade do |t|
+    t.bigint "evaluador_id", null: false
+    t.bigint "proyecto_id", null: false
+    t.boolean "firmado"
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluador_id"], name: "index_py.firmas_on_evaluador_id"
+    t.index ["proyecto_id"], name: "index_py.firmas_on_proyecto_id"
   end
 
   create_table "fiscales", force: :cascade do |t|
@@ -598,6 +609,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_204701) do
   add_foreign_key "etapas", "proyectos"
   add_foreign_key "etapas", "teventos"
   add_foreign_key "evaluadores", "personas"
+  add_foreign_key "firmas", "evaluadores"
+  add_foreign_key "firmas", "proyectos"
   add_foreign_key "fiscales", "capitulos"
   add_foreign_key "fiscales", "recursos"
   add_foreign_key "fuentes", "lugares"

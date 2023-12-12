@@ -41,11 +41,22 @@
                                 <%= render 'vistas/util/evalestado', proyecto:py %>
                             </td>
                             <td class="px-6 py-4">
-                                <% if py.etapas.last.tevento.clave == 'CAP' %> 
-                                       <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                                <% else %>    
-                                       <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                                <% end %>                            
+                                <div class="flex">
+                                   <div>
+                                        <% if py.etapas.last.tevento.clave == 'CAP' %> 
+                                            <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                                        <% else %>    
+                                            <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                                        <% end %>                            
+                                   </div>  
+                                   <div class="ml-5">   
+                                        <% if py.enlaces.last.enevento.clave == 'DICT' %>
+                                                <%= link_to 'Firmar', firma_path(py, format: :html), class:"font-medium text-green-600 dark:text-green-500 hover:underline font-bold" %> 
+                                                
+                                        <% else %>
+                                                 <span class="text-gray-500 italic ">Firmar</span>
+                                        <% end %>  
+                                   </div>
                             </td>
                         </tr>
                      <% end %>   

@@ -1,0 +1,14 @@
+<div style="width:100%; background-color: #e4e4e4; padding:5px 0; margin-top:5px;">
+
+
+    <% @proyecto.firmas.each do |firma| 
+          persona = Persona.find(firma.evaluador.persona.id)
+    %>
+           <div style="margin-top:15px;">
+                <div style="margin-top:2px;"><strong><%= persona.nom_espacio %></strong></div>
+                <div style="margin-top:2px;"><strong>Firma Electrónica</strong></div>
+                <div style="margin-top:2px;"> <%= firma.data %> </div>
+           </div>
+    <% end %>
+
+</div>

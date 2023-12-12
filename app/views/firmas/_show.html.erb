@@ -1,0 +1,36 @@
+<div class="">
+  
+</div>  
+
+<div class="mt-10 w-full h-1/4 border-2 p-2" style="overflow-x: auto;">
+    <div class="pdf-data">
+        <%= render partial: '/proyectos/pdf/ficha_head', formats:[:html] %>
+
+        <%= render partial: '/proyectos/pdf/proyecto', formats:[:html], locals:{proyecto:@proyecto} %>
+
+        <%= render partial: '/proyectos/pdf/presupuesto', formats:[:html], locals:{proyecto:@proyecto} %>
+
+        <%= render partial: '/proyectos/pdf/ficha_foot', formats:[:html], locals:{proyecto:@proyecto} %>
+        
+        <%= render partial: '/proyectos/pdf/metas', formats:[:html], locals:{proyecto:@proyecto} %>
+    </div>
+</div>
+
+<div id="target_firma" class="flex items-center justify-center mt-5 w-full h-36 border-2 p-2" style="overflow-x: auto;">
+  <% 
+      firma = Firma.where(evaluador_id: current_usuario.cuenta.persona.evaluador.id, proyecto_id: @proyecto.id, firmado:true).first
+  %> 
+    <% if firma.nil? %>
+        <div  class="cursor-pointer" data-controller="firmar" data-action = "click->firmar#generar" data-firmar-proyecto-param = "<%= @proyecto.id %>">
+            <%= inline_svg_tag 'svg/firma.svg' %>
+            <div class="flex justify-center font-bold">Firmar</div>
+        </div>  
+    <% else %>
+         <div>
+           <div class="font-bold">  <%= current_usuario.cuenta.persona.nom_espacio %> </div>
+           <div class="font-bold">Firma Electrónica </div>
+           <%= firma.data %>
+         </div>  
+    <% end %>    
+    
+</div>

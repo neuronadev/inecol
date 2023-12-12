@@ -21,6 +21,7 @@ class Proyecto < ApplicationRecord
     has_many :prorrogas
     has_many :avances
     has_many :informes
+    has_many :firmas
     has_one :solicitud
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
