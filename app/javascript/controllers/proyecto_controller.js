@@ -87,7 +87,7 @@ export default class extends Controller {
 
                  })
            })*/
-           this.activeMedios()
+           //this.activeMedios()
            var data_medio = await this.idxConvocatoria('CONV').then( r => { return r })
            let idx_medio = data_medio.medio_id
            var data_clasif = await this.tipoClasifica(event.target.value).then( c => { return c } )
