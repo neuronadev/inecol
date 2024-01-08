@@ -190,31 +190,19 @@ class ProyectosController < ApplicationController
 
   def enviar
        proyecto = Proyecto.find(params[:id])
-       #@pry = proyecto
-       #ResponsableMailer.with(proyecto: @pry).notificar_envio.deliver_later
+
        evento = Tevento.where(clave:'REV').first
        Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
 
        enevento = Enevento.where(clave:'NVO').first
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
        
-       ##enviar email al Enlace de proyectos### 
-         #param_email = {nproyecto: proyecto.nombre, responsable: proyecto.persona.nom_espacio }
-         #data1 = Util::Email.proyecto_enlace(param_email)
-         #puts 'DATA1 -----------------'
-         #puts data1
-       #########################  
-
-       ##enviar email al Responsable de proyectos### 
-         #param_email = {nproyecto: proyecto.nombre}
-         #data2 = Util::Email.proyecto_responsable(param_email, proyecto.id)
-         #puts 'DATA2 ---------------'
-         #puts data2
-       #########################  
+       #@pry = proyecto
+       #ResponsableMailer.with(proyecto: @pry).notificar_envio.deliver_later      
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }
-      end
+       end
   end
  
   def eliminar
