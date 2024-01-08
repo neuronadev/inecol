@@ -14,7 +14,7 @@
         <tbody>
             <% @inv.each do |part_inv| %>
                 <tr>
-                    <td class="border border-slate-300"><%= part_inv.academico.persona.ap_nom_prop %></td>
+                    <td class="border border-slate-300"><%= part_inv.academico.persona.nom_espacio %></td>
                     <td class="border border-slate-300 text-center"><%= part_inv.academico.tacademico.nomtacademico %></td>
                     <td class="border border-slate-300 text-center">
                                 <% if part_inv.responsable %>

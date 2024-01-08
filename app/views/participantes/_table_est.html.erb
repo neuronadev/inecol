@@ -13,7 +13,7 @@
                 <% if @est.any? %>  
                         <% @est.each do |part_est| %>
                             <tr>
-                                <td class="border border-slate-300"><%= part_est.nombre %></td>
+                                <td class="border border-slate-300"><%= part_est.nombre.nom_espacio %></td>
                                 <td class="border border-slate-300 text-center"><%= part_est.nivel.nomnivel %></td>
                             </tr>
                         <% end %>
