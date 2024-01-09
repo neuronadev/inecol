@@ -5,7 +5,7 @@ class ParticipantesController < ApplicationController
   def show
       @participante = Participante.find(params[:id])
       @proyecto = @participante.proyecto
-      @inv = @participante.pacademicos #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV')
+      @inv = @participante.pacademicos.order(:responsable) #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV')
       @tec = @participante.ptecnicos #.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC')
       @est = @participante.pestudiantes
 

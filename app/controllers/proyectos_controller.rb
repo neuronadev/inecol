@@ -197,8 +197,9 @@ class ProyectosController < ApplicationController
        enevento = Enevento.where(clave:'NVO').first
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
        
-       #@pry = proyecto
-       #ResponsableMailer.with(proyecto: @pry).notificar_envio.deliver_later      
+       
+       message  = ResponsableMailer.with(proyecto).notificar_envio
+       message.deliver_later
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

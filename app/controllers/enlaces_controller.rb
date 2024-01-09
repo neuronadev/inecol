@@ -28,6 +28,8 @@ class EnlacesController < ApplicationController
       respond_to do |format|
             if @enlace.save
                    #format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
+                   message  = ResponsableMailer.with(p:@proyecto, e:@enlace).notificar_corregir
+                   message.deliver_later
                    format.html { redirect_to enlace_path(@enlace) }
             else
                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
