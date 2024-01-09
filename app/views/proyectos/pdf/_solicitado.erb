@@ -1,0 +1,37 @@
+<table style=" width:80%; padding:5px 0;  border-collapse: collapse;">
+    <tr>  
+       <td style="width:10%;"></td>
+       <td style="width:90%;"> 
+            <table style="width:100%; border-collapse: collapse;">
+              <tbody>            
+                  <% if items.any? %>
+                          <% items.each do |item| %>
+                              <tr style="background-color: #FFFFFF;">
+                                  <td style="width:400px; padding:5px; text-align:left;"><%= item.capitulo.nomcapitulo %></td>
+                                  <td style="width:20px; padding:5px; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
+                                  <td style="width:100px; padding:7px; text-align:right;"><%=  number_to_currency(item.monto,:unit => "") %></td>
+                              </tr>
+                          <% end %>
+                  <% else %>
+                              <tr style="background-color: #FFFFFF;">
+                                  <td style="width:400px; padding:5px;text-align:left;"></td>
+                                  <td style="width:20px; padding:5px; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
+                                  <td style="width:100px; padding:7px; text-align:right;">0.00</td>
+                              </tr>
+                  <% end %>
+              </tbody>    
+              <tfoot>
+                          <tr>
+                              <td style="width:400px; font-weight: bold; padding:5px;text-align:right;">Subtotal</td>
+                              <td style="width:20px; font-weight: bold; padding:5px; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
+                               <% if items.any? %>
+                                      <td style="width:100px; font-weight: bold; padding:7px; text-align:right;"><%=  number_to_currency(items.sum(:monto),:unit => "") %></td>
+                               <% else %>       
+                                      <td style="width:100px; font-weight: bold; padding:7px; text-align:right;">0.00</td> 
+                               <% end %>
+                          </tr>
+              </tfoot>
+            </table>          
+       </td> 
+     </tr>     
+</table>

@@ -12,6 +12,15 @@
 </div>   
 
 <div style="width:100%; background-color: #e4e4e4; padding:2px 0;">
+        <div style="font-weight: bold; background-color: #909090; padding:7px 0;">Desglose de Recursos Financiados por la Institución, Gobierno o Empresa</div>
+        <div style="font-weight: bold; margin-top:10px;"></div>
+        <div>
+              <%= render partial: '/proyectos/pdf/solicitado', formats:[:html], locals:{items:@proyecto.presupuesto.solicitados} %>
+        </div>    
+</div>        
+
+
+<div style="width:100%; background-color: #e4e4e4; padding:2px 0;">
    <div style="font-weight: bold; background-color: #909090; padding:7px 0;">Desglose de Recursos Aportados por el INECOL</div>
    
    <div style="font-weight: bold; margin-top:10px;">Fondos Fiscales</div>
