@@ -77,7 +77,7 @@ Rails.application.configure do
    :address              => "smtp.gmail.com",
    :port                 => 587,
    :user_name            => "sisproyectos.inecol@gmail.com",
-   :password             => "jjsiqqtiovqjifsz",
+   :password             => ENV["GMAIL_PASSWORD"],
    :authentication       => "plain",
    :enable_starttls_auto => true,
    :openssl_verify_mode => 'none'
