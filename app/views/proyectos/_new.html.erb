@@ -57,11 +57,17 @@
                 </div>
 
                 <div class="md:flex md:items-center mb-3">
+                    <% if controller.action_name == 'new' %>  
                         <%=  form.hidden_field :overhead, value:'0' %>
+                    <% else %>    
+                        <%=  form.hidden_field :overhead %>
+                    <% end %>    
+
+                   
 
                         <div class="md:w-1/5"></div>
                         <div id="sel_overhead" class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] w-3/6 md:flex md:items-center mx-1.5">
-                                  <% if controller.action_name == 'new' || controller.action_name == 'create' %>  
+                                  <% if controller.action_name == 'new'  %>  
                                          <%= render 'proyectos/sel_overh_new' %>
                                   <% else %>
                                          <%= render 'proyectos/sel_overh_otro' %> 
