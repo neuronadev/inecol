@@ -62,8 +62,9 @@ class EnlacesController < ApplicationController
 
   def atendido
       enlace = Enlace.find(params[:enlace_id])
-
+      
       #########################################################################
+      @proyecto = Proyecto.find(enlace.proyecto_id)
       enlace_py = enlace.proyecto_id
       enevento = Enevento.where(clave:'SOLA').first
 
@@ -75,6 +76,20 @@ class EnlacesController < ApplicationController
       Enlace.create(proyecto_id:enlace_py, enevento_id:enevento_proc.id, estado:'C', raiz:e1.id) 
       ########################################################################
             
+      current_time = Time.now
+      tiempo = (current_time.to_f * 1000).to_i
+      file_nm = "email_atendido_#{tiempo.to_s}.txt"
+      path = "log/#{file_nm}"
+
+      File.open(path, 'w') do |file|
+             file.write("Estimada Sara. <br><br>
+                         El académico: <b> #{@proyecto.persona.nom_espacio} </b> ha <b>corregido</b> la solicitud enviada.<br>
+                         <b>Nombre del proyecto:</b> #{@proyecto.nombre}<br>
+                         <b>Solicitud:</b> #{enlace.txtcoment}
+                        ")
+       end 
+       `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx`
+      
       data = {result:'ok'}
       respond_to do |format|
           format.json { render json:data.to_json }
