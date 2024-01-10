@@ -28,7 +28,7 @@ class ValidacionesController < ApplicationController
                Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
-               emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx']
+               emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx', 'sara.sanchez@inecol.mx']
 
                current_time = Time.now
                tiempo = (current_time.to_f * 1000).to_i
@@ -47,7 +47,7 @@ class ValidacionesController < ApplicationController
                end 
 
                emails.each do |mail|
-                     `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:no-reply@inecol.mx' #{mail}`
+                     `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
                end
 
                if current_usuario.cuenta.rol.clave == 'EL'

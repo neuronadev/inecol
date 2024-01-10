@@ -30,6 +30,29 @@ class DictamenesController < ApplicationController
             if @dictamen.save
                    Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                    Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+
+                   emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx', 'sara.sanchez@inecol.mx']
+                   current_time = Time.now
+                   tiempo = (current_time.to_f * 1000).to_i
+                   file_nm = "email_solfirma_#{tiempo.to_s}.txt"
+                   path = "log/#{file_nm}"
+
+                   File.open(path, 'w') do |file|
+                      file.write(" <p>Estimados y Estimadas integrantes del Comité Evaluador de Proyectos Externos</p>
+                                 <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO<b> el siguiente proyecto:</p>
+                                 <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+                                 <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
+                                 <p>Favor de ingresar al sistema para firmar.</p>
+
+                                 <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
+                                 ")
+                      end 
+
+                      emails.each do |mail|
+                                `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto dictaminado" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
+                      end
+
+
                    format.html { redirect_to dictamen_path(@dictamen) } 
             else
                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
