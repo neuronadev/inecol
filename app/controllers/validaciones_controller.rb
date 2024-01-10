@@ -36,12 +36,7 @@ class ValidacionesController < ApplicationController
                path = "log/#{file_nm}"
 
                File.open(path, 'w') do |file|
-                     file.write(" <p>Estimados y Estimadas integrantes del Comité Evaluador de Proyectos Externos</p>
-                                  <p> Por medio del presente se hace de su conocimiento que se ha envíado el siguiente proyecto para evaluación:</p>
-                                  <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                                  <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
-                                  <p><b>Comentarios:</b> #{@validacion.txtval}</p>
-
+                     file.write(" #{@validacion.txtval}
                                   <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
                                   ")
                end 
