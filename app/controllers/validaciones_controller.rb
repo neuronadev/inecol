@@ -32,7 +32,7 @@ class ValidacionesController < ApplicationController
 
                current_time = Time.now
                tiempo = (current_time.to_f * 1000).to_i
-               file_nm = "email_solcorr_#{tiempo.to_s}.txt"
+               file_nm = "email_evaluadores_#{tiempo.to_s}.txt"
                path = "log/#{file_nm}"
 
                File.open(path, 'w') do |file|
