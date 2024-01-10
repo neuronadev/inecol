@@ -13,7 +13,6 @@
                                                            <div id = "div_file" class=" md:w-full p-2" data-controller="upsf">
                                                                    <%= form.file_field :docconvenios, class:'item_file', style:'display:none;',  multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                                                    <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
-                                                                   <button type="button" class='item_file ml-2 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'  data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%=  doc.id %>'>Reemplazar...</button>
                                                            </div>
                                                 <% end %>
                         <% else %>         
