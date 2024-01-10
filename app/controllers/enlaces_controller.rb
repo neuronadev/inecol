@@ -28,8 +28,26 @@ class EnlacesController < ApplicationController
       respond_to do |format|
             if @enlace.save
                    #format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
-                   message  = ResponsableMailer.with(p:@proyecto, e:@enlace).notificar_corregir
-                   message.deliver_later
+                   #message  = ResponsableMailer.with(p:@proyecto, e:@enlace).notificar_corregir
+                   #message.deliver_later
+
+                   p = @proyecto.persona
+                   c = Cuenta.where(persona_id:p.id).first
+                   u = Usuario.find(c.usuario_id) 
+                   m = u.email 
+
+                   current_time = Time.now
+                   tiempo = (current_time.to_f * 1000).to_i
+                   file_nm = "email_solcorr_#{tiempo.to_s}.txt"
+                   path = "log/#{file_nm}"
+
+                   File.open(path, 'w') do |file|
+                            file.write("<p>Favor de atender la siguiente solicitud.</p>
+                                        <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+                                        <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>")
+                   end 
+                   `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir información del proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}`
+
                    format.html { redirect_to enlace_path(@enlace) }
             else
                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'

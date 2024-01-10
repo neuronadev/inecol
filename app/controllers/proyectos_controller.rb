@@ -191,11 +191,11 @@ class ProyectosController < ApplicationController
   def enviar
        proyecto = Proyecto.find(params[:id])
 
-       #evento = Tevento.where(clave:'REV').first
-       #Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
+       evento = Tevento.where(clave:'REV').first
+       Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
 
-       #enevento = Enevento.where(clave:'NVO').first
-       #Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
+       enevento = Enevento.where(clave:'NVO').first
+       Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
               
        #message  = ResponsableMailer.with(proyecto).notificar_envio
        #message.deliver_later
@@ -211,8 +211,8 @@ class ProyectosController < ApplicationController
                          <b>Nombre del proyecto:</b> #{proyecto.nombre}
                         ")
        end 
-       `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto enviado a revisión" -a 'Reply-To:no-reply@inecol.mx' antonio.francisco@inecol.mx`
-        p "Email enviado. ---------------------"
+       `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto enviado a revisión" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx`
+
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }
