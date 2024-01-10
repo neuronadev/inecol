@@ -74,12 +74,12 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-   :address              => "smtp.gmail.com",
-   :port                 => 587,
-   :user_name            => "sisproyectos.inecol@gmail.com",
-   :password             => ENV["GMAIL_PASSWORD"],
+   :address              => "smtp.office365.com",
+   :port                 => 25,
+   :user_name            => "proyecto.externo@inecol.mx",
+   :password             => "Proy.23#",
    :authentication       => "plain",
-   :enable_starttls_auto => true,
+   :enable_starttls_auto => false,
    :openssl_verify_mode => 'none'
   }
 end

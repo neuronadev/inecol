@@ -191,14 +191,28 @@ class ProyectosController < ApplicationController
   def enviar
        proyecto = Proyecto.find(params[:id])
 
-       evento = Tevento.where(clave:'REV').first
-       Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
+       #evento = Tevento.where(clave:'REV').first
+       #Etapa.create!(proyecto_id:proyecto.id, tevento_id:evento.id)
 
-       enevento = Enevento.where(clave:'NVO').first
-       Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
+       #enevento = Enevento.where(clave:'NVO').first
+       #Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
               
-       message  = ResponsableMailer.with(proyecto).notificar_envio
-       message.deliver_later
+       #message  = ResponsableMailer.with(proyecto).notificar_envio
+       #message.deliver_later
+        
+       current_time = Time.now
+       tiempo = (current_time.to_f * 1000).to_i
+       file_nm = "email_enlace_#{tiempo.to_s}.txt"
+       path = "log/#{file_nm}"
+
+       File.open(path, 'w') do |file|
+             file.write("Estimada Sara. <br><br>
+                         El académico: <b> #{proyecto.persona.nom_espacio} </b> ha enviado un proyecto a revisión.<br>
+                         <b>Nombre del proyecto:</b> #{proyecto.nombre}
+                        ")
+       end 
+       `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto enviado a revisión" -a 'Reply-To:no-reply@inecol.mx' antonio.francisco@inecol.mx`
+        p "Email enviado. ---------------------"
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

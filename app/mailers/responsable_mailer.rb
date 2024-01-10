@@ -1,7 +1,7 @@
 class ResponsableMailer < ApplicationMailer
       def notificar_envio
            @proyecto_m = Proyecto.find(params[:id]) 
-           mail(to: 'sara.sanchez@inecol.mx', subject: "Proyecto", reply_to: 'no-reply@inecol.mx').deliver!
+           mail(to: 'antonio.francisco@inecol.mx', subject: "Proyecto", reply_to: 'no-reply@inecol.mx').deliver!
       end
 
       def notificar_corregir
