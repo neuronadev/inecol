@@ -25,7 +25,7 @@
                    Responsable:
                 </th>
                 <td class="px-6 py-4">
-                    <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %>
+                    <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
