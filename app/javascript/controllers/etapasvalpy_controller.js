@@ -12,8 +12,13 @@ export default class extends Controller {
 
     mensaje(event){
         //wmodal.mostrar()
+        
         var fr_el = document.getElementById('pycontent')
         if (window.confirm("El proyecto será habilitado para revisión por parte del área de Proyectos Externos. ¿Desea continuar?")) {
+             let button = document.getElementById("btn_enviar");
+             button.disabled = true; 
+             let txt_btn = document.getElementById("txt_btn_enviar");
+             txt_btn.innerHTML = "Un momento..."
              this.enviarpy(event.params.proyecto).then(result => { 
                      fr_el.src = '/proyectos/'
                      fr_el.reload()

@@ -8,6 +8,10 @@ export default class extends Controller {
 
   enlaceAtendido(event){
        this.enlaceUpdateAtendido(event.params.idenlace).then(result => {
+                let txt_aten = document.getElementById("txt_atendida")
+                txt_aten.innerHTML = "Un momento, cerrando proceso..."
+                txt_aten.style.backgroundColor = "gray"
+                
                 var el = event.target.closest('[role="alert"]')
                 el.remove()
                 var listItems = document.querySelectorAll('.items_corr li');

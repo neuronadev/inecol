@@ -199,7 +199,7 @@ class ProyectosController < ApplicationController
               
        #message  = ResponsableMailer.with(proyecto).notificar_envio
        #message.deliver_later
-        
+
        current_time = Time.now
        tiempo = (current_time.to_f * 1000).to_i
        file_nm = "email_enlace_#{tiempo.to_s}.txt"
@@ -212,7 +212,6 @@ class ProyectosController < ApplicationController
                         ")
        end 
        `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto enviado a revisión" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx`
-
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }
