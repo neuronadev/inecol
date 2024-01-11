@@ -43,7 +43,7 @@ class ValidacionesController < ApplicationController
                                         ")
                     end 
                     emails.each do |mail|
-                        `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
+                        #`cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
                     end
                 end     
 
