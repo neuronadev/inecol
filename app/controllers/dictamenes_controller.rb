@@ -38,7 +38,7 @@ class DictamenesController < ApplicationController
                    path = "log/#{file_nm}"
 
                    File.open(path, 'w') do |file|
-                      file.write(" <p>Estimados y Estimadas integrantes del Comité Evaluador de Proyectos Externos</p>
+                      file.write(" <p>Estimado Comité Evaluador de Proyectos Externos</p>
                                  <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO<b> el siguiente proyecto:</p>
                                  <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
                                  <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>

@@ -35,11 +35,13 @@ class ValidacionesController < ApplicationController
                file_nm = "email_evaluadores_#{tiempo.to_s}.txt"
                path = "log/#{file_nm}"
 
-               File.open(path, 'w') do |file|
-                     file.write(" #{@validacion.txtval}
-                                  <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
-                                  ")
-               end 
+               if current_usuario.cuenta.rol.clave == 'EL' 
+                    File.open(path, 'w') do |file|
+                            file.write(" #{@validacion.txtval}
+                                        <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
+                                        ")
+                    end 
+                end
 
                emails.each do |mail|
                      `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
