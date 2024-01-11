@@ -34,18 +34,18 @@ class ValidacionesController < ApplicationController
                tiempo = (current_time.to_f * 1000).to_i
                file_nm = "email_evaluadores_#{tiempo.to_s}.txt"
                path = "log/#{file_nm}"
-
+ 
+               
                if current_usuario.cuenta.rol.clave == 'EL' 
                     File.open(path, 'w') do |file|
                             file.write(" #{@validacion.txtval}
                                         <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
                                         ")
                     end 
-                end
-
-               emails.each do |mail|
-                     `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
-               end
+                    emails.each do |mail|
+                        `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
+                    end
+                end     
 
                if current_usuario.cuenta.rol.clave == 'EL'
                     format.html { redirect_to validaciones_path(:idpy=>@proyecto.id) } 
