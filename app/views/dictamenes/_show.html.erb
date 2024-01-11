@@ -14,7 +14,7 @@
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                    Nombre del Proyecto
+                    Nombre del Proyecto:
                 </th>
                 <td class="px-6 py-4">
                     <%= @proyecto.nombre %>
@@ -22,7 +22,7 @@
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Responsable
+                   Responsable:
                 </th>
                 <td class="px-6 py-4">
                     <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.ap_nom_prop %>
@@ -30,7 +30,7 @@
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                    Fecha de Captura
+                    Fecha de Captura:
                 </th>
                 <td class="px-6 py-4">
                     <%= @proyecto.created_at.strftime('%d-%m-%Y') %>
@@ -38,7 +38,7 @@
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Número de Registro
+                   Número de Registro:
                 </th>
                 <td class="px-6 py-4">
                     <%= @dictamen.numregistro %>
@@ -46,7 +46,7 @@
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Fecha Dictamen
+                   Fecha Dictamen:
                 </th>
                 <td class="px-6 py-4">
                     <%= @dictamen.created_at.strftime('%d-%m-%Y') %>
@@ -54,7 +54,7 @@
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Dictamen
+                   Evaluación:
                 </th>
                 <td class="px-6 py-4">
                      <strong> <%= @dictamen.tvalidacion.nomtvalidacion %> </strong>
@@ -62,16 +62,7 @@
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Observaciones
-                </th>
-                <td class="px-6 py-4">
-                    <%= @dictamen.txtdictamen %>
-                </td>
-            </tr>    
-
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Documento
+                   Documento:
                 </th>
                 <td class="px-6 py-4">
                          <% if @dictamen.docdictamen.attached? %>
@@ -80,7 +71,17 @@
                                 <div class="font-semibold text-gray-600 italic ml-4"> No se incluyó ningún documento.</div>
                         <% end %>
                 </td>
+            </tr>   
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
+                   Dictamen:
+                </th>
+                <td class="px-6 py-4">
+                    <%= @dictamen.txtdictamen %>
+                </td>
             </tr>    
+
+             
            
            
         </tbody>
