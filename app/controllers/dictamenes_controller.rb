@@ -42,11 +42,11 @@ class DictamenesController < ApplicationController
                     p = @proyecto.persona
                     c = Cuenta.where(persona_id:p.id).first
                     u = Usuario.find(c.usuario_id) 
-                    #m = u.email  #---------------------------------------------
-                    m = 'fwneurona@gmail.com'
+                    m = u.email  #---------------------------------------------
 
-                    #emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
-                    emails_comite = ['antonio.francisco@inecol.mx','proyecto.externo@inecol.mx','red_neuronal@hotmail.com']
+
+                    emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
+
                     emails_otros = []
                     if !params[:dictamen][:otrose].nil?
                         emails_tmp = params[:dictamen][:otrose].split(/\n/)
@@ -65,19 +65,19 @@ class DictamenesController < ApplicationController
                     #COMITE
                     emails_comite.each do |ecom|
                         Thread.new  {               
-                            `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
+                            `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
                          }
                     end
 
                     #RESPONSBLE
                     Thread.new  {               
-                        `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{m}) &`
+                        `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{m}) &`
                     }
 
                     #OTROS
                     emails_otros.each do |eotro|
                         Thread.new  {               
-                            `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
+                            `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
                          }
                     end 
 
