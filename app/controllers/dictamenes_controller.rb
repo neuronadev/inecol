@@ -32,7 +32,7 @@ class DictamenesController < ApplicationController
                     Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                     Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                    str_comite = " <p>Estimado Comité Evaluador de Proyectos Externos</p>
+                    str_comite = " <p>Estimados Integrantes de Proyectos Externos</p>
                                    <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO</b> el siguiente proyecto:</p>
                                    <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
                                    <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>

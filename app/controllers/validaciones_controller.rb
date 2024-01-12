@@ -28,7 +28,8 @@ class ValidacionesController < ApplicationController
                Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
-               emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx', 'sara.sanchez@inecol.mx']
+               #emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx', 'sara.sanchez@inecol.mx']
+               emails = ['sara.sanchez@inecol.mx']
 
                current_time = Time.now
                tiempo = (current_time.to_f * 1000).to_i
@@ -38,12 +39,13 @@ class ValidacionesController < ApplicationController
                
                if current_usuario.cuenta.rol.clave == 'EL' 
                     File.open(path, 'w') do |file|
-                            file.write(" #{@validacion.txtval}
-                                        <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
-                                        ")
+                            file.write("<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>
+                                         #{@validacion.txtval}
+                                         <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
+                                        </body></html>")
                     end 
                     emails.each do |mail|
-                        #`cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
+                        `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
                     end
                 end     
 

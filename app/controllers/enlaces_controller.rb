@@ -42,11 +42,15 @@ class EnlacesController < ApplicationController
                    path = "log/#{file_nm}"
 
                    File.open(path, 'w') do |file|
-                            file.write("<p>Favor de atender la siguiente solicitud.</p>
+                            file.write("<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>
+                                        <p>Favor de atender la siguiente solicitud.</p>
                                         <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                                        <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>")
+                                        <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>
+                                        </body></html>")
                    end 
-                   `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir información del proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}`
+                   Thread.new  { 
+                      `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
+                   }    
 
                    format.html { redirect_to enlace_path(@enlace) }
             else
@@ -82,14 +86,15 @@ class EnlacesController < ApplicationController
       path = "log/#{file_nm}"
 
       File.open(path, 'w') do |file|
-             file.write("Estimada Sara. <br><br>
+             file.write("<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>Estimada Sara. <br><br>
                          El académico: <b> #{@proyecto.persona.nom_espacio} </b> ha <b>corregido</b> la solicitud enviada.<br>
                          <b>Nombre del proyecto:</b> #{@proyecto.nombre}<br>
                          <b>Solicitud:</b> #{enlace.txtcoment}
-                        ")
+                        </body></html>")
        end 
-       `cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx`
-      
+       Thread.new  { 
+          `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+       }
       data = {result:'ok'}
       respond_to do |format|
           format.json { render json:data.to_json }
