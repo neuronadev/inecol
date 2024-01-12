@@ -1,4 +1,5 @@
 class DictamenesController < ApplicationController
+
   def index
   end
 
@@ -13,56 +14,85 @@ class DictamenesController < ApplicationController
   end
 
   def create
-      @dictamen = Dictamen.new(dictamen_params)
-      @tvalidacion = Tvalidacion.find(params[:dictamen][:tvalidacion_id])
-      @proyecto = Proyecto.find(params[:dictamen][:proyecto_id])
+        @dictamen = Dictamen.new(dictamen_params)
+        @tvalidacion = Tvalidacion.find(params[:dictamen][:tvalidacion_id])
+        @proyecto = Proyecto.find(params[:dictamen][:proyecto_id])
 
-      enevento = Enevento.where(clave:'DICT').first  #Eventos de enlace
+        enevento = Enevento.where(clave:'DICT').first  #Eventos de enlace
 
-      if @tvalidacion.clave == 'ACEP'
+        if @tvalidacion.clave == 'ACEP'
             tevento = Tevento.where(clave:'ACEP').first
-      else
+        else
             tevento = Tevento.where(clave:'RECH').first
-      end      
+        end      
 
-      
-      respond_to do |format|
+        
+        respond_to do |format|
             if @dictamen.save
-                   Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
-                   Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                    Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
+                    Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                   emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','secretaria.tecnica@inecol.mx', 'sara.sanchez@inecol.mx']
-                   current_time = Time.now
-                   tiempo = (current_time.to_f * 1000).to_i
-                   file_nm = "email_solfirma_#{tiempo.to_s}.txt"
-                   path = "log/#{file_nm}"
+                    str_comite = " <p>Estimado Comité Evaluador de Proyectos Externos</p>
+                                   <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO</b> el siguiente proyecto:</p>
+                                   <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+                                   <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
+                                   <p>Favor de ingresar al sistema para firmar.</p>
+                                   <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>" 
 
-                   File.open(path, 'w') do |file|
-                      file.write(" <p>Estimado Comité Evaluador de Proyectos Externos</p>
-                                 <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO<b> el siguiente proyecto:</p>
-                                 <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                                 <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
-                                 <p>Favor de ingresar al sistema para firmar.</p>
+                    p = @proyecto.persona
+                    c = Cuenta.where(persona_id:p.id).first
+                    u = Usuario.find(c.usuario_id) 
+                    #m = u.email  #---------------------------------------------
+                    m = 'fwneurona@gmail.com'
 
-                                 <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
-                                 ")
-                      end 
+                    #emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
+                    emails_comite = ['antonio.francisco@inecol.mx','proyecto.externo@inecol.mx','red_neuronal@hotmail.com']
+                    emails_otros = []
+                    if !params[:dictamen][:otrose].nil?
+                        emails_tmp = params[:dictamen][:otrose].split(/\n/)
+                        emails_tmp.each do |em|
+                            if !(em.gsub(/\r/, "")=~ URI::MailTo::EMAIL_REGEXP).nil?
+                                emails_otros << em  
+                            end
+                        end
+                   end
 
-                      emails.each do |mail|
-                                #`cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto dictaminado" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}`
-                      end
+                    #current_time = Time.now
+                    #tiempo = (current_time.to_f * 1000).to_i
+                    #file_nm = "email_solfirma_#{tiempo.to_s}.txt"
+                    #path = "log/#{file_nm}"
+                 
+                    #COMITE
+                    emails_comite.each do |ecom|
+                        Thread.new  {               
+                            `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
+                         }
+                    end
 
+                    #RESPONSBLE
+                    Thread.new  {               
+                        `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{m}) &`
+                    }
 
-                   format.html { redirect_to dictamen_path(@dictamen) } 
+                    #OTROS
+                    emails_otros.each do |eotro|
+                        Thread.new  {               
+                            `(sleep 15;echo "<html><body style='font-size:17px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
+                         }
+                    end 
+
+                   
+                    format.html { redirect_to dictamen_path(@dictamen) } 
             else
-                   flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-                   format.html { render :new, status: :bad_request }
+                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    format.html { render :new, status: :bad_request }
             end
-      end
+        end
   end
 
   private
   def dictamen_params
-      params.require(:dictamen).permit(:proyecto_id, :tvalidacion_id, :numregistro, :txtdictamen, :docdictamen)
+      params.require(:dictamen).permit(:proyecto_id, :tvalidacion_id, :numregistro, :txtdictamen, :docdictamen, :otrose)
   end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_12_053748) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_055924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -172,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_053748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tvalidacion_id", null: false
+    t.text "otrose"
     t.index ["proyecto_id"], name: "index_py.dictamenes_on_proyecto_id"
     t.index ["tvalidacion_id"], name: "index_dictamenes_on_tvalidacion_id"
   end
