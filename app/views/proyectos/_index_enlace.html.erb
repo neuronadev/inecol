@@ -2,7 +2,7 @@
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
-                <th scope="col" class="p-1 text-center">
+                <th scope="col" class="p-1 text-center" style="width:50%;">
                     Nombre del Proyecto
                 </th>
                 <th scope="col" class="p-1 text-center">
@@ -13,7 +13,7 @@
                     Responsable
                 </th>
 
-                <th scope="col" class="p-1 text-center">
+                <th scope="col" class="p-1 text-center" style="width:10%;">
                     Estado
                 </th>
                
@@ -29,10 +29,10 @@
                     %>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                             <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
-                                <%= py.nombre %>
+                                <%= py.nombre %> </div>
                             </th>
                             <td class="p-2 text-center">
-                                 <%= py.created_at.strftime("%d-%m-%Y")  %>
+                                 <%= py.created_at.strftime("%d-%m-%Y %H:%M ")  %>
                             </td>
                             <td class="p-2">
                                  <%= @resp %>
