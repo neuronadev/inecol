@@ -88,7 +88,7 @@ export default class extends Controller {
 
     let btn = document.createElement("button");
 
-    btn.innerHTML = " Eliminar";
+    btn.innerHTML = " Quitar y subir otro";
     btn.type = "button";
     btn.classList.add('item_file','p-2','text-red-700')
 

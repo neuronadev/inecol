@@ -7,12 +7,15 @@
                 </div>
                 <div class="md:w-3/5 p-0">
                                 <div class="font-semibold flex"> <div class="ml-3">Protocolo:</div> </div>
-                                <div id = "div_file" class="md:w-full ml-3 p-2" data-controller="upsf">
+                                <div id = "div_file" class="md:w-full ml-3 p-2 flex-col" data-controller="upsf">
                                         
 
                                                 <% if @proyecto.docprotocolo.attached? %>
                                                         <%= form.file_field :docprotocolo, class:'item_file mb-3', style:'display:none;', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                                         <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %>
+                                                        <!-- 
+                                                          <button type="button" class='item_file ml-2  font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'  data-action='click->upsf#delFileEdit' data-upsf-idpy-param='<%= @proyecto.docprotocolo.id %>'>Subir otro archivo...</button>
+                                                        -->  
                                                 <% else %>
                                                         <%= form.file_field :docprotocolo, class:'item_file', direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                                 <% end %>
@@ -20,12 +23,13 @@
                                 </div>
                 </div>       
         </div>
-        
+       <!-- 
         <div class="md:flex md:items-center justify-end border-t-2 border-gray-100 p-2">
                   <button type="submit" class="text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" 
                           data-turbo-frame= 'py_content_secc'>
                                 Aplicar cambios
                   </button>
         </div>
+       --> 
    <% end %>      
 </div>        
