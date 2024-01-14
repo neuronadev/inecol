@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_12_055924) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -229,6 +229,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_055924) do
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "clave"
+    t.string "tipo", limit: 15
+    t.text "firmasign"
     t.index ["evaluador_id"], name: "index_py.firmas_on_evaluador_id"
     t.index ["proyecto_id"], name: "index_py.firmas_on_proyecto_id"
   end

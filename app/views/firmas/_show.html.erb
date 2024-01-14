@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div id="target_firma" class="flex items-center justify-center mt-5 w-full h-36 border-2 p-2" style="overflow-x: auto;">
+<div id="target_firma" class="flex items-center justify-center mt-5 w-full h-70 border-2 p-2" style="overflow-x: auto;">
   <% 
       firma = Firma.where(evaluador_id: current_usuario.cuenta.persona.evaluador.id, proyecto_id: @proyecto.id, firmado:true).first
   %> 
@@ -29,7 +29,7 @@
          <div>
            <div class="font-bold">  <%= current_usuario.cuenta.persona.nom_espacio %> </div>
            <div class="font-bold">Firma Electrónica </div>
-           <%= firma.data %>
+           <div class="w-50"> <%= firma.firmasign %> </div>
          </div>  
     <% end %>    
     

@@ -15,11 +15,12 @@ export default class extends Controller {
             })
             .then(response => response.json())
             .then(data => {
+                  console.log(data)
                   let el = document.getElementById("target_firma")
-                  el.innerHTML =  `<div>
+                  el.innerHTML =  `<div class="flex-col">
                                         <div><strong>${data.nombre}</strong></div>
                                         <div><strong>Firma Electrónica</strong></div>
-                                        <div>${data.s}</div>
+                                        <div class="ml-50"><p>${data.s}</p></div>
                                     </div>`  
             })
       } catch (e) { alert(e) } 
