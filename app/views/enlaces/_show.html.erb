@@ -6,7 +6,8 @@
 </div> 
 
 <div class="mt-5 border-2 border-gray-100 p-5">
-    <div> <strong>Mensaje envíado</strong>
+    <div> <strong>Mensaje envíado</strong></div>
+    <div> <strong> <%= @enlace.created_at.strftime("%d-%m-%Y %H : %M ") %> </strong></div>
     <div>
         <%= @enlace.txtcoment %>
     </div>

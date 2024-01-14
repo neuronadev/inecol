@@ -17,6 +17,7 @@ module Inecol
     # in config/environments, which are processed later.
     #
     #config.time_zone = :local
+    config.time_zone = "Mexico City"
     config.active_record.default_timezone = :local
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")

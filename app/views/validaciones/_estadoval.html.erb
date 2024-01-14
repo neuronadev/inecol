@@ -2,7 +2,20 @@
           <%  if !proyecto.validaciones.where(evaluador_id:evaluador.id).last.nil? %> 
                   <div class="p-2 mb-1 text-sm text-green-800 rounded-lg bg-green-200 dark:bg-gray-800 dark:text-green-400" role="alert">
                         <span class="text-sm font-semibold"><%= proyecto.validaciones.where(evaluador_id:evaluador.id).last.tvalidacion.nomtvalidacion%></span>
+                        <span class="text-sm font-semibold"><%= proyecto.validaciones.where(evaluador_id:evaluador.id).last.created_at.strftime(" %d-%m-%Y %H : %M ") %></span>
                   </div>
+                  <% if !proyecto.firmas.where(evaluador_id:evaluador.id).first.nil? %>
+                         <div class="p-2 mb-1 text-sm text-white rounded-lg bg-blue-400 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                    <% if proyecto.firmas.where(evaluador_id:evaluador.id).first.firmado %>
+                                          <span class="text-sm font-semibold">Firmado </span>
+                                          <span class="text-sm font-semibold"><%=proyecto.firmas.where(evaluador_id:evaluador.id).first.created_at.strftime(" %d-%m-%Y %H : %M ") %></span>
+                                     <% end %>
+                         </div>
+                   <% else %>      
+                        <div class="p-2 mb-1 text-sm text-white rounded-lg bg-gray-400 dark:bg-gray-800 dark:text-gray-300" role="alert">
+                                          <span class="text-sm font-semibold italic">Esperando Firma Electrónica </span>
+                         </div>
+                   <% end %> 
                      
           <% else %>
                  <span class="bg-yellow-100 font-semibold text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 ">Sin respuesta</span>
