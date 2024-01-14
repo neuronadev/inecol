@@ -13,4 +13,12 @@ export default class extends Controller {
        }     
   }
 
+  updateVista(){
+       var fr_el = document.getElementById('py_content_sub')
+       var btn = document.getElementById('btn_upvista')
+       btn.innerHTML = "Actualizando Vista..."
+       
+       fr_el.reload()
+  }
+
 }

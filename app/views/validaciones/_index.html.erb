@@ -4,9 +4,11 @@
                        La solicitud se hizo en la <strong>fecha: <%= @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last.created_at.strftime("%d-%m-%Y")  %></strong></span>
        </div>          
 <% end %>  
-  
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5" data-controller="valcomm">
+    <div>
+       <button type="button" id="btn_upvista" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-action="click->valcomm#updateVista">Actualizar Vista</button>
+   </div>
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-medium text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
