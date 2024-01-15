@@ -4,7 +4,8 @@ class Dictamen < ApplicationRecord
   belongs_to :tvalidacion
 
   has_rich_text :txtdictamen
-  has_one_attached :docdictamen
+  #has_one_attached :docdictamen
+  has_many_attached :docdictamenes
 
     
 

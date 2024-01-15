@@ -57,11 +57,16 @@
                    Documento:
                 </th>
                 <td class="px-6 py-4">
-                         <% if @dictamen.docdictamen.attached? %>
-                               <%= link_to @dictamen.docdictamen.filename, rails_blob_path(@dictamen.docdictamen, disposition: 'inline'), class:"text-blue-800", target: :_blank %>
-                        <% else %>                     
-                                <div class="font-semibold text-gray-600 italic ml-4"> No se incluyó ningún documento.</div>
-                        <% end %>
+                        
+
+                         <% if @dictamen.docdictamenes.attached? %>
+                            
+                                         <% @dictamen.docdictamenes.each do |doc| %>
+                                                   <div class="flex"> 
+                                                        <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                                   </div>
+                                       <% end %>
+                         <% end %>
                 </td>
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

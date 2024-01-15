@@ -23,11 +23,16 @@
                 <tr class="">
                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Documento:</td>
                         <td class="p-2 border-b border-slate-300">
-                                <% if  @proyecto.dictamen.docdictamen.attached? %>
-                                           <%= link_to @proyecto.dictamen.docdictamen.filename, rails_blob_path(@proyecto.dictamen.docdictamen, disposition: 'inline'), class:'text-blue-700', target: :_blank %>
+                                <% if  @proyecto.dictamen.docdictamenes.attached? %>
+                                            <% @proyecto.dictamen.docdictamenes.each do |doc| %>
+                                                   <div class="flex"> 
+                                                        <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                                   </div>
+                                           <% end %>
                                 <% else %>      
                                             <span class="italic">Sin archivo</span>.
                                 <% end %>
+
                         </td>
                </tr>
                <tr class="">

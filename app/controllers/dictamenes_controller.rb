@@ -96,7 +96,7 @@ class DictamenesController < ApplicationController
 
   private
   def dictamen_params
-      params.require(:dictamen).permit(:proyecto_id, :tvalidacion_id, :numregistro, :txtdictamen, :docdictamen, :otrose)
+      params.require(:dictamen).permit(:proyecto_id, :tvalidacion_id, :numregistro, :txtdictamen, :otrose, docdictamenes:[])
   end
 
 end
