@@ -32,7 +32,7 @@ class DictamenesController < ApplicationController
                     Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                     Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                    str_comite = " <p>Estimados Integrantes de Proyectos Externos</p>
+                    str_comite = " <p><b>Estimados Integrantes de Proyectos Externos:</b></p>
                                    <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO</b> el siguiente proyecto:</p>
                                    <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
                                    <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
@@ -65,7 +65,7 @@ class DictamenesController < ApplicationController
                     #COMITE
                     emails_comite.each do |ecom|
                         Thread.new  {               
-                            `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
+                            `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Ficha-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
                          }
                     end
 
@@ -81,6 +81,10 @@ class DictamenesController < ApplicationController
                          }
                     end 
 
+                    #AREA PROYECTOS EXTERNOS
+                    Thread.new  {
+                        `(sleep 15;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{@dictamen.txtdictamen}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx) &`
+                    }
                    
                     format.html { redirect_to dictamen_path(@dictamen) } 
             else
