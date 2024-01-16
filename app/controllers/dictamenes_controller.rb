@@ -94,6 +94,27 @@ class DictamenesController < ApplicationController
         end
   end
 
+  def notificar
+      @dictamen = Dictamen.find(params[:dictamen])
+      @proyecto = Proyecto.find(@dictamen.proyecto_id)
+
+      current_time = Time.now
+      tiempo = (current_time.to_f * 1000).to_i
+      file_nm = "email_temporal_#{tiempo.to_s}.txt"
+      path = "log/#{file_nm}"
+
+      File.open(path, 'w') do |file|
+        file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>
+                     #{@dictamen.txtdictamen}
+                     <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
+                    </body></html>")
+      end 
+
+      Thread.new  {
+        `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" antonio.francisco@inecol.mx) &`
+      }
+  end
+
   private
   def dictamen_params
       params.require(:dictamen).permit(:proyecto_id, :tvalidacion_id, :numregistro, :txtdictamen, :otrose, docdictamenes:[])

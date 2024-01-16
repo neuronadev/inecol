@@ -95,7 +95,11 @@ resources :mtoconcurrentes
 
 
   resources :validaciones 
-  resources :dictamenes
+  resources :dictamenes do
+            collection do 
+                 post 'notificar'
+            end
+  end
   resources :correos do
              collection do
                 post 'enviarmail'

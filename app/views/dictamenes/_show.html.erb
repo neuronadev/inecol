@@ -78,7 +78,16 @@
                 </td>
             </tr>    
 
-             
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
+                   Enviar:
+                </th>
+                <td class="px-6 py-4" data-controller="email">
+                    <input type="text" name="cr_email" id="cr_email">
+                    <button class="bg-blue-400 p-3" data-action="click->email#enviar" data-email-iddict-param="<%= @dictamen.id %>" >Enviar</button>
+                </td>
+            </tr>    
+           
            
            
         </tbody>
