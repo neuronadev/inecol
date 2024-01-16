@@ -104,14 +104,14 @@ class DictamenesController < ApplicationController
       path = "log/#{file_nm}"
 
       File.open(path, 'w') do |file|
-        file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>
+        file.write("<html><body style='font-size:15px;font-family: Arial, Helvetica, sans-serif;'>
                      #{@dictamen.txtdictamen}
                      <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
                     </body></html>")
       end 
 
       Thread.new  {
-        `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" antonio.francisco@inecol.mx) &`
+        `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,antonio.francisco@inecol.mx) &`
       }
   end
 
