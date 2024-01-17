@@ -14,6 +14,7 @@
                 <% end %> 
                 <%= render "proyectos/tr", titulo:'Tipo Investigación:', valor: @proyecto.linea.nomlinea %>
                 <%= render "proyectos/tr", titulo:'Periodo:', valor: @proyecto.periodo %>
+                <%= render "proyectos/tr", titulo:'Transferencia de Conocimiento:', valor: @proyecto.tfconoc ? 'SI' : 'NO'  %>
                 <%= render "proyectos/tr", titulo:'Interinstitucional:', valor: @proyecto.interinst ? 'SI' : 'NO'  %>
                 <% if @proyecto.interinst %>
                     <%= render "proyectos/tr_condicion", v:'proyectos/lista_instituciones' %>
