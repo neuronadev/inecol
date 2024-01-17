@@ -1,5 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
+
 let token = document.querySelector('meta[name="csrf-token"]').content
+
 // Connects to data-controller="email"
 export default class extends Controller {
   connect() {}
