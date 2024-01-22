@@ -23,6 +23,15 @@
                       <%  @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').each do |item| %>
                                <li role="alert">
                                    <div class="flex-column items-center p-1 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                                        <div class="flex-col w-full ml-2">
+                                            <% if item.doccambios.attached? %>
+                                                    <% item.doccambios.each do |doc| %>
+                                                        <div class="flex"> 
+                                                            <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                                            </div>
+                                                    <% end %>
+                                            <% end %>
+                                        </div> 
                                         <span class="flex-1 ml-2 text-sm w-full"><%= item.txtcoment %></span>
                                          
                                         <div class="flex-column mt-3">

@@ -1,6 +1,7 @@
  <% if @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').any? %> 
        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-800" role="alert">
-             <span class="font-medium">El proyecto se encuentra abierto para Evaluación.
+             <p class="mb-2"><strong>Nombre del Proyecto:</strong> <%= @proyecto.nombre %> </p>
+             <span class="font-medium">El proyecto se encuentra <strong>abierto para Evaluación.</strong>
                        La solicitud se hizo en la <strong>fecha: <%= @proyecto.validaciones.includes(:tvalidacion).where('tvalidaciones.clave':'SOLV').last.created_at.strftime("%d-%m-%Y")  %></strong></span>
        </div>          
 <% end %>  
@@ -67,4 +68,14 @@
           
         </tbody>
     </table>
+</div>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 p-3 mb-3" data-controller="valcomm">
+    <div class="w-full p-3 text-blue-600 text-center bg-gray-200">
+       Mensaje enviado
+   </div>
+
+   <div> 
+       <%= @proyecto.validaciones.first.txtval %>
+   </div>
 </div>

@@ -73,8 +73,6 @@ export default class extends Controller {
     event.target.value = ''
   }
 
-
-
   createLinkFile(blob) {
     const elementLink = document.createElement('a')
     let textLink = document.createTextNode(blob.filename)
@@ -83,14 +81,14 @@ export default class extends Controller {
     elementLink.appendChild(textLink)
     elementLink.href = url
     elementLink.target = '_blank'
-    elementLink.classList.add('item_file','text-blue-700')
+    elementLink.classList.add('item_file','p-1','text-blue-700')
     this.element.appendChild(elementLink);
 
     let btn = document.createElement("button");
 
-    btn.innerHTML = " Quitar y subir otro";
+    btn.innerHTML = "Quitar y subir otro";
     btn.type = "button";
-    btn.classList.add('item_file','p-2','text-red-700')
+    btn.classList.add('item_file','p-1','text-red-700')
 
     btn.dataset.action ='upsf#delFile'
     this.element.appendChild(btn);

@@ -11,12 +11,14 @@
                               <div class="ml-1 font-semibold">Abrir proyecto a evaluadores</div>
                          <% end %> 
                     </div>
+                    <!--
                     <div class="flex w-auto">
                          <%= link_to resumen_vistas_path(:id=>@proyecto.id), class:'flex' do %>
                               <div><%= inline_svg_tag 'svg/regresar.svg' %></div>
                               <div class="ml-1 text-sm font-semibold">Regresar</div>
                          <% end %>   
                     </div>
+                    -->
                </div>
 </div> 
 <div class="border border-gray-200 rounded-lg shadow sm:p-3 dark:bg-gray-800 dark:border-gray-700">
@@ -35,11 +37,25 @@
                          <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
                          <%= form.hidden_field :enevento_id, value:@enevento.id %>
                          
-                         <div>
+                         <div class="mb-3">
                               <div> Proyecto: <strong><%= @proyecto.nombre %></strong> </div>
                               <div> Responsable: <strong><%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %></strong> </div>
                          </div>
-                    
+                         
+                         <div class="flex-col md:items-center mb-3">
+                                <div class="md:w-1/5 font-semibold">
+                                        <%= label_tag 'Documentos:' %>
+                                </div>
+                                <div class="flex-col">
+                                     <div id = "div_file" class="flex md:w-full p-1" data-controller="upsf">
+                                           <%= form.file_field :doccambios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                     </div>       
+                                     <div id = "div_file" class="flex md:w-full p-1" data-controller="upsf">
+                                           <%= form.file_field :doccambios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
+                                     </div>    
+                                     
+                                </div>
+                         </div>
 
                          <div class="md:items-center mb-3 mt-5">
                               <div class="md:w-1/5 font-semibold">

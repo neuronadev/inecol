@@ -48,12 +48,12 @@ class EnlacesController < ApplicationController
                                         <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>
                                         </body></html>")
                    end 
-                   Thread.new{
-                      `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
-                   }
-                   Thread.new{
-                      `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-                   }
+                   #Thread.new{
+                   #   `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
+                   #}
+                   #Thread.new{
+                   #   `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+                   #}
 
                    format.html { redirect_to enlace_path(@enlace) }
             else
@@ -125,7 +125,7 @@ end
 
   private
   def enlace_params
-      params.require(:enlace).permit(:proyecto_id, :enevento_id, :txtcoment, :estado)
+      params.require(:enlace).permit(:proyecto_id, :enevento_id, :txtcoment, :estado, doccambios:[])
   end
 
 end

@@ -8,7 +8,16 @@
 <div class="mt-5 border-2 border-gray-100 p-5">
     <div> <strong>Mensaje envíado</strong></div>
     <div> <strong> <%= @enlace.created_at.strftime("%d-%m-%Y %H : %M ") %> </strong></div>
-    <div>
+    <div class="flex-col w-full ml-2">
+           <% if @enlace.doccambios.attached? %>
+                    <% @enlace.doccambios.each do |doc| %>
+                          <div class="flex"> 
+                               <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                          </div>
+                    <% end %>
+          <% end %>
+    </div>
+    <div class="ml-2 mt-2">
         <%= @enlace.txtcoment %>
     </div>
-</div>    
+</div>

@@ -8,7 +8,16 @@
         <%  @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').each do |item| %>
                  <div class="p-3 mb-2 mt-3 bg-red-100 border border-red-200 rounded-lg shadow dark:bg-red-800 dark:border-re-700" role="alert" data-controller="notifica">                   
                         <h5 class="mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white">Atender la siguiente observación</h5>
-                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                         <div class="flex-col w-full ml-2">
+                              <% if item.doccambios.attached? %>
+                                    <% item.doccambios.each do |doc| %>
+                                           <div class="flex"> 
+                                               <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                            </div>
+                                     <% end %>
+                              <% end %>
+                         </div>
+                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 ml-2">
                                  <%= item.txtcoment %>
                          </p>
                                  

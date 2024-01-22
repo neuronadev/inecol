@@ -9,12 +9,23 @@
                <tr class="">
                       <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'> Evaluación:</td>
                       <td class="p-2 border-b border-slate-300">
-                          <% if @proyecto.dictamen.tvalidacion.clave == 'ACEP' %>
-                               <span class="text-green-800 font-semibold p-1 bg-green-300"> <%= @proyecto.dictamen.tvalidacion.nomtvalidacion %> </span>
-                          <% end %> 
-                          <% if @proyecto.dictamen.tvalidacion.clave == 'REC' %>
-                               <span class="text-red-800 font-semibold p-1 bg-red-300"> <%= @proyecto.dictamen.tvalidacion.nomtvalidacion %> </span>
-                          <% end %> 
+                            <div class="flex">  
+                               <div class="p-2"> 
+                                   <% if @proyecto.dictamen.tvalidacion.clave == 'ACEP' %>
+                                        <span class="text-green-800 font-semibold p-1 bg-green-300"> <%= @proyecto.dictamen.tvalidacion.nomtvalidacion %> </span>
+                                   <% end %> 
+                                   <% if @proyecto.dictamen.tvalidacion.clave == 'REC' %>
+                                        <span class="text-red-800 font-semibold p-1 bg-red-300"> <%= @proyecto.dictamen.tvalidacion.nomtvalidacion %> </span>
+                                   <% end %> 
+                               </div>
+                               <div class="ml-3 p-2">
+                                      <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                             <div class="flex ml-2" >
+                                                  <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-700"><strong>Ficha del proyecto</strong></div>
+                                             </div>
+                                      <% end %>
+                               </div>
+                            </div>       
                       </td>
                </tr>
                <%  if @proyecto.etapas.last.tevento.clave == 'ACEP' %>
