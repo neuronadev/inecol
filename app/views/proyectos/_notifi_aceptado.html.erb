@@ -18,7 +18,15 @@
                                         <span class="text-red-800 font-semibold p-1 bg-red-300"> <%= @proyecto.dictamen.tvalidacion.nomtvalidacion %> </span>
                                    <% end %> 
                                </div>
-                               
+                               <% if @proyecto.firmas.count() == 4 %>
+                                        <div class="ml-3 p-2">
+                                             <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
+                                                       <div class="flex ml-2" >
+                                                            <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-700"><strong>Ficha del proyecto</strong></div>
+                                                       </div>
+                                             <% end %>
+                                        </div>
+                               <% end %>         
                             </div>       
                       </td>
                </tr>
