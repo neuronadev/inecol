@@ -81,13 +81,13 @@ class DictamenesController < ApplicationController
 
                     #RESPONSBLE
                     Thread.new  {               
-                        `(sleep 50;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,#{m}) &`
+                        `(sleep 120;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,#{m}) &`
                     }
 
                     #OTROS
                     emails_otros.each do |eotro|
                         Thread.new  {               
-                            `(sleep 50;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
+                            `(sleep 140;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
                          }
                     end 
 
