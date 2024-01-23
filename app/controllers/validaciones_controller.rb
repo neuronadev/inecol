@@ -29,6 +29,7 @@ class ValidacionesController < ApplicationController
                Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
                emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx', 'rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx']
+               espacios = [20,40,60,80,100]
 
                current_time = Time.now
                tiempo = (current_time.to_f * 1000).to_i
@@ -43,10 +44,13 @@ class ValidacionesController < ApplicationController
                                          <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
                                         </body></html>")
                     end 
+                    i = 0
                     emails.each do |mail|
+                        t = espacios[i] 
                         Thread.new  {
-                          `(sleep 50;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
+                          `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
                         }  
+                      i = i+1  
                     end
                 end     
 

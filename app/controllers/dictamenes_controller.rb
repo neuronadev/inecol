@@ -57,6 +57,7 @@ class DictamenesController < ApplicationController
 
 
                     emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
+                    espacios = [20,40,60,80,100]
 
                     emails_otros = []
                     if !params[:dictamen][:otrose].nil?
@@ -69,10 +70,13 @@ class DictamenesController < ApplicationController
                    end
                  
                     #COMITE
+                    i = 0
                     emails_comite.each do |ecom|
+                        t = espacios[i]  
                         Thread.new  {               
-                            `(sleep 50;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Ficha-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
+                            `(sleep #{t.to_s};echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Ficha-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
                          }
+                    i = i+1     
                     end
 
                     #RESPONSBLE
