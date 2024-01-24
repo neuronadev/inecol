@@ -30,7 +30,11 @@ export default class extends Controller {
   enlaceEnterado(event){
          this.enlaceUpdateEnterado(event.params.idenlace).then(result => {
              var el = event.target.closest('[role="alert"]')
-            el.remove()
+             el.remove()
+             var body = document.getElementsByTagName('body')[0];
+             body.lastElementChild.remove()
+             var m = document.getElementById("pycontent")
+             m.reload()
          })
          //var listItems = document.querySelectorAll('.items_sola li');
          //console.log(listItems.length)

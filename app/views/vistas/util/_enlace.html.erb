@@ -16,7 +16,7 @@
                   <% end %>      
             </div>  
             <% if @proyecto.enlaces.any? %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' %>
+                  <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' || @proyecto.enlaces.last.enevento.clave == 'SOLA' %>
                               <%= render 'vistas/util/m_nvo_proc' %>
                   <% end %>
                   <% if @proyecto.enlaces.last.enevento.clave == 'CORR' %>

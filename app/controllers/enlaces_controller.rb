@@ -77,10 +77,10 @@ class EnlacesController < ApplicationController
 
       enlace.estado = 'C'
       enlace.save
-      e1 = Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'C', raiz:enlace.id) 
+      e1 = Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
       #########################################################################
-      enevento_proc = Enevento.where(clave:'PROC').first
-      Enlace.create(proyecto_id:enlace_py, enevento_id:enevento_proc.id, estado:'C', raiz:e1.id) 
+      #enevento_proc = Enevento.where(clave:'PROC').first
+      #Enlace.create(proyecto_id:enlace_py, enevento_id:enevento_proc.id, estado:'C', raiz:e1.id) 
       ########################################################################
             
       current_time = Time.now
@@ -114,7 +114,7 @@ class EnlacesController < ApplicationController
     enlace.estado = 'C'
     enlace.save
 
-    Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
+    Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'C', raiz:enlace.id) 
 
     data = {result:'ok'}
     respond_to do |format|
