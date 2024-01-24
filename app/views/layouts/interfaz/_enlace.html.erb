@@ -1,40 +1,106 @@
-<div class="min-h-screen bg-gray-100">
-  <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
-    <div class="flex h-screen flex-col justify-between pt-2 pb-6">
-      <div>
-        <div class="w-max p-2.5">
-          <!-- <img src="https://tailus.io/images/logo.svg" class="w-32" alt=""> -->
+            
+<aside class="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+  
+    <div class="flex flex-col justify-between flex-1 mt-6" data-controller='menup'>
+        <nav class="-mx-3 space-y-3 ">
+             <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
+                   data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+                         </svg>
+                         <span class="mx-2 text-sm font-medium">Inicio</span>
+             <% end %>
+            
+            <%= link_to 'reportes/index', class:"group flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
+                  data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                          </svg>
+                         <span class="mx-2 text-sm font-medium">Reportes</span>
+             <% end %> 
+
+        </nav>
+
+        <div>
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-semibold text-gray-800 dark:text-white">Histórico</h2>
+
+                <button class="p-0.5 hover:bg-gray-100 duration-200 transition-colors text-gray-500 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 border rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="mt-4 -mx-3 space-y-3 ">
+                <button class="flex items-center justify-between w-full px-3 py-2 text-xs font-medium text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
+                        <span>Test 1</span>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+
+                <button class="flex items-center justify-between w-full px-3 py-2 text-xs font-medium text-gray-700 transition-colors duration-300 transform bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-200">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                        <span>Test 2</span>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+
+                <button class="flex items-center justify-between w-full px-3 py-2 text-xs font-medium text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                        <span>TEst 3</span>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+
+                <button class="flex items-center justify-between w-full px-3 py-2 text-xs font-medium text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                        <span>TEst 4</span>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+
+                <button class="flex items-center justify-between w-full px-3 py-2 text-xs font-medium text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                        <span>TEst 5</span>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+            </nav>
         </div>
-        <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
-          <li class="min-w-max" data-action='click->menup#onClickItem'>
 
-              <%= link_to proyectos_path, class:"menupactivo relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white",
-                   data:{turbo_frame: 'pycontent'} do %> 
-                        <%= inline_svg_tag 'svg/dashboard.svg' %>
-                        <span class="group-hover:text-gray-700">Inicio</span>
-             <% end %>
-
-          </li>
-
-           <li class="min-w-max" data-action='click->menup#onClickItem'>
-             <%= link_to 'reportes/index', class:"group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600",
-                  data:{turbo_frame: 'pycontent'} do %> 
-                      <%= inline_svg_tag 'svg/formulario.svg' %>
-                      <span class="group-hover:text-gray-700">Reportes</span>
-             <% end %>
-          </li>
-        
-         
-        </ul>
-      </div>
-      <div class="w-max -mb-3">
-        <a href="#" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
-          <%= link_to destroy_usuario_session_path,  data: {turbo_method: :delete}, class:"bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600" do %> 
+        <div>
+            <nav class="mt-4 -mx-3 space-y-3 ">
+             
+             <%= link_to destroy_usuario_session_path,  data: {turbo_method: :delete}, class:"group flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" do %> 
                       <%= inline_svg_tag 'svg/salir-alt.svg' %>
-                      <span class="group-hover:text-gray-700">Salir</span>
+                      <span class="mx-2 text-sm font-mediu">Salir</span>
              <% end %>
-        </a>
-      </div>
+            </nav>
+        </div>
     </div>
-  </div>
-</div>
+</aside>
+
+        
