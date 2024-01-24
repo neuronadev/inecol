@@ -25,7 +25,7 @@
                   <% if @proyecto.enlaces.last.enevento.clave == 'EVAL' %>
                               <%= render 'vistas/util/m_eval' %>
                   <% end %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                  <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>
                                <%= render 'vistas/util/m_dict' %>
                   <% end %>
                   

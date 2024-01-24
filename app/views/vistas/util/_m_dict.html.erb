@@ -26,7 +26,7 @@
                     <% end %>  
                 </li>
                 <li>
-                    <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                    <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR'  %>
                                     <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_content_sub'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
                                                 <div class="flex w-full ml-1">
                                                     <%= inline_svg_tag 'svg/controlar-gray.svg' %>

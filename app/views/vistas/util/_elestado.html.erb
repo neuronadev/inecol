@@ -6,19 +6,7 @@
                         <% else %>
                                 <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% end %>   
- 
-                        <% if  proyecto.enlaces.last.enevento.clave == 'PROC' && !proyecto.enlaces.last.raiz.nil? 
-                                       enlace_edo_anterior = Enlace.find(proyecto.enlaces.last.raiz)
-                        %> 
-                                   <% if enlace_edo_anterior.estado == 'A' %>     
-                                               <%= enlace_edo_anterior.enevento.nomenevento %>                                   
-                                    <% else %>       
-                                               <%= proyecto.enlaces.last.enevento.nomenevento %>
-                                   <% end %>      
-                        <% else %>
-                                   <%= proyecto.enlaces.last.enevento.nomenevento %>
-                        <% end %>          
-
+                        <%= proyecto.enlaces.last.enevento.nomenevento %>
                 </span>
      <% else %>
              <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
