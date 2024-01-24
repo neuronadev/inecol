@@ -45,14 +45,15 @@ class EnlacesController < ApplicationController
                             file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>
                                         <p>Favor de atender la siguiente solicitud.</p>
                                         <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+                                        <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
                                         <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>
                                         </body></html>")
                    end 
                    Thread.new{
-                      `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
+                      `(sleep 20;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
                    }
                    Thread.new{
-                      `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+                      `(sleep 60;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
                    }
 
                    format.html { redirect_to enlace_path(@enlace) }
