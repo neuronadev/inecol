@@ -49,7 +49,7 @@
                         <%= render 'validaciones/menu_rw', evl:e %>  
                     </td>
                 </tr>
-                                
+                                   
                 <tr id="com-<%= e.id %>" class="font-medium border-b dark:bg-gray-800 dark:border-gray-700" style="display:none;">
                      <td class="px-8" scope="row" colspan="5">
                            <div class="mb-3 p-5 border">
@@ -74,7 +74,9 @@
     <div class="w-full p-3 text-blue-600 text-center bg-gray-200">
        Mensaje enviado
    </div>
-
+   <div>
+        
+   </div>
    <div> 
        <%= @proyecto.validaciones.first.txtval %>
    </div>

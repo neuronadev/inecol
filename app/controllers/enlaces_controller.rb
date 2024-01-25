@@ -68,6 +68,7 @@ class EnlacesController < ApplicationController
       @proyecto = Proyecto.find(params[:idpy])
   end
 
+  
   def atendido
       enlace = Enlace.find(params[:enlace_id])
       

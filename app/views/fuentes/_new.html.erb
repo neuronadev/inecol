@@ -21,31 +21,45 @@
                     <%= form.text_field :nomfuente, class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name' %>
                     </div>
             </div>
-            <div class="md:flex md:items-center mb-3">
-                    <div class="md:w-1/5">
-                        <%= form.label :nacionalidad_id, 'Origen de la Institución, Gobierno o Empresa:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
-                    </div>
-                    <div class="md:w-2/5">
-                        <%= form.select :nacionalidad_id,
-                                                Nacionalidad.all.map{|item| [item.nomnacionalidad, item.id]},
-                                                {prompt: '-- Seleccione una opción --'},
-                                                {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name', 
-                                                        'data-action':'change->fuente#onNacionalidad'
-                                                }
-                        %>   
-                    </div>
-        </div>
+
+                <div class="md:flex md:items-center mb-3">
+                        <div class="md:w-1/5">
+                            <%= form.label :nacionalidad_id, 'Origen de la Institución, Gobierno o Empresa:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                        </div>
+                        <div class="md:w-2/5">
+                                <%= form.select :nacionalidad_id,
+                                                            Nacionalidad.all.map{|item| [item.nomnacionalidad, item.id]},
+                                                            {prompt: '-- Seleccione una opción --'},
+                                                            {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name', 
+                                                                    'data-action':'change->fuente#onNacionalidad'
+                                                            }
+                                    %>   
+                        </div>
+                </div>
+
+
+
         <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
                         <%= form.label :lugar_id, 'País/Estado:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-2/5">
-                        <%= form.select :lugar_id,
+                            <% if controller.action_name == 'new' %>
+                                   <%= form.select :lugar_id,
                                                 Lugar.where(tiponac:'NAC').all.map{|item| [item.nomlugar, item.id]},
                                                 {prompt: '-- Seleccione una opción --'},
                                                 {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
 
-                        %>   
+                             %>   
+                            <% end %>  
+                            <% if controller.action_name == 'edit' || controller.action_name == 'update' || controller.action_name == 'create' %>
+                                    <%= form.select :lugar_id,
+                                                Lugar.where(tiponac:@fuente.nacionalidad.clave).all.map{|item| [item.nomlugar, item.id]},
+                                                {prompt: '-- Seleccione una opción --'},
+                                                {class:' appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name'}
+
+                                    %>   
+                            <% end %>      
                     </div>
         </div>
         <div class="md:flex md:items-center mb-3">

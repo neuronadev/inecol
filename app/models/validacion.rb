@@ -5,5 +5,6 @@ class Validacion < ApplicationRecord
   belongs_to :tvalidacion
 
   has_one_attached :docficha
+  has_many_attached :dcevaluaciones
   has_rich_text :txtval
 end
