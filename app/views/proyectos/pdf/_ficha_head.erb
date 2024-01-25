@@ -4,7 +4,7 @@
           <td class="txt2">Ficha de Propuesta de Proyectos Externos</td>
           <td class="txt3">Número de Registro</td>
           <td class="txt4">
-                 <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>             
+                 <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>             
                     <span class="font-semibold"> <%= @proyecto.dictamen.numregistro %> </span>
                  <% end %>
           </td>

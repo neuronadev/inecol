@@ -15,6 +15,10 @@
     </figure>
 <% end %>
 <% if ['pdf','docx','doc'].include?(blob.filename.extension) %>
-   <span class="attachment__download"><%= link_to blob.filename, rails_blob_path(blob) %></span>
-   <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>
+   <div>
+        <br>
+        <span class="attachment__download"><%= link_to blob.filename, rails_blob_path(blob) %></span>
+        <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>
+        <br>
+   </div>
 <% end %>
