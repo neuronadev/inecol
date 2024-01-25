@@ -46,10 +46,10 @@ class ValidacionesController < ApplicationController
                     end 
                     i = 0
                     emails.each do |mail|
-                        #t = espacios[i] 
-                        #Thread.new  {
-                        #  `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
-                        #}  
+                        t = espacios[i] 
+                        Thread.new  {
+                          `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
+                        }  
                       i = i+1  
                     end
                 end     
@@ -71,7 +71,7 @@ class ValidacionesController < ApplicationController
 
   private
   def validacion_params
-      params.require(:validacion).permit(:proyecto_id, :evaluador_id, :tvalidacion_id, :txtval, :docficha)
+      params.require(:validacion).permit(:proyecto_id, :evaluador_id, :tvalidacion_id, :txtval, :docficha, dcevaluaciones:[])
   end
 
   def lim_eval

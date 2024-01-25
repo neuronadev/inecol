@@ -74,7 +74,15 @@
     <div class="w-full p-3 text-blue-600 text-center bg-gray-200">
        Mensaje enviado
    </div>
-   <div>
+   <div clas="flex-col">
+       
+      <% if @proyecto.validaciones.first.dcevaluaciones.attached? %>
+           <% @proyecto.validaciones.first.dcevaluaciones.each do |doc| %>
+                 <div class="flex"> 
+                                 <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                  </div>
+           <% end %>
+      <% end %>
         
    </div>
    <div> 

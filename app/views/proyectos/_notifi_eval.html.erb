@@ -41,6 +41,16 @@
                    <tr class="">
                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Comentarios:</td>
                         <td class="p-2 border-b border-slate-300">
+                                 <div clas="flex-col">
+                                   <% if validacion.dcevaluaciones.attached? %>
+                                        <% validacion.dcevaluaciones.each do |doc| %>
+                                             <div class="flex"> 
+                                                            <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                             </div>
+                                        <% end %>
+                                   <% end %>
+                                   
+                              </div> 
                                  <%= validacion.txtval %>
                         </td>
                    </tr>
