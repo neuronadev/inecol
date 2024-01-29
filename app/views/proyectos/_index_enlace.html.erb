@@ -27,7 +27,7 @@
                     <%  @proyectos.each do |py| 
                         @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
                     %>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 container box" draggable="true">
                             <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
                                 <%= py.nombre %> </div>
                             </th>
