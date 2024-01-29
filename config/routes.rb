@@ -24,6 +24,7 @@ Rails.application.routes.draw do
             get 'continuar'
             post 'eliminar'
             get 'observa'
+            post 'nombrecorto'
         end
         member do
             get 'planconv'

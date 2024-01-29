@@ -26,28 +26,31 @@
              <% if @proyectos.any? %>
                     <%  @proyectos.each do |py| 
                         @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
+                        item = Item.where(proyecto_id:py.id).first
+                        if item.blank?
                     %>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" draggable="true" data-id="<%= py.id %>" data-organizar-target="proyecto">
-                            <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
-                                <%= py.nombre %> </div>
-                            </th>
-                            <td class="p-2 text-center">
-                                 <%= py.created_at.strftime("%d-%m-%Y %H:%M ")  %>
-                            </td>
-                            <td class="p-2">
-                                 <%= @resp %>
-                            </td>
-                             <td class="p-2 text-center">
-                                <%= render 'vistas/util/elestado', proyecto:py %>
-                            </td>
-                            <td class="p-2">
-                                <% if py.etapas.last.tevento.clave == 'CAP' %> 
-                                       <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                                <% else %>    
-                                       <%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                                <% end %>                            
-                            </td>
-                        </tr>
+                            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" draggable="true" id="<%= py.id %>" data-action="dragstart->organizar#handleDragStart">
+                                <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
+                                    <%= py.nombre %> </div>
+                                </th>
+                                <td class="p-2 text-center">
+                                    <%= py.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                                </td>
+                                <td class="p-2">
+                                    <%= @resp %>
+                                </td>
+                                <td class="p-2 text-center">
+                                    <%= render 'vistas/util/elestado', proyecto:py %>
+                                </td>
+                                <td class="p-2">
+                                    <% if py.etapas.last.tevento.clave == 'CAP' %> 
+                                        <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                                    <% else %>    
+                                        <%= link_to 'Ver', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline",  data:{turbo_frame: 'pycontent'}  %> 
+                                    <% end %>                            
+                                </td>
+                            </tr>
+                       <% end %>       
                      <% end %>   
              <% else %>           
                      <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>

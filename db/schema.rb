@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -129,6 +129,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
     t.bigint "recurso_id", null: false
     t.index ["capitulo_id"], name: "index_py.concurrentes_on_capitulo_id"
     t.index ["recurso_id"], name: "index_concurrentes_on_recurso_id"
+  end
+
+  create_table "contenedores", force: :cascade do |t|
+    t.text "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "convenios", force: :cascade do |t|
@@ -284,6 +290,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
     t.index ["proyecto_id"], name: "index_instituciones_on_proyecto_id"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "periodo_id", null: false
+    t.text "nombre"
+    t.bigint "proyecto_id", null: false
+    t.integer "orden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["periodo_id"], name: "index_py.items_on_periodo_id"
+    t.index ["proyecto_id"], name: "index_py.items_on_proyecto_id"
+  end
+
   create_table "lineas", force: :cascade do |t|
     t.string "nomlinea"
     t.string "clave", limit: 2
@@ -395,6 +412,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
     t.datetime "updated_at", null: false
     t.index ["proyecto_id"], name: "index_py.participantes_on_proyecto_id"
     t.index ["tparticipante_id"], name: "index_py.participantes_on_tparticipante_id"
+  end
+
+  create_table "periodos", force: :cascade do |t|
+    t.bigint "contenedor_id", null: false
+    t.text "nombre"
+    t.integer "anio"
+    t.integer "orden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contenedor_id"], name: "index_py.periodos_on_contenedor_id"
   end
 
   create_table "personas", force: :cascade do |t|
@@ -623,6 +650,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
   add_foreign_key "informes", "proyectos"
   add_foreign_key "informes", "tinformes"
   add_foreign_key "instituciones", "proyectos"
+  add_foreign_key "items", "periodos"
+  add_foreign_key "items", "proyectos"
   add_foreign_key "mconvocatorias", "proyectos"
   add_foreign_key "metas", "proyectos"
   add_foreign_key "mtoautorizados", "proyectos"
@@ -632,6 +661,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_030849) do
   add_foreign_key "pacademicos", "participantes"
   add_foreign_key "participantes", "proyectos"
   add_foreign_key "participantes", "tparticipantes"
+  add_foreign_key "periodos", "contenedores"
   add_foreign_key "personas", "tpersonas"
   add_foreign_key "pestudiantes", "niveles"
   add_foreign_key "pestudiantes", "participantes"

@@ -237,6 +237,23 @@ class ProyectosController < ApplicationController
 
   end
 
+  def nombrecorto
+    proyecto = Proyecto.find(params[:idproy].to_i)
+    periodo = Periodo.where(anio:2024).first
+
+    if proyecto.enlaces.last.enevento.clave == 'FIR'
+          sc = proyecto.dictamen.numregistro + '-' + proyecto.persona.nom_espacio
+          r = {'nombre':sc, 'link': resumen_vistas_path(:id=>proyecto.id) }
+          Item.create!(periodo_id:periodo.id, nombre:sc, proyecto_id:proyecto.id, orden:Item.count()+1)
+    else
+          r = {'nombre':0}
+    end
+    
+    respond_to do |format|
+        format.json { render json:r.to_json}
+    end
+  end
+
   private
   def proyecto_params
       params.require(:proyecto).permit(:nombre, 

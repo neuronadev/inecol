@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contenedor: one
+  nombre: MyText
+  anio: 1
+  orden: 1
+
+two:
+  contenedor: two
+  nombre: MyText
+  anio: 1
+  orden: 1

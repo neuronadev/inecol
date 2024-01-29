@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  periodo: one
+  nombre: MyText
+  proyecto: one
+  orden: 1
+
+two:
+  periodo: two
+  nombre: MyText
+  proyecto: two
+  orden: 1
