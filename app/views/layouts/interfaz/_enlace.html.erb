@@ -1,5 +1,5 @@
             
-<aside class="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+<aside class="flex flex-col w-80 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
   
     <div class="flex flex-col justify-between flex-1 mt-6" data-controller='menup'>
         <nav class="-mx-3 space-y-3 ">
@@ -46,14 +46,14 @@
                     -->
                 </button>
                 <div id="estructura" class="box w-full px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100" data-action="drop->organizar#handleDrop" style="min-height: 150px;">
-                      <% @proyectos_items = Proyecto.includes(etapas: :tevento).order(:created_at).where('teventos.clave':'REV') 
-                         @proyectos_items.each do |py| 
-                             item = Item.where(proyecto_id:py.id).first
-                             if !item.blank?
+                      <% 
+                         Item.order(:nombre).each do |item| 
+                             #item = Item.where(proyecto_id:py.id).first
+                             
                       %> 
-                               <div class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>py.id) %>" > <%= item.nombre %></div>
-                            <% end %>    
-                      <% end %>
+                            <div class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" > <%= item.nombre %></div>
+                        <% end %>    
+                      
                 </div>
             </nav>
         </div>

@@ -12,6 +12,9 @@
                 <th scope="col" class="p-1 text-center">
                     Responsable
                 </th>
+                <th scope="col" class="p-1 text-center">
+                    Num. de Registro
+                </th>
 
                 <th scope="col" class="p-1 text-center" style="width:10%;">
                     Estado
@@ -30,19 +33,26 @@
                         if item.blank?
                     %>
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" draggable="true" id="<%= py.id %>" data-action="dragstart->organizar#handleDragStart">
-                                <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white">
+                                <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
                                     <%= py.nombre %> </div>
                                 </th>
-                                <td class="p-2 text-center">
+                                <td class="p-2" style="text-align: center;">
                                     <%= py.created_at.strftime("%d-%m-%Y %H:%M ")  %>
                                 </td>
                                 <td class="p-2">
                                     <%= @resp %>
                                 </td>
-                                <td class="p-2 text-center">
+                                <td style="text-align: center;">
+                                       <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
+                                              <%= py.dictamen.numregistro %>
+                                       <% else %>       
+                                           --
+                                       <% end %>
+                                </td>
+                                <td class="p-2" style="text-align: center;">
                                     <%= render 'vistas/util/elestado', proyecto:py %>
                                 </td>
-                                <td class="p-2">
+                                <td class="p-2" style="text-align: center;">
                                     <% if py.etapas.last.tevento.clave == 'CAP' %> 
                                         <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
                                     <% else %>    
