@@ -56,7 +56,7 @@ class DictamenesController < ApplicationController
                     m = u.email  #---------------------------------------------
 
 
-                    emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
+                    emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','betsabe.ruiz@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
                     espacios = [20,40,60,80,100]
 
                     emails_otros = []

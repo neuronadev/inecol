@@ -28,7 +28,7 @@ class ValidacionesController < ApplicationController
                Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
-               emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx', 'rosario.landgrave@inecol.mx', 'sara.sanchez@inecol.mx']
+               emails = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx', 'betsabe.ruiz@inecol.mx', 'sara.sanchez@inecol.mx']
                espacios = [20,40,60,80,100]
 
                current_time = Time.now
