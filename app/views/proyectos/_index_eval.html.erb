@@ -57,9 +57,9 @@
 
                                          %>  
                                         <% if py.enlaces.last.enevento.clave == 'DICT' %>
-                                                
+                                                <% if !existe_firma.nil? %>
                                                        <%= link_to 'Firmar', firma_path(py, format: :html), class:"text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
-                                                
+                                                <% end %>     
                                         <% elsif py.enlaces.last.enevento.clave == 'FIR' %>
                                                   <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
                                         <% else %>
