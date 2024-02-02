@@ -2,6 +2,7 @@ class Persona < ApplicationRecord
   self.table_name='rh.personas'
   belongs_to :tpersona
   has_one :evaluador
+  has_one :cargo
 
   def ap_nom
       return (apaterno||'') + ' ' + (amaterno||'') + ' ' + (nombre||'')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_01_220838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
     t.integer "orden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cargos", force: :cascade do |t|
+    t.bigint "tipocargo_id", null: false
+    t.bigint "persona_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["persona_id"], name: "index_rh.cargos_on_persona_id"
+    t.index ["tipocargo_id"], name: "index_rh.cargos_on_tipocargo_id"
   end
 
   create_table "categorias", force: :cascade do |t|
@@ -225,6 +234,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
     t.boolean "evalua"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "estado", limit: 1
     t.index ["persona_id"], name: "index_py.evaluadores_on_persona_id"
   end
 
@@ -238,6 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
     t.text "clave"
     t.string "tipo", limit: 15
     t.text "firmasign"
+    t.string "cargoeval", limit: 3
     t.index ["evaluador_id"], name: "index_py.firmas_on_evaluador_id"
     t.index ["proyecto_id"], name: "index_py.firmas_on_proyecto_id"
   end
@@ -569,6 +580,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
     t.integer "orden"
   end
 
+  create_table "tipocargos", force: :cascade do |t|
+    t.string "nomtcargo", limit: 200
+    t.string "clave", limit: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tparticipantes", force: :cascade do |t|
     t.string "nomtparticipante"
     t.string "clave", limit: 5
@@ -625,6 +643,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_29_201615) do
   add_foreign_key "apmontos", "capitulos"
   add_foreign_key "aportados", "fondos"
   add_foreign_key "avances", "proyectos"
+  add_foreign_key "cargos", "personas"
+  add_foreign_key "cargos", "tipocargos"
   add_foreign_key "concurrentes", "capitulos"
   add_foreign_key "concurrentes", "recursos"
   add_foreign_key "convenios", "proyectos"

@@ -50,13 +50,18 @@
                                         <% end %>                            
                                    </div>  
                                    <div class="ml-5">   
-                                        <% if py.enlaces.last.enevento.clave == 'DICT' || py.enlaces.last.enevento.clave == 'FIR' %>
-                                              <% if py.firmas.where(evaluador_id:current_usuario.cuenta.persona.evaluador.id).first.nil? %>
-                                                      <%= link_to 'Firmar', firma_path(py, format: :html), class:"text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
-                                              <% else %>        
-                                                      <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
-                                              <% end %>
-                                                
+                                         <%
+                                                  #CARGO DEL USUARIO ACTUAL.
+                                                  cargo_actual = current_usuario.cuenta.persona.cargo.tipocargo.clave
+                                                  existe_firma = py.firmas.where(cargoeval:cargo_actual).first
+
+                                         %>  
+                                        <% if py.enlaces.last.enevento.clave == 'DICT' %>
+                                                <% if !existe_firma.nil? %>
+                                                       <%= link_to 'Firmar', firma_path(py, format: :html), class:"text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
+                                                <% end %>     
+                                        <% elsif py.enlaces.last.enevento.clave == 'FIR' %>
+                                                  <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
                                         <% else %>
                                                  <span class="text-gray-500 italic ">Firmar</span>
                                         <% end %>  
