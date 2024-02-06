@@ -1,0 +1,33 @@
+<% @evaluadores.where(estado:'A').each do |e| %>
+               <tr class="bg-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                         <%= e.persona.nom_espacio %>
+                    </th>
+                    <td class="px-6 py-4 text-center">
+                         <%= render 'estadoval', proyecto:@proyecto, evaluador:e %> 
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                         <%= @proyecto.solicitud.fecha_sol.strftime('%d-%m-%Y') %>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                         <%= @proyecto.solicitud.fecha_lim.strftime('%d-%m-%Y') %>
+                    </td>
+                    <td class="text-center p-1">
+                        <%= render 'validaciones/menu_rw', evl:e %>  
+                    </td>
+                </tr>
+                                   
+                <tr id="com-<%= e.id %>" class="font-medium border-b dark:bg-gray-800 dark:border-gray-700" style="display:none;">
+                     <td class="px-8" scope="row" colspan="5">
+                           <div class="mb-3 p-5 border">
+                                <%  if @proyecto.validaciones.any? %>
+                                        <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
+                                                <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
+                                                        Comentarios: <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
+                                                <% end %>       
+                                        <% end %>
+                                <% end %>
+                           </div>     
+                     </td>
+                </tr>
+<% end %>    

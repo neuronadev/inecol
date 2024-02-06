@@ -213,9 +213,9 @@ class ProyectosController < ApplicationController
                          </body></html>")
        end
 
-       Thread.new  { 
-           `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto Recibido-#{proyecto.persona.nom_espacio}-#{proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-       }
+       #Thread.new  { 
+       #    `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto Recibido-#{proyecto.persona.nom_espacio}-#{proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+       #}
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

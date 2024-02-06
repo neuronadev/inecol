@@ -22,16 +22,35 @@
             </div>             
 
             <%
-                validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
+                #CARGO DEL USUARIO ACTUAL.
+                cargo_actual = current_usuario.cuenta.persona.cargo.tipocargo.clave
+                #validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
+                cargos_eval = []
+                validacion = ''
+                @proyecto.validaciones.each do |v|
+                     if v.evaluador.evalua
+                          cargos_eval << v.evaluador.persona.cargo.tipocargo.clave
+                          if (  v.evaluador.persona.cargo.tipocargo.clave == cargo_actual )
+                                validacion =  v
+                          end
+                     end 
+                      
+                end
+
             %>
-            <% if validacion.nil? %>               
+            <% if !cargos_eval.include?(cargo_actual) %>               
               <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
                         <%= link_to new_validacion_path(:idpy=>@proyecto.id, :tval=>Tvalidacion.where(clave:'ACEP').first.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>
                                 <span class='text-sm text-blue-800 font-semibold ml-1'>Validar</span>
                         <% end %>  
                </div>  
-             <% else %>   
+             <% else %> 
+                  <%
+                     puts "---------------"  
+                     puts validacion.id
+                     #validacion = @proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
+                  %>  
                   <div id="itemopt" data-nom="validar" class="itemmenu flex ml-3 items-center p-1 rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
                         <%= link_to validacion_path(validacion.id), data:{turbo_frame: "py_content_sub"}, class:'flex px-2 py-2' do %>
                                 <%= inline_svg_tag 'svg/usuarios-alt.svg' %>

@@ -34,10 +34,10 @@
                     <%  puts "--------------------------------------  rrrrrrrrrrrrrrr" %> 
                     <%= render 'validaciones/dict' %>
            <% elsif @proyecto.enlaces.last.enevento.clave == 'FIR' %>
-                    <%= render 'validaciones/firmado_dict' %>
+                    <%= render 'validaciones/firmado' %>
            <% else %>
                    <% if @proyecto.enlaces.last.enevento.clave == 'EVAL' %>
-                        <%= render 'validaciones/evalcomite' %>
+                        <%= render 'validaciones/dict' %>
                    <% end %>   
            <% end %>        
           

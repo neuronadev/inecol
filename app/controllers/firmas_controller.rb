@@ -46,12 +46,12 @@ class FirmasController < ApplicationController
             c = Cuenta.where(persona_id:p.id).first
             u = Usuario.find(c.usuario_id) 
             m = u.email
-            Thread.new{
-                 `(sleep 20;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{m}) &`
-            }
-            Thread.new{
-                 `(sleep 60;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-            }
+            #Thread.new{
+            #     `(sleep 20;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{m}) &`
+            #}
+            #Thread.new{
+            #     `(sleep 60;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+            #}
       end
 
       respond_to do |format|
