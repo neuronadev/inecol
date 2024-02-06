@@ -45,13 +45,13 @@ class ValidacionesController < ApplicationController
                       end 
 
                       i = 0
-                      #emails.each do |mail|
-                      #      t = espacios[i] 
-                      #      Thread.new  {
-                      #                   `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
-                      #                  }  
-                      #      i = i+1  
-                      #end
+                      emails.each do |mail|
+                            t = espacios[i] 
+                            Thread.new  {
+                                         `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
+                                        }  
+                            i = i+1  
+                      end
 
                   end     
 

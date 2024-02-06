@@ -6,7 +6,8 @@ class ProyectosController < ApplicationController
       @total_notifica_rp = 0
 
       if current_usuario.cuenta.rol.clave == 'EL'
-             @proyectos = Proyecto.includes(etapas: :tevento).order(:created_at).where('teventos.clave':'REV')
+             #@proyectos = Proyecto.includes(etapas: :tevento).order(:created_at).where('teventos.clave':'REV')
+              @proyectos = Proyecto.includes(:dictamen).includes(etapas: :tevento).where('teventos.clave':'REV').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'CAP'
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
@@ -213,9 +214,9 @@ class ProyectosController < ApplicationController
                          </body></html>")
        end
 
-       #Thread.new  { 
-       #    `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto Recibido-#{proyecto.persona.nom_espacio}-#{proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-       #}
+       Thread.new  { 
+           `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto Recibido-#{proyecto.persona.nom_espacio}-#{proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+       }
 
        respond_to do |format|
            format.json { render json:@proyecto.to_json }

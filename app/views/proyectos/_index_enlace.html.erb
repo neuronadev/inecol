@@ -2,6 +2,10 @@
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
+                 <th scope="col" class="p-1 text-center">
+                    Num. de Registro
+                </th>
+
                 <th scope="col" class="p-1 text-center" style="width:50%;">
                     Nombre del Proyecto
                 </th>
@@ -11,9 +15,6 @@
 
                 <th scope="col" class="p-1 text-center">
                     Responsable
-                </th>
-                <th scope="col" class="p-1 text-center">
-                    Num. de Registro
                 </th>
 
                 <th scope="col" class="p-1 text-center" style="width:10%;">
@@ -33,6 +34,13 @@
                         if item.blank?
                     %>
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" draggable="true" id="<%= py.id %>" data-action="dragstart->organizar#handleDragStart">
+                                 <td style="text-align: center;">
+                                       <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
+                                              <%= py.dictamen.numregistro %>
+                                       <% else %>       
+                                           --
+                                       <% end %>
+                                </td>
                                 <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
                                     <%= py.nombre %> </div>
                                 </th>
@@ -42,13 +50,7 @@
                                 <td class="p-2">
                                     <%= @resp %>
                                 </td>
-                                <td style="text-align: center;">
-                                       <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
-                                              <%= py.dictamen.numregistro %>
-                                       <% else %>       
-                                           --
-                                       <% end %>
-                                </td>
+                               
                                 <td class="p-2" style="text-align: center;">
                                     <%= render 'vistas/util/elestado', proyecto:py %>
                                 </td>

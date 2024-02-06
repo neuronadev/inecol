@@ -1,7 +1,7 @@
             
 <aside class="flex flex-col w-80 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
   
-    <div class="flex flex-col justify-between flex-1 mt-6" data-controller='menup'>
+    <div class="flex flex-col  flex-1 mt-6" data-controller='menup'>
         <nav class="-mx-3 space-y-3 ">
              <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
                    data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
@@ -22,7 +22,7 @@
 
         </nav>
 
-        <div data-controller="sidecontent">
+        <div class="mt-10" data-controller="sidecontent">
             <div class="flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-800 dark:text-white">Poyectos Externos</h2>
 
