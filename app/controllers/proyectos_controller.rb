@@ -14,7 +14,7 @@ class ProyectosController < ApplicationController
       elsif current_usuario.cuenta.rol.clave == 'PLAN'
              @proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
       else
-             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC'])
+             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
       end
 
 
