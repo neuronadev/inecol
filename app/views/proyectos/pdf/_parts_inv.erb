@@ -1,6 +1,6 @@
 <table style="width:100%; border-collapse: collapse;">
                                    <% i = 1 %>
-                                   <% @proyecto.participante.pacademicos.each do |acad| %>
+                                   <% @proyecto.participante.pacademicos.order(:id).each do |acad| %>
                                         <% if i < @proyecto.participante.pacademicos.count(:all) %>
                                             <tr style="background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;">
                                                <td style=""> <%= acad.academico.persona.nom_espacio  %> </td>
