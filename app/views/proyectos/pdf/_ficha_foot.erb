@@ -1,7 +1,7 @@
 <div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
    <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
         <tr>   
-            <td>Observaciones</td>
+            <td><strong>Observaciones</strong></td>
             <td style="width:90%; text-align: left; background-color: #ffffff;">
                  <% if !@proyecto.meta.comentario.nil? %>
                         <%= @proyecto.meta.comentario %>
@@ -11,9 +11,23 @@
 
    </table>
 </div>   
-<div style="width:100%;height: 150px;  background-color: #e4e4e4; padding:5px 0;">
+<div style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+     <table style="width:100%; background-color: #e4e4e4; padding:5px 5px;">
+          <tr>   
+              <td><strong>Fecha Dictamen</strong></td>
+              <td style="width:89%; text-align: left; background-color: #ffffff;">
+                   <% if !@proyecto.meta.comentario.nil? %>
+                       <%= @proyecto.dictamen.created_at.strftime('%d-%m-%Y') %>
+                   <% end %>
+               </td>
+         </tr>
+  
+     </table>
+  </div> 
+<div style="width:100%;height: 10px;  background-color: #e4e4e4; padding:5px 0;">
 
 </div>
+
 <!-- 
 <div style="width:100%;height: 100px;  background-color: #e4e4e4; padding:5px 0;">
    <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
