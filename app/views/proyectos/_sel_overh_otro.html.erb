@@ -1,4 +1,6 @@
-<% if @proyecto.clasificacion.clave == 'CREC' %>
+<%
+   
+if  !@proyecto.clasificacion.blank? && @proyecto.clasificacion.clave == 'CREC' %>
         <div>
                 <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
                     <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded">
@@ -22,7 +24,7 @@
         </div>
 <% end %>        
 
-<% if @proyecto.clasificacion.clave == 'PSERV' || @proyecto.clasificacion.clave == 'INCUR' %>
+<% if !@proyecto.clasificacion.blank? && (@proyecto.clasificacion.clave == 'PSERV' || @proyecto.clasificacion.clave == 'INCUR') %>
         <div>
                     <div class="flex cursor-pointer" data-action="click->proyecto#onOverheadTrue">
                             <div id="iconTrue" class=" md:flex md:items-center w-6 border-2 border-solid rounded"> 
@@ -42,6 +44,6 @@
         </div>
 <% end %>  
 
-<% if @proyecto.clasificacion.clave == 'SNREC' %>
+<% if !@proyecto.clasificacion.blank? && @proyecto.clasificacion.clave == 'SNREC' %>
        <span class="italic font-semibold ">No aplica Overhead</span>
 <% end %>

@@ -5,6 +5,8 @@
                                 <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% elsif proyecto.enlaces.last.enevento.clave == 'FIR' %>
                                 <span class="flex w-2.5 h-2.5 bg-blue-800 rounded-full mr-1.5 flex-shrink-0"></span>
+                         <% elsif proyecto.enlaces.last.enevento.clave == 'EVAL' %>        
+                                <span class="flex w-2.5 h-2.5 bg-pink-800 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% else %>
                                 <span class="flex w-2.5 h-2.5 bg-orange-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% end %>   
