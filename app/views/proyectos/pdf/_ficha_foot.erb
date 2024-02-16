@@ -16,7 +16,7 @@
           <tr>   
               <td><strong>Fecha Dictamen</strong></td>
               <td style="width:89%; text-align: left; background-color: #ffffff;">
-                   <% if !@proyecto.meta.comentario.nil? %>
+                   <% if !@proyecto.dictamen.nil? %>
                        <%= @proyecto.dictamen.created_at.strftime('%d-%m-%Y') %>
                    <% end %>
                </td>
