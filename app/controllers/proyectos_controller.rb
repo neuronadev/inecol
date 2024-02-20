@@ -255,6 +255,21 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def cambiarnm
+      nombre = params[:nombre]
+      id = params[:item]
+
+      item = Item.find(id)
+      item.nombre = nombre
+      item.save
+
+      r = {'result':'ok'}
+      
+      respond_to do |format|
+           format.json { render json:r.to_json}
+      end
+  end
+
   private
   def proyecto_params
       params.require(:proyecto).permit(:nombre, 

@@ -77,17 +77,21 @@
                     </svg>
                     -->
                 </button>
-                <div id="estructura" class="box w-full px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100" data-action="drop->organizar#handleDrop" style="min-height: 150px;">
+                
+                <div id="estructura" class="box px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100" data-action="drop->organizar#handleDrop" style="min-height: 150px;">
                       <% 
                          Item.order(:nombre).each do |item| 
                              #item = Item.where(proyecto_id:py.id).first
-                             
                       %> 
-                            <div class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                        <div class="flex">
+                            <div id="item_<%= item.id %>" class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="width:166px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <%= item.nombre %>
                             </div>
+                            <div style="width:auto;">
+                              <span class="text-blue-700 cursor-pointer" data-action="click->organizar#cambiarnm" data-organizar-iditem-param="<%= item.id %>"> Edit </span>
+                            </div>
+                         </div> 
                         <% end %>    
-                      
                 </div>
             </nav>
         </div>
