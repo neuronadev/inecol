@@ -30,7 +30,7 @@
 </style>
 
 
-<div id="resizeMe" class="resizable">
+<div id="resizeMe" class="resizable" style="">
 <aside class="resizer resizer-r flex flex-col w-96 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
   
     <div class="flex flex-col  flex-1 mt-6" data-controller='menup'>
@@ -84,7 +84,7 @@
                              #item = Item.where(proyecto_id:py.id).first
                       %> 
                         <div class="flex">
-                            <div id="item_<%= item.id %>" class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="width:166px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                            <div id="item_<%= item.id %>" class="font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="width:200px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <%= item.nombre %>
                             </div>
                             <div style="width:auto;">
