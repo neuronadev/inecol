@@ -26,13 +26,15 @@ class FirmasController < ApplicationController
       key_pair = OpenSSL::PKey::RSA.generate(2048)
       signature = key_pair.sign(OpenSSL::Digest::SHA256.new,data.to_json)
 
+      cargo_actual = current_usuario.cuenta.persona.cargo.tipocargo.clave 
       r = Firma.create!(evaluador_id: current_usuario.cuenta.persona.evaluador.id, 
                             proyecto_id: @proyecto.id, 
                             firmado: true, 
                             data: Base64.encode64(signature), 
                             clave: Base64.encode64(key_pair.to_s), 
                             tipo: 'KPAIRYB64',
-                            firmasign: Base64.encode64(signature.unpack('H*')[0])
+                            firmasign: Base64.encode64(signature.unpack('H*')[0]),
+                            cargoeval:cargo_actual
                           )
       if ( @proyecto.firmas.count() == 4 )
             enevento = Enevento.where(clave:'FIR').first
