@@ -1,20 +1,75 @@
 import { Controller } from "@hotwired/stimulus"
+
 var token = document.querySelector('meta[name="csrf-token"]').content
 let el = ''
 let tmp_html = ''
 let item_id = 0
+let els = document.querySelectorAll("div.context")
+let contextMenu = document.getElementById("context-menu");
 // Connects to data-controller="organizar"
 export default class extends Controller {
    
    
 
-   connect() {}
-    handleDragStart(e) {
-    e.target.style.opacity = '0.4';
-    this.dragSrcEl = e.target;
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', e.target.innerHTML);
+   connect() {
+         
+         els.forEach(function (el_item) {
+               el_item.addEventListener("contextmenu", (e) => {
+                  e.preventDefault();
+                  let mouseX = e.clientX || e.touches[0].clientX;
+                  let mouseY = e.clientY || e.touches[0].clientY;
+                  let menuHeight = contextMenu.getBoundingClientRect().height;
+                  let menuWidth = contextMenu.getBoundingClientRect().width;
+                  let width = window.innerWidth;
+                  let height = window.innerHeight;
+                  if (width - mouseX <= 200) {
+                    contextMenu.style.borderRadius = "5px 0 5px 5px";
+                    contextMenu.style.left = width - menuWidth + "px";
+                    contextMenu.style.top = mouseY + "px";
+                    //right bottom
+                    if (height - mouseY <= 200) {
+                      contextMenu.style.top = mouseY - menuHeight + "px";
+                      contextMenu.style.borderRadius = "5px 5px 0 5px";
+                    }
+                  }
+                  //left
+                  else {
+                    contextMenu.style.borderRadius = "0 5px 5px 5px";
+                    contextMenu.style.left = mouseX + "px";
+                    contextMenu.style.top = mouseY + "px";
+                    //left bottom
+                    if (height - mouseY <= 200) {
+                      contextMenu.style.top = mouseY - menuHeight + "px";
+                      contextMenu.style.borderRadius = "5px 5px 5px 0";
+                    }
+                  }
+                  //display the menu
+                  item_id=el_item.dataset.iditem
+                  contextMenu.style.visibility = "visible";
+              });
+         });
+
+         document.addEventListener("click", function (e) {
+            if (!contextMenu.contains(e.target)) {
+                 contextMenu.style.visibility = "hidden";
+            }
+         });
+         document.addEventListener("keyup", function (e) {
+             console.log(e)
+             if (e.key === "Escape") { 
+                  if ( el != '' ){
+                      el.innerHTML = tmp_html
+                  }
+             }
+         });
    }
+   
+   handleDragStart(e) {
+        e.target.style.opacity = '0.4';
+        this.dragSrcEl = e.target;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', e.target.innerHTML);
+     }
    async handleDrop(e) {
     e.stopPropagation(); // stops the browser from redirecting.
     if ( e.target !== 'estructura' ) {
@@ -39,8 +94,8 @@ export default class extends Controller {
    }
 
    cambiarnm(event){
-         let str_id = "item_" + event.params.iditem
-         item_id = event.params.iditem
+         let str_id = "item_" + item_id
+         //item_id = event.params.iditem
          el = document.getElementById(str_id)
          tmp_html = el.innerHTML
          el.innerHTML = `
@@ -94,4 +149,11 @@ export default class extends Controller {
    }
 
      
+   ctxitem(event){
+      contextMenu.style.visibility = "hidden"; 
+      this.cambiarnm('')
+      console.log(item_id)
+   }
+
+
 }
