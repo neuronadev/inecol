@@ -74,10 +74,10 @@
                              #item = Item.where(proyecto_id:py.id).first
                       %> 
                         <div id="context-menu">
-                            <div class="item" data-action="click->organizar#ctxitem">Editar nombre...</div>
+                            <div id="itemedit" class="item" data-action="click->organizar#ctxitem">Editar nombre...</div>
                         </div>
 
-                        <div class="flex">
+                        <div>
                             <div id="item_<%= item.id %>" class="context font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="width:200px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <%= item.nombre %>
                             </div>

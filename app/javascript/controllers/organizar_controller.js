@@ -43,8 +43,12 @@ export default class extends Controller {
                       contextMenu.style.borderRadius = "5px 5px 5px 0";
                     }
                   }
-                  //display the menu
-                  item_id=el_item.dataset.iditem
+                  item_id = el_item.dataset.iditem
+                  let item_ctx = document.getElementById("context-menu")
+                  item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>`
+                  if ( el != '' ){
+                       item_ctx.innerHTML = `<div id="itemedit" class="item"><span class="italic text-zinc-400">Editar nombre...</span></div>`
+                   }
                   contextMenu.style.visibility = "visible";
               });
          });
@@ -55,10 +59,10 @@ export default class extends Controller {
             }
          });
          document.addEventListener("keyup", function (e) {
-             console.log(e)
              if (e.key === "Escape") { 
                   if ( el != '' ){
                       el.innerHTML = tmp_html
+                      el = ''
                   }
              }
          });
@@ -101,7 +105,6 @@ export default class extends Controller {
          el.innerHTML = `
                <input id="txt${item_id}" type="text" name="nmItem" style="height:20px;width:auto;font-size:12px;" value="${tmp_html.trim()}" data-action="keyup->organizar#aplicar" >  
              `
-         console.log(tmp_html)
    }
 
    async aplicar(event){
@@ -109,10 +112,12 @@ export default class extends Controller {
        let el_input = document.getElementById("txt"+item_id)
        if (event.key === "Escape") { 
              el.innerHTML = tmp_html
+             el = ''
        }
        if (event.key === "Enter") {
              let cambio = await this.updatenombre(el_input.value)
              el.innerHTML = el_input.value
+             el = ''
        }
    }
 
@@ -152,7 +157,6 @@ export default class extends Controller {
    ctxitem(event){
       contextMenu.style.visibility = "hidden"; 
       this.cambiarnm('')
-      console.log(item_id)
    }
 
 

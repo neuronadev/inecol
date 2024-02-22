@@ -1,5 +1,6 @@
 class VistasController < ApplicationController
-    layout 'vistas'
+    #layout 'vistas'
+    layout :select_layout
     def resumen
         session[:step] = 0
         @proyecto = Proyecto.find(params[:id])
@@ -32,4 +33,21 @@ class VistasController < ApplicationController
         @fuente = @proyecto.fuente 
     end
 
+    protected 
+     def select_layout
+        
+        if !current_usuario.nil?
+             if current_usuario.cuenta.rol.clave == 'EL'
+                   return 'enlaces' 
+             elsif current_usuario.cuenta.rol.clave == 'EVAL'
+                   return 'validaciones'
+             elsif current_usuario.cuenta.rol.clave == 'PLAN'
+                   return 'planeacion'
+             else
+                   return 'proyectos'
+             end
+                
+        end
+     end        
+     
 end
