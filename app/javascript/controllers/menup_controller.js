@@ -10,7 +10,7 @@ const cssUnselectedItem = ['menupactivo','group', 'flex', 'items-center', 'space
 
 export default class extends Controller {
    connect() {
-       console.log('Menup..')
+       
     }
    
     onOver(event){

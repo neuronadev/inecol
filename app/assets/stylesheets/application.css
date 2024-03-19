@@ -33,3 +33,46 @@
     display: block;
     text-align: center;
   }
+
+  #context-menu {
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(37, 40, 42, 0.22);
+    color: #1f194c;
+    width: 15.5em;
+    padding: 0.8em 0.6em;
+    font-size: 12px;
+    position: fixed;
+    visibility: hidden;
+    z-index: 100;
+}
+
+.item {
+ padding: 0.3em 1.2em;
+}
+
+.item:hover {
+ background-color: rgba(44, 141, 247, 0.2);
+ cursor: pointer;
+}
+
+.resizer {
+   width: 3px;
+   top: 0;
+   right: 0;
+   cursor: col-resize;
+   height: 100%;
+   position: absolute;
+   background-color: #ebebeb;
+}
+.sidebar {
+    width: 333px;
+    overflow-x: hidden;
+    position: relative;
+ }
+
+ .moving {
+    user-select:none;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+}

@@ -1,30 +1,8 @@
-<style>
-#context-menu {
-    background-color: #ffffff;
-    box-shadow: 0 0 20px rgba(37, 40, 42, 0.22);
-    color: #1f194c;
-    width: 15.5em;
-    padding: 0.8em 0.6em;
-    font-size: 12px;
-    position: fixed;
-    visibility: hidden;
-    z-index: 100;
-}
-
-.item {
- padding: 0.3em 1.2em;
-}
-
-.item:hover {
- background-color: rgba(44, 141, 247, 0.2);
- cursor: pointer;
-}
-</style>
-<div id="resizeMe" class="resizable" style="">
-<aside class="resizer resizer-r flex flex-col w-75 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-  
+<aside id="sidebar" class="sidebar flex flex-col w-75 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+    <div class="resizer"></div>
     <div class="flex flex-col  flex-1 mt-6" data-controller='menup'>
         <nav class="-mx-3 space-y-3 ">
+              
              <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
                    data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -78,7 +56,7 @@
                         </div>
 
                         <div>
-                            <div id="item_<%= item.id %>" class="context font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="width:200px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                            <div id="item_<%= item.id %>" class="context font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <%= item.nombre %>
                             </div>
                             
@@ -99,4 +77,96 @@
         </div>
     </div>
 </aside>
-</div>
+<script>
+var resizer = document.querySelector(".resizer")
+var sidebar = document.querySelector(".sidebar");
+var els_items = document.querySelectorAll("div.context")
+var item_id = 0
+var contextMenu = document.getElementById("context-menu");
+var el = ''
+var tmp_html = ''
+
+function initResizerFn( resizer, sidebar ) {
+   
+   // track current mouse position in x var
+   var x, w;
+
+   function rs_mousedownHandler( e ) {
+
+      x = e.clientX;
+
+      var sbWidth = window.getComputedStyle( sidebar ).width;
+      w = parseInt( sbWidth, 10 );
+
+      document.addEventListener("mousemove", rs_mousemoveHandler);
+      document.addEventListener("mouseup", rs_mouseupHandler);
+
+      document.getElementById('sidebar').classList.toggle('moving',true);
+   }
+
+   function rs_mousemoveHandler( e ) {
+      var dx = e.clientX - x;
+
+      var cw = w + dx; // complete width
+      
+      //if ( cw < 700 ) {
+         sidebar.style.width = `${ cw }px`;
+      //}
+   }
+
+   function rs_mouseupHandler() {
+      // remove event mousemove && mouseup
+      document.removeEventListener("mouseup", rs_mouseupHandler);
+      document.removeEventListener("mousemove", rs_mousemoveHandler);
+      document.getElementById('sidebar').classList.toggle('moving',false);
+   }
+
+   resizer.addEventListener("mousedown", rs_mousedownHandler);
+}
+
+
+initResizerFn( resizer, sidebar );
+
+
+        els_items.forEach(function (el_item) {
+               el_item.addEventListener("contextmenu", (e) => {
+                  e.preventDefault();
+                  let mouseX = e.clientX || e.touches[0].clientX;
+                  let mouseY = e.clientY || e.touches[0].clientY;
+                  let menuHeight = contextMenu.getBoundingClientRect().height;
+                  let menuWidth = contextMenu.getBoundingClientRect().width;
+                  let width = window.innerWidth;
+                  let height = window.innerHeight;
+                  if (width - mouseX <= 200) {
+                    contextMenu.style.borderRadius = "5px 0 5px 5px";
+                    contextMenu.style.left = width - menuWidth + "px";
+                    contextMenu.style.top = mouseY + "px";
+                    //right bottom
+                    if (height - mouseY <= 200) {
+                      contextMenu.style.top = mouseY - menuHeight + "px";
+                      contextMenu.style.borderRadius = "5px 5px 0 5px";
+                    }
+                  }
+                  //left
+                  else {
+                    contextMenu.style.borderRadius = "0 5px 5px 5px";
+                    contextMenu.style.left = mouseX + "px";
+                    contextMenu.style.top = mouseY + "px";
+                    //left bottom
+                    if (height - mouseY <= 200) {
+                      contextMenu.style.top = mouseY - menuHeight + "px";
+                      contextMenu.style.borderRadius = "5px 5px 5px 0";
+                    }
+                  }
+                  item_id = el_item.dataset.iditem
+                  let item_ctx = document.getElementById("context-menu")
+                  item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>`
+                  if ( el != '' ){
+                       item_ctx.innerHTML = `<div id="itemedit" class="item"><span class="italic text-zinc-400">Editar nombre...</span></div>`
+                   }
+                  contextMenu.style.visibility = "visible";
+              });
+         });
+
+
+</script>

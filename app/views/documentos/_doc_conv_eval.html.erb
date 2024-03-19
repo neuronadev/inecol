@@ -9,7 +9,7 @@
                <div class='font-semibold'>Convenio, Contrato o algún otro Documento Legal:</div>
                     <div id = "div_file" class="md:w-full ml-3">
                          <% if @proyecto.docconvenios.attached? %>
-                                                <% @proyecto.docconvenios.each do |doc| %>
+                                                <% @proyecto.docconvenios.order(:created_at).each do |doc| %>
                                                            <div id = "div_file" class=" md:w-full p-2" data-controller="upsf">
                                                                    <%= form.file_field :docconvenios, class:'item_file', style:'display:none;',  multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
                                                                    <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>

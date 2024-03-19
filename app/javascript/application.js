@@ -4,9 +4,6 @@ import "controllers"
 import 'flowbite'
 import "trix"
 import "@rails/actiontext"
-
-
-
 addEventListener("trix-initialize", (event) => {
     //configTrix();
     //extendTrix(event);

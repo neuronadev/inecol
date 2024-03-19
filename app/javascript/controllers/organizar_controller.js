@@ -1,11 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 var token = document.querySelector('meta[name="csrf-token"]').content
-let el = ''
-let tmp_html = ''
-let item_id = 0
-let els = document.querySelectorAll("div.context")
-let contextMenu = document.getElementById("context-menu");
+
+
+
+
 // Connects to data-controller="organizar"
 export default class extends Controller {
    
@@ -13,46 +12,7 @@ export default class extends Controller {
 
    connect() {
          
-         els.forEach(function (el_item) {
-               el_item.addEventListener("contextmenu", (e) => {
-                  e.preventDefault();
-                  let mouseX = e.clientX || e.touches[0].clientX;
-                  let mouseY = e.clientY || e.touches[0].clientY;
-                  let menuHeight = contextMenu.getBoundingClientRect().height;
-                  let menuWidth = contextMenu.getBoundingClientRect().width;
-                  let width = window.innerWidth;
-                  let height = window.innerHeight;
-                  if (width - mouseX <= 200) {
-                    contextMenu.style.borderRadius = "5px 0 5px 5px";
-                    contextMenu.style.left = width - menuWidth + "px";
-                    contextMenu.style.top = mouseY + "px";
-                    //right bottom
-                    if (height - mouseY <= 200) {
-                      contextMenu.style.top = mouseY - menuHeight + "px";
-                      contextMenu.style.borderRadius = "5px 5px 0 5px";
-                    }
-                  }
-                  //left
-                  else {
-                    contextMenu.style.borderRadius = "0 5px 5px 5px";
-                    contextMenu.style.left = mouseX + "px";
-                    contextMenu.style.top = mouseY + "px";
-                    //left bottom
-                    if (height - mouseY <= 200) {
-                      contextMenu.style.top = mouseY - menuHeight + "px";
-                      contextMenu.style.borderRadius = "5px 5px 5px 0";
-                    }
-                  }
-                  item_id = el_item.dataset.iditem
-                  let item_ctx = document.getElementById("context-menu")
-                  item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>`
-                  if ( el != '' ){
-                       item_ctx.innerHTML = `<div id="itemedit" class="item"><span class="italic text-zinc-400">Editar nombre...</span></div>`
-                   }
-                  contextMenu.style.visibility = "visible";
-              });
-         });
-
+         
          document.addEventListener("click", function (e) {
             if (!contextMenu.contains(e.target)) {
                  contextMenu.style.visibility = "hidden";
@@ -103,7 +63,7 @@ export default class extends Controller {
          el = document.getElementById(str_id)
          tmp_html = el.innerHTML
          el.innerHTML = `
-               <input id="txt${item_id}" type="text" name="nmItem" style="height:20px;width:auto;font-size:12px;" value="${tmp_html.trim()}" data-action="keyup->organizar#aplicar" >  
+               <input id="txt${item_id}" type="text" name="nmItem" style="height:20px;width:300px;font-size:12px;" value="${tmp_html.trim()}" data-action="keyup->organizar#aplicar" >  
              `
    }
 
