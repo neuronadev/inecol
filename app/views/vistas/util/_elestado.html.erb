@@ -11,6 +11,10 @@
                                 <span class="flex w-2.5 h-2.5 bg-orange-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% end %>   
                         <%= proyecto.enlaces.last.enevento.nomenevento %>
+                        <% if proyecto.enlaces.last.enevento.clave == 'DICT' %>
+                               <%= proyecto.dictamen.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                        <% end %>
+
                 </span>
      <% else %>
              <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">

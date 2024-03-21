@@ -10,7 +10,7 @@
                     Nombre del Proyecto
                 </th>
                 <th scope="col" class="p-1 text-center">
-                    Fecha de Registro
+                    Fecha Recepción
                 </th>
 
                 <th scope="col" class="p-1 text-center">
@@ -45,7 +45,7 @@
                                     <%= py.nombre %> </div>
                                 </th>
                                 <td class="p-2" style="text-align: center;">
-                                    <%= py.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                                    <%= py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y %H:%M ")  %>
                                 </td>
                                 <td class="p-2">
                                     <%= @resp %>

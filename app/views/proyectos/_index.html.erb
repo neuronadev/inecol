@@ -2,13 +2,15 @@
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
         <thead class="text-sm text-gray-700 bg-gray-200 dark:bg-gray-800 dark:text-gray-400">
             <tr>
-                <th scope="col" class="p-1" style="text-align: center;">
+                <th scope="col" class="p-1 w-3/5" style="text-align: center;">
                     Nombre del Proyecto
                 </th>
                 <th scope="col" class="p-1" style="text-align: center;">
-                     Fecha de Registro
+                     Fecha de Captura
                 </th>
-
+                <th scope="col" class="p-1" style="text-align: center;">
+                     Fecha de Envío
+                </th>
                 <th scope="col" class="p-1" style="text-align: center;">
                     Estado
                 </th>
@@ -23,7 +25,7 @@
                                 <% @proyectos.each do |py| %>
                                      <% if py.etapas.last.tevento.clave != 'DEL' %>
                                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                                <th scope="row" class=" font-medium text-gray-900 dark:text-white p-2">
+                                                <td scope="row" class=" font-medium text-gray-900 dark:text-white p-2" style="text-align: justify;">
                                                     <%= py.nombre %>
                                                     <% if py.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').any? %>
                                                           <div class="text-red-700 italic ml-2">
@@ -31,12 +33,20 @@
                                                               Se requiere que atienda las observaciones. Haga clic en la opción Ver.
                                                           </div>
                                                     <% end %>
-                                                </th>
+                                                </td>
                                                 <td class=" font-semibold p-2">
                                                     <div class="flex justify-center"><%= py.created_at.strftime("%d-%m-%Y")  %></div>
                                                 </td>
+                                                <td class=" font-semibold p-2 ">
+                                                   <% if py.etapas.includes(:tevento).where('teventos.clave':'REV').any?  %> 
+                                                         <div class="flex justify-center"><%= py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y")  %></div>
+                                                   <% else %>     
+                                                           <div class="flex justify-center">--</div>
+                                                   <% end %>
+
+                                                </td>
                                                 <td class="p-2">
-                                                    <div class="flex"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
+                                                    <div class="flex justify-center"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
                                                 </td>
                                                 
                                                 <td class="p-2">
