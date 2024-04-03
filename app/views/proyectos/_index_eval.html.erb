@@ -1,4 +1,13 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+<style>
+th {
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+</style>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5" style="height: 80vh;">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -29,11 +38,11 @@
                         #if py.enlaces.last.enevento.clave == "EVAL" || py.enlaces.last.enevento.clave == "DICT"
                     %>
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
                                     <%= py.nombre %>
                                     <%= py.validaciones.last.tvalidacion.clave %>
 
-                                </th>
+                                </td>
                                 <td class="px-6 py-4 text-center">
                                     <%= py.created_at.strftime("%d-%m-%Y")  %>
                                 </td>
