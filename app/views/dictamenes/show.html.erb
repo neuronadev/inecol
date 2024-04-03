@@ -1,18 +1,7 @@
-<%= turbo_frame_tag 'py_content_sub', class:'w-full' do %>
-   <%= turbo_frame_tag 'py_content_secc', class:'w-full' do %>
+<% if current_usuario.cuenta.rol.clave == 'EL' %>
+      <%= render 'showel' %>
+<% end %>
 
-    <div class="w-full text-slate-700 mt-5">
-      <div class="flex align-middle border-b-2 border-slate-200 justify-between">
-          <div class="flex w-1/3">
-               <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
-                    <div class="ml-1">Dictamen</div>
-          </div>
-      </div>
-
-   
-      <div class="border border-gray-200 rounded-lg shadow sm:p-3 dark:bg-gray-800 dark:border-gray-700">
-                <%= render 'show' %>
-      </div>
-    </div>      
-   <% end %> 
+<% if current_usuario.cuenta.rol.clave == 'DIR' %>
+      <%= render 'showdir' %>
 <% end %>

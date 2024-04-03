@@ -19,6 +19,8 @@
               <%= render 'index' %>  
      <% elsif current_usuario.cuenta.rol.clave == 'PLAN' %> 
               <%= render 'index_plan' %>
+     <% elsif current_usuario.cuenta.rol.clave == 'DIR' %> 
+              <%= render 'index_dir' %>         
      <% else %>         
               <%= render 'index_eval' %>  
      <% end %>

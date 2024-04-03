@@ -13,6 +13,8 @@ class ProyectosController < ApplicationController
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       elsif current_usuario.cuenta.rol.clave == 'PLAN'
              @proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
+      elsif current_usuario.cuenta.rol.clave == 'DIR'
+                @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       else
              @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
       end
@@ -303,6 +305,8 @@ class ProyectosController < ApplicationController
                    return 'validaciones'
              elsif current_usuario.cuenta.rol.clave == 'PLAN'
                    return 'planeacion'
+             elsif current_usuario.cuenta.rol.clave == 'DIR'
+                    return 'direccion'
              else
                    return 'proyectos'
              end

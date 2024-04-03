@@ -1,0 +1,16 @@
+<%= turbo_frame_tag 'pycontent', class:'w-full' do %>
+    <div class="w-full text-slate-700 mt-5">
+      <div class="flex align-middle border-b-2 border-slate-200 justify-between">
+          <div class = "p-2 hover:bg-gray-200 hover:ring-2">
+                 <%= link_to proyectos_path, 'data-frame-target':'_top', class:'flex' do %>
+                         <%= inline_svg_tag 'svg/flecha-izquierda.svg' %>
+                  <% end %>      
+            </div>  
+      </div>
+
+   
+      <div class="border border-gray-200 rounded-lg shadow sm:p-3 dark:bg-gray-800 dark:border-gray-700">
+                <%= render 'show' %>
+      </div>
+    </div>      
+<% end %>

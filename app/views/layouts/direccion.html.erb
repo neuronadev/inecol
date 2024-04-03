@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  
     <title>Inecol</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -9,22 +10,16 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <%= stylesheet_link_tag "https://unpkg.com/slim-select@latest/dist/slimselect.css", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <style>
-      .box.over {
-        border: 3px dotted #666;
-      }
-
-
-    </style>
+    
   </head>
 
-  <body> 
-   <div class="container-fluid md:flex" data-controller="organizar">  
-    <%= render "layouts/interfaz/enlace" %>    
-    <main id="main" class="mx-auto flex w-full" >
-          <div class="flex-col w-full">
+  <body>
+    <main class="container mx-auto flex">
+         <%= render "layouts/interfaz/direccion" %>
+         <div class="flex-col w-full">
               <div class="flex justify-center w-full p-1 h-20 ">
                      <div class="flex justify-between w-11/12 border-b-2 border-slate-200">
                         <div class="flex">
@@ -45,6 +40,5 @@
               </div> 
          </div>
     </main>
-   </div>
   </body>
 </html>
