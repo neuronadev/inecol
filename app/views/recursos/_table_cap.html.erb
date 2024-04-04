@@ -36,7 +36,12 @@
                         <% items.each do |item| %>
                             <tr>
                                 <td class="border border-slate-300 p-1" style="width:600px;" ><%= item.capitulo.nomcapitulo %></td>
-                                <td class="border border-slate-300 text-center p-1" style="width:300px;"><%= number_to_currency(item.monto, :unit=>@moneda.currency + ' $ ') %></td>
+                                <td class="border border-slate-300 text-center p-1" style="width:300px;">
+                                     <div style="display:flex;"> 
+                                        <div style="width:30%;display: flex;justify-content: flex-end;"><%= @moneda.currency + ' ' + @moneda.simbolo %></div>
+                                        <div style="width:40%;display: flex;justify-content: flex-end;"> <%= number_to_currency(item.monto, :unit=>"") %></div>
+                                     </div>
+                                </td>
                             </tr>
                         <% end %>            
                    <% else %>
@@ -49,7 +54,12 @@
             <tfoot>
                 <tr>  
                     <td class="text-right font-semibold">Total:</td>
-                    <td class="text-center font-semibold"><%= number_to_currency(total, :unit=>@moneda.currency + ' $ ') %></td>
+                    <td class="text-center font-semibold">
+                          <div style="display:flex;"> 
+                                        <div style="width:30%;display: flex;justify-content: flex-end;"><%= @moneda.currency + ' ' + @moneda.simbolo %></div>
+                                        <div style="width:40%;display: flex;justify-content: flex-end;"> <%= number_to_currency(total, :unit=>"") %></div>
+                           </div>
+                    </td>
                 </tr>
             </tfoot>
         </table>

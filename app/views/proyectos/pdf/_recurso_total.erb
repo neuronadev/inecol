@@ -6,7 +6,7 @@
                 <tfoot>
                             <tr>
                                 <td style="width:400px; font-weight: bold; padding:5px;text-align:right;">Total</td>
-                                <td style="width:20px; font-weight: bold; padding:5px; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span>$</span></td>
+                                <td style="width:20px; font-weight: bold; padding:5px; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span><%=  @proyecto.presupuesto.moneda.simbolo %></span></td>
                                 <td style="width:100px; font-weight: bold; padding:7px; text-align:right;"><%=  number_to_currency(gtotal,:unit => "") %></td>
                             </tr>
                 </tfoot>

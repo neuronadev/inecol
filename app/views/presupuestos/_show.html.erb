@@ -7,7 +7,7 @@
                             
                             <tr>
                                 <td class=" p-2 text-center font-semibold">Costo del Proyecto SIN IVA</td>
-                                <td class="p-2 font-semibold text-left"><%= number_to_currency(@presupuesto.costo, :unit=>@moneda.currency + ' $ ') %>  </td>
+                                <td class="p-2 font-semibold text-left"><%= number_to_currency(@presupuesto.costo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ' ) %>  </td>
                             </tr>    
                     </table>
                 </div>     
@@ -19,11 +19,11 @@
                             <table class="w-full">
                                     <tr  style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">IVA</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' $ ') %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %> </td>
                                     </tr>
                                     <tr>
                                         <td class="p-2 text-right w-5 font-semibold">Total del Proyecto</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto, :unit=>@moneda.currency + ' $ ') %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.tproyecto, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %> </td>
                                     </tr>
                             </table>      
                     </div>
@@ -31,11 +31,11 @@
                             <table class="w-full">
                                     <tr style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">20% Overhead</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' $ ') %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %> </td>
                                     </tr>
                                     <tr style=" <%= @proyecto.overhead ? 'display:table-row;' : 'display:none;' %>  ">
                                         <td class="p-2 text-right w-5">10% Estímulos</td>
-                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' $ ') %> </td>
+                                        <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %> </td>
                                     </tr>
                             </table>      
                     </div>
@@ -46,7 +46,7 @@
                     <table class="w-full">
                             <tr>
                                 <td class=" p-2 text-center font-semibold">Total para Gastos</td>
-                                <td class=" p-2 font-semibold text-center"><%= number_to_currency(@presupuesto.tgastos, :unit=>@moneda.currency + ' $ ') %></td>
+                                <td class=" p-2 font-semibold text-center"><%= number_to_currency(@presupuesto.tgastos, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %></td>
                             </tr>    
                     </table>
                 </div>     
