@@ -1,9 +1,16 @@
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-gray-100" data-controller="menuimage" >
   <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
     <div class="flex h-screen flex-col justify-between pt-2 pb-6">
       <div>
-        <div class="w-max p-2.5">
-          <img src="https://tailus.io/images/logo.svg" class="w-32" alt="">
+        <div class="w-max p-1">
+          <!-- 
+              <div id="logo_circular" class="flex w-full" style="display:none;">
+                  <%= image_tag('circular.png', size: '50x50') %>
+              </div>
+              <div id="logo_expan" class="flex w-full" style="display:flex;">
+                  <%= image_tag('logo140.png') %>
+              </div>
+          -->    
         </div>
         <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
           <li class="min-w-max" data-action='click->menup#onClickItem'>
@@ -15,7 +22,8 @@
              <% end %>
 
           </li>
-        
+         
+          
          
         </ul>
       </div>

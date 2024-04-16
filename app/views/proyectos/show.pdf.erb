@@ -10,7 +10,7 @@
    
    <%= render partial: '/proyectos/pdf/metas', formats:[:html], locals:{proyecto:@proyecto} %>
 
-   <% if current_usuario.cuenta.rol.clave == 'EL' || current_usuario.cuenta.rol.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'DIR' %>
+   <% if current_usuario.cuenta.rol.clave == 'EL' || current_usuario.cuenta.rol.clave == 'CAP' || current_usuario.cuenta.rol.clave == 'DIR' || current_usuario.cuenta.rol.clave == 'PLAN' %>
         <%= render partial: '/proyectos/pdf/firmas', formats:[:html], locals:{proyecto:@proyecto} %>
    <% end %>
 

@@ -12,7 +12,8 @@ class ProyectosController < ApplicationController
              @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id)
              @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       elsif current_usuario.cuenta.rol.clave == 'PLAN'
-             @proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
+             #@proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
+               @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'DIR'
                 @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       else
