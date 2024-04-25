@@ -113,6 +113,13 @@ resources :mtoconcurrentes
             post 'generar'
         end
   end
+
+  resources :modificatorios do
+        collection do
+               get 'mensaje'
+               post 'aplicarmod'
+        end
+  end
    
   root 'proyectos#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_01_220838) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_24_223453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -500,6 +500,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_220838) do
     t.boolean "overhead"
     t.bigint "persona_id", null: false
     t.text "objetivo"
+    t.string "modificatorio", limit: 4
+    t.integer "raiz"
     t.index ["clasificacion_id"], name: "index_proyectos_on_clasificacion_id"
     t.index ["linea_id"], name: "index_proyectos_on_linea_id"
     t.index ["medio_id"], name: "index_proyectos_on_medio_id"

@@ -1,10 +1,20 @@
+<% if  @proyecto.enlaces.last.enevento.clave == 'FIR' %>
+   <div id="itemopt" data-nom="modprop" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2">
+       <%= link_to mensaje_modificatorios_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_content_sub'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                                                <div class="flex w-full ml-1">
+                                                    <%= image_tag('doc24x24.png') %>
+                                                    <span class="text-sm text-blue-800 ml-1">Mod propuesta</span>
+                                                </div>
+       <% end %>   
+    </div>     
+<% end %>
+
 <div id="itemopt" data-nom="solcambio" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
-                                    
     <div class="flex hover:cursor-pointer font-medium text-sm leading-tight">
                 <div> <%= inline_svg_tag 'svg/girar-iz.svg' %></div> <div class="ml-2 text-gray-400">Solicitar cambios</div>
     </div>   
-    
 </div>     
+
 
 <div id="itemopt" data-nom="evaluador" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion" data-controller="mnueval">
     <button id="dropdownBtnEval" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
