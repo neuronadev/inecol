@@ -10,12 +10,27 @@
          <tbody>
                    <%= render "proyectos/tr", titulo:'Nombre del Proyecto:', valor: @proyecto.nombre  %>
                    <%= render "proyectos/tr", titulo:'Responsable Técnico:', valor: @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>
+                   <% if !@proyecto.raiz.nil? 
+                          py_ant =  Proyecto.find(@proyecto.raiz)
+                   %> 
+                            <tr class="">
+                                   <td class="font-semibold text-gray-500 p-2 text-right border-b border-slate-300 italic" style='width:300px;'>Ficha Anterior:</td>
+                                   <td class="p-2 border-b border-slate-300">
+                                             <%= link_to proyecto_path(py_ant, format: :pdf), target:'_blank' do %> 
+                                                       <div class="flex  font-medium text-sm leading-tight ml-3" >
+                                                            <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar-Ficha anterior</div>
+                                                       </div>
+                                             <% end %>
+                                   </td>
+                              </tr>
+                   <% end %>
+
                    <tr class="">
-                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Ficha del Proyecto:</td>
+                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Ficha Actual:</td>
                         <td class="p-2 border-b border-slate-300">
                                 <%= link_to proyecto_path(@proyecto, format: :pdf), target:'_blank' do %> 
                                         <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                              <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar</div>
+                                              <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-gray-800">Descargar-Ficha</div>
                                         </div>
                                 <% end %>
                         </td>
