@@ -17,9 +17,15 @@ export default class extends Controller {
                                       headers: {'Content-Type':'application/json', 'Accept':'application/json', 'X-CSRF-Token': token },
                                       body: JSON.stringify( {idpy:idpy} )
                                     })
-                                    .then(response=>response.text())
+                                    .then(response=>response.json())
                                     .then( data=>{ 
-                                                     console.log(data)
+                                                     if (data.mensaje == "success"){
+                                                           var div_conten = document.getElementById("cont_data")
+                                                           var row_conten = document.getElementById("rw_success")
+                                                           var td_conten = document.getElementById("cont_success")
+                                                           row_conten.style.display = "table-row"
+                                                           td_conten.innerHTML =  `<span>Proyecto en proceso de modificación. Fecha de inicio: ${data.fecha} </span>`
+                                                     }
                                                 } )
         } catch(e){ alert(e) }
     }

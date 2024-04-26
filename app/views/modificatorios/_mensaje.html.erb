@@ -56,18 +56,34 @@
                      <strong> <%=  @proyecto.dictamen.tvalidacion.nomtvalidacion %> </strong>
                 </td>
             </tr>   
+            <% if !Proyecto.where(raiz:@proyecto.id).any? %>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="rw_success" style="display:none;">
+                        <td colspan="2" class="px-6 py-4 text-red-900 whitespace-nowrap dark:text-white font-semibold" id="cont_success">
+                        </td>
+                     </tr>   
+            <% else %>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="rw_success">
+                        <td colspan="2" class="px-6 py-4 text-red-900 whitespace-nowrap dark:text-white font-semibold" id="cont_success">
+                            <%
+                               p = Proyecto.where(raiz:@proyecto.id).last
+                            %>  
+                            Proyecto en proceso de modificación. Fecha de inicio: <%= p.created_at.strftime("%d-%m-%Y %H:%M") %>
+                        </td>
+                    </tr>  
+            <% end %> 
         </tbody>
     </table>
 </div>
-<div class="relative overflow-x-auto flex justify-end">
-      <button                 id = "btnmod"
-                              type = "button"
-                              data-idxpy = <%= @proyecto.id %>
-                              class = "text-white mt-2 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" 
-                              data-turbo-frame = 'py_content_action' data-controller = "modificatorio" data-action="click->modificatorio#aplicarproceso">
-                             
-                             <span class="ml-2">Aceptar</span>
-                             <%= inline_svg_tag 'svg/disco.svg', class:"ml-2" %>
-     </button>
-</div>
-
+<% if !Proyecto.where(raiz:@proyecto.id).any? %>
+    <div class="relative overflow-x-auto flex justify-end">
+        <button                 id = "btnmod"
+                                type = "button"
+                                data-idxpy = <%= @proyecto.id %>
+                                class = "text-white mt-2 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" 
+                                data-turbo-frame = 'py_content_action' data-controller = "modificatorio" data-action="click->modificatorio#aplicarproceso">
+                                
+                                <span class="ml-2">Aceptar</span>
+                                <%= inline_svg_tag 'svg/disco.svg', class:"ml-2" %>
+        </button>
+    </div>
+<% end %>

@@ -58,6 +58,11 @@
                         <div>
                             <div id="item_<%= item.id %>" class="context font-semibold mb-2 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <%= item.nombre %>
+                                <% if Proyecto.where(raiz:item.proyecto_id).any? %>
+                                             <div class="text-red-700 italic ml-2">
+                                                    [Modificación]   
+                                             </div>
+                                <% end %> 
                             </div>
                             
                          </div> 

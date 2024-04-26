@@ -6,13 +6,15 @@ class ModificatoriosController < ApplicationController
 
    def aplicarmod
             @proyecto = Proyecto.find(params[:idpy])
-            r = {mesaje:@proyecto.id}
 
-            proyecto_mod = regproyecto @proyecto
-            fuente = regfuente @proyecto.fuente, proyecto_mod.id
-            participantes = regparts @proyecto.participante, proyecto_mod.id
-            presupuesto = regpresup @proyecto.presupuesto, proyecto_mod.id
-            recurso = regrecurso @proyecto.recurso, proyecto_mod.id
+            #proyecto_mod = regproyecto @proyecto
+            #fuente = regfuente @proyecto.fuente, proyecto_mod.id
+            #participantes = regparts @proyecto.participante, proyecto_mod.id
+            #presupuesto = regpresup @proyecto.presupuesto, proyecto_mod.id
+            #recurso = regrecurso @proyecto.recurso, proyecto_mod.id
+            #meta = regmeta @proyecto.meta, proyecto_mod.id
+
+            r = { "mensaje":"success", "fecha": @proyecto.created_at.strftime("%d-%m-%Y %H:%M") }
 
             respond_to do |format|
                 format.json { render json: r }

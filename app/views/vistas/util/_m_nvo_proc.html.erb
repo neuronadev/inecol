@@ -60,6 +60,19 @@
             </div>
       <% end %>
 </div>
+
+<% if @proyecto.modificatorio == 'SI' 
+         p = Proyecto.find(@proyecto.raiz) 
+%>
+      <div id="itemopt" data-nom="ficha_ant" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+            <%= link_to proyecto_path(p, format: :pdf),  target:'_blank'  do %> 
+                  <div class="flex  font-medium text-sm leading-tight ml-3" >
+                        <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Ficha anterior</div>
+                  </div>
+            <% end %>
+      </div>   
+<% end %>
+
 <div id="itemopt" data-nom="ficha" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
       <%= link_to proyecto_path(@proyecto, format: :pdf),  target:'_blank'  do %> 
             <div class="flex  font-medium text-sm leading-tight ml-3" >
