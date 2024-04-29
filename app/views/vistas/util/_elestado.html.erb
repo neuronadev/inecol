@@ -17,7 +17,12 @@
 
                 </span>
      <% else %>
-             <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-             <span class="flex w-2.5 h-2.5 bg-teal-500 rounded-full mr-1.5 flex-shrink-0"></span>Nuevo</span>
+                 <% if proyecto.modificatorio == 'SI' && current_usuario.cuenta.rol.clave == 'EL' %>
+                         <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                         <span class="flex w-2.5 h-2.5 bg-red-500 rounded-full mr-1.5 flex-shrink-0"></span>Modificación</span>  
+                 <% else %>
+                         <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                         <span class="flex w-2.5 h-2.5 bg-teal-500 rounded-full mr-1.5 flex-shrink-0"></span>Nuevo</span>
+                <% end %>         
      <% end %>
  </div>

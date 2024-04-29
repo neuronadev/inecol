@@ -1,18 +1,23 @@
  <div class="text-blue-700 flex">
      <%  if proyecto.validaciones.any? %>
-                <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                        <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
-                        
-                                        <%
-                                            proy_val = proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
-                                            if !proy_val.nil?
-                                                edo = proy_val.tvalidacion.nomtvalidacion
-                                            else
-                                                edo = 'Nuevo'     
-                                            end     
-                                        %> 
-                        <%= edo %>
-                </span>
+              <% if proyecto.modificatorio == 'SI' %>
+                         <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                         <span class="flex w-2.5 h-2.5 bg-red-500 rounded-full mr-1.5 flex-shrink-0"></span>Modificación</span>   
+              <% else %>
+                        <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                                <span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>
+                                
+                                                <%
+                                                    proy_val = proyecto.validaciones.includes(:evaluador).where('evaluadores.persona_id':current_usuario.cuenta.persona.id).last
+                                                    if !proy_val.nil?
+                                                        edo = proy_val.tvalidacion.nomtvalidacion
+                                                    else
+                                                        edo = 'Nuevo'     
+                                                    end     
+                                                %> 
+                                <%= edo %>
+                        </span>
+             <% end %>          
      <% else %>
              <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
              <span class="flex w-2.5 h-2.5 bg-teal-500 rounded-full mr-1.5 flex-shrink-0"></span>---</span>

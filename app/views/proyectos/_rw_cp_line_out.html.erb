@@ -1,0 +1,47 @@
+<tr class="bg-white dark:bg-gray-900 dark:border-gray-700" >
+    <td style="text-align: center;">
+        <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
+                <%= py.dictamen.numregistro %>
+        <% else %>       
+            --
+        <% end %>
+    </td>  
+
+
+    <td  class=" font-medium text-gray-900 dark:text-white p-2" style="text-align: justify;">
+        <%= py.nombre %>
+        <% if py.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').any? %>
+                <div class="text-red-700 italic ml-2">
+                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg> 
+                    Se requiere que atienda las observaciones. Haga clic en la opción Ver.
+                </div>
+        <% end %>
+        <% if py.modificatorio == 'SI' 
+                pmodif = Proyecto.find(py.raiz)
+        %>
+                <div class="text-red-700 italic ml-2">
+                        [Referencia: <%= pmodif.dictamen.numregistro %>]   
+                </div>
+        <% end %>
+    </td>
+    <td class=" font-semibold p-2">
+        <div class="flex justify-center"><%= py.created_at.strftime("%d-%m-%Y")  %></div>
+    </td>
+    <td class=" font-semibold p-2 ">
+        <% if py.etapas.includes(:tevento).where('teventos.clave':'REV').any?  %> 
+                <div class="flex justify-center"><%= py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y")  %></div>
+        <% else %>     
+                <div class="flex justify-center">--</div>
+        <% end %>
+
+    </td>
+    <td class="p-2">
+        <div class="flex justify-center"> <%= render 'vistas/util/pyestado', proyecto:py %></div>
+    </td>
+    
+    <td class="p-2">
+        <div class="flex-row">
+            <%= render "proyectos/menus/index_opt_captura", py:py %>
+        </div>    
+    </td>
+</tr>

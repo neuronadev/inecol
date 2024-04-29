@@ -15,6 +15,7 @@ class ModificatoriosController < ApplicationController
             meta = regmeta @proyecto.meta, proyecto_mod.id
 
             r = { "mensaje":"success", "fecha": proyecto_mod.created_at.strftime("%d-%m-%Y %H:%M") }
+            #r = { "mensaje":"success", "fecha": "XXXXX" }
 
             respond_to do |format|
                 format.json { render json: r }
@@ -23,22 +24,60 @@ class ModificatoriosController < ApplicationController
 
    def regproyecto p
         file = ''
-        @proyecto_reg = Proyecto.create!(
-                                  nombre:@proyecto.nombre,
-                                  clasificacion_id: @proyecto.clasificacion_id,
-                                  medio_id: @proyecto.medio_id,
-                                  linea_id: @proyecto.linea_id,
-                                  tfconoc: @proyecto.tfconoc,
-                                  interinst: @proyecto.interinst,
-                                  periodo: @proyecto.periodo,
-                                  overhead: @proyecto.overhead,
-                                  persona_id: @proyecto.persona_id,
-                                  objetivo: @proyecto.objetivo
-                                ) do |proyecto|
-                                       file = Rails.root.join(ActiveStorage::Blob.service.path_for(p.docprotocolo.key)).open('rb')
-                                       proyecto.docprotocolo.attach(io: file, filename: 'protocolotmp.pdf', content_type: 'application/pdf')
-                                  end
-                                  file.close
+        @proyecto_reg = ''
+
+        p_convoca =  nil
+        p_instituc = Array.new
+
+        if !p.mconvocatoria.nil?
+             p_convoca =  { nomconvocatoria: p.mconvocatoria.nomconvocatoria, link: p.mconvocatoria.link }
+        end
+
+        if p.instituciones.any?
+             p.instituciones.each do |i|
+                   p_instituc.push( { nominstitucion: i.nominstitucion, _destroy:'0' } )
+             end    
+        end
+        
+        params = {
+            proyecto:{
+                  nombre:p.nombre,
+                  clasificacion_id: p.clasificacion_id,
+                  medio_id: p.medio_id,
+                  linea_id: p.linea_id,
+                  tfconoc: p.tfconoc,
+                  interinst: p.interinst,
+                  periodo: p.periodo,
+                  overhead: p.overhead,
+                  persona_id: p.persona_id,
+                  objetivo: p.objetivo,
+                  mconvocatoria_attributes: !p_convoca.nil? ? p_convoca : {},
+                  instituciones_attributes: !p_instituc.nil? ? p_instituc : []
+            }
+         }
+         puts params
+         @proyecto_reg = Proyecto.create(params[:proyecto]) do |proyecto|
+                                        file = Rails.root.join(ActiveStorage::Blob.service.path_for(p.docprotocolo.key)).open('rb')
+                                        proyecto.docprotocolo.attach(io: file, filename: 'protocolotmp.pdf', content_type: 'application/pdf')
+                                   end
+                                   file.close
+
+        #@proyecto_reg = Proyecto.create!(
+        #                          nombre:p.nombre,
+        #                          clasificacion_id: p.clasificacion_id,
+        #                          medio_id: p.medio_id,
+        #                          linea_id: p.linea_id,
+        #                          tfconoc: p.tfconoc,
+        #                          interinst: p.interinst,
+        #                          periodo: p.periodo,
+        #                          overhead: p.overhead,
+        #                          persona_id: p.persona_id,
+        #                          objetivo: p.objetivo
+        #                        ) do |proyecto|
+        #                               file = Rails.root.join(ActiveStorage::Blob.service.path_for(p.docprotocolo.key)).open('rb')
+        #                               proyecto.docprotocolo.attach(io: file, filename: 'protocolotmp.pdf', content_type: 'application/pdf')
+        #                          end
+        #                          file.close
 
         @proyecto_reg.modificatorio = 'SI'
         @proyecto_reg.raiz = p.id

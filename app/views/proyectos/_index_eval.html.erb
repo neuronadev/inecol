@@ -11,6 +11,9 @@ th {
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
+                <th scope="col" class="p-1 text-center">
+                    Num. de Registro
+                </th> 
                 <th scope="col" class="px-6 py-3 text-center" style="width:50%;">
                     Nombre del Proyecto
                 </th>
@@ -38,6 +41,20 @@ th {
                         #if py.enlaces.last.enevento.clave == "EVAL" || py.enlaces.last.enevento.clave == "DICT"
                     %>
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <td style="text-align: center;">
+                                       <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
+                                              <%= py.dictamen.numregistro %>
+                                       <% else %>       
+                                                   <% 
+                                                     if !py.raiz.nil?
+                                                         py_mod_ref = Proyecto.find(py.raiz)
+                                                   %>
+                                                            <%= py_mod_ref.dictamen.numregistro %>
+                                                   <% else %>
+                                                           --
+                                                   <%  end %>
+                                       <% end %>
+                                </td> 
                                 <td scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
                                     <%= py.nombre %>
                                     <%= py.validaciones.last.tvalidacion.clave %>

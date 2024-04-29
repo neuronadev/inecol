@@ -18,10 +18,17 @@
 
 %>
  <div class="flex">
-          <div class="flex items-center text-sm">
-             <span class="w-2.5 h-2.5 <%= color %> rounded-full mr-1.5 flex-shrink-0"></span>
-          </div>  
-          <div class="flex items-center text-sm">
-             <%= proyecto.etapas.last.tevento.nomtevento %>
-          </div>
-</div>
+
+          <% if proyecto.modificatorio == 'SI' %>
+                         <span class="flex items-center text-sm font-medium text-red-900 dark:text-white">
+                         <span class="flex w-2.5 h-2.5 bg-red-500 rounded-full mr-1.5 flex-shrink-0"></span>Modificación</span>  
+          <% else %>
+                        <div class="flex items-center text-sm">
+                                    <span class="w-2.5 h-2.5 <%= color %> rounded-full mr-1.5 flex-shrink-0"></span>
+                        </div>  
+                        <div class="flex items-center text-sm">
+                                    <%= proyecto.etapas.last.tevento.nomtevento %>
+                        </div>
+          <% end %>     
+          
+ </div>
