@@ -14,11 +14,11 @@
   </head>
 
   <body>
-    <main class="container mx-auto flex">
+    <main class="container-fluid mx-auto flex">
          <%= render "layouts/interfaz/evaluador" %>
          <div class="flex-col w-full">
                   <div class="flex justify-center w-full p-1 h-20 ">
-                     <div class="flex justify-between w-5/6 border-b-2 border-slate-200">
+                     <div class="flex justify-between w-11/12 border-b-2 border-slate-200">
                         <div class="flex">
                             <div class="flex items-center"><%= image_tag "logo140.png", width:"120px" %></div>
                         </div>   
@@ -29,7 +29,7 @@
                     </div>   
               </div>  
                   <div class="flex justify-center w-full">
-                      <div class="flex w-5/6">
+                      <div class="flex w-11/12">
                             <%= turbo_frame_tag 'pycontent', class:'w-full' do %>
                                 <%= yield %>
                             <% end %>

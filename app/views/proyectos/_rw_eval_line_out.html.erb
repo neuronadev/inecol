@@ -1,0 +1,59 @@
+<tr class="bg-white dark:bg-gray-900 dark:border-gray-700">
+            <td style="text-align: center;">
+                    <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
+                            <%= py.dictamen.numregistro %>
+                    <% else %>       
+                                <% 
+                                    if !py.raiz.nil?
+                                        py_mod_ref = Proyecto.find(py.raiz)
+                                %>
+                                        <%= py_mod_ref.dictamen.numregistro %>
+                                <% else %>
+                                        --
+                                <%  end %>
+                    <% end %>
+            </td> 
+            <td scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                <%= py.nombre %>
+                <%= py.validaciones.last.tvalidacion.clave %>
+
+            </td>
+            <td class="px-6 py-4 text-center">
+                <%= py.created_at.strftime("%d-%m-%Y")  %>
+            </td>
+            <td class="px-6 py-4">
+                <%= @resp %>
+            </td>
+            <td class="px-6 py-4 text-center">
+                <%= render 'vistas/util/evalestado', proyecto:py %>
+            </td>
+            <td class="px-6 py-4">
+                <div class="flex">
+                <div>
+                        <% if py.etapas.last.tevento.clave == 'CAP' %> 
+                            <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                        <% else %>    
+                            <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                        <% end %>                            
+                </div>  
+                <div class="ml-5">   
+                        <%
+                                #CARGO DEL USUARIO ACTUAL.
+                                cargo_actual = current_usuario.cuenta.persona.cargo.tipocargo.clave
+                                existe_firma = py.firmas.where(cargoeval:cargo_actual).order(:created_at).first
+
+                        %>  
+                        <% if py.enlaces.last.enevento.clave == 'DICT' %>
+                                <% if existe_firma.nil? %>
+                                    <%= link_to 'Firmar', firma_path(py, format: :html), class:"text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
+                                <% else %>    
+                                        <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
+                                <% end %>     
+                        <% elsif py.enlaces.last.enevento.clave == 'FIR' %>
+                                <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
+                        <% else %>
+                                <span class="text-gray-500 italic ">Firmar</span>
+                        <% end %>  
+                </div>
+            </td>
+</tr>

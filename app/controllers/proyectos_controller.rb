@@ -17,6 +17,7 @@ class ProyectosController < ApplicationController
       elsif current_usuario.cuenta.rol.clave == 'DIR'
                 @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       else
+             
              @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
       end
 
