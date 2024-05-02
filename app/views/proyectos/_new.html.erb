@@ -214,10 +214,15 @@
                          </div>
                 <% end %>
 
+                
                 <% if current_usuario.cuenta.rol.clave != 'EL'  %>
                         <%= render 'proyectos/docs/protocolo', form:form %>
                         <%= render 'proyectos/docs/convenio', form:form %>
                 <% end %> 
+
+
+                
+
 
                 <div class="md:flex md:items-center justify-end border-t-2 border-gray-100 p-2">
                     <% if controller.action_name == 'new' || controller.action_name == 'create' %>
