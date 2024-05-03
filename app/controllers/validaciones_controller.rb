@@ -21,6 +21,13 @@ class ValidacionesController < ApplicationController
   def create
       @validacion = Validacion.new(validacion_params)
       @proyecto = Proyecto.find(params[:validacion][:proyecto_id])
+      txt_mod = '' 
+
+      if @proyecto.modificatorio == 'SI'
+              txt_mod = 'Modificación de Proyecto' 
+      else
+              txt_mod = 'Proyecto para Evaluación'
+      end
 
       respond_to do |format|
           if @validacion.save
@@ -49,7 +56,7 @@ class ValidacionesController < ApplicationController
                       emails.each do |mail|
                             t = espacios[i] 
                             Thread.new  {
-                                         `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto para evaluación-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
+                                         `(sleep #{t.to_s};cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{txt_mod}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{mail}) &`
                                         }  
                             i = i+1  
                       end
