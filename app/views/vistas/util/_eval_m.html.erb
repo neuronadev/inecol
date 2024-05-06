@@ -1,0 +1,15 @@
+<% if @proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
+                <%= link_to dictamen_path(@proyecto.dictamen), data:{turbo_frame:'py_content_sub'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                            <div class="flex w-full ml-1">
+                                    <%= inline_svg_tag 'svg/controlar-gray.svg' %>
+                                    <span class="text-sm text-blue-800 ml-1">Ver dictamen modif.</span>
+                            </div>
+                <% end %>  
+<% else %>
+                <%= link_to new_dictamen_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_content_sub'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
+                        <div class="flex w-full ml-1">
+                            <%= inline_svg_tag 'svg/controlar-blue.svg' %>
+                            <span class="text-sm text-blue-800 ml-1">Dictamen modif.</span>
+                        </div>       
+                <% end %>  
+<% end %>   

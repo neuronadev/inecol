@@ -1,7 +1,9 @@
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" draggable="true" id="<%= py.id %>" data-action="dragstart->organizar#handleDragStart">
                                  <td style="text-align: center;">
                                        <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
-                                              <%= py.dictamen.numregistro %>
+                                               <% if py.modificatorio != 'SI' %> 
+                                                  <%= py.dictamen.numregistro %>
+                                               <% end %>
                                        <% else %>       
                                         
                                        <% end %>

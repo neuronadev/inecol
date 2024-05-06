@@ -12,15 +12,19 @@
                          %>  
                     </div>
      </div>
-     <div class="md:flex md:items-center mb-3">
+      <% if @proyecto.modificatorio != 'SI' %>
+          <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5 font-semibold">
                         <%= form.label :numregistro, 'Número de registro:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-1/5">
-                      <%= form.text_field :numregistro, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
-                      <span class="italic text-sm">Último número de registro asignado: <%= !Dictamen.all.order(:numregistro).last.nil? ? Dictamen.order(:numregistro).last.numregistro : 'Sin asignar' %></span>
+                              <%= form.text_field :numregistro, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                              <span class="italic text-sm">Último número de registro asignado: <%= !Dictamen.all.order(:numregistro).last.nil? ? Dictamen.order(:numregistro).last.numregistro : 'Sin asignar' %></span>
                     </div>
-     </div>
+          </div>
+      <% else %>    
+          <%= form.hidden_field :numregistro, value:'DMOD'%>
+      <% end %>    
      <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5 font-semibold">
                         <%= form.label :docdictamen, 'Documento:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
@@ -45,7 +49,11 @@
      </div>
      <div class="md:flex md:items-center mb-3 font-semibold">
                     <div class="md:w-1/5">
-                        <%= form.label :txtdictamen, 'Dictamen:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                           <% if @proyecto.modificatorio != 'SI' %>
+                                   <%= form.label :txtdictamen, 'Dictamen:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                           <% else %>        
+                                   <%= form.label :txtdictamen, 'Comentarios:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                           <% end %>
                     </div>
                      <div class="md:w-4/5" data-controller="trix">
                          <%= form.rich_text_area :txtdictamen, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>

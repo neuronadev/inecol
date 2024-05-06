@@ -4,9 +4,15 @@
           <td class="txt2">Ficha de Propuesta de Proyectos Externos</td>
           <td class="txt3">Número de Registro</td>
           <td class="txt4">
-                 <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>             
-                    <span class="font-semibold"> <%= @proyecto.dictamen.numregistro %> </span>
-                 <% end %>
+            <% if @proyecto.modificatorio == 'SI' 
+                     proy_raiz = Proyecto.find(@proyecto.raiz)
+            %>
+                     <span class="font-semibold"> <%= proy_raiz.dictamen.numregistro %> </span>
+            <% else %>
+                    <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>             
+                        <span class="font-semibold"> <%= @proyecto.dictamen.numregistro %> </span>
+                    <% end %>
+            <% end %>        
           </td>
     </tr>
 </table>

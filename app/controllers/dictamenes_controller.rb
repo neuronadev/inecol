@@ -32,12 +32,23 @@ class DictamenesController < ApplicationController
                     Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                     Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
+                    if @proyecto.modificatorio == 'SI'                
+                        com_subj_txt = 'Firmar Ficha Modificada'
+                        resp_subj_txt = 'Modificacion Aprobada'
+                        com_conten_txt = '<b>APROBADO</b> la modificación del'
+                    else                           
+                        com_subj_txt = 'Firmar Ficha'
+                        resp_subj_txt = 'Dictamen de Proyecto'
+                        com_conten_txt = '<b>DICTAMINADO</b> el'
+                    end
+
                     str_comite = " <p><b>Estimados Integrantes de Proyectos Externos:</b></p>
-                                   <p> Por medio del presente se hace de su conocimiento que se ha <b>DICTAMINADO</b> el siguiente proyecto:</p>
+                                   <p> Por medio del presente se hace de su conocimiento que se ha #{com_conten_txt} siguiente proyecto:</p>
                                    <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
                                    <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
                                    <p>Favor de ingresar al sistema para firmar.</p>
                                    <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>" 
+
 
                     current_time = Time.now
                     tiempo = (current_time.to_f * 1000).to_i
@@ -74,20 +85,20 @@ class DictamenesController < ApplicationController
                     emails_comite.each do |ecom|
                         t = espacios[i]  
                         Thread.new  {               
-                            `(sleep #{t.to_s};echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Firmar Ficha-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
+                            `(sleep #{t.to_s};echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{com_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
                          }
                     i = i+1     
                     end
 
                     #RESPONSBLE
                     Thread.new  {               
-                        `(sleep 120;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,#{m}) &`
+                        `(sleep 120;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{resp_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,#{m}) &`
                     }
 
                     #OTROS
                     emails_otros.each do |eotro|
                         Thread.new  {               
-                            `(sleep 140;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
+                            `(sleep 140;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{resp_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
                          }
                     end 
 

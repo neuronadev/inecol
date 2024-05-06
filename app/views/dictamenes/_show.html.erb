@@ -6,7 +6,14 @@
                 <th scope="col" class="px-6 py-3" colspan="2">
                     <div class="flex align-middle border-b-2 border-slate-200">
                       <div><%= inline_svg_tag 'svg/adoc.svg' %></div>
-                      <div class="ml-1">Dictamen</div>
+                      <div class="ml-1">
+                         <% if @proyecto.modificatorio == 'SI' %>
+                              <div class="ml-1 font-semibold">Dictamen de la modificación</div>
+                         <% else %>
+                              <div class="ml-1 font-semibold">Dictamen</div>
+                         <% end %>    
+
+                      </div>
                     </div>  
                 </th>
             </tr>
@@ -29,16 +36,19 @@
                 </td>
             </tr>    
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Número de Registro:
-                </th>
-                <td class="px-6 py-4">
-                    <%= @dictamen.numregistro %>
-                </td>
+              <% if @proyecto.modificatorio != 'SI' %>
+                        <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
+                        Número de Registro:
+                        </th>
+                        <td class="px-6 py-4">
+                            <%= @dictamen.numregistro %>
+                        </td>
+              <% end %>          
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Fecha Dictamen:
+                  <% if @proyecto.modificatorio != 'SI' %> Fecha Dictamen: <% end %>
+                  <% if @proyecto.modificatorio == 'SI' %> Fecha evaluación: <% end %>
                 </th>
                 <td class="px-6 py-4">
                     <%= @dictamen.created_at.strftime('%d-%m-%Y') %>
@@ -71,7 +81,8 @@
             </tr>   
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Dictamen:
+                     <% if @proyecto.modificatorio != 'SI' %> Dictamen: <% end %>
+                     <% if @proyecto.modificatorio == 'SI' %> Comentarios: <% end %>
                 </th>
                 <td class="px-6 py-4">
                   <!--  

@@ -16,16 +16,16 @@
                   <% end %>      
             </div>  
             <% if @proyecto.enlaces.any? %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' || @proyecto.enlaces.last.enevento.clave == 'SOLA' %>
+                  <% if @proyecto.enlaces.order(:created_at).last.enevento.clave == 'NVO' || @proyecto.enlaces.last.enevento.clave == 'PROC' || @proyecto.enlaces.last.enevento.clave == 'SOLA' %>
                               <%= render 'vistas/util/m_nvo_proc' %>
                   <% end %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'CORR' %>
+                  <% if @proyecto.enlaces.order(:created_at).last.enevento.clave == 'CORR' %>
                               <%= render 'vistas/util/m_corr' %>
                   <% end %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'EVAL' %>
+                  <% if @proyecto.enlaces.order(:created_at).last.enevento.clave == 'EVAL' %>
                               <%= render 'vistas/util/m_eval' %>
                   <% end %>
-                  <% if @proyecto.enlaces.last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>
+                  <% if @proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' || @proyecto.enlaces.last.enevento.clave == 'FIR' %>
                                <%= render 'vistas/util/m_dict' %>
                   <% end %>
                   
