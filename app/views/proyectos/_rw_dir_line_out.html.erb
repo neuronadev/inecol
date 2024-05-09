@@ -1,0 +1,28 @@
+<tr class="bg-white dark:bg-gray-900 dark:border-gray-700 box" id="<%= py.id %>" >
+    <td style="text-align: center;">
+        <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
+                <%= py.dictamen.numregistro %>
+        <% else %>       
+            --
+        <% end %>
+</td>
+<td scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
+    <%= py.nombre %>
+</td>
+<td class="p-2" style="text-align: center;">
+    <%= @resp %>
+</td>
+
+<td class="p-2" style="text-align: center;">
+    <%= render 'vistas/util/direstado', proyecto:py %>
+</td>
+<td class="p-2" style="text-align: center;">
+        <div id="itemopt" data-nom="ficha" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+            <%= link_to proyecto_path(py, format: :pdf), target:'_blank' do %> 
+                <div class="flex  font-medium text-sm leading-tight ml-3" >
+                    <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Ficha</div>
+                </div>
+            <% end %>
+        </div>
+</td>
+</tr>

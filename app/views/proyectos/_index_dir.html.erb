@@ -35,38 +35,18 @@ th {
         </thead>
         <tbody>
              <% if @proyectos.any? %>
-                    <%  @proyectos.each do |py| 
-                        @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
-                    %>
-                            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" id="<%= py.id %>" >
-                                 <td style="text-align: center;">
-                                       <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
-                                              <%= py.dictamen.numregistro %>
-                                       <% else %>       
-                                           --
-                                       <% end %>
-                                </td>
-                                <td scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
-                                    <%= py.nombre %>
-                                </td>
-                                <td class="p-2" style="text-align: center;">
-                                    <%= @resp %>
-                                </td>
-                               
-                                <td class="p-2" style="text-align: center;">
-                                    <%= render 'vistas/util/direstado', proyecto:py %>
-                                </td>
-                                <td class="p-2" style="text-align: center;">
-                                      <div id="itemopt" data-nom="ficha" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
-                                           <%= link_to proyecto_path(py, format: :pdf), target:'_blank' do %> 
-                                               <div class="flex  font-medium text-sm leading-tight ml-3" >
-                                                    <div> <%= inline_svg_tag 'svg/archivo-pdf.svg' %></div> <div class="ml-2 text-blue-800">Ficha</div>
-                                               </div>
-                                           <% end %>
-                                      </div>
-                                </td>
-                            </tr>
-                       <% end %>       
+                  <%  @proyectos.each do |py| 
+                      @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
+                  %>
+                        <% if !Proyecto.where(raiz:py.id).last.nil?
+                               py_mod = Proyecto.find(Proyecto.where(raiz:py.id).last.id)
+                        %>
+                               <%= render 'rw_dir_line_out', py:py %> 
+                               <%= render 'rw_dir_mod', py:py_mod %>
+                        <% else %>
+                               <%= render 'rw_dir', py:py %>
+                        <% end %>   
+                  <% end %>       
              <% else %>           
                      <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>
             <% end %>            
