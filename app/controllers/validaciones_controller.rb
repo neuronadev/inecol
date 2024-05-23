@@ -85,7 +85,7 @@ class ValidacionesController < ApplicationController
 
   def lim_eval
       hoy = Date.today
-      dias_base = 7
+      dias_base = 5
       dias_tmp = dias_base
       limit_calc = rango(hoy, dias_tmp)
       while limit_calc <= dias_base
