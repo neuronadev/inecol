@@ -33,8 +33,9 @@ class DictamenesController < ApplicationController
                     Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                     Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                    #Util::Email.notificar(@proyecto.id, 'ENEVD') 
-                    #Util::Email.notificar(@proyecto.id, 'ENRPD') 
+                    Util::Email.notificar(@proyecto.id, 'ENEVD') 
+                    Util::Email.notificar(@proyecto.id, 'ENRPD') 
+                                      
 
                     #if @proyecto.modificatorio == 'SI'                
                     #    com_subj_txt = 'Firmar Ficha Modificada'

@@ -44,23 +44,23 @@ class FirmasController < ApplicationController
             enevento = Enevento.where(clave:'FIR').first
             Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id, estado:'C') 
             
-            #Util::Email.notificar(@proyecto.id, 'FIRCOM')
+            Util::Email.notificar(@proyecto.id, 'FIRCOM')
 
-            msg = " <p><b>Estimado(a) Investigador(a).</b></p>
-                                   <p> Por medio del presente se hace de su conocimiento que ya se encuentra firmada la ficha del proyecto:</p>
-                                   <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                                   <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
-                                   <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>"
-            p = @proyecto.persona
-            c = Cuenta.where(persona_id:p.id).first
-            u = Usuario.find(c.usuario_id) 
-            m = u.email
-            Thread.new{
-                 `(sleep 20;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{m}) &`
-            }
-            Thread.new{
-                 `(sleep 60;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-            }
+            #msg = " <p><b>Estimado(a) Investigador(a).</b></p>
+            #                       <p> Por medio del presente se hace de su conocimiento que ya se encuentra firmada la ficha del proyecto:</p>
+            #                       <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+            #                       <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
+            #                       <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>"
+            #p = @proyecto.persona
+            #c = Cuenta.where(persona_id:p.id).first
+            #u = Usuario.find(c.usuario_id) 
+            #m = u.email
+            #Thread.new{
+            #     `(sleep 20;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:sara.sanchez@inecol.mx' #{m}) &`
+            #}
+            #Thread.new{
+            #     `(sleep 60;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+            #}
       end
 
       respond_to do |format|

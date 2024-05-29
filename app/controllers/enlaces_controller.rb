@@ -30,36 +30,36 @@ class EnlacesController < ApplicationController
       respond_to do |format|
             if @enlace.save
 
-                   #Util::Email.notificar(@proyecto.id, 'ENRPCOR') 
+                   Util::Email.notificar(@proyecto.id, 'ENRPCOR') 
                    
                    #format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
                    #message  = ResponsableMailer.with(p:@proyecto, e:@enlace).notificar_corregir
                    #message.deliver_later <- NOOO
 
-                   p = @proyecto.persona
-                   c = Cuenta.where(persona_id:p.id).first
-                   u = Usuario.find(c.usuario_id) 
-                   m = u.email 
+                   #p = @proyecto.persona
+                   #c = Cuenta.where(persona_id:p.id).first
+                   #u = Usuario.find(c.usuario_id) 
+                   #m = u.email 
 
-                   current_time = Time.now
-                   tiempo = (current_time.to_f * 1000).to_i
-                   file_nm = "email_solcorr_#{tiempo.to_s}.txt"
-                   path = "log/#{file_nm}"
+                   #current_time = Time.now
+                   #tiempo = (current_time.to_f * 1000).to_i
+                   #file_nm = "email_solcorr_#{tiempo.to_s}.txt"
+                   #path = "log/#{file_nm}"
 
-                   File.open(path, 'w') do |file|
-                            file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>
-                                        <p>Favor de atender la siguiente solicitud.</p>
-                                        <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                                        <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
-                                        <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>
-                                        </body></html>")
-                   end 
-                   Thread.new{
-                      `(sleep 20;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
-                   }
-                   Thread.new{
-                      `(sleep 60;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-                   }
+                   #File.open(path, 'w') do |file|
+                   #         file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>
+                   #                     <p>Favor de atender la siguiente solicitud.</p>
+                   #                     <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
+                   #                     <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
+                   #                     <p><b>Solicitud:</b> #{@enlace.txtcoment}</p>
+                   #                     </body></html>")
+                   #end 
+                   #Thread.new{
+                   #   `(sleep 20;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' #{m}) &`
+                   #}
+                   #Thread.new{
+                   #   `(sleep 60;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Corregir Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+                   #}
 
                    format.html { redirect_to enlace_path(@enlace) }
             else
@@ -84,29 +84,29 @@ class EnlacesController < ApplicationController
 
       enlace.estado = 'C'
       enlace.save
-      e1 = Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id) 
+      e1 = Enlace.create(proyecto_id:enlace_py, enevento_id:enevento.id, estado:'A', raiz:enlace.id)
       #########################################################################
       #enevento_proc = Enevento.where(clave:'PROC').first
       #Enlace.create(proyecto_id:enlace_py, enevento_id:enevento_proc.id, estado:'C', raiz:e1.id) 
       ########################################################################
             
-      current_time = Time.now
-      tiempo = (current_time.to_f * 1000).to_i
-      file_nm = "email_atendido_#{tiempo.to_s}.txt"
-      path = "log/#{file_nm}"
+      #current_time = Time.now
+      #tiempo = (current_time.to_f * 1000).to_i
+      #file_nm = "email_atendido_#{tiempo.to_s}.txt"
+      #path = "log/#{file_nm}"
 
-      File.open(path, 'w') do |file|
-             file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>Estimada Sara. <br><br>
-                         El académico: <b> #{@proyecto.persona.nom_espacio} </b> ha <b>corregido</b> la solicitud enviada.<br>
-                         <b>Nombre del proyecto:</b> #{@proyecto.nombre}<br>
-                         <b>Solicitud:</b> #{enlace.txtcoment}
-                        </body></html>")
-       end 
-       Thread.new  { 
-          `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
-       }
+      #File.open(path, 'w') do |file|
+      #       file.write("<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>Estimada Sara. <br><br>
+      #                   El académico: <b> #{@proyecto.persona.nom_espacio} </b> ha <b>corregido</b> la solicitud enviada.<br>
+      #                   <b>Nombre del proyecto:</b> #{@proyecto.nombre}<br>
+      #                   <b>Solicitud:</b> #{enlace.txtcoment}
+      #                  </body></html>")
+      # end 
+      # Thread.new  { 
+      #    `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
+      # }
       
-      #Util::Email.notificar(@proyecto.id, 'RPENATEN') 
+      Util::Email.notificar(@proyecto.id, 'RPENATEN') 
       
       data = {result:'ok'}
 
