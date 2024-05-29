@@ -1,3 +1,5 @@
+require 'util/email.rb'
+
 class EnlacesController < ApplicationController
   def index
   end
@@ -27,9 +29,12 @@ class EnlacesController < ApplicationController
 
       respond_to do |format|
             if @enlace.save
+
+                   #Util::Email.notificar(@proyecto.id, 'ENRPCOR') 
+                   
                    #format.html { redirect_to resumen_vistas_path(:id=>@proyecto.id) } 
                    #message  = ResponsableMailer.with(p:@proyecto, e:@enlace).notificar_corregir
-                   #message.deliver_later
+                   #message.deliver_later <- NOOO
 
                    p = @proyecto.persona
                    c = Cuenta.where(persona_id:p.id).first
@@ -100,7 +105,12 @@ class EnlacesController < ApplicationController
        Thread.new  { 
           `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto corregido-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
        }
+      
+      #Util::Email.notificar(@proyecto.id, 'RPENATEN') 
+      
       data = {result:'ok'}
+
+
       respond_to do |format|
           format.json { render json:data.to_json }
       end

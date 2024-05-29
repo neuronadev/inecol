@@ -1,4 +1,5 @@
 require 'util/email.rb'
+
 class ProyectosController < ApplicationController
   layout :select_layout
 
@@ -202,9 +203,6 @@ class ProyectosController < ApplicationController
        enevento = Enevento.where(clave:'NVO').first
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
               
-       #message  = ResponsableMailer.with(proyecto).notificar_envio
-       #message.deliver_later
-
        current_time = Time.now
        tiempo = (current_time.to_f * 1000).to_i
        file_nm = "email_enlace_#{tiempo.to_s}.txt"
@@ -222,8 +220,11 @@ class ProyectosController < ApplicationController
            `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Proyecto Recibido-#{proyecto.persona.nom_espacio}-#{proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
        }
 
+       
+       #Util::Email.notificar(proyecto.id, 'RPEN')
+
        respond_to do |format|
-           format.json { render json:@proyecto.to_json }
+           format.json { render json:proyecto.to_json }
        end
   end
  

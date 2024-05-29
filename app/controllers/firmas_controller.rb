@@ -1,3 +1,5 @@
+require 'util/email.rb'
+
 require 'openssl'
 require 'json'
 require 'base64'
@@ -36,9 +38,14 @@ class FirmasController < ApplicationController
                             firmasign: Base64.encode64(signature.unpack('H*')[0]),
                             cargoeval:cargo_actual
                           )
-      if ( @proyecto.firmas.count() == 4 )
+
+     evalua_cont = Evaluador.where(estado:'A', evalua:true).count
+     if ( @proyecto.firmas.count() == evalua_cont )
             enevento = Enevento.where(clave:'FIR').first
             Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id, estado:'C') 
+            
+            #Util::Email.notificar(@proyecto.id, 'FIRCOM')
+
             msg = " <p><b>Estimado(a) Investigador(a).</b></p>
                                    <p> Por medio del presente se hace de su conocimiento que ya se encuentra firmada la ficha del proyecto:</p>
                                    <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
