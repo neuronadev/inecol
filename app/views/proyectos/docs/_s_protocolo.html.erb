@@ -1,12 +1,14 @@
 <div class="md:flex w-full justify-center mt-3">
     <div class="md:w-3/5 p-0">
          <div class='font-semibold'>Protocolo</div>
-                <% if @proyecto.docprotocolo.attached? %>
-                      <div id = "div_file" class=" md:w-full p-1" data-controller="upsf">
-                          <%= link_to @proyecto.docprotocolo.filename, rails_blob_path(@proyecto.docprotocolo, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
-                      </div>
-                <% else %>           
+                 <% if @proyecto.docprotocolos.attached? %>
+                        <% @proyecto.docprotocolos.each do |doc| %>
+                            <div id = "div_file" class=" md:w-full p-1" data-controller="upsf">
+                                    <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                            </div>
+                        <% end %>  
+                 <% else %>           
                        <div class="text-gray-700">No se incluyeron archivos</div>
-                <% end %>         
+                <% end %>           
     </div>     
 </div>   

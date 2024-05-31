@@ -216,8 +216,8 @@
 
                 
                 <% if current_usuario.cuenta.rol.clave != 'EL'  %>
-                        <%= render 'proyectos/docs/protocolo', form:form %>
-                        <%= render 'proyectos/docs/convenio', form:form %>
+                         <%= render 'marchivos/wrap', form:form, tipo:'protocolo' %>  
+                         <%= render 'marchivos/wrap', form:form, tipo:'convenio' %>  
                 <% end %> 
                                   
 

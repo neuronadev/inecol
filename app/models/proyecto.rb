@@ -29,7 +29,10 @@ class Proyecto < ApplicationRecord
 
     #has_one :protocolo #, dependent: :destroy, inverse_of: :proyecto
     #accepts_nested_attributes_for :protocolo, reject_if: :all_blank #, allow_destroy: true
+    
     has_one_attached :docprotocolo, dependent: :detach
+    has_many_attached :docprotocolos, dependent: :detach
+
     has_one_attached :dconvocatoria, dependent: :detach
     has_one_attached :planconv, dependent: :detach #Convenio firmado
     has_one_attached :dfiniquito, dependent: :detach #Documento finiquito

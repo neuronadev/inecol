@@ -1,0 +1,11 @@
+ <div class="item flex w-full">
+    <div class="flex text-wrap w-9/12">  
+        <%= form.file_field :docconvenios, 
+                            multiple:true, 
+                            class:'item_file', 
+                            direct_upload: true, 
+                            data: { archivo_target: "input", action: "change->archivo#uploadFile"} %>
+     </div>                        
+    <div class="flex items-center justify-center w-3/12"></div>      
+  
+</div>
