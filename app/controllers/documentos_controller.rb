@@ -11,6 +11,17 @@ class DocumentosController < ApplicationController
       @proyecto = Proyecto.find(params[:idpy]) 
   end
 
+  def agregar
+      proyecto = Proyecto.find(params[:idproyecto].to_i)
+      d = proyecto.docprotocolos.attach(params[:idsigned])
+      data = {success:d}
+      puts data
+      respond_to do |format|
+          format.json { render json:data.to_json }
+      end
+
+  end
+
   def removatach
         attachment = ActiveStorage::Attachment.find(params[:doc_id])
         if !attachment.nil?

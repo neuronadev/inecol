@@ -95,6 +95,13 @@ resources :mtoconcurrentes
              end
   end
 
+  resources :documentos do
+     collection do
+         post 'agregar'
+     end
+  end
+
+
 
   resources :validaciones 
   resources :dictamenes do

@@ -56,7 +56,7 @@ class Proyecto < ApplicationRecord
     validates :medio_id, presence: true
     validates :linea_id, presence: true
     validates :periodo, presence: true
-    validates :docprotocolo, presence: true
+    #validates :docprotocolo, presence: true
     validates :objetivo, presence: true
     #validates :protocolo, presence: true
 

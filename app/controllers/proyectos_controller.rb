@@ -104,21 +104,21 @@ class ProyectosController < ApplicationController
 
   def create
       @proyecto = Proyecto.new(proyecto_params)
-      #respond_to do |format|
-      #      if @proyecto.save
-      #             tevento = Tevento.where(clave:'CAP').first
-      #             Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
-      #             session[:proyecto_id] = @proyecto.id
-      #             session[:step] = 1
+      respond_to do |format|
+            if @proyecto.save
+                   tevento = Tevento.where(clave:'CAP').first
+                   Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                   session[:proyecto_id] = @proyecto.id
+                   session[:step] = 1
                    #format.html { redirect_to new_fuente_path } <---NOOOOOO
-      #             format.html { redirect_to @proyecto } 
-      #      else
-      #              @proyecto.build_mconvocatoria(nomconvocatoria:params[:proyecto][:mconvocatoria_attributes][:nomconvocatoria],
-      #                                            link:params[:proyecto][:mconvocatoria_attributes][:link])
-      #              flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-      #              format.html { render :new, status: :bad_request }
-      #      end
-      #end
+                   format.html { redirect_to @proyecto } 
+            else
+                    @proyecto.build_mconvocatoria(nomconvocatoria:params[:proyecto][:mconvocatoria_attributes][:nomconvocatoria],
+                                                  link:params[:proyecto][:mconvocatoria_attributes][:link])
+                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    format.html { render :new, status: :bad_request }
+            end
+      end
   end
 
   def edit
@@ -287,9 +287,9 @@ class ProyectosController < ApplicationController
                                        :tfconoc,
                                        :interinst,
                                        :persona_id,
-                                       :docprotocolos[],
                                        :dconvocatoria,
                                        docconvenios:[],
+                                       docprotocolos:[],
                                        mconvocatoria_attributes:[:id, :nomconvocatoria, :link, :_destroy],
                                        instituciones_attributes:[:id, :nominstitucion, :_destroy]
                                        #protocolo_attributes:[:id, :dprotocolo, :activo],
