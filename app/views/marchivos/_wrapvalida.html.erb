@@ -1,0 +1,26 @@
+<div class="grid w-full justify-items-left mb-5" data-controller="archivo">
+  <div class="flex w-full"> 
+        
+        <div class="w-full border-2 border-gray-200">
+                <div class="p-1 text-center border border-gray-200 border-b-2 border-t-0 border-l-0 border-r-0 font-bold">
+                              Documentos
+                </div>
+                <div class="p-2 text-left text-sm font-bold text-blue-800">
+                   <span class="cursor-pointer" data-action="click->archivo#agreraCampos" data-archivo-tipo-param = '<%= tipo %>' > 
+                        + Agregar otro archivo...
+                   </span>
+                </div>
+                <div class="p-1 bg-slate-200">
+                      <div id="cont_<%= tipo %>" class="md:w-full ml-3">
+                           <% if tipo == 'evalidael' %>
+                               <%= render 'marchivos/evalidael', form:form %>
+                           <% end %>
+                           <% if tipo == 'dictamen' %>
+                               <%= render 'marchivos/dictamen', form:form %>
+                           <% end %>
+                      </div> 
+                </div>
+                
+        </div>
+  </div>      
+</div>

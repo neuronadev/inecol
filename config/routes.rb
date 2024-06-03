@@ -98,6 +98,7 @@ resources :mtoconcurrentes
   resources :documentos do
      collection do
          post 'agregar'
+         post 'removatachel'
      end
   end
 

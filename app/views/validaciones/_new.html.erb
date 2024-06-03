@@ -32,24 +32,10 @@
                  </div>    
                  <div class="md:flex md:items-center mb-3">
                      <div class="md:w-1/5 font-semibold">
-                              <%= label_tag 'Documentos:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
+                              
                          </div>
-                     <div class="flex-col">
-                              <div id = "div_file" class="flex md:w-full p-2" data-controller="upsf">
-                                   <%= form.file_field :dcevaluaciones, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                              </div>       
-                              <div id = "div_file" class="flex md:w-full p-2" data-controller="upsf">
-                                   <%= form.file_field :dcevaluaciones, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                              </div>    
-                              <div id = "div_file" class="flex md:w-full p-2" data-controller="upsf">
-                                   <%= form.file_field :dcevaluaciones, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                              </div>    
-                              <div id = "div_file" class="flex md:w-full p-2" data-controller="upsf">
-                                   <%= form.file_field :dcevaluaciones, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                              </div>    
-                              <div id = "div_file" class="flex md:w-full p-2" data-controller="upsf">
-                                   <%= form.file_field :dcevaluaciones, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                              </div>    
+                     <div class="w-4/5">
+                               <%= render 'marchivos/wrapvalida', form:form, tipo:'evalidael' %>  
                      </div>
                  </div>
           <% end %>

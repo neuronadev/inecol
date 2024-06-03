@@ -46,28 +46,20 @@
                         </td>
                    </tr>
                    <tr class="">
-                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Archivo:</td>
+                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Archivo(s):</td>
                         <td class="p-2 border-b border-slate-300">
-                                <% if  validacion.docficha.attached? %>
-                                           <%= link_to validacion.docficha.filename, rails_blob_path(validacion.docficha, disposition: 'inline'), class:'text-blue-700', target: :_blank %>
-                                <% else %>      
-                                            <span class="italic">Sin archivo</span>.
-                                <% end %>
-                        </td>
-                   </tr>
-                   <tr class="">
-                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Comentarios:</td>
-                        <td class="p-2 border-b border-slate-300">
-                                 <div clas="flex-col">
-                                   <% if validacion.dcevaluaciones.attached? %>
+                               <% if validacion.dcevaluaciones.attached? %>
                                         <% validacion.dcevaluaciones.each do |doc| %>
                                              <div class="flex"> 
                                                             <%= link_to doc.filename, rails_blob_path(doc, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
                                              </div>
                                         <% end %>
-                                   <% end %>
-                                   
-                              </div> 
+                               <% end %>
+                        </td>
+                   </tr>
+                   <tr class="">
+                        <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'>Mensaje:</td>
+                        <td class="p-2 border-b border-slate-300">
                                  <%= validacion.txtval %>
                         </td>
                    </tr>

@@ -13,9 +13,15 @@ class DocumentosController < ApplicationController
 
   def agregar
       proyecto = Proyecto.find(params[:idproyecto].to_i)
-      d = proyecto.docprotocolos.attach(params[:idsigned])
+      if params[:tipo] == 'protocolo'
+          d = proyecto.docprotocolos.attach(params[:idsigned])
+      end
+      if params[:tipo] == 'convenio'
+         d = proyecto.docconvenios.attach(params[:idsigned])
+      end
+
       data = {success:d}
-      puts data
+
       respond_to do |format|
           format.json { render json:data.to_json }
       end
@@ -35,6 +41,24 @@ class DocumentosController < ApplicationController
        respond_to do |format|
               format.json { render json:data.to_json }
        end
+  end
+
+  def removatachel
+        blob = ActiveStorage::Blob.find_signed(params[:idsigned])
+
+        #p blob.attachments
+        if blob
+            if blob.attachments.any?
+                blob.attachments.each { |attachment|
+                                         Dhistorico.create!(name:attachment.name, record_type:attachment.record_type, record_id:attachment.record_id, blob_id:attachment.blob_id)
+                                         attachment.delete 
+                                      }  #or purge
+            end
+            render json: { result: "ok" }
+        else
+            head :unprocessable_entity
+        end
+
   end
   
 end

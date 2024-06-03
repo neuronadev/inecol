@@ -81,7 +81,7 @@ export default class extends Controller {
                             ${blob.filename}    
                           </a>
                         </div> 
-                        <div class="flex items-center justify-center w-3/12 text-red-700"><span data-archivo-action-param='listel' data-archivo-sid-param='${blob.signed_id}' data-action="click->archivo#quitarArch">Quitar</span></div>  
+                        <div class="flex items-center justify-center w-3/12 text-red-700"><span data-archivo-idproyecto-param='${idproyecto}' data-archivo-sid-param='${blob.signed_id}' data-action="click->archivo#quitarArchEl">Quitar</span></div>  
                       
           `
           cont_item.innerHTML = data
@@ -143,11 +143,22 @@ export default class extends Controller {
      agreraCampos(event){
           var tipo = event.params.tipo
           var field_input = ''
+          var controller = ''
           if ( tipo == 'protocolo' ){
                   field_input = 'docprotocolos'
+                  controller = 'proyecto'
           }
           if ( tipo == 'convenio' ){
                field_input = 'docconvenios'
+               controller = 'proyecto'
+          }
+          if ( tipo == 'evalidael' ){
+               field_input = 'dcevaluaciones'
+               controller = 'validacion'
+          }
+          if ( tipo == 'dictamen' ){
+               field_input = 'docdictamenes'
+               controller = 'dictamen'
           }
 
           var wrap_items = document.getElementById(`cont_${tipo}`)
@@ -155,8 +166,8 @@ export default class extends Controller {
                                         `
                                         <div class="item flex w-full">
                                            <div class="flex text-wrap w-9/12">  
-                                                <input name="proyecto[${field_input}][]" type="hidden" value="" autocomplete="off">
-                                                <input multiple="multiple" class="item_file" data-archivo-target="input" data-action="change->archivo#uploadFile" data-direct-upload-url="rails/active_storage/direct_uploads" type="file" name="proyecto[${field_input}][]" id="proyecto_${field_input}">
+                                                <input name="${controller}[${field_input}][]" type="hidden" value="" autocomplete="off">
+                                                <input multiple="multiple" class="item_file" data-archivo-target="input" data-action="change->archivo#uploadFile" data-direct-upload-url="rails/active_storage/direct_uploads" type="file" name="${controller}[${field_input}][]" id="${controller}_${field_input}">
                                            </div>                        
                                            <div class="flex items-center justify-center w-3/12 text-red-700">
                                                    <span data-action="click->archivo#quitarArch" data-archivo-id-param = '0' data-archivo-action-param = 'NO' >Quitar</span>
@@ -189,6 +200,24 @@ export default class extends Controller {
                  return data
       
             } catch (e) { alert(e) }
+     }
+
+     async quitarArchEl(event){
+
+          var el_principal = event.target.parentNode.parentNode
+          var idsigned = event.params.sid
+          var idproyecto = event.params.idproyecto
+
+          try {
+               var data = await fetch('/documentos/removatachel', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json', 'Accept':'application/json', 'X-CSRF-Token':token },
+               body: JSON.stringify({idsigned:idsigned, idproyecto:idproyecto})
+          })
+            .then(response => response.json())
+                    el_principal.remove()
+          }catch (e) { alert(e) }
+
      }
 
 }
