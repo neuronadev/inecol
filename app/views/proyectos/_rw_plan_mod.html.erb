@@ -1,0 +1,31 @@
+<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" id="<%= py.id %>" >
+
+    <td style="text-align: center;">
+        <div class="text-red-700 italic ml-2"> Modificación</div>
+    </td> 
+
+    <td scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
+       
+    </td>
+    
+    <td class="p-2" style="text-align: center;">
+        <%= @resp %>
+    </td>
+    
+    <td class="p-2" style="text-align: center;">
+                <%= link_to proyecto_path(py.id, format: :pdf), 
+                            target:'_blank', 
+                            class:'flex block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent 
+                                    md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 
+                                    dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent' do %> 
+                            <%= inline_svg_tag 'svg/archivo-pdf-blue.svg' %>
+                            <span class='text-blue-800 font-semibold ml-1'>Ficha</span>
+                <% end %>  
+    </td>
+
+    <td class="p-2" style="text-align: center;">
+            
+                <%= link_to 'Montos', resumen_vistas_path(:id=>py.id), class:"p-2 justify-self-center font-medium text-blue-600 dark:text-blue-500 rounded hover:bg-gray-200 hover:ring-2" %> 
+
+    </td>
+</tr>
