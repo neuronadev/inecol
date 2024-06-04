@@ -6,6 +6,7 @@ class MtoconcurrentesController < ApplicationController
        @proyecto = Proyecto.find(params[:proyecto_id])
        @mtoconcurrente = Mtoconcurrente.find(params[:id])
        @moneda = @proyecto.presupuesto.moneda
+       
   end
 
   def new

@@ -44,7 +44,7 @@ class FirmasController < ApplicationController
             enevento = Enevento.where(clave:'FIR').first
             Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id, estado:'C') 
             
-            Util::Email.notificar(@proyecto.id, 'FIRCOM')
+            #Util::Email.notificar(@proyecto.id, 'FIRCOM')
 
             #msg = " <p><b>Estimado(a) Investigador(a).</b></p>
             #                       <p> Por medio del presente se hace de su conocimiento que ya se encuentra firmada la ficha del proyecto:</p>

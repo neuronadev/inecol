@@ -16,7 +16,7 @@
                                        Oficio del CIINECOL:
                                    </div>    
                                     <div class='ml-1 text-blue-600'>
-                                            <%= link_to @recurso.doficio.filename, rails_blob_path(@recurso.doficio, disposition: "attachment", target:'_blank') %>  
+                                            <%= link_to @recurso.doficio.filename, rails_blob_path(@recurso.doficio), disposition: "attachment", target:'_blank' %>  
                                    </div>
                              </div>
                          <% else %>    
