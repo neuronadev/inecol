@@ -15,11 +15,17 @@ export default class extends Controller {
     async connect() {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
         var idmoneda = document.getElementById('presupuesto_moneda_id').value
-        
+       /* 
         if ( idmoneda != '' ){
               await this.Tmoneda(idmoneda)
         }
         await this.proyecto(proyecto)
+        */
+        await this.proyecto(proyecto).then(r=>{
+            if ( idmoneda != '' ){
+                 this.Tmoneda(idmoneda)
+            }
+        })
     }
 
     campoformat(event){
@@ -179,6 +185,8 @@ export default class extends Controller {
        
         var costo = document.getElementById('presupuesto_costo')
         var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
+        var action_p = document.getElementById('action_p')
+        console.log(action_p)
 
         var iva = 0.0
         var tProyecto = 0.0
@@ -189,22 +197,32 @@ export default class extends Controller {
        
 
         if (clasifica.includes(py_clasifca) && Boolean(py_ovh) ){
-               iva = presupuesto.iva()
-               tProyecto = presupuesto.tProyecto()
-               porcOverhead = presupuesto.porcOverhead()
-               porcEstimulo = presupuesto.porcEstimulo()
-               tGastos = presupuesto.tGastos()
+
+                        iva = presupuesto.iva()
+                        tProyecto = presupuesto.tProyecto()
+                        porcOverhead = presupuesto.porcOverhead()
+                        porcEstimulo = presupuesto.porcEstimulo()
+                        tGastos = presupuesto.tGastos()
+
         }
         if (clasifica.includes(py_clasifca) && !Boolean(py_ovh)) {
                tProyecto = costo.value
                tGastos = costo.value
         }
 
-        document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
+        if ( action_p.value != 'edit' && action_p.value != 'update' ){  //<- Se agrego para estimulo, Quitar o ajustar
+            document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
+        }else{
+            document.getElementById('presupuesto_iva').value = formato.moneda(document.getElementById('presupuesto_iva').value, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_tproyecto').value = formato.moneda( document.getElementById('presupuesto_tproyecto').value, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_overhead').value = formato.moneda( document.getElementById('presupuesto_overhead').value, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_estimulo').value = formato.moneda(document.getElementById('presupuesto_estimulo').value, moneda_data.locale, moneda_data.currency)
+            document.getElementById('presupuesto_tgastos').value = formato.moneda(document.getElementById('presupuesto_tgastos').value, moneda_data.locale, moneda_data.currency)
+        }      
  
     }
 

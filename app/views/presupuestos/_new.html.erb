@@ -22,9 +22,11 @@
 
        <% if controller.action_name == 'new' || controller.action_name == 'create' %>  
               <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+              <input type="hidden" name="action_p" value="new" id="action_p">
        <% end %> 
        <% if controller.action_name == 'edit' || controller.action_name == 'update' %>  
               <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+              <input type="hidden" name="action_p" value="edit" id="action_p">
        <% end %> 
 
        <%= render 'costos', form:form %>
