@@ -96,7 +96,7 @@ export default class extends Controller {
                             ${blob.filename}    
                           </a>
                         </div> 
-                        <div class="flex items-center justify-center w-3/12 text-red-700"><span data-action="click->archivo#quitarArch">Quitar</span></div>  
+                        <div class="flex items-center justify-center w-3/12 text-red-700"><span data-action="click->archivo#quitarArch" data-archivo-id-param = '0' data-archivo-action-param = 'NO'>Quitar</span></div>  
                       
           `
           cont_item.innerHTML = data
@@ -160,6 +160,11 @@ export default class extends Controller {
                field_input = 'docdictamenes'
                controller = 'dictamen'
           }
+          if ( tipo == 'doccambio' ){
+               field_input = 'doccambios'
+               controller = 'enlace'
+          }
+
 
           var wrap_items = document.getElementById(`cont_${tipo}`)
           wrap_items.insertAdjacentHTML('beforeend', 
@@ -182,7 +187,6 @@ export default class extends Controller {
  
           if ( action == 'edit' || action == 'update' || action == 'listel' ){
                  var data = await this.eliminardoc(id)
-                 console.log(data)
           }       
 
           var el_principal = event.target.parentNode.parentNode

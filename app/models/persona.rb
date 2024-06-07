@@ -16,8 +16,8 @@ class Persona < ApplicationRecord
       n = (nombre||'')
       p = (apaterno||'')
       m = (amaterno||'')
-
-      str_nom = zanityTxt(n) + ' ' + zanityTxt(p) + ' ' + zanityTxt(m)
+      str_nom = n + ' ' + p + ' ' + m 
+      #str_nom = zanityTxt(n) + ' ' + zanityTxt(p) + ' ' + zanityTxt(m)
        #nombre_mod_1 = (apaterno||'').capitalize() + ' ' + (amaterno||'').capitalize() + ' ' + (nombre||'').capitalize() 
        #palabras = nombre_mod_1.split(' ')
        #str_nom = ''

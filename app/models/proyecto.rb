@@ -64,7 +64,11 @@ class Proyecto < ApplicationRecord
     medio = Medio.where(clave:'CONV').first
     validates :mconvocatoria, presence: true, :if => lambda {|attr| medio_id == medio.id  }
     validates :instituciones, presence: true, :if => lambda {|attr| interinst  }
-        
+
+    validate do |proyecto|
+         ValProtocolo.new(proyecto).validate
+    end
+            
     def cap_completo
         p = Proyecto.find(self.id)
         if p.fuente.nil?
@@ -97,6 +101,16 @@ class Proyecto < ApplicationRecord
                0
         end
     end
-
-
 end
+
+
+class ValProtocolo
+       def initialize(py)
+           @py_data = py 
+       end
+       def validate
+            if !@py_data.docprotocolos.any?
+                  @py_data.errors.add :docprotocolos, :invalid, message:"Se requiere el protocolo."
+            end
+       end
+ end

@@ -34,15 +34,25 @@ export default class extends Controller {
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/html', e.target.innerHTML);
      }
+
    async handleDrop(e) {
     e.stopPropagation(); // stops the browser from redirecting.
     if ( e.target !== 'estructura' ) {
          let p = await this.moverproy(this.dragSrcEl.id)
          if (p.nombre != '0'){
-              e.target.insertAdjacentHTML('beforeend', `<div class="cursor-pointer font-semibold mb-2" data-action="click->organizar#abrirEnlace" data-enlace="${p.link}"> ${p.nombre}</div>`) //e.dataTransfer.getData('text/html');
+             
+              e.target.insertAdjacentHTML('beforeend', `<div class="cursor-pointer font-semibold mb-2" data-action="click->organizar#abrirEnlace" data-enlace="${p.link}"> 
+                                                            ${p.nombre}
+                                                        </div>`
+                                         ) //e.dataTransfer.getData('text/html');
+                                          
               var fr_el = document.getElementById('pycontent')
               fr_el.src = '/proyectos/'
               fr_el.reload()
+
+              var fr_orden = document.getElementById('lista_items_ord')
+              fr_orden.src = fr_orden.src
+              fr_orden.reload()
          }else{
                alert("El proyecto aún no esta firmado")
          }      

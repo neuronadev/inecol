@@ -31,9 +31,16 @@ class DocumentosController < ApplicationController
   def removatach
         attachment = ActiveStorage::Attachment.find(params[:doc_id])
         if !attachment.nil?
-            Dhistorico.create!(name:attachment.name, record_type:attachment.record_type, record_id:attachment.record_id, blob_id:attachment.blob_id)
+            evento = Tevento.where(clave:'REV').first
+            etapa = Etapa.where(proyecto_id:attachment.record_id, tevento_id:evento.id) 
+
+            if etapa.any?
+                 Dhistorico.create!(name:attachment.name, record_type:attachment.record_type, record_id:attachment.record_id, blob_id:attachment.blob_id)
+            end
+
             attachment.delete  # or use purge
             data = { result:'ok' }
+            
         else
             data = { result:'ok' } 
        end

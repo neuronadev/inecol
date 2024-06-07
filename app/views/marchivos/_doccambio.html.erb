@@ -1,7 +1,7 @@
 <% if controller.action_name == 'new' %>
  <div class="item flex w-full">
     <div class="flex text-wrap w-9/12">  
-        <%= form.file_field :docprotocolos, 
+        <%= form.file_field :doccambios, 
                             multiple:true, 
                             class:'item_file', 
                             direct_upload: true, 
@@ -15,8 +15,8 @@
    <% 
      
 
-     if !params[:proyecto][:docprotocolos].any?
-         params[:proyecto][:docprotocolos].each do |item|
+     if !params[:proyecto][:doccambios].any?
+         params[:proyecto][:doccambios].each do |item|
            b = ActiveStorage::Blob.find_signed(item)
    %>
            <div class="item border border-gray-400 border-b-2 border-t-0 border-l-0 border-r-0 flex w-full">
@@ -32,7 +32,7 @@
    <% else %>
           <div class="item flex w-full">
             <div class="flex text-wrap w-9/12">  
-               <%= form.file_field :docprotocolos, 
+               <%= form.file_field :doccambios, 
                                     multiple:true, 
                                     class:'item_file', 
                                     direct_upload: true, 
@@ -41,21 +41,4 @@
             <div class="flex items-center justify-center w-3/12"></div>                            
          </div>
    <% end %>      
-<% end %>
-
-<% if controller.action_name == 'edit' || controller.action_name == 'update' %>
-   <% 
-      if @proyecto.docprotocolos.attached? %>
-        <% @proyecto.docprotocolos.each do |item|
-   %>
-           <div class="item flex border border-gray-400 border-b-2 border-t-0 border-l-0 border-r-0 w-full">
-              <div class="flex text-wrap w-9/12">  
-                 <%= link_to item.filename, rails_blob_path(item, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
-              </div>                        
-              <div class="flex items-center justify-center w-3/12 text-red-700">
-                  <span data-action="click->archivo#quitarArch"  data-archivo-id-param = '<%= item.id %>'  data-archivo-action-param = '<%= controller.action_name %>'>Quitar</span>
-              </div>                           
-           </div>
-        <% end %>
-      <% end %>      
 <% end %>

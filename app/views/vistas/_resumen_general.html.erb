@@ -35,7 +35,7 @@
 
 
       <%  
-          if  Proyecto.where(raiz:@proyecto.id).any?
+          if  @proyecto.modificatorio == 'SI'
       %>
 
            <div class="text-red-700 italic ml-2 mb-3"> 

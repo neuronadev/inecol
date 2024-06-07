@@ -25,7 +25,11 @@ class PresupuestosController < ApplicationController
 
   def edit
       @presupuesto = Presupuesto.find(params[:id])  
+      puts "##################"
+      puts params[:id]
+      p @presupuesto.to_json
       @proyecto = Proyecto.find(@presupuesto.proyecto_id)
+      
   end
 
   def update

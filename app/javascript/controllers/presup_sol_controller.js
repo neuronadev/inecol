@@ -16,10 +16,14 @@ export default class extends Controller {
         var proyecto = document.getElementById('presupuesto_proyecto_id')
         var idmoneda = document.getElementById('presupuesto_moneda_id').value
         
-        if ( idmoneda != '' ){
+        /*if ( idmoneda != '' ){
               await this.Tmoneda(idmoneda)
-        }
-        await this.proyecto(proyecto)
+        }*/
+        await this.proyecto(proyecto).then(r=>{
+            if ( idmoneda != '' ){
+                  this.Tmoneda(idmoneda)
+            }
+        })
     }
 
     campoformat(event){

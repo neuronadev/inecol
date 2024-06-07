@@ -1,0 +1,127 @@
+ <turbo-frame id="lista_items_ord">
+     
+            <% 
+                Item.order(:nombre).each do |item| 
+                    #item = Item.where(proyecto_id:py.id).first
+            %> 
+            <div id="context-menu">
+                <div id="itemedit" class="item" data-action="click->organizar#ctxitem">Editar nombre...</div>
+            </div>
+
+            <div class="mb-2">
+                    <div id="item_<%= item.id %>" class="context font-semibold mb-1 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                    <%= item.nombre %>
+                    </div>   
+                    <div>
+                    <% if Proyecto.where(raiz:item.proyecto_id).any? 
+                           i = 1 
+                            Proyecto.where(raiz:item.proyecto_id).each do |m|
+                    %>
+                                    <div class="text-red-700">
+                                        <div id="item_<%= m.id %>" class="context font-semibold cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= m.id %>" data-enlace="<%= resumen_vistas_path(:id=>m.id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                        Modificación <%= i %>
+                                        </div>  
+                                    </div>
+
+                            <% i += 1
+                            end %>
+                    <% end %> 
+                </div>
+                
+                </div> 
+            <% end %>    
+
+    <script>
+            var resizer = document.querySelector(".resizer")
+            var sidebar = document.querySelector(".sidebarz");
+            var els_items = document.querySelectorAll("div.context")
+            var item_id = 0
+            var contextMenu = document.getElementById("context-menu");
+            var el = ''
+            var tmp_html = ''
+
+            function initResizerFn( resizer, sidebar ) {
+            
+            // track current mouse position in x var
+            var x, w;
+
+            function rs_mousedownHandler( e ) {
+
+                x = e.clientX;
+
+                var sbWidth = window.getComputedStyle( sidebar ).width;
+                w = parseInt( sbWidth, 10 );
+
+                document.addEventListener("mousemove", rs_mousemoveHandler);
+                document.addEventListener("mouseup", rs_mouseupHandler);
+
+                document.getElementById('sidebar').classList.toggle('moving',true);
+            }
+
+            function rs_mousemoveHandler( e ) {
+                var dx = e.clientX - x;
+
+                var cw = w + dx; // complete width
+                
+                //if ( cw < 700 ) {
+                    sidebar.style.width = `${ cw }px`;
+                //}
+            }
+
+            function rs_mouseupHandler() {
+                // remove event mousemove && mouseup
+                document.removeEventListener("mouseup", rs_mouseupHandler);
+                document.removeEventListener("mousemove", rs_mousemoveHandler);
+                document.getElementById('sidebar').classList.toggle('moving',false);
+            }
+
+            resizer.addEventListener("mousedown", rs_mousedownHandler);
+            }
+
+
+            initResizerFn( resizer, sidebar );
+
+
+            els_items.forEach(function (el_item) {
+                    el_item.addEventListener("contextmenu", (e) => {
+                        e.preventDefault();
+                        let mouseX = e.clientX || e.touches[0].clientX;
+                        let mouseY = e.clientY || e.touches[0].clientY;
+                        let menuHeight = contextMenu.getBoundingClientRect().height;
+                        let menuWidth = contextMenu.getBoundingClientRect().width;
+                        let width = window.innerWidth;
+                        let height = window.innerHeight;
+                        if (width - mouseX <= 200) {
+                        contextMenu.style.borderRadius = "5px 0 5px 5px";
+                        contextMenu.style.left = width - menuWidth + "px";
+                        contextMenu.style.top = mouseY + "px";
+                        //right bottom
+                        if (height - mouseY <= 200) {
+                            contextMenu.style.top = mouseY - menuHeight + "px";
+                            contextMenu.style.borderRadius = "5px 5px 0 5px";
+                        }
+                        }
+                        //left
+                        else {
+                        contextMenu.style.borderRadius = "0 5px 5px 5px";
+                        contextMenu.style.left = mouseX + "px";
+                        contextMenu.style.top = mouseY + "px";
+                        //left bottom
+                        if (height - mouseY <= 200) {
+                            contextMenu.style.top = mouseY - menuHeight + "px";
+                            contextMenu.style.borderRadius = "5px 5px 5px 0";
+                        }
+                        }
+                        item_id = el_item.dataset.iditem
+                        let item_ctx = document.getElementById("context-menu")
+                        item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>`
+                        if ( el != '' ){
+                            item_ctx.innerHTML = `<div id="itemedit" class="item"><span class="italic text-zinc-400">Editar nombre...</span></div>`
+                        }
+                        contextMenu.style.visibility = "visible";
+                    });
+                });
+    </script>
+
+</turbo-frame>
+

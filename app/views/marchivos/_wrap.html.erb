@@ -1,6 +1,8 @@
-<div class="grid justify-items-center mb-5" data-controller="archivo">
+<div class=" <%= tipo != 'doccambio' ? 'grid justify-items-center mb-5' : 'grid justify-items-left mb-5' %> " data-controller="archivo">
   <div class="flex w-full"> 
-        <div class="w-1/5"></div>
+        <% if tipo != 'doccambio' %>
+            <div class="w-1/5"></div>
+        <% end %>
         <div class="w-5/12 border-2 border-gray-200">
                 <div class="p-1 text-center border border-gray-200 border-b-2 border-t-0 border-l-0 border-r-0 font-bold">
                      <% if tipo == 'protocolo' %>
@@ -8,6 +10,9 @@
                      <% end %>
                      <% if tipo == 'convenio' %>
                               Convenio
+                     <% end %>
+                      <% if tipo == 'doccambio' %>
+                              Archivos
                      <% end %>
                 </div>
                 <div class="p-2 text-left text-sm font-bold text-blue-800">
@@ -22,6 +27,9 @@
                            <% end %>
                            <% if tipo == 'convenio' %>
                                <%= render 'marchivos/convenio', form:form %>
+                           <% end %>
+                           <% if tipo == 'doccambio' %>
+                               <%= render 'marchivos/doccambio', form:form %>
                            <% end %>
                       </div> 
                 </div>

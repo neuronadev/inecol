@@ -43,17 +43,9 @@
                          </div>
                          
                          <div class="flex-col md:items-center mb-3">
-                                <div class="md:w-1/5 font-semibold">
-                                        <%= label_tag 'Documentos:' %>
-                                </div>
+                               
                                 <div class="flex-col">
-                                     <div id = "div_file" class="flex md:w-full p-1" data-controller="upsf">
-                                           <%= form.file_field :doccambios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                                     </div>       
-                                     <div id = "div_file" class="flex md:w-full p-1" data-controller="upsf">
-                                           <%= form.file_field :doccambios, class:'item_file', multiple:true, direct_upload: true, data: { upsf_target: "input", action: "change->upsf#uploadFile"} %>
-                                     </div>    
-                                     
+                                     <%= render 'marchivos/wrap', form:form, tipo:'doccambio' %>  
                                 </div>
                          </div>
 

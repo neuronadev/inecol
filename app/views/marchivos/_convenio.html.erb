@@ -13,7 +13,7 @@
 
 <% if controller.action_name == 'create' %>
    <% 
-     if !params[:proyecto][:docconvenios].blank?
+     if !params[:proyecto][:docconvenios].any?
          params[:proyecto][:docconvenios].each do |item|
            b = ActiveStorage::Blob.find_signed(item)
    %>
@@ -27,6 +27,17 @@
               <div class="flex items-center justify-center w-3/12"></div>                            
            </div>
          <% end %>
+   <% else %>      
+            <div class="item flex w-full">
+               <div class="flex text-wrap w-9/12">  
+                  <%= form.file_field :docconvenios, 
+                                       multiple:true, 
+                                       class:'item_file', 
+                                       direct_upload: true, 
+                                       data: { archivo_target: "input", action: "change->archivo#uploadFile"} %>
+               </div>                        
+               <div class="flex items-center justify-center w-3/12"></div>                            
+            </div>
    <% end %>      
 <% end %>
 

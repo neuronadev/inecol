@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+   
   get 'reportes/index'
   get 'reportes/recurso'
   get 'reportes/interinst'
@@ -127,6 +127,12 @@ resources :mtoconcurrentes
                get 'mensaje'
                post 'aplicarmod'
         end
+  end
+
+  resources :periodos do
+        collection do
+               get 'listado'
+        end 
   end
    
   root 'proyectos#index'
