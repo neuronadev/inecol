@@ -35,30 +35,13 @@ th {
             </tr>
         </thead>
         <tbody>
-             <% if @proyectos.any? %>
-                    <%  @proyectos.each do |py| 
-                        @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
-                        #if py.enlaces.last.enevento.clave == "EVAL" || py.enlaces.last.enevento.clave == "DICT"
-                    %>
-                              <% if py.modificatorio == 'SI' 
-                                    p_origen = Proyecto.find(py.raiz)
-                              %>
-                                         <%= render 'rw_eval_line_out', py:p_origen %>
-                                         <%= render 'rw_eval_mod', py:py %>
-                              <% else %>     
-                                         <% 
-                                             p_out = Proyecto.where(raiz:py.id)
-                                             if p_out.blank?
-                                         %>
-                                                  <%= render 'rw_eval', py:py %>
-                                            <% end %>    
-                              <% end %>    
+               <%  @validaciones.each do |item| %>
+                     <%= render 'proyectos/rwdata', py:item, tipo:'V' %>
+               <% end %>
+               <%  @validado.each do |item| %>
+                     <%= render 'proyectos/rwdata', py:item, tipo:'' %>
+               <% end %>
 
-                        <% #end %>    
-                     <% end %>   
-             <% else %>           
-                     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>
-            <% end %>            
         </tbody>
     </table>
 </div>

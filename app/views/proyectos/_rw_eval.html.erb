@@ -1,4 +1,4 @@
-<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+<tr class="<%= tipo == 'V' ? ' bg-amber-50' : ' bg-white'  %>  border-b dark:bg-gray-900 dark:border-gray-700">
             <td style="text-align: center;">
                     <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
                             <%= py.dictamen.numregistro %>
@@ -29,11 +29,14 @@
             <td class="px-6 py-4">
                 <div class="flex">
                 <div>
-                        <% if py.etapas.last.tevento.clave == 'CAP' %> 
-                            <%= link_to 'Editar', resumen_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                        <% else %>    
-                            <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
-                        <% end %>                            
+                    <%
+                       eval = Evaluador.where(persona_id: current_usuario.cuenta.persona.id).first
+                    %>     
+                    <% if py.validaciones.where(proyecto_id: py.id, evaluador_id: eval.id, tvalidacion_id:[3,4]).blank? %> 
+                              <%= link_to 'Validar', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                    <% else %>      
+                              <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                    <% end %>   
                 </div>  
                 <div class="ml-5">   
                         <%

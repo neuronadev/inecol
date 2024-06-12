@@ -39,7 +39,11 @@ class ParticipantesController < ApplicationController
                        flash.now[:error] = @participante.errors.where(:base).first.full_message
                else
                        flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-               end      
+               end   
+               @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
+               @tec_sum = @participante.ptecnicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('ptecnicos.porcentaje')
+               @tot_porc = @inv_sum.to_f + @tec_sum.to_f   
+               puts "-------------------------------------------------"
                format.html { render :edit, status: :bad_request }
            end
       end

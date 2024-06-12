@@ -55,10 +55,12 @@ class ModificatoriosController < ApplicationController
                   instituciones_attributes: !p_instituc.nil? ? p_instituc : []
             }
          }
-         puts params
+         
          @proyecto_reg = Proyecto.create(params[:proyecto]) do |proyecto|
-                                        file = Rails.root.join(ActiveStorage::Blob.service.path_for(p.docprotocolo.key)).open('rb')
-                                        proyecto.docprotocolo.attach(io: file, filename: 'protocolotmp.pdf', content_type: 'application/pdf')
+                                       p.docprotocolos.each do |doc|
+                                           file = Rails.root.join(ActiveStorage::Blob.service.path_for(doc.key)).open('rb')
+                                           proyecto.docprotocolos.attach(io: file, filename: 'protocolotmp.pdf', content_type: 'application/pdf')
+                                       end    
                                    end
                                    file.close
 

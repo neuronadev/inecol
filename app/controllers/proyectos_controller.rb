@@ -8,18 +8,65 @@ class ProyectosController < ApplicationController
 
       if current_usuario.cuenta.rol.clave == 'EL'
              #@proyectos = Proyecto.includes(etapas: :tevento).order(:created_at).where('teventos.clave':'REV')
-              @proyectos = Proyecto.includes(:dictamen).includes(etapas: :tevento).where('teventos.clave':'REV').order('dictamenes.numregistro')
+               @proyectos = Proyecto.includes(:dictamen).includes(etapas: :tevento).where('teventos.clave':'REV').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'CAP'
-             @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).order(:created_at)
-             @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
+               @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).order(:created_at)
+               @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       elsif current_usuario.cuenta.rol.clave == 'PLAN'
              #@proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
-               @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
+               @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').where.not('dictamenes.numregistro':'DMOD').order('dictamenes.numregistro DESC')
       elsif current_usuario.cuenta.rol.clave == 'DIR'
-                @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
-      else
-             
-             @proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
+               @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
+      elsif current_usuario.cuenta.rol.clave == 'EVAL'
+               #@proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
+               @validaciones = []
+               @ids_validado = []
+               @validado = []
+
+               Proyecto.all.each do |item|
+                  if item.etapas.order(:created_at).last.tevento.clave != 'DEL'
+                      if !Enlace.where(proyecto_id:item.id).blank?
+                         if Enlace.where(proyecto_id:item.id).order(:created_at).last.enevento.clave == 'EVAL' || Enlace.where(proyecto_id:item.id).order(:created_at).last.enevento.clave == 'DICT'
+                                 if !Proyecto.where(raiz:item.id).blank?
+                                        Proyecto.where(raiz:item.id).each do |pm|
+                                             if Enlace.where(proyecto_id:pm.id).order(:created_at).last.enevento.clave == 'EVAL' || Enlace.where(proyecto_id:pm.id).order(:created_at).last.enevento.clave == 'DICT'
+                                                    @validaciones.push(item)
+                                             end
+                                        end    
+                                 else       
+                                      if item.modificatorio.nil?
+                                        @validaciones.push(item)
+                                      end  
+
+                                 end     
+                         end
+                        
+                         if Enlace.where(proyecto_id:item.id).order(:created_at).last.enevento.clave == 'FIR'
+                                  if !Proyecto.where(raiz:item.id).blank?
+                                        Proyecto.where(raiz:item.id).each do |pm|
+                                             if Enlace.where(proyecto_id:pm.id).order(:created_at).last.enevento.clave == 'EVAL' || Enlace.where(proyecto_id:pm.id).order(:created_at).last.enevento.clave == 'DICT'
+                                                    @validaciones.push(item)
+                                             else
+                                                    @ids_validado.push(item.id)  
+                                             end
+                                        end    
+                                 else       
+                                        @ids_validado.push(item.id)
+                                 end       
+                         end        
+                     end   
+                  end   
+               end
+
+               Dictamen.where(proyecto_id:@ids_validado).order(numregistro: :desc).each do |d|
+                        if d.numregistro != 'DMOD'
+                            #reg = item.numregistro.split("-")
+                            #hs = {item:item, anio:reg[0], order:reg[1].to_i}
+                            @validado.push(d.proyecto)
+                        end    
+               end
+              
+               
       end
 
 

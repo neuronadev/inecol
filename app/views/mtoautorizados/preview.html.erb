@@ -9,6 +9,7 @@
             </tr>
         </thead>  
         <tbody>
+            <% if !@proyecto.mtoautorizado.nil? %>
                 <tr>
                     <td class="text-center p-1"> <%= @proyecto.mtoautorizado.finicio.strftime("%d-%m-%Y") %> </td>
                     <td class="text-center p-1"> 
@@ -25,6 +26,11 @@
                         <%= render 'mtoautorizados/rwmenu' %>  
                     </td>
                 </tr>
+            <% else %>    
+                <tr>
+                    <td class="text-center p-1" colspan="4">Sin asignar</td>
+                </tr>    
+            <% end %>    
         </tbody>
     </table>    
 <% end %>

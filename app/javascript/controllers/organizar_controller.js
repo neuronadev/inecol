@@ -52,6 +52,7 @@ export default class extends Controller {
 
               var fr_orden = document.getElementById('lista_items_ord')
               fr_orden.src = fr_orden.src
+              console.log(fr_orden.src)
               fr_orden.reload()
          }else{
                alert("El proyecto aún no esta firmado")

@@ -1,0 +1,19 @@
+<%
+  @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
+%>
+<% 
+ exist_modifi_py = Proyecto.where(raiz:py.id)
+ if !exist_modifi_py.blank?
+     exist_modifi_py.each do |mod|
+%>
+            <%= render 'proyectos/rw_eval_line_out', py: py, tipo: tipo %>
+            <%= render 'proyectos/rw_eval_mod', py: mod, tipo: tipo %>
+     <% end %>       
+<% else %>     
+            <% 
+                p_out = Proyecto.where(raiz:py.id)
+                if p_out.blank?
+            %>
+                    <%= render 'proyectos/rw_eval', py:py, tipo: tipo %>
+            <% end %>    
+<% end %>    

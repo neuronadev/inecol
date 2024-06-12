@@ -9,19 +9,21 @@
                  
             </template>
             
-            <% if controller.action_name == 'new' || controller.action_name == 'create' %>
-                        <% idx = 1 %>
+            <% if controller.action_name == 'new' || controller.action_name == 'create' 
+                  
+            %>
+                        <% idx_nwcr = 1 %>
                         <%= form.fields_for :pacademicos do |pacad_fields|%>
-                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1, idx:idx %>
-                              <% idx = idx+1 %>
+                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1, idx:idx_nwcr %>
+                              <% idx_nwcr += 1 %>
                         <% end %>
                         
             <% end %>
             <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
-                        <% idx = 1 %>
+                        <% idx_edup = 1 %>
                         <%= form.fields_for :pacademicos, form.object.pacademicos.order(:responsable).includes(academico: :tacademico).where('tacademicos.clave':['INV','CAT']) do |pacad_fields|%>
-                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:0, idx:idx %>
-                              <% idx = idx+1 %>
+                              <%= render 'participantes/part_acad_form', f: pacad_fields, rp:1, idx:idx_edup %>
+                              <% idx_edup += 1 %>
                         <% end %>
             <% end %>
             <div data-nested-form-inv-target="target"></div>
@@ -32,7 +34,7 @@
                            <% if controller.action_name == 'new' %> 
                                    0.0 % 
                            <% end %>
-                           <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
+                           <% if controller.action_name == 'edit' || controller.action_name == 'update' || controller.action_name == 'create' %> 
                                 <%= @inv_sum.to_s %> % 
                            <% end %>
                       </div>

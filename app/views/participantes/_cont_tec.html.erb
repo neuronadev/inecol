@@ -12,7 +12,7 @@
                                     <%= render 'participantes/part_tec_form', f: ptec_fields %>
                               <% end %>
                    <% end %>
-                   <% if controller.action_name == 'edit' %>
+                   <% if controller.action_name == 'edit' ||  controller.action_name == 'update' %>
                              <%= form.fields_for :ptecnicos, form.object.ptecnicos.includes(academico: :tacademico).where('tacademicos.clave':'TEC') do |ptec_fields|%>
                                     <%= render 'participantes/part_tec_form', f: ptec_fields %>
                               <% end %>   
@@ -27,7 +27,7 @@
                             <% if controller.action_name == 'new' %> 
                                             0.0 % 
                             <% end %>
-                            <% if controller.action_name == 'edit' || controller.action_name == 'create' %> 
+                            <% if controller.action_name == 'edit' || controller.action_name == 'update' || controller.action_name == 'create' %> 
                                             <%= @tec_sum.to_s %> % 
                             <% end %>
                       </div>
