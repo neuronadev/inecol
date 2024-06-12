@@ -1,0 +1,31 @@
+<%= turbo_frame_tag "preview_monto_ejercido" do %>
+<table class="border-collapse border border-slate-400 w-full text-sm">
+        <thead>
+            <tr>
+                <th class="border border-slate-300 bg-gray-300">Fecha</th>
+                <th class="border border-slate-300 bg-gray-300">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @proyecto.mtoejercidos.each do |item| %>
+                   <tr>
+                        <td class="border border-slate-300 text-center p-1"><%= item.fecha.strftime('%d-%m-%Y') %></td>
+                        <td class="border border-slate-300 text-center p-1"><%= number_to_currency(item.monto, :unit=>@moneda.currency + ' ') %></td>
+                   </tr>
+            <% end %>
+        </tbody> 
+        <tfoot>
+              <tr>  
+                   <td class="text-right font-semibold p-2">Total ejercido:</td>
+                   <td class="text-center font-semibold p-2"><%= number_to_currency(@proyecto.mtoejercidos.sum(:monto), :unit=>@moneda.currency + ' ') %></td>
+              </tr>
+              <tr>  
+                   <td class="text-right font-semibold p-1">Monto restante:</td>
+                   <%
+                        r = @proyecto.mtoautorizado.monto - @proyecto.mtoejercidos.sum(:monto)
+                   %>
+                   <td class="text-center font-semibold p-1"><%= number_to_currency(r, :unit=>@moneda.currency + ' ') %></td>
+              </tr>
+        </tfoot>   
+</table> 
+<% end %>

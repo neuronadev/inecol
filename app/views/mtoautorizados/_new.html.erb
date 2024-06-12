@@ -1,7 +1,9 @@
 <%= form_with model:@mtoautorizado, url:[@proyecto, @mtoautorizado], class:'w-full' do |f| %>
      <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
      <input type="hidden" name="tmoneda" id="tmoneda" value="<%= @moneda_sym %>">
+
      <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"  >
+        <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold">Monto Autorizado</div>
            <table class="w-full text-gray-800 dark:text-gray-800 mt-2">
                    <tbody>
                             <tr class="bg-white ">
@@ -48,9 +50,11 @@
                                                        class:'text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
                                                  %>
                                        <% else %>          
-                                                <button data-action="click->mautorizado#cancelnew" class='text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'>
-                                                    Cancelard
-                                                </button>    
+                                                <button type="button" data-action="click->mautorizado#cancelnew" 
+                                                        data-mautorizado-idpy-param="<%= @proyecto.id %>"
+                                                        class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                                                    Cancelar
+                                                </button>
                                        <% end %>
                                 </td>
                             </tr>
@@ -58,7 +62,5 @@
            </table>
      </div>      
     
-
-
    
 <% end %>

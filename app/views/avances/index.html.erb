@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "py_content_sub" do %>
      <div class="mt-3 p-3 font-semibold">Avances del proyecto.</div>
-     
+         <% if current_usuario.cuenta.rol.clave == 'CAP' %>
             <div class="w-full p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <% if @proyecto.etapas.last.tevento.clave != 'FIN' %>    
                         <%= link_to new_proyecto_avance_path(@proyecto), data:{turbo_frame: "py_content_sub"} do %>
@@ -10,6 +10,7 @@
                               </div>
                         <% end %>   
                 <% end %>         
+         <% end %>       
                 <%= render 'index' %>
             </div>    
 <% end %>

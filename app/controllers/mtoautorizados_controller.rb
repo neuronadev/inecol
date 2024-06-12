@@ -1,6 +1,6 @@
 class MtoautorizadosController < ApplicationController
   def index
-      
+    @proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   def show
@@ -53,7 +53,8 @@ class MtoautorizadosController < ApplicationController
         
         respond_to do |format|
             if @mtoautorizado.save
-                   format.html { redirect_to proyecto_mtoautorizado_path(@proyecto, @mtoautorizado) }
+                   #format.html { redirect_to proyecto_mtoautorizado_path(@proyecto, @mtoautorizado) }
+                   format.html { redirect_to proyecto_mtoautorizados_path(@proyecto) }
             else
                     flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                     format.html { render :new, status: :bad_request }

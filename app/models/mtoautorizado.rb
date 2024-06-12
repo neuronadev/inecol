@@ -6,4 +6,5 @@ class Mtoautorizado < ApplicationRecord
   validates :ftermino, presence: true
   validates :monto, presence: true
 
+ 
 end

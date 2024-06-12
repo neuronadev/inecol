@@ -40,7 +40,11 @@ Rails.application.routes.draw do
                       get 'preview'
                   end
         end
-        resources :mtoejercidos
+        resources :mtoejercidos do
+                  member do
+                     get 'preview'
+                  end
+        end
         resources :mtoconcurrentes
         resources :prorrogas
         resources :avances

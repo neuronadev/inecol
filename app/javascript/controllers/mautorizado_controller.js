@@ -13,8 +13,10 @@ export default class extends Controller {
   }
 
   cancelnew(event){
-    event.preventDefault()
-    console.log(Turbo.visit(location))
+    var py = event.params.idpy
+    var target = document.getElementById("monto_autorizado")
+    target.src = `/proyectos/${py}/mtoautorizados`
+    target.reload()
   }
 
 

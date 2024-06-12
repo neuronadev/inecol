@@ -2,15 +2,22 @@ class MtoejercidosController < ApplicationController
   def index
        @proyecto = Proyecto.find(params[:proyecto_id])
        @moneda = @proyecto.presupuesto.moneda
+       
   end
 
   def show
+  end
+
+  def preview
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @moneda = @proyecto.presupuesto.moneda
   end
 
   def new
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoejercido = Mtoejercido.new 
       @moneda_sym = @proyecto.presupuesto.moneda.currency
+      @moneda = @proyecto.presupuesto.moneda
   end
 
   def edit
@@ -21,6 +28,7 @@ class MtoejercidosController < ApplicationController
 
   def create
         @proyecto = Proyecto.find(params[:proyecto_id])
+        @moneda = @proyecto.presupuesto.moneda
         m = @proyecto.presupuesto.moneda.currency
 
         params[:mtoejercido][:monto] = params[:mtoejercido][:monto].gsub(m,'').gsub(',','').gsub(/\s+/,'')
@@ -30,7 +38,12 @@ class MtoejercidosController < ApplicationController
             if @mtoejercido.save
                    format.html { redirect_to proyecto_mtoejercidos_path(@proyecto) }
             else
-                    flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    #flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    if @mtoejercido.errors.where(:base).any?
+                         flash.now[:monto] = @mtoejercido.errors.where(:base).first.full_message
+                    else
+                         flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+                    end  
                     format.html { render :new, status: :bad_request }
             end
         end

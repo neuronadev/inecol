@@ -1,4 +1,43 @@
 <% if  @proyecto.enlaces.last.enevento.clave == 'FIR' %>
+   
+                  <li id="itemopt" data-nom="seguimiento" class="itemmenu flex ml-3 items-center rounded hover:bg-gray-200 hover:ring-2" data-action="click->menueval#clkOpcion">
+                        <div data-controller="dropdown">
+                              <button id="dropdownButton" class="flex items-center justify-between w-full py-2 ml-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent" type="button">
+                                    <%= inline_svg_tag 'svg/calendario-lineas.svg' %>
+                                    <span class='text-blue-800 text-sm font-semibold ml-1'>Seguimiento</span>
+                                    <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                    </svg>
+                              </button>
+                              <!-- Dropdown menu -->
+                              <div id="dropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownButton">
+                                          <li>
+                                              <%= link_to proyecto_avances_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                   Avances
+                                              <% end %>    
+                                          </li>
+                                          <li>
+                                               <%= link_to proyecto_informes_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                    Informes
+                                               <% end %>    
+                                          </li>
+                                          <li>
+                                             <% if @proyecto.etapas.last.tevento.clave != 'FIN' %> 
+                                                  <span class="cursor-no-drop italic block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                       Reporte final
+                                                  </span>
+                                             <% else %>
+                                                  <%= link_to sfinalizar_proyecto_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                       Reporte final
+                                                  <% end %>
+                                             <% end %>     
+                                          </li>
+                                    </ul>
+                              </div>
+                        </div>
+                  </li>   
+
    <div id="itemopt" data-nom="modprop" class="itemmenu flex ml-3 p-2 items-center rounded hover:bg-gray-200 hover:ring-2">
        <%= link_to mensaje_modificatorios_path(:idpy=>@proyecto.id), data:{turbo_frame:'py_content_sub'}, class:"block px-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>
                                                 <div class="flex w-full ml-1">

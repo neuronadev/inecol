@@ -1,8 +1,23 @@
+
+<% flash.each do |type, msg| %>
+            
+               <% if type == "monto" %>
+                      <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                             <%= msg %>
+                      </div>
+               <% else %>
+                      <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                           <%= msg %>
+                       </div> 
+               <% end %>
+   <% end %>
 <%= form_with model:@mtoejercido, url:[@proyecto, @mtoejercido], class:'w-full' do |f| %>
      <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
      <input type="hidden" name="tmoneda" id="tmoneda" value="<%= @moneda_sym %>">
-     <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-           <div class="font-semibold border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800"> Monto Ejercido</div>
+     <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-sm">
+           <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold"> Total ejercido: <%= number_to_currency(@proyecto.mtoejercidos.sum(:monto), :unit=>@moneda.currency + ' ') %> </div>
+           <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold"> Ingrese el nuevo monto ejercido</div>
+           
            <table class="w-full text-gray-800 dark:text-gray-800 mt-2">
                    <tbody>
                             <tr class="bg-white ">
@@ -21,7 +36,7 @@
                                        <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                                             <%= f.text_field :monto, 
                                                 class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700', 
-                                                data:{controller:'formatoinput utils', action:'keydown->utils#keyEnter keyup->formatoinput#stopTyping keydown->utils#onlynumbers blur->formatoinput#f_moneda focus->formatoinput#unf_moneda' } 
+                                                data:{controller:'formatoinput utils', action:'keydown->utils#keyEnter keyup->mejercido#valmonto keyup->formatoinput#stopTyping keydown->utils#onlynumbers blur->formatoinput#f_moneda focus->formatoinput#unf_moneda' } 
                                             %> 
                                       <% end %>  
                                       <% if controller.action_name == 'edit' %>
@@ -40,6 +55,12 @@
                                                 <%= link_to 'Cancelar', proyecto_mtoejercido_path(@proyecto, @mtoejercido),
                                                        class:'text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
                                                  %>
+                                       <% else %>          
+                                                 <button type="button" data-action="click->mejercido#cancelnew" 
+                                                        data-mejercido-idpy-param="<%= @proyecto.id %>"
+                                                        class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                                                    Cancelar
+                                                </button>
                                        <% end %>
                                 </td>
                             </tr>
