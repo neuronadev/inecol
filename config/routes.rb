@@ -26,6 +26,7 @@ Rails.application.routes.draw do
             get 'observa'
             post 'nombrecorto'
             post "cambiarnm"
+            post "seguimiento"
         end
         member do
             get 'planconv'

@@ -23,11 +23,14 @@ export default class extends Controller {
   }
 
   onParticipante(event){
-      this.tipoPart(event.target.value).then(data=>{
-              let p = event.target.closest('.nested-form-wrapper')
-              let el = p.querySelector('.parttipo')
-              //el.innerHTML = data.nomtipo
-      })
+      
+      if (event.target.value != ''){
+          this.tipoPart(event.target.value).then(data=>{
+                  let p = event.target.closest('.nested-form-wrapper')
+                  let el = p.querySelector('.parttipo')
+                  //el.innerHTML = data.nomtipo
+          })
+      }    
   }
 
   onResponsable(event){

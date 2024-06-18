@@ -7,14 +7,14 @@
                                 Academico.where(persona_id: current_usuario.cuenta.persona_id).includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
                                 {prompt: '--Seleccione un Investigador--', selected: current_usuario.cuenta.persona_id},
                                 { 
-                                   data:{controller:'slimrp', slimrp_target:'field', action:'change->participan#onParticipante'}
+                                   data:{controller:'slimrp', slimrp_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
                                 } %>
                     <% else %>
                             <%= f.select :academico_id,
                                 Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
                                 {prompt: '--Seleccione un Investigador--'},
                                 { 
-                                   data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante'}
+                                   data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
                                 }
                             %>      
                     <% end %>
@@ -25,14 +25,14 @@
                             <%= f.select :academico_id,
                                 Academico.where(persona_id: current_usuario.cuenta.persona_id).includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
                                 {prompt: '--Seleccione un Investigador--', selected: current_usuario.cuenta.persona_id, class:'bg-slate-200'},
-                                { data:{controller:'slimrp', slimrp_target:'field', action:'change->participan#onParticipante'}}
+                                { data:{controller:'slimrp', slimrp_target:'field', action:'change->participan#onParticipante', class:'selectinv'}}
                             %>
                       <% else %>          
                               <%= f.select :academico_id,
                                 Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
                                 {prompt: '--Seleccione un Investigador--'},
                                 { 
-                                   data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante'}
+                                   data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
                                 }
                               %>  
                       <% end %>

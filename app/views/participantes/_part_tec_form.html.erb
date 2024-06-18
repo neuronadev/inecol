@@ -4,7 +4,7 @@
                          Academico.includes(:tacademico).where('tacademicos.clave':['TEC']).all.map{|item| [item.persona.nom_espacio, item.id] if item.tacademico.clave == 'TEC' },
                          {prompt: '--Seleccione un Técnico--'},
                          { 
-                         data:{controller:'slim', slim_target:'field'}
+                         data:{controller:'slim', slim_target:'field', class:'selecttect'}
                          }
 
                     %>   

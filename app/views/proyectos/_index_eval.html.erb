@@ -35,10 +35,13 @@ th {
             </tr>
         </thead>
         <tbody>
-               <%  @validaciones.each do |item| %>
+               <%  @xevaluar.each do |item| %>
                      <%= render 'proyectos/rwdata', py:item, tipo:'V' %>
                <% end %>
-               <%  @validado.each do |item| %>
+               <%  @xfirmar.each do |item| %>
+                     <%= render 'proyectos/rwdata', py:item, tipo:'F' %>
+               <% end %>
+               <%  @validados.each do |item| %>
                      <%= render 'proyectos/rwdata', py:item, tipo:'' %>
                <% end %>
 

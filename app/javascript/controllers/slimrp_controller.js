@@ -5,7 +5,7 @@ import SlimSelect from 'slim-select'
 export default class extends Controller {
   static targets = ['field']
   connect() {
-       var x = new SlimSelect({
+       new SlimSelect({
             select: this.fieldTarget,
             settings: {
                 showSearch: false,

@@ -1,4 +1,4 @@
-<tr class="<%= tipo == 'V' ? ' bg-amber-50' : ' bg-white'  %>  border-b dark:bg-gray-900 dark:border-gray-700">
+<tr class="<%= tipo == 'V' ? ' bg-orange-100' : tipo == 'F' ?  ' bg-emerald-100' : ' bg-white'  %> border-b dark:bg-gray-900 dark:border-gray-700">
             <td style="text-align: center;">
                     <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
                             <%= py.dictamen.numregistro %>

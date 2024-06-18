@@ -12,8 +12,7 @@ export default class extends Controller {
 
     mensaje(event){
         //wmodal.mostrar()
-        
-        var fr_el = document.getElementById('pycontent')
+            var fr_el = document.getElementById('pycontent')
         if (window.confirm("El proyecto será habilitado para revisión por parte del área de Proyectos Externos. ¿Desea continuar?")) {
              let button = document.getElementById("btn_enviar");
              button.disabled = true; 
@@ -25,6 +24,38 @@ export default class extends Controller {
               })
        }
     }
+
+    async seguimiento(event){
+
+        if ( event.target.checked ){
+               if (window.confirm("El proyecto será habilitado para seguimiento por parte del responsable técnico. ¿Desea continuar?")) {
+                       let r = await this.activarseg(event.params.idpy, true)
+                       if(r.seguimiento){
+                               alert("Proyecto activado correctamente.")
+                       }
+               }else{  event.target.checked = false }
+        }else{
+            if (window.confirm("El seguimiento del proyecto será deshabilitado. ¿Desea continuar?")) {
+                       let r = await this.activarseg(event.params.idpy, false)
+                       if(!r.seguimiento){
+                                alert("Proyecto desactivad correctamente.")
+                       }
+            }else{ event.target.checked = true }
+        } 
+    }
+
+    async activarseg(idpy, tipo){
+        try {
+            var data = await fetch('/proyectos/seguimiento', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-Token': token },
+                body: JSON.stringify({ id: idpy, tipo: tipo })
+            })
+            .then(response => response.json())
+          return data
+       } catch (e) { alert(e) }
+    }
+
     mwcerrar(event) {
         wmodal.cerrar()
     }
