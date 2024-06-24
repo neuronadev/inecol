@@ -19,12 +19,29 @@
                     </div>
                     <div class="md:w-1/5">
                               <%= form.text_field :numregistro, class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'%>
+                            <!--
                               <span class="italic text-sm">Último número de registro asignado: <%= !Dictamen.all.order(:numregistro).last.nil? ? Dictamen.order(:numregistro).last.numregistro : 'Sin asignar' %></span>
+                            -->  
                     </div>
           </div>
       <% else %>    
           <%= form.hidden_field :numregistro, value:'DMOD'%>
       <% end %>    
+      <div class="md:flex md:items-center mb-3">
+                    <div class="block font-semibold md:w-1/5 md:text-right mb-1 md:mb-0 pr-4">
+                        Emails:
+                    </div>
+                    <div class="md:w-2/5">
+                         <%= form.select :otrose,
+                                 Persona.includes(:tpersona).where('tpersona.clave':['ADMIN']).all.map{|item| [item.nom_espacio+"<"+item.email+">", item.id] },
+                                {},
+                                {multiple:true, data:{controller:'inputmail', inputmail_target:'field', action:'change->inputmail#addemail'}}
+                                
+
+                            %>   
+                            
+                    </div>
+     </div>
      <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5 font-semibold">
 
