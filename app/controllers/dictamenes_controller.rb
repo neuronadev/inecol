@@ -30,87 +30,11 @@ class DictamenesController < ApplicationController
         
         respond_to do |format|
             if @dictamen.save
-                    Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
-                    Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                    #Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
+                    #Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                    Util::Email.notificar(@proyecto.id, 'ENEVD') 
-                    Util::Email.notificar(@proyecto.id, 'ENRPD') 
-                                      
-
-                    #if @proyecto.modificatorio == 'SI'                
-                    #    com_subj_txt = 'Firmar Ficha Modificada'
-                    #    resp_subj_txt = 'Modificacion Aprobada'
-                    #    com_conten_txt = '<b>APROBADO</b> la modificación del'
-                    #else                           
-                    #    com_subj_txt = 'Firmar Ficha'
-                    #    resp_subj_txt = 'Dictamen de Proyecto'
-                    #    com_conten_txt = '<b>DICTAMINADO</b> el'
-                    #end
-
-                    #str_comite = " <p><b>Estimados Integrantes de Proyectos Externos:</b></p>
-                    #               <p> Por medio del presente se hace de su conocimiento que se ha #{com_conten_txt} siguiente proyecto:</p>
-                    #               <p><b>Proyecto:</b> #{@proyecto.nombre}</p>
-                    #               <p><b>Responsable:</b> #{@proyecto.persona.nom_espacio}</p>
-                    #               <p>Favor de ingresar al sistema para firmar.</p>
-                    #               <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>" 
-
-
-                    #current_time = Time.now
-                    #tiempo = (current_time.to_f * 1000).to_i
-                    #file_nm = "email_dictamen_#{tiempo.to_s}.txt"
-                    #path = "log/#{file_nm}"
-                    #File.open(path, 'w') do |file|
-                    #    file.write("<html><body style='font-size:15px;font-family: Arial, Helvetica, sans-serif;'>
-                    #                 #{@dictamen.txtdictamen}
-                    #                 <p><b>Enlace: <a href='https://sisproyectos.inecol.edu.mx/'>Ingresar al Sistema de Proyectos Externos</a></b>
-                    #                </body></html>")
-                    #end
-
-                    #p = @proyecto.persona
-                    #c = Cuenta.where(persona_id:p.id).first
-                    #u = Usuario.find(c.usuario_id) 
-                    #m = u.email  #---------------------------------------------
-
-
-                    #emails_comite = ['secretaria.academica@inecol.mx','secretaria.posgrado@inecol.mx','indra.morandin@inecol.mx','betsabe.ruiz@inecol.mx', 'sara.sanchez@inecol.mx'] #------------------
-                    #espacios = [20,40,60,80,100]
-
-                    #emails_otros = []
-                    #if !params[:dictamen][:otrose].nil?
-                    #    emails_tmp = params[:dictamen][:otrose].split(/\n/)
-                    #    emails_tmp.each do |em|
-                    #        if !(em.gsub(/\r/, "")=~ URI::MailTo::EMAIL_REGEXP).nil?
-                    #            emails_otros << em  
-                    #        end
-                    #    end
-                   #end
-                 
-                    #COMITE
-                    #i = 0
-                    #emails_comite.each do |ecom|
-                    #    t = espacios[i]  
-                    #    Thread.new  {               
-                    #        `(sleep #{t.to_s};echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{str_comite}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{com_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{ecom}) &`
-                    #     }
-                    #i = i+1     
-                    #end
-
-                    #RESPONSBLE
-                    #Thread.new  {               
-                    #    `(sleep 120;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{resp_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,#{m}) &`
-                    #}
-
-                    #OTROS
-                    #emails_otros.each do |eotro|
-                    #    Thread.new  {               
-                    #        `(sleep 140;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "#{resp_subj_txt}-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" #{eotro}) &`
-                    #     }
-                    #end 
-
-                    #AREA PROYECTOS EXTERNOS
-                    #Thread.new  {
-                    #    `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx) &`
-                    #}
+                    #Util::Email.notificar(@proyecto.id, 'ENEVD') 
+                    #Util::Email.notificar(@proyecto.id, 'ENRPD') 
                    
                     format.html { redirect_to dictamen_path(@dictamen) } 
             else
