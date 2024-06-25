@@ -16,3 +16,4 @@ pin "activestorage", to: "https://ga.jspm.io/npm:activestorage@5.2.8-1/app/asset
 pin "numeral", to: "https://ga.jspm.io/npm:numeral@2.0.6/numeral.js"
 pin "@kanety/stimulus-contextmenu", to: "https://ga.jspm.io/npm:@kanety/stimulus-contextmenu@1.0.1/dist/index.module.js"
 pin "@kanety/stimulus-static-actions", to: "https://ga.jspm.io/npm:@kanety/stimulus-static-actions@1.0.1/dist/index.modern.js"
+pin "tabulator-tables", to: "https://ga.jspm.io/npm:tabulator-tables@6.2.1/dist/js/tabulator_esm.js"
