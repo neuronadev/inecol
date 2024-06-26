@@ -4,6 +4,12 @@ import "controllers"
 import 'flowbite'
 import "trix"
 import "@rails/actiontext"
+//import {TabulatorFull as Tabulator} from 'tabulator-tables';
+//window.Tabulator = Tabulator
+
+import * as XLSX from 'xlsx';
+window.XLSX = XLSX
+
 addEventListener("trix-initialize", (event) => {
     //configTrix();
     //extendTrix(event);

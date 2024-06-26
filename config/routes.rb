@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'reportes/recurso'
   get 'reportes/interinst'
   get 'reportes/cconvenio'
+  get 'reportes/pinvfin'
      
   get 'documentos/protocolo'
   get 'documentos/convenio'
