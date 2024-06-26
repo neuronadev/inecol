@@ -56,7 +56,8 @@ export default class extends Controller {
         var sum_caps = 0.0
         var caps = document.getElementsByClassName(t_class)
         Array.from(caps, (el) => {
-            let v = numeral(el.value).value()
+            var monto_tmp = el.value.toString().replace('GBP','')
+            let v = numeral(monto_tmp).value()
             sum_caps += v
         })
         return sum_caps   

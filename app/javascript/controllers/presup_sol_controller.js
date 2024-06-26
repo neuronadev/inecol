@@ -204,11 +204,14 @@ export default class extends Controller {
                tGastos = costo.value
         }
 
+
         document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
         document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
         document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
         document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
         document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
+
+      
  
     }
 

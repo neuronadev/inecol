@@ -1,11 +1,13 @@
 import numeral from "numeral"
 
+
 export default class SolicitaUtil{
    constructor(){
          this.monto_limite = 0.0
    }
     limiteGasto(monto){
-        this.monto_limite = numeral(monto).value()
+        var monto_tmp = monto.toString().replace('GBP','') 
+        this.monto_limite = numeral(monto_tmp).value()
     }
 
    limiteMaxGasto(){
@@ -24,7 +26,8 @@ export default class SolicitaUtil{
            let id_input_d = el.id.replace("monto", "_destroy");
            let input_d = document.getElementById(id_input_d)
            if ( input_d.value == 'false' ){
-               let v = numeral(el.value).value()
+               var monto_tmp = el.value.toString().replace('GBP','') 
+               let v = numeral(monto_tmp).value()
                sum_caps += v
            }    
        })

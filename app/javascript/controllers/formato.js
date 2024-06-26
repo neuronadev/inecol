@@ -7,19 +7,19 @@ export default class Formato{
    
    moneda(monto, locale_p='es-MX', currency_p='MXN'){
           return currency_p + ' ' + numeral(monto).format('0,0.00')
-
       /*var resultd = (numeral(monto).value()).toLocaleString(locale_p, {
          style: 'currency',
          currencyDisplay: 'code',
          currency: currency_p
       });*/
       
-      return resultd
+      //return resultd
    }
 
    unformat(monto){
-     
-      return numeral(monto).value()
+      
+      var monto_tmp = monto.toString().replace('GBP','')
+      return numeral(monto_tmp).value()
    }
 
    settingFormat(){
