@@ -30,11 +30,11 @@ class DictamenesController < ApplicationController
         
         respond_to do |format|
             if @dictamen.save
-                    #Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
-                    #Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                    Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
+                    Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
 
-                    #Util::Email.notificar(@proyecto.id, 'ENEVD') 
-                    #Util::Email.notificar(@proyecto.id, 'ENRPD') 
+                    Util::Email.notificar(@proyecto.id, 'ENEVD') 
+                    Util::Email.notificar(@proyecto.id, 'ENRPD') 
                    
                     format.html { redirect_to dictamen_path(@dictamen) } 
             else
