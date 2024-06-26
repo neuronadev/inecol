@@ -34,7 +34,7 @@
                        eval = Evaluador.where(persona_id: current_usuario.cuenta.persona.id).first
                     %>     
                     <% if py.validaciones.where(proyecto_id: py.id, evaluador_id: eval.id, tvalidacion_id:[3,4]).blank? %> 
-                              <%= link_to 'Validar', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                              <%= link_to 'Validar', notifica_vistas_path(:id=>py.id), class:"font-medium text-orange-600 dark:text-orange-600 hover:underline font-bold" %>
                     <% else %>      
                               <%= link_to 'Ver', notifica_vistas_path(:id=>py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
                     <% end %>                            
@@ -48,7 +48,7 @@
                         %>  
                         <% if py.enlaces.last.enevento.clave == 'DICT' %>
                                 <% if existe_firma.nil? %>
-                                    <%= link_to 'Firmar', firma_path(py, format: :html), class:"text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
+                                    <%= link_to 'Firmar', firma_path(py, format: :html), class:"font-medium text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
                                 <% else %>    
                                         <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
                                 <% end %>     

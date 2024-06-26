@@ -101,7 +101,16 @@ class ReportesController < ApplicationController
           #mto_ejer = e.proyecto.mtoejercidos.sum(:monto) if e.proyecto.mtoejercidos.any?
 
           resp_tec =  e.proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
-          comentarios = e.proyecto.avances.last.txtavance.body.to_plain_text if !e.proyecto.avances.blank?
+          
+          #comentarios = e.proyecto.avances.last.txtavance.body.to_plain_text if !e.proyecto.avances.blank?
+          comentarios = ''
+          e.proyecto.avances.each do |v|
+                comentarios += v.txtavance.body.to_plain_text
+          end
+          if e.proyecto.etapas.last.tevento.clave == 'FIN'
+                comentarios += e.proyecto.txtlogro.body.to_plain_text
+          end
+
           data << { nombre:e.proyecto.nombre, 
                     fuente:e.proyecto.fuente.nomfuente,
                     tipoproy:e.proyecto.clasificacion.nomclasifica,

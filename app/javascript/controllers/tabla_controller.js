@@ -11,22 +11,23 @@ export default class extends Controller {
         //create Tabulator on DOM element with id "example-table"        
         await this.proyinf().then(d=>{
              items = d
-                table = new Tabulator("#example-table", {
+                table = new Tabulator("#table-pfin", {
                 spreadsheet:true,
                 spreadsheetOutputFull: true,
-                height:405, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-                data:d, //assign data to table
-                layout:"fitColumns", //fit columns to width of table (optional)
+                editorEmptyValue:undefined,
+                height:'605px', 
+                data:d, 
+                layout:"fitColumns", 
                 columns:[ //Define Table Columns
-                    {title:"Nombre", field:"nombre", width:280},
-                    {title:"Fuente", field:"fuente", width:180},
+                    {title:"Nombre del proyecto", field:"nombre", width:280},
+                    {title:"Fuente de financiamiento", field:"fuente", width:180},
                     {title:"Tipo de Proyecto", field:"tipoproy", width:180},
-                    {title:"Fecha de inicio", field:"finicio", width:100},
-                    {title:"Fecha de termino", field:"ftermino", width:100}, 
-                    {title:"Porcentaje", field:"porcentaje", width:80},
+                    {title:"Fecha de inicio", field:"finicio", width:100, accessorDownload: this.valorNull},
+                    {title:"Fecha de termino", field:"ftermino", width:100, accessorDownload: this.valorNull}, 
+                    {title:"Porcentaje de avance", field:"porcentaje", width:80, accessorDownload: this.valorNull},
                     {title:"Monto autorizado", field:"montoaut", width:90}, 
                     {title:"Monto ejercido", field:"montoejer", width:90},
-                    {title:"Responsable técnico", field:"resp", width:100},
+                    {title:"Responsable", field:"resp", width:100},
                     {title:"Comentarios", field:"comen", width:100},
 
                 ],
@@ -39,6 +40,14 @@ export default class extends Controller {
 
         })
         
+  }
+
+  valorNull(value, data, type, component){
+          if (value == null){
+               return ''
+          }else{
+              return value
+          }
   }
 
   async proyinf(){
