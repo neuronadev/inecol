@@ -49,7 +49,7 @@ export default class extends Controller {
               return value
           }
   }
-
+  
   async proyinf(){
         try {
             var data = await fetch('/reportes/pinvfin', {
@@ -64,6 +64,8 @@ export default class extends Controller {
 
   download(event){
       table.download("xlsx", "informacion.xlsx", {sheetName:"Datos"});
+        
+
   }
 
 }
