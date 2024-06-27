@@ -12,14 +12,17 @@ export default class extends Controller {
         await this.proyinf().then(d=>{
              items = d
                 table = new Tabulator("#table-pfin", {
-                spreadsheet:true,
-                spreadsheetOutputFull: true,
-                editorEmptyValue:undefined,
                 height:'605px', 
+                dataTreeStartExpanded:true,
+                dataTreeElementColumn:"nombre",
+                dataTreeChildField:"outlineChildren",
+                dataTreeBranchElement:false,
+                dataTreeChildIndent:17,
+                scrollToRowPosition: "center",
                 data:d, 
-                layout:"fitColumns", 
+                
                 columns:[ //Define Table Columns
-                    {title:"Nombre del proyecto", field:"nombre", width:280},
+                    {title:"Nombre del proyecto", field:"nombre", width:280 },
                     {title:"Fuente de financiamiento", field:"fuente", width:180},
                     {title:"Tipo de Proyecto", field:"tipoproy", width:180},
                     {title:"Fecha de inicio", field:"finicio", width:100, accessorDownload: this.valorNull},

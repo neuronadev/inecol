@@ -96,13 +96,8 @@ class ReportesController < ApplicationController
                 mto_ejer =  format('$%.2f', 0.0)
           end
 
-
-          #mto_aut = e.proyecto.mtoautorizado.monto if !e.proyecto.mtoautorizado.nil?
-          #mto_ejer = e.proyecto.mtoejercidos.sum(:monto) if e.proyecto.mtoejercidos.any?
-
           resp_tec =  e.proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
           
-          #comentarios = e.proyecto.avances.last.txtavance.body.to_plain_text if !e.proyecto.avances.blank?
           comentarios = ''
           e.proyecto.avances.each do |v|
                 comentarios += v.txtavance.body.to_plain_text
@@ -120,7 +115,18 @@ class ReportesController < ApplicationController
                     montoaut:mto_aut,
                     montoejer:mto_ejer,
                     resp:resp_tec,
-                    comen:comentarios
+                    comen:comentarios,
+                    _outlineChildren:[ {nombre:e.proyecto.nombre, 
+                               fuente:e.proyecto.fuente.nomfuente,
+                               tipoproy:e.proyecto.clasificacion.nomclasifica,
+                               finicio:f_inicio,
+                               ftermino:f_termino,
+                               porcentaje:porcen_sum,
+                               montoaut:mto_aut,
+                               montoejer:mto_ejer,
+                               resp:resp_tec,
+                               comen:comentarios}
+                            ]
                   }
       end
      
