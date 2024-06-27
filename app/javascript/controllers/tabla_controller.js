@@ -2,48 +2,41 @@ import { Controller } from "@hotwired/stimulus"
 import {TabulatorFull as Tabulator} from 'tabulator-tables';
 
 var token = document.querySelector('meta[name="csrf-token"]').content
-var items = []
 var table 
+
 // Connects to data-controller="tabla"
 export default class extends Controller {
+
  async connect() {
-               
-        //create Tabulator on DOM element with id "example-table"        
-        await this.proyinf().then(d=>{
-             items = d
-                table = new Tabulator("#table-pfin", {
-                height:'605px', 
-                dataTreeStartExpanded:true,
-                dataTreeElementColumn:"nombre",
-                dataTreeChildField:"outlineChildren",
-                dataTreeBranchElement:false,
-                dataTreeChildIndent:17,
-                scrollToRowPosition: "center",
-                data:d, 
-                
-                columns:[ //Define Table Columns
-                    {title:"Nombre del proyecto", field:"nombre", width:280 },
-                    {title:"Fuente de financiamiento", field:"fuente", width:180},
-                    {title:"Tipo de Proyecto", field:"tipoproy", width:180},
-                    {title:"Fecha de inicio", field:"finicio", width:100, accessorDownload: this.valorNull},
-                    {title:"Fecha de termino", field:"ftermino", width:100, accessorDownload: this.valorNull}, 
-                    {title:"Porcentaje de avance", field:"porcentaje", width:80, accessorDownload: this.valorNull},
-                    {title:"Monto autorizado", field:"montoaut", width:90}, 
-                    {title:"Monto ejercido", field:"montoejer", width:90},
-                    {title:"Responsable", field:"resp", width:100},
-                    {title:"Comentarios", field:"comen", width:100},
-
-                ],
-             });
-              
-              //trigger an alert message when the row is clicked
-             table.on("rowClick", function(e, row){ 
-                  //alert("Row " + row.getData().id + " Clicked!!!!");
-             });   
-
-        })
-        
-  }
+       var items = []
+       await this.proyinf().then(datos => {
+            datos.forEach(item => {
+                    items.push(item)
+            })
+            table = new Tabulator("#table-pfin", {
+                        height:'605px',
+                        data:items,
+                        dataTree:true,
+                        dataTreeChildIndent:15,
+                        renderHorizontal:"virtual",
+                        columns:[ 
+                            {formatter:"rownum", hozAlign:"center", width:40, frozen:true}, 
+                            {title:"Nombre del proyecto", field:"nombre", width:500, responsive:0, frozen:true},
+                            {title:"Fuente de financiamiento", field:"fuente", width:450},
+                            {title:"Tipo de Proyecto", field:"tipoproy", width:180},
+                            {title:"Fecha de inicio", field:"finicio", width:100, hozAlign:"center", accessorDownload: this.valorNull},
+                            {title:"Fecha de termino", field:"ftermino", width:100, hozAlign:"center", accessorDownload: this.valorNull}, 
+                            {title:"Porcentaje de avance", field:"porcentaje", width:80, hozAlign:"center", accessorDownload: this.valorNull},
+                            {title:"Monto autorizado", field:"montoaut", hozAlign:"right", width:90}, 
+                            {title:"Monto ejercido", field:"montoejer", hozAlign:"right", width:90},
+                            {title:"Responsable", field:"resp", width:100},
+                            {title:"Comentarios", field:"comen", width:100},
+                        ]
+            })
+       })
+      
+       
+ }
 
   valorNull(value, data, type, component){
           if (value == null){
@@ -66,9 +59,8 @@ export default class extends Controller {
 
 
   download(event){
+      console.log("qqq")
       table.download("xlsx", "informacion.xlsx", {sheetName:"Datos"});
-        
-
   }
 
 }

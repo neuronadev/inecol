@@ -1,5 +1,16 @@
 <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css" rel="stylesheet">
 
-
-<button type="button" data-controller="tablainter" data-action="click->tablainter#download">Descargar</button>
-<div id="example-table" data-controller="tablainter"></div>
+<div data-controller="tablainter">
+    <div class="flex mb-5 justify-between">  
+        <div class="flex w-40"> 
+            <select id="countries_disabled" class="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>-- Año -- </option>
+                <option class="p-3" value="2024" selected><span class="p-5">Periodo 2024</span></option>
+            </select> 
+        </div>
+        <div class="flex ml-2">   
+            <button type="button" data-action="click->tablainter#download" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Descargar</button>
+        </div>
+    </div>    
+    <div id="example-table"></div>
+</div>    

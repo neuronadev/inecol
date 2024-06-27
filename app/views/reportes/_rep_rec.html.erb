@@ -1,5 +1,39 @@
 <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css" rel="stylesheet">
+<style>
+    /*Style row formatter contents*/
+#table-pfin .tabulator-row table{
+    vertical-align: middle;
+    border-collapse:collapse;
+}
 
+#table-pfin .tabulator-row table img{
+    border:2px solid #ccc;
+}
 
-<button type="button" data-controller="tabla" data-action="click->tabla#download">Descargar</button>
-<div id="table-pfin" data-controller="tabla"></div>
+#table-pfin .tabulator-row table tr td{
+     border:none;
+}
+
+#table-pfin .tabulator-row table tr td:first-of-type{
+    width:60px;
+}
+
+#table-pfin .tabulator-row table tr td div{
+    padding:5px;
+}
+</style>
+
+<div data-controller="tabla">
+    <div class="flex mb-5 justify-between">  
+        <div class="flex w-40"> 
+            <select id="countries_disabled" class="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>-- Año -- </option>
+                <option class="p-3" value="2024" selected><span class="p-5">Periodo 2024</span></option>
+            </select> 
+        </div>
+        <div class="flex ml-2">   
+            <button type="button" data-action="click->tabla#download" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Descargar</button>
+        </div>
+    </div>    
+    <div id="table-pfin"></div>
+</div>    

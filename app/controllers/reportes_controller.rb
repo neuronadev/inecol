@@ -115,18 +115,7 @@ class ReportesController < ApplicationController
                     montoaut:mto_aut,
                     montoejer:mto_ejer,
                     resp:resp_tec,
-                    comen:comentarios,
-                    _outlineChildren:[ {nombre:e.proyecto.nombre, 
-                               fuente:e.proyecto.fuente.nomfuente,
-                               tipoproy:e.proyecto.clasificacion.nomclasifica,
-                               finicio:f_inicio,
-                               ftermino:f_termino,
-                               porcentaje:porcen_sum,
-                               montoaut:mto_aut,
-                               montoejer:mto_ejer,
-                               resp:resp_tec,
-                               comen:comentarios}
-                            ]
+                    comen:comentarios
                   }
       end
      
