@@ -62,12 +62,15 @@ export default class extends Controller {
 
   crearTag(){
        let tagContainer = document.getElementById("conttags")
+       var otrose = document.getElementById("dictamen_otrose")
+       var str_otrose = ''
        this.reset() 
        tags.slice().reverse().forEach(tag=>{
             let input = this.crearEl(tag)
             tagContainer.prepend(input)
+            str_otrose += tag + ';'
        })
-
+       otrose.value = str_otrose
   }
 
   crearEl(label){
@@ -101,6 +104,8 @@ export default class extends Controller {
   }
 
   reset(){
+       var otrose = document.getElementById("dictamen_otrose")
+       otrose.value = ''
        document.querySelectorAll('.tag').forEach(tag=>{
               tag.parentElement.removeChild(tag)
        })

@@ -35,7 +35,11 @@ class DictamenesController < ApplicationController
 
                     Util::Email.notificar(@proyecto.id, 'ENEVD') 
                     Util::Email.notificar(@proyecto.id, 'ENRPD') 
-                   
+                    
+                    if !@dictamen.otrose.blank?
+                           Util::Email.notificar(@proyecto.id, 'OTROSE') 
+                    end
+
                     format.html { redirect_to dictamen_path(@dictamen) } 
             else
                     flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
