@@ -29,6 +29,7 @@ export default class extends Controller {
    }
    
    handleDragStart(e) {
+        
         e.target.style.opacity = '0.4';
         this.dragSrcEl = e.target;
         e.dataTransfer.effectAllowed = 'move';
@@ -41,10 +42,10 @@ export default class extends Controller {
          let p = await this.moverproy(this.dragSrcEl.id)
          if (p.nombre != '0'){
              
-              e.target.insertAdjacentHTML('beforeend', `<div class="cursor-pointer font-semibold mb-2" data-action="click->organizar#abrirEnlace" data-enlace="${p.link}"> 
+              /*e.target.insertAdjacentHTML('beforeend', `<div class="cursor-pointer font-semibold mb-2" data-action="click->organizar#abrirEnlace" data-enlace="${p.link}"> 
                                                             ${p.nombre}
                                                         </div>`
-                                         ) //e.dataTransfer.getData('text/html');
+                                         ) *///e.dataTransfer.getData('text/html');
                                           
               var fr_el = document.getElementById('pycontent')
               fr_el.src = '/proyectos/'
