@@ -19,7 +19,24 @@
                                 <td class="border border-slate-300 text-center"><%= part_tec.academico.tacademico.nomtacademico %></td>
                                 <td class="border border-slate-300 text-center">
                                 </td>
-                                <td class="border border-slate-300 text-center"><%= sprintf("%.1f",part_tec.porcentaje) %> <span>%</span> </td>
+                                <td class="border border-slate-300 text-center">
+                                                                           
+                                      <%= 
+                                      
+                                           if !part_tec.porcentaje.nil?
+                                                if part_tec.porcentaje.modulo(1).round(2) > 0
+                                                        sprintf("%.1f",part_tec.porcentaje) 
+                                                else
+                                                        sprintf("%.0f",part_tec.porcentaje) 
+                                                end
+                                                else
+                                                        sprintf("%.0f", 0 ) 
+                                           end        
+                                     
+                                      %> 
+                                      
+                                      <span>%</span> 
+                                </td>
                             </tr>
                         <% end %>
                 <% else %>

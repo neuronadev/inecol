@@ -21,7 +21,21 @@
                                               <div class="flex justify-center"><%= inline_svg_tag 'svg/controlar.svg' %></div>
                                 <% end %>
                     </td>
-                    <td class="border border-slate-300 text-center"><%= sprintf("%.1f",part_inv.porcentaje) %> <span>%</span> </td>
+                    <td class="border border-slate-300 text-center">
+                         <%= 
+                            if !part_inv.porcentaje.nil?
+                               if part_inv.porcentaje.modulo(1).round(2) > 0
+                                    sprintf("%.1f",part_inv.porcentaje) 
+                               else
+                                    sprintf("%.0f",part_inv.porcentaje) 
+                               end
+                            else
+                                    sprintf("%.0f", 0 ) 
+                            end       
+                         
+                         %> 
+                         <span>%</span> 
+                    </td>
                 </tr>
             <% end %>            
         </tbody>

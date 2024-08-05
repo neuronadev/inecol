@@ -4,12 +4,39 @@
                                         <% if i < @proyecto.participante.ptecnicos.count(:all) %>
                                             <tr style="background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;">
                                                <td style=""> <%= tec.academico.persona.nom_espacio  %> </td>
-                                               <td style="width:10%; text-align: center; background-color: #FFFFFF; border-left: 1px solid #a9a9a9;"> <%= sprintf("%.1f",tec.porcentaje)  %></td>
+                                               <td style="width:10%; text-align: center; background-color: #FFFFFF; border-left: 1px solid #a9a9a9;"> 
+                                                     <%= 
+                                                     if !tec.porcentaje.nil?
+                                                            if tec.porcentaje.modulo(1).round(2) > 0
+                                                                    sprintf("%.1f",tec.porcentaje) 
+                                                            else
+                                                                    sprintf("%.0f",tec.porcentaje) 
+                                                            end
+                                                     else
+                                                                    sprintf("%.0f", 0 ) 
+                                                     end      
+                                                     %>
+                                               </td>
                                             </tr>
                                         <% else %>    
                                             <tr style="background-color: #FFFFFF;">
                                                <td style=""> <%= tec.academico.persona.nom_espacio  %> </td>
-                                               <td style="width:10%; text-align: center; background-color: #FFFFFF; border-left: 1px solid #a9a9a9;"> <%= sprintf("%.1f",tec.porcentaje)  %></td>
+                                               <td style="width:10%; text-align: center; background-color: #FFFFFF; border-left: 1px solid #a9a9a9;">
+                                                                                                
+                                                <%= 
+                                                    if !tec.porcentaje.nil?
+                                                            if tec.porcentaje.modulo(1).round(2) > 0
+                                                                    sprintf("%.1f",tec.porcentaje) 
+                                                            else
+                                                                    sprintf("%.0f",tec.porcentaje) 
+                                                            end
+                                                    else
+                                                                    sprintf("%.0f", 0 ) 
+                                                    end  
+                                                          
+                                                %>
+                                                
+                                                </td>
                                             </tr>
                                         <% end %>        
                                    <% i += 1 %>       
