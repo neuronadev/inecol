@@ -1,3 +1,4 @@
+require 'util/email.rb'
 class ModificatoriosController < ApplicationController
    
    def mensaje
@@ -5,7 +6,13 @@ class ModificatoriosController < ApplicationController
    end
 
    def aplicarmod
+             
             @proyecto = Proyecto.find(params[:idpy])
+
+            if @proyecto.modificatorio == 'SI'
+                   @proyecto = Proyecto.find(@proyecto.raiz)
+            end
+             
 
             proyecto_mod = regproyecto @proyecto
             fuente = regfuente @proyecto.fuente, proyecto_mod.id
@@ -16,6 +23,8 @@ class ModificatoriosController < ApplicationController
 
             r = { "mensaje":"success", "fecha": proyecto_mod.created_at.strftime("%d-%m-%Y %H:%M") }
             #r = { "mensaje":"success", "fecha": "XXXXX" }
+
+            Util::Email.notificar(@proyecto.id, 'ENRPMOD') 
 
             respond_to do |format|
                 format.json { render json: r }
