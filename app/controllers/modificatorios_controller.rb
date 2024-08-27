@@ -9,9 +9,9 @@ class ModificatoriosController < ApplicationController
              
             @proyecto = Proyecto.find(params[:idpy])
 
-            if @proyecto.modificatorio == 'SI'
-                   @proyecto = Proyecto.find(@proyecto.raiz)
-            end
+            #if @proyecto.modificatorio == 'SI'
+            #       @proyecto = Proyecto.find(@proyecto.raiz)
+            #end
              
 
             proyecto_mod = regproyecto @proyecto

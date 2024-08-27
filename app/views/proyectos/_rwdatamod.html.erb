@@ -1,0 +1,42 @@
+<%
+   @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
+%>
+<% 
+ exist_modifi_py = Proyecto.where(raiz:py.id)
+ 
+ mods = Array.new
+
+ sig = true
+ tmp_py = py
+ 
+
+ while sig do
+    if !Proyecto.where(raiz:tmp_py.id).last.nil?           
+         p_item = Proyecto.find(Proyecto.where(raiz:tmp_py.id).last.id)
+         tmp_py = p_item
+         mods << p_item
+    else
+         sig = false
+    end     
+ end
+
+%>
+   <%= render 'proyectos/rw_eval_line_out', py: py, tipo: tipo %> 
+<% 
+ if !mods.blank?
+     item_count = 0
+     mods.each do |mod|
+             item_count = item_count + 1
+%>
+             <% if !mod.enlaces.blank? %>
+                    <%= render 'proyectos/rw_eval_mod', py: mod, tipo: 'V', item_count: item_count %>
+             <% end %> 
+     <% end %>       
+<% else %>     
+            <% 
+                p_out = Proyecto.where(raiz:py.id)
+                if p_out.blank?
+            %>
+                    <%= render 'proyectos/rw_eval', py:py, tipo: tipo %>
+            <% end %>    
+<% end %> 

@@ -3,7 +3,7 @@ require 'util/email.rb'
 class ProyectosController < ApplicationController
   layout :select_layout
 
-  def index
+   def index
       @total_notifica_rp = 0
 
       if current_usuario.cuenta.rol.clave == 'EL'
@@ -19,69 +19,76 @@ class ProyectosController < ApplicationController
                @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'EVAL'
                #@proyectos = Proyecto.includes(validaciones: :tvalidacion).where('tvalidaciones.clave':['SOLV','COM','ACEP','REC']).order(created_at: :desc)
-               @xfirmar = []
-               @xevaluar = []
-               @validados = []
-               @ids_validado = []
-               
                idevaluador = Evaluador.where(persona_id:current_usuario.cuenta.persona_id).first.id
-
-               Proyecto.all.each do |item|
-                  items_eval = []
-                  if item.modificatorio.nil?
-                    if item.enlaces.any?
-                            if !Proyecto.where(raiz:item.id).blank?
-                                    Proyecto.where(raiz:item.id).each do |pm|
-                                        items_eval.push(pm)
-                                    end    
-                            else        
-                                    items_eval.push(item) 
-                            end
-                            items_eval.each do |idx|
-                                  if !idx.enlaces.blank?
-                                        enlace_act = idx.enlaces.order(:created_at).last
-
-                                        if !enlace_act.blank?
+               @validados = []
+               @xevaluarmod = []
+               @xevaluar = []
+               @xfirmar = []
+               Dictamen.where.not(numregistro:'DMOD').order(numregistro: :desc).each do |d|
+                    p = Proyecto.find(d.proyecto_id)
+                    sig = true
+                    tmp_py = p
+                     if !Proyecto.where(raiz:tmp_py.id).last.nil?
+                                while sig do
+                                    if !Proyecto.where(raiz:tmp_py.id).last.nil?           
+                                            p_item = Proyecto.find(Proyecto.where(raiz:tmp_py.id).last.id)
+                                            enlace_act = p_item.enlaces.order(:created_at).last
+                                            if !enlace_act.blank?
                                                 if enlace_act.enevento.clave == 'EVAL'
-                                                        if Validacion.where(proyecto_id:idx.id, evaluador_id:idevaluador).first.nil?
-                                                             @xevaluar.push(item)
+                                                        if Validacion.where(proyecto_id:p_item.id, evaluador_id:idevaluador).first.nil?
+                                                            if !@xevaluarmod.include?(p)
+                                                                @xevaluarmod.push(p)
+                                                            end   
                                                         else
-                                                             @xfirmar.push(item)
+                                                                @xevaluarmod.push(p)
                                                         end
                                                 elsif enlace_act.enevento.clave == 'DICT'
-                                                        if Firma.where(proyecto_id:idx.id, evaluador_id:idevaluador).first.nil?
-                                                            @xfirmar.push(item)
-                                                        else
-                                                            #@validados.push(item)
-                                                            @ids_validado.push(item.id)
-                                                        end
+                                                        if Firma.where(proyecto_id:p_item.id, evaluador_id:idevaluador).first.nil?
+                                                            if !@xevaluarmod.include?(p)
+                                                                @xevaluarmod.push(p)
+                                                            end      
+                                                        end        
                                                 elsif enlace_act.enevento.clave == 'FIR'
-                                                            #@validados.push(item)
-                                                            @ids_validado.push(item.id)
-                                                end
-                                        end
+                                                        if !@validados.include?(p)
+                                                            @validados.push(p)
+                                                        end    
+                                                end        
+                                            else
+                                                        if !@validados.include?(p) 
+                                                             @validados.push(p)    
+                                                        end    
+                                            end
+                                            tmp_py = p_item
                                     else
-                                        @ids_validado.push(item.id)
-                                    end    
-                            end        
+                                            sig = false
+                                    end     
+                                end
+                     else
+                        if !@validados.include?(p) 
+                             @validados.push(p)
+                        end     
+                     end
+                    #if d.numregistro != 'DMOD'
+                    #    @validados.push(d.proyecto)
+                    #end
+               end
+               Proyecto.where(modificatorio:nil).each do |item|
+                    enlace_act_v = item.enlaces.order(:created_at).last
+                    if !enlace_act_v.blank?
+                        if enlace_act_v.enevento.clave == 'EVAL'
+                                if Validacion.where(proyecto_id:item.id, evaluador_id:idevaluador).first.nil?
+                                     @xevaluar.push(item)
+                                else
+                                     @xfirmar.push(item)
+                                end
+                        elsif enlace_act_v.enevento.clave == 'DICT'
+                                if Firma.where(proyecto_id:item.id, evaluador_id:idevaluador).first.nil?
+                                    @xfirmar.push(item)
+                                end
+                        end
                     end
-                  end    
                end
-               Dictamen.where(proyecto_id:@ids_validado).order(numregistro: :desc).each do |d|
-                    if d.numregistro != 'DMOD'
-                         @validados.push(d.proyecto)
-                    end    
-               end
-             
-              
-               puts "-----------------------"
-               p @xevaluar
-                puts "-----------------------"
-               p @xfirmar
-               puts "-----------------------"
-               p @ids_validado
-               #exit;
-              
+               
       end
 
 

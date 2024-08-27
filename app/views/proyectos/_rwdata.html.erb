@@ -7,10 +7,10 @@
  if !exist_modifi_py.blank?
      exist_modifi_py.each do |mod|
 %>
-             <%= render 'proyectos/rw_eval_line_out', py: py, tipo: tipo %>
+             <%= render 'proyectos/rw_eval_line_out', py: py, tipo: tipo, item_count: '' %>
              <% if !mod.enlaces.blank? %>
 
-                    <%= render 'proyectos/rw_eval_mod', py: mod, tipo: tipo %>
+                    <%= render 'proyectos/rw_eval_mod', py: mod, tipo: tipo, item_count: '' %>
 
              <% end %> 
      <% end %>       
@@ -19,6 +19,6 @@
                 p_out = Proyecto.where(raiz:py.id)
                 if p_out.blank?
             %>
-                    <%= render 'proyectos/rw_eval', py:py, tipo: tipo %>
+                    <%= render 'proyectos/rw_eval', py:py, tipo: tipo, item_count: '' %>
             <% end %>    
 <% end %>    

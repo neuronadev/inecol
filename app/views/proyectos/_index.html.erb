@@ -28,15 +28,26 @@
                                 <% @proyectos.each do |py| %>
                                      <% if py.etapas.last.tevento.clave != 'DEL' %>
                                               <%  if py.modificatorio.nil? %>
-                                                         <% if !Proyecto.where(raiz:py.id).last.nil?
-                                                                    py_mod = Proyecto.find(Proyecto.where(raiz:py.id).last.id)
-                                                         %>
-                                                                    <%= render 'rw_cp_line_out', py:py %> 
-                                                                    <%= render 'rw_cp_mod', py:py_mod %>
-                                                         <% else %>
-                                                                    <%= render 'rw_cp', py:py %>
-                                                         <% end %> 
-                                              <% end %>           
+                                                      <%= render 'rw_cp', py:py %>
+
+                                                      <%
+                                                          sig = true
+                                                          tmp_py = py
+                                                          item_count = 0
+                                                          while sig do
+                                                             if !Proyecto.where(raiz:tmp_py.id).last.nil?           
+                                                                  p_item = Proyecto.find(Proyecto.where(raiz:tmp_py.id).last.id)
+                                                                  tmp_py = p_item
+                                                                  item_count = item_count + 1
+                                                      %>
+                                                                  <%= render 'rw_cp_mod', py:p_item, noitem:item_count %>        
+                                                      <%     else
+                                                                  sig = false   
+                                                             end
+                                                          end
+                                                      %>
+                                              <% end %> 
+                                              
                                       <% end %>      
                                 <% end %>   
              <% else %>           

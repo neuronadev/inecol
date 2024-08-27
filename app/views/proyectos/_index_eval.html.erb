@@ -35,6 +35,9 @@ th {
             </tr>
         </thead>
         <tbody>
+               <%  @xevaluarmod.each do |item| %>
+                     <%= render 'proyectos/rwdatamod', py:item, tipo:'V' %>
+               <% end %>
                <%  @xevaluar.each do |item| %>
                      <%= render 'proyectos/rwdata', py:item, tipo:'V' %>
                <% end %>
@@ -44,7 +47,7 @@ th {
                <%  @validados.each do |item| %>
                      <%= render 'proyectos/rwdata', py:item, tipo:'' %>
                <% end %>
-
+                           
         </tbody>
     </table>
 </div>

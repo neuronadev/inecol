@@ -10,25 +10,33 @@
 
             <div class="mb-2">
                     <div id="item_<%= item.id %>" class="context font-semibold mb-1 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                    <%= item.nombre %>
+                       <%= item.nombre %>
                     </div>   
                     <div>
-                    <% if Proyecto.where(raiz:item.proyecto_id).any? 
-                           i = 1 
-                            Proyecto.where(raiz:item.proyecto_id).each do |m|
-                    %>
-                                    <div class="text-red-700">
-                                        <div id="item_<%= m.id %>" class="context font-semibold cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= m.id %>" data-enlace="<%= resumen_vistas_path(:id=>m.id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                                        Modificación <%= i %>
-                                        </div>  
-                                    </div>
-
-                            <% i += 1
-                            end %>
-                    <% end %> 
-                </div>
+                        <%
+                            sig = true
+                            p = Proyecto.find(item.proyecto_id)
+                            tmp_py = p
+                            item_count = 0
+                            while sig do
+                              if !Proyecto.where(raiz:tmp_py.id).last.nil?           
+                                   p_item = Proyecto.find(Proyecto.where(raiz:tmp_py.id).last.id)
+                                   tmp_py = p_item
+                                   item_count = item_count + 1
+                        %>
+                                   <div class="text-red-700">
+                                       <div id="item_<%= tmp_py.id %>" class="context font-semibold cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= tmp_py.id %>" data-enlace="<%= resumen_vistas_path(:id=>tmp_py.id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                            Modificación <%= item_count %>
+                                       </div>  
+                                   </div>
+                           <% else
+                                    sig = false   
+                              end
+                            end
+                           %>
+                    </div>
                 
-                </div> 
+            </div> 
             <% end %>    
 
     <script>

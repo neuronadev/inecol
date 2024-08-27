@@ -1,15 +1,15 @@
 <tr class="<%= tipo == 'V' ? ' bg-orange-100' : tipo == 'F' ?  ' bg-emerald-100' : ' bg-white'  %> border-b dark:bg-gray-900 dark:border-gray-700">
             <td style="text-align: center;">
                     <% if !py.enlaces.blank? && (py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT') %>
-                            <%= py.dictamen.numregistro %>
+                            <strong><%= py.dictamen.numregistro %></strong>
                     <% else %>       
                                 <% 
                                     if !py.raiz.nil?
                                         py_mod_ref = Proyecto.find(py.raiz)
                                 %>
-                                        <%= py_mod_ref.dictamen.numregistro %>
+                                        <strong><%= py_mod_ref.dictamen.numregistro %></strong>
                                 <% else %>
-                                        --
+                                        <strong>--</strong>
                                 <%  end %>
                     <% end %>
             </td> 
