@@ -15,26 +15,47 @@
      <table style="width:100%; background-color: #e4e4e4; padding:5px 5px;">
         
         <% if @proyecto.modificatorio == 'SI' 
-                 proy_raiz = Proyecto.find(@proyecto.raiz)
+                lista = Array.new
+                sig = true
+                py_tmp = @proyecto
+                lista << py_tmp
+                while sig do
+                    if py_tmp.modificatorio == 'SI'
+                         py_tmp = Proyecto.find(py_tmp.raiz)
+                         lista  << py_tmp
+                    else
+                         sig = false
+                    end   
+                 end
+                 i = 0
+                 lista.reverse.each_with_index do |node, index|
+                    
+                    proy_raiz = node #Proyecto.find(@proyecto.raiz)
+                          
          %> 
-            <tr> <td colspan="2"><strong>Fecha:</strong></td>  </tr>
-            <tr>   
-                <td><strong>Dictamen</strong></td>
-                <td style="width:89%; text-align: left; background-color: #ffffff;">
-                        <% if ! proy_raiz.dictamen.nil? %>
-                                <%=  proy_raiz.dictamen.created_at.strftime('%d-%m-%Y') %>
-                        <% end %>
-               </td>
-            </tr>
-            <tr>   
-                <td><strong>Modificación</strong></td>
-                <td style="width:89%; text-align: left; background-color: #ffffff;">
-                         <% if !@proyecto.dictamen.nil? %>
-                            <%= @proyecto.dictamen.created_at.strftime('%d-%m-%Y') %>
-                         <% end %>
-               </td>
-            </tr>
-
+                    <% if i == 0 %>
+                        <tr> <td colspan="2"><strong>Fecha:</strong></td>  </tr>
+                        <tr>   
+                            <td><strong>Dictamen</strong></td>
+                            <td style="width:89%; text-align: left; background-color: #ffffff;">
+                                    <% if ! proy_raiz.dictamen.nil? %>
+                                            <%=  proy_raiz.dictamen.created_at.strftime('%d-%m-%Y') %>
+                                    <% end %>
+                        </td>
+                        </tr>
+                    <% end %> 
+                    <% if i > 0 %>   
+                        <tr>   
+                            <td><strong>Modificación <%= i %> </strong></td>
+                            <td style="width:89%; text-align: left; background-color: #ffffff;">
+                                    <% if !proy_raiz.dictamen.nil? %>
+                                        <%= proy_raiz.dictamen.created_at.strftime('%d-%m-%Y') %>
+                                    <% end %>
+                        </td>
+                        </tr>
+                    <% end %>
+                    <% i = i+1 %>    
+                <% end %>
             
         <% else %>
             <tr>   

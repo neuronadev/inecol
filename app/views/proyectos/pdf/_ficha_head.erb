@@ -5,7 +5,18 @@
           <td class="txt3">Número de Registro</td>
           <td class="txt4">
             <% if @proyecto.modificatorio == 'SI' 
-                     proy_raiz = Proyecto.find(@proyecto.raiz)
+                    sig = true
+                    py_tmp = @proyecto
+                    while sig do
+                          if py_tmp.modificatorio == 'SI'
+                               py_tmp = Proyecto.find(py_tmp.raiz)
+                          else
+                               sig = false
+                               py_padre = py_tmp.id
+                          end   
+                    end
+                     
+                     proy_raiz = Proyecto.find(py_padre)
             %>
                      <span class="font-semibold"> <%= proy_raiz.dictamen.numregistro %> </span>
             <% else %>

@@ -95,7 +95,8 @@
                              <td style='width:10%'></td>
                              <td style="width:5%; text-align:left; "><strong>Aceptado</strong></td>
                              <td style="width:10%; text-align:center; background-color: #FFFFFF; border-bottom: 1px solid #a9a9a9;"> 
-                                      <% if @proyecto.modificatorio == 'SI' 
+                                      <% if @proyecto.modificatorio == 'SI'
+                                       
                                              proy_raiz = Proyecto.find(@proyecto.raiz)
                                       %>
                                             <% if proy_raiz.enlaces.last.enevento.clave == 'DICT' ||  proy_raiz.enlaces.last.enevento.clave == 'FIR' %>             
