@@ -10,6 +10,7 @@ var py_ovh = ''
 var solUtil = new SolicitaUtil()
 var formato = new Formato()
 var moneda_data = ''
+
 export default class extends Controller {
     
     async connect() {
@@ -179,38 +180,55 @@ export default class extends Controller {
         } catch (e) { alert(e) }
     }
 
-    costos() {
-       
-        var costo = document.getElementById('presupuesto_costo')
-        var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
+    async costos() {
+      var proyecto = document.getElementById('presupuesto_proyecto_id')
 
-        var iva = 0.0
-        var tProyecto = 0.0
-        var porcOverhead = 0.0
-        var porcEstimulo = 0.0
-        var tGastos = 0.0
-        
-       
+      
 
-        if (clasifica.includes(py_clasifca) && Boolean(py_ovh) ){
-               iva = presupuesto.iva()
-               tProyecto = presupuesto.tProyecto()
-               porcOverhead = presupuesto.porcOverhead()
-               porcEstimulo = presupuesto.porcEstimulo()
-               tGastos = presupuesto.tGastos()
-        }
-        if (clasifica.includes(py_clasifca) && !Boolean(py_ovh)) {
-               tProyecto = costo.value
-               tGastos = costo.value
-        }
+      await fetch('/presupuestos/pytoverhead', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept':'application/json', 'X-CSRF-Token':token },
+            body: JSON.stringify({ proyecto_id:proyecto.value})
+        }).then(response => response.json())
+          .then(data => {
+                
+                var tpoyovh
+                if ( data.tpovh == null || data.tpovh == 1 ){
+                      tpoyovh = 1
+                }
+                if ( data.tpovh == 2 ){
+                      tpoyovh = 2
+                }
+                var costo = document.getElementById('presupuesto_costo')
+                var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
+
+                var iva = 0.0
+                var tProyecto = 0.0
+                var porcOverhead = 0.0
+                var porcEstimulo = 0.0
+                var tGastos = 0.0
+                
+            
+
+                if (clasifica.includes(py_clasifca) && Boolean(py_ovh) ){
+                    iva = presupuesto.iva(tpoyovh)
+                    tProyecto = presupuesto.tProyecto(tpoyovh)
+                    porcOverhead = presupuesto.porcOverhead(tpoyovh)
+                    porcEstimulo = presupuesto.porcEstimulo(tpoyovh)
+                    tGastos = presupuesto.tGastos(tpoyovh)
+                }
+                if (clasifica.includes(py_clasifca) && !Boolean(py_ovh)) {
+                    tProyecto = costo.value
+                    tGastos = costo.value
+                }
 
 
-        document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
-        document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
-
+                document.getElementById('presupuesto_iva').value = formato.moneda(iva, moneda_data.locale, moneda_data.currency)
+                document.getElementById('presupuesto_tproyecto').value = formato.moneda(tProyecto, moneda_data.locale, moneda_data.currency)
+                document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
+                document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
+                document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
+           })
       
  
     }

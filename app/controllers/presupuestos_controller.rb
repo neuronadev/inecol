@@ -148,6 +148,17 @@ class PresupuestosController < ApplicationController
       end
   end
 
+  def pytoverhead
+        @proyecto = Proyecto.find(params[:proyecto_id])
+        tpovh = @proyecto.tpoverhead
+        
+        data = {tpovh:tpovh}
+        
+        respond_to do |format|
+            format.json { render json:data.to_json }
+        end
+  end
+
   private
    def presupuesto_params
        params.require(:presupuesto).permit(

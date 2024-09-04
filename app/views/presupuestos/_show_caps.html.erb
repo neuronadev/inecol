@@ -15,7 +15,7 @@
                                 <td class="border border-slate-300 text-center">
                                     <div style="display:flex;"> 
                                       <div style="width:30%;display: flex;justify-content: flex-end;"><%= @moneda.currency + ' ' + @moneda.simbolo %></div>
-                                      <div style="width:40%;display: flex;justify-content: flex-end;"> <%= number_to_currency(s.monto, :unit=>"") %></div>
+                                      <div style="width:50%;display: flex;justify-content: flex-end;"> <%= number_to_currency(s.monto, :unit=>"") %></div>
                                     </div>
                                 </td>
                             </tr>
@@ -28,7 +28,7 @@
                         <td class="text-center font-semibold">
                               <div style="display:flex;"> 
                                       <div style="width:30%;display: flex;justify-content: flex-end;"><%= @moneda.currency + ' ' + @moneda.simbolo %></div>
-                                      <div style="width:40%;display: flex;justify-content: flex-end;"> <%= number_to_currency(@sum_caps, :unit=>"") %></div>
+                                      <div style="width:55%;display: flex;justify-content: flex-end;"> <%= number_to_currency(@sum_caps, :unit=>"") %></div>
                               </div>
                     </tr>
               </tfoot>
