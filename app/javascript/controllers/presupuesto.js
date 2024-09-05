@@ -25,7 +25,7 @@ export default class Presupuesto{
               return parseFloat(this.monto) * .20
         }
         if (toverh == 2){
-            return parseFloat(this.monto) * .087
+            return parseFloat(this.monto) * .0871
         }   
     } 
     porcEstimulo( testim = 1 ){
@@ -41,7 +41,7 @@ export default class Presupuesto{
             return parseFloat(this.monto) - ( (parseFloat(this.monto) * .20) + (parseFloat(this.monto) * .10) )
         }
         if ( tgas == 2 ){ 
-            return parseFloat(this.monto) - ( (parseFloat(this.monto) * .087) )
+            return parseFloat(this.monto) - ( (parseFloat(this.monto) * .0871) )
         }    
     }
 
