@@ -1,4 +1,5 @@
-<%= turbo_frame_tag "monto_autorizado" do %>
+
+<%= turbo_frame_tag "preview_monto_autorizado" do %>
        <%= form_with model:@prorroga, url:[@proyecto, @prorroga], class:'w-full' do |f| %>
              <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
              <div class="w-full overflow-x-auto p-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"  >
@@ -7,7 +8,7 @@
                       <tbody>
                             <tr class="bg-white ">
                                 <td scope="row" class="p-1 text-right w-1/5 font-semibold ">
-                                     Fecha:
+                                     Nueva fecha de termino:
                                 </td>
                                 <td class="text-left p-1">
                                      <%= f.date_field :fecha, class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700' %> 
@@ -27,7 +28,7 @@
              <div class="w-full overflow-x-auto p-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                       <%= link_to preview_proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado), 
                                     class:"mr-3 text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800",
-                                    data: { turbo_frame: "monto_autorizado" } do %>  
+                                    data: { turbo_frame: "preview_monto_autorizado" } do %>  
                                    Cancelar
                         <% end %>   
                         <button type="submit" class="text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" 

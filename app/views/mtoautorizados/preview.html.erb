@@ -10,14 +10,10 @@
         </thead>  
         <tbody>
             <% if !@proyecto.mtoautorizado.nil? %>
-                <tr>
+                <tr class="border-b">
                     <td class="text-center p-1"> <%= @proyecto.mtoautorizado.finicio.strftime("%d-%m-%Y") %> </td>
                     <td class="text-center p-1"> 
-                          <% if !@proyecto.prorrogas.any? %>  
                                  <%= @proyecto.mtoautorizado.ftermino.strftime("%d-%m-%Y") %> 
-                          <% else %>       
-                                 <%= @proyecto.prorrogas.last.fecha.strftime("%d-%m-%Y") %> 
-                          <% end %>
                     </td>
                     <td class="text-center p-1">
                                     <%= number_to_currency(@proyecto.mtoautorizado.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %> 
@@ -26,6 +22,17 @@
                         <%= render 'mtoautorizados/rwmenu' %>  
                     </td>
                 </tr>
+
+                <% if @proyecto.prorrogas.any? %>
+                       <% @proyecto.prorrogas.order(:created_at).each do |p| %> 
+                           <tr>
+                               <td class="text-center p-1 text-red-500"> Prorroga </td>
+                                <td>  <%= p.fecha.strftime("%d-%m-%Y") %>  </td>
+                                <td>  <%= p.txtobs %>  </td>
+                           </tr>
+                       <% end %>         
+                <% end %>
+
             <% else %>    
                 <tr>
                     <td class="text-center p-1" colspan="4">Sin asignar</td>

@@ -1,9 +1,10 @@
 <%= form_with model:@mtoautorizado, url:[@proyecto, @mtoautorizado], class:'w-full' do |f| %>
      <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
+     <%= f.hidden_field :tipo, value:'I' %>
      <input type="hidden" name="tmoneda" id="tmoneda" value="<%= @moneda_sym %>">
-
+     
      <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"  >
-        <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold">Monto Autorizado</div>
+        <div class="border-b text-white bg-blue-400 dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold">Monto Autorizado</div>
            <table class="w-full text-gray-800 dark:text-gray-800 mt-2">
                    <tbody>
                             <tr class="bg-white ">
@@ -27,7 +28,7 @@
                                     Monto Autorizado:
                                 </td>
                                 <td class="text-left p-2">
-                                      <% if controller.action_name == 'new' %>
+                                      <% if controller.action_name == 'new' || controller.action_name == 'create' %>
                                             <%= f.text_field :monto, 
                                                 class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700', 
                                                 data:{controller:'formatoinput utils', action:'keydown->utils#keyEnter keyup->formatoinput#stopTyping keydown->utils#onlynumbers blur->formatoinput#f_moneda focus->formatoinput#unf_moneda' } 
@@ -64,3 +65,5 @@
     
    
 <% end %>
+
+<br><br>

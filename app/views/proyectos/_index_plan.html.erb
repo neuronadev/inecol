@@ -38,16 +38,10 @@ th {
                     <%  @proyectos.each do |py| 
                         @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
                     %>
-                            <% if !Proyecto.where(raiz:py.id).last.nil?
-                                   py_mod = Proyecto.find(Proyecto.where(raiz:py.id).last.id)
-                            %>
-                                   <%= render 'rw_plan_line_out', py:py %> 
-                                   <%= render 'rw_plan_mod', py:py_mod %>
-                            <% else %>
-                                   <%= render "rw_plan", py: py %>
-                            <% end %> 
-       
-                       <% end %>       
+                          <%= render "rw_plan", py: py %>
+                         
+                    <% end %>
+
              <% else %>           
                      <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"><td colspan='3' scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay proyectos registrados</td>
             <% end %>            

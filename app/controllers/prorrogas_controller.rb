@@ -17,6 +17,9 @@ class ProrrogasController < ApplicationController
           if @prorroga.save
               format.html { redirect_to preview_proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado) }
           else 
+              puts "---------------------"
+              @prorroga.errors.full_messages
+              @prorroga.errors[:txtobs]
               flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
               format.html { render :new, status: :bad_request }
           end  

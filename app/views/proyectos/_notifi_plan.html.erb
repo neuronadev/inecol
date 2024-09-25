@@ -37,7 +37,7 @@
                    </tr>
                    <tr>
                       <td colspan="2"> 
-                         <div class="w-full"> 
+                         <div class="w-full" style="min-height:100px; "> 
                              <%= turbo_frame_tag "monto_autorizado", src:proyecto_mtoautorizados_path(@proyecto) do  %>
                              <% end %>
                          </div> 
@@ -61,10 +61,10 @@
                    -->
                    <tr>
                         <td colspan="2" >
-                              <div class="w-full"> 
+                              <div class="w-full" style="min-height:100px; "> 
                                    <%= turbo_frame_tag "monto_ejercido", src:proyecto_mtoejercidos_path(@proyecto) do  %>
                                    <% end %>
-                         </div> 
+                              </div> 
                         </td>
                    </tr>
 

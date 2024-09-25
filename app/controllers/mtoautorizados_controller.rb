@@ -64,7 +64,7 @@ class MtoautorizadosController < ApplicationController
 
   private
   def mtoautorizado_params
-      params.require(:mtoautorizado).permit(:finicio, :ftermino, :monto, :proyecto_id)
+      params.require(:mtoautorizado).permit(:finicio, :ftermino, :monto, :proyecto_id, :tipo)
   end
 
 end

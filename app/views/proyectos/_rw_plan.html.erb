@@ -1,4 +1,4 @@
-<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 box" id="<%= py.id %>" >
+<tr class="bg-white border-t dark:bg-gray-900 dark:border-gray-700 box" id="<%= py.id %>" >
     <td style="text-align: center;">
             <% if py.enlaces.last.enevento.clave == 'FIR' || py.enlaces.last.enevento.clave == 'DICT' %>
                     <%= py.dictamen.numregistro %>
@@ -30,3 +30,4 @@
          <%= link_to 'Montos', resumen_vistas_path(:id=>py.id), class:"p-2 justify-self-center font-medium text-blue-600 dark:text-blue-500 rounded hover:bg-gray-200 hover:ring-2" %> 
    </td>
 </tr>
+<%= render "proyectos/rw_modificatorios", py: py %> 

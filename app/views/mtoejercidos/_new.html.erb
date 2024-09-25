@@ -14,7 +14,8 @@
 <%= form_with model:@mtoejercido, url:[@proyecto, @mtoejercido], class:'w-full' do |f| %>
      <%= f.hidden_field :proyecto_id, value:@proyecto.id %>
      <input type="hidden" name="tmoneda" id="tmoneda" value="<%= @moneda_sym %>">
-     <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-sm">
+     <div class="w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+           <div class="border-b bg-orange-400 text-white bg-blue-400 dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold">Monto Ejercido</div>
            <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold"> Total ejercido: <%= number_to_currency(@proyecto.mtoejercidos.sum(:monto), :unit=>@moneda.currency + ' ') %> </div>
            <div class="border-b dark:bg-gray-800 dark:border-gray-700 p-2 text-gray-800 font-bold"> Ingrese el nuevo monto ejercido</div>
            
@@ -68,3 +69,4 @@
            </table>        
    </div>        
 <% end %>
+<br><br>
