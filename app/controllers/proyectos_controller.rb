@@ -33,6 +33,7 @@ class ProyectosController < ApplicationController
                                     if !Proyecto.where(raiz:tmp_py.id).last.nil?           
                                             p_item = Proyecto.find(Proyecto.where(raiz:tmp_py.id).last.id)
                                             enlace_act = p_item.enlaces.order(:created_at).last
+                                            
                                             if !enlace_act.blank?
                                                 if enlace_act.enevento.clave == 'EVAL'
                                                         if Validacion.where(proyecto_id:p_item.id, evaluador_id:idevaluador).first.nil?
@@ -64,9 +65,12 @@ class ProyectosController < ApplicationController
                                     end     
                                 end
                      else
-                        if !@validados.include?(p) 
-                             @validados.push(p)
-                        end     
+                        enlace_valor = p.enlaces.order(:created_at).last
+                        if enlace_valor.enevento.clave == 'FIR'
+                            if !@validados.include?(p) 
+                                @validados.push(p)
+                            end     
+                        end    
                      end
                     #if d.numregistro != 'DMOD'
                     #    @validados.push(d.proyecto)
@@ -88,9 +92,9 @@ class ProyectosController < ApplicationController
                         end
                     end
                end
-               
+      
+        
       end
-
 
   end
 

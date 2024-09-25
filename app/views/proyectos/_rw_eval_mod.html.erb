@@ -32,13 +32,13 @@
                                 existe_firma = py.firmas.where(cargoeval:cargo_actual).order(:created_at).first
 
                         %>  
-                        <% if py.enlaces.last.enevento.clave == 'DICT' %>
+                        <% if py.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
                                 <% if existe_firma.nil? %>
                                     <%= link_to 'Firmar', firma_path(py, format: :html), class:"font-medium text-orange-600 dark:text-orange-600 hover:underline font-bold" %> 
                                 <% else %>    
                                         <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
                                 <% end %>     
-                        <% elsif py.enlaces.last.enevento.clave == 'FIR' %>
+                        <% elsif py.enlaces.order(:created_at).last.enevento.clave == 'FIR' %>
                                 <%= link_to 'Firmado', firma_path(py, format: :html), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline font-bold" %>  
                         <% else %>
                                 <span class="text-gray-500 italic ">Firmar</span>
