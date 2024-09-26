@@ -3,13 +3,13 @@ class Prorroga < ApplicationRecord
   belongs_to :proyecto
   has_rich_text :txtobs
 
-  validates :fecha, presence: true
-  validates :txtobs, presence: true
+  #validates :fecha, presence: {message:'Se requiere la fecha'}
+  #validates :txtobs, presence: {message:'Se requiere un texto'}
 
- # validate do |prorroga| 
- #     Valcampos.new(prorroga).vfecha
- #     Valcampos.new(prorroga).vtxtobs
- # end
+  validate do |prorroga| 
+      Valcampos.new(prorroga).vfecha
+      Valcampos.new(prorroga).vtxtobs
+  end
 
 end
 
@@ -18,19 +18,17 @@ class Valcampos
         @prorroga = prorroga
         @fecha = prorroga.fecha
         @txtobs = prorroga.txtobs
-        puts "AAAAAAAAAA"
-        puts @txtobs.to_s
       end
 
       def vfecha
           if @fecha.nil?
-               @prorroga.errors.add :base, :invalid, message:"Se requiere la fecha."
+               @prorroga.errors.add :fecha, :invalid, message:"Se requiere la fecha."
           end
       end
 
       def vtxtobs
-          if @txtobs.to_s.nil?
-               @prorroga.errors.add :base, :invalid, message:"Se requieren las observaciones"
+          if @txtobs.blank?
+               @prorroga.errors.add :txtobs, :invalid, message:"Se requieren las observaciones"
           end
       end
 end
