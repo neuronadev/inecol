@@ -37,6 +37,9 @@
                                             <% if @presupuesto.proyecto.tpoverhead == 2 %>
                                                    8.71% Overhead
                                             <% end %>    
+                                            <% if @presupuesto.proyecto.tpoverhead == 3 %>
+                                                   10% Overhead
+                                            <% end %> 
                                         </td>
                                         <td class="p-2 text-center w-5"> <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %> </td>
                                     </tr>

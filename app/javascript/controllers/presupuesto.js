@@ -11,6 +11,9 @@ export default class Presupuesto{
          if ( tiva == 2 ){
                return 0.0
          }   
+         if ( tiva == 3 ){
+            return 0.0
+         }   
     }
     tProyecto( tproy = 1 ){
          if ( tproy == 1 ){
@@ -18,7 +21,10 @@ export default class Presupuesto{
          }
          if ( tproy == 2 ){
                return parseFloat(this.monto)
-         }         
+         }
+         if ( tproy == 3 ){
+            return parseFloat(this.monto)
+         }
     }
     porcOverhead( toverh = 1 ){
         if (toverh == 1){
@@ -26,7 +32,10 @@ export default class Presupuesto{
         }
         if (toverh == 2){
             return parseFloat(this.monto) * .0871
-        }   
+        }
+        if (toverh == 3){
+            return parseFloat(this.monto) * 0.1
+        }
     } 
     porcEstimulo( testim = 1 ){
         if ( testim == 1 ){
@@ -34,7 +43,10 @@ export default class Presupuesto{
         }
         if ( testim == 2 ){
             return  0.0
-         }                  
+        }
+        if ( testim == 3 ){
+            return  0.0
+        }
     }
     tGastos( tgas = 1 ){
         if ( tgas == 1 ){ 
@@ -42,6 +54,9 @@ export default class Presupuesto{
         }
         if ( tgas == 2 ){ 
             return parseFloat(this.monto) - ( (parseFloat(this.monto) * .0871) )
+        }    
+        if ( tgas == 3 ){ 
+            return parseFloat(this.monto) - ( (parseFloat(this.monto) * 0.1) )
         }    
     }
 

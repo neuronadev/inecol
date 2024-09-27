@@ -7,6 +7,10 @@
     <% if @proyecto.tpoverhead == 2 %>
          <%= form.label :overhead, '8.71% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
     <% end %>
+
+    <% if @proyecto.tpoverhead == 3 %>
+         <%= form.label :overhead, '10% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+    <% end %>
   
   </div>
   <div class="md:w-2/5">

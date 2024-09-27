@@ -199,6 +199,9 @@ export default class extends Controller {
                 if ( data.tpovh == 2 ){
                       tpoyovh = 2
                 }
+                if ( data.tpovh == 3 ){
+                      tpoyovh = 3
+                }
                 var costo = document.getElementById('presupuesto_costo')
                 var presupuesto = new Presupuesto(py_clasifca, py_ovh, formato.unformat(costo.value))
 

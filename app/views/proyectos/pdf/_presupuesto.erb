@@ -35,6 +35,9 @@
                                            <% if @proyecto.tpoverhead == 2 %>
                                                    8.71% Overhead
                                            <% end %>
+                                           <% if @proyecto.tpoverhead == 3 %>
+                                                   10% Overhead
+                                           <% end %>
                                         </span> 
                                  </td>
                                  <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span><%=  @proyecto.presupuesto.moneda.simbolo %></span></td>
