@@ -18,8 +18,6 @@ class ProrrogasController < ApplicationController
               format.html { redirect_to preview_proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado) }
           else 
               flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores.'
-              puts "--------------------------"
-              puts flash.to_json
               format.html { render :new, status: :bad_request }
           end  
        end    

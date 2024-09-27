@@ -9,9 +9,7 @@ class Mtoejercido < ApplicationRecord
        if !mtoejercido.monto.nil?
            Summto.new(mtoejercido).validate
        end    
-
     end
-  
 end
 
 class Summto
@@ -35,8 +33,6 @@ class Summto
         end
         if suma > @mto_autorizado
               @ejercido.errors.add :base, :invalid, message:"La suma total del monto ejercido debe ser menor o igual al monto autorizado"
-      end
-    end
-
-   
+        end
+    end   
 end
