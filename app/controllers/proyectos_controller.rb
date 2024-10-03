@@ -3,7 +3,7 @@ require 'util/email.rb'
 class ProyectosController < ApplicationController
   layout :select_layout
 
-   def index
+  def index
       @total_notifica_rp = 0
 
       if current_usuario.cuenta.rol.clave == 'EL'
@@ -55,7 +55,7 @@ class ProyectosController < ApplicationController
                                                         end    
                                                 end        
                                             else
-                                                        if !@validados.include?(p) 
+                                                        if !@validados.include?(p)
                                                              @validados.push(p)    
                                                         end    
                                             end
@@ -71,6 +71,11 @@ class ProyectosController < ApplicationController
                                 @validados.push(p)
                             end     
                         end    
+                        if enlace_valor.enevento.clave == 'DICT'
+                            if !Firma.where(proyecto_id:p.id, evaluador_id:idevaluador).first.nil?
+                                @validados.push(p)
+                            end
+                        end
                      end
                     #if d.numregistro != 'DMOD'
                     #    @validados.push(d.proyecto)
@@ -90,12 +95,14 @@ class ProyectosController < ApplicationController
                                     @xfirmar.push(item)
                                 end
                         end
+                        
                     end
                end
       
         
       end
 
+     
   end
 
   def estadoactual enlace_act
