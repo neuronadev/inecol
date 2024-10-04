@@ -40,6 +40,10 @@ class ParticipantesController < ApplicationController
                else
                        flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                end   
+               
+               puts "---------------------------------------" 
+               puts @participante.errors.full_messages
+
                @inv_sum = @participante.pacademicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'INV').sum('pacademicos.porcentaje')
                @tec_sum = @participante.ptecnicos.includes(academico: [:tacademico, :persona]).where('tacademicos.clave':'TEC').sum('ptecnicos.porcentaje')
                @tot_porc = @inv_sum.to_f + @tec_sum.to_f   
@@ -63,6 +67,10 @@ class ParticipantesController < ApplicationController
                   else
                           flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                   end
+
+                  puts "---------------------------------------" 
+                  puts @participante.errors.full_message
+
                   @inv_sum = !params[:participante][:pacademicos_attributes].nil? ? SumParts.new(params[:participante][:pacademicos_attributes]).suma : 0.0
                   @tec_sum = !params[:participante][:ptecnicos_attributes].nil? ? SumParts.new(params[:participante][:ptecnicos_attributes]).suma : 0.0
                   @tot_porc = @inv_sum + @tec_sum
