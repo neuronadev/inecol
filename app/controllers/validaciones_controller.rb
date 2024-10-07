@@ -56,7 +56,7 @@ class ValidacionesController < ApplicationController
                         
                         format.html { redirect_to validacion_path(@validacion) } 
                   end   
-            else
+          else
                   flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
                   format.html { render :new, status: :bad_request }
           end

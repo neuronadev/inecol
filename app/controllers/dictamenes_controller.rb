@@ -8,6 +8,8 @@ class DictamenesController < ApplicationController
   def new
       @dictamen = Dictamen.new
       @proyecto = Proyecto.find(params[:idpy])
+      @fecha_inicial =  Date.today
+      @fecha_limite = lim_eval
   end
 
   def show
@@ -16,6 +18,7 @@ class DictamenesController < ApplicationController
   end
 
   def create
+        
         @dictamen = Dictamen.new(dictamen_params)
         @tvalidacion = Tvalidacion.find(params[:dictamen][:tvalidacion_id])
         @proyecto = Proyecto.find(params[:dictamen][:proyecto_id])
@@ -27,11 +30,12 @@ class DictamenesController < ApplicationController
         else
             tevento = Tevento.where(clave:'RECH').first
         end      
-        
+                
         respond_to do |format|
             if @dictamen.save
                     Enlace.create!(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                     Etapa.create!(proyecto_id:@proyecto.id, tevento_id:tevento.id)
+                    Solfirma.create(proyecto_id:@proyecto.id, fecha_dict:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
                     Util::Email.notificar(@proyecto.id, 'ENEVD') 
                     Util::Email.notificar(@proyecto.id, 'ENRPD') 
@@ -67,6 +71,22 @@ class DictamenesController < ApplicationController
       Thread.new  {
         `(sleep 15;cat #{path} | mail -a "Content-Type: text/html; charset=UTF-8" -s "Dictamen de Proyecto-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" sara.sanchez@inecol.mx,antonio.francisco@inecol.mx) &`
       }
+  end
+
+  def lim_eval
+    hoy = Date.today
+    dias_base = 3
+    dias_tmp = dias_base
+    limit_calc = rango(hoy, dias_tmp)
+    while limit_calc <= dias_base
+         dias_tmp += 1
+         limit_calc = rango(hoy, dias_tmp)
+    end
+    return hoy + dias_tmp
+  end
+
+  def rango(fini, dias)
+    ( (fini)..(fini + dias) ).select {|d| (1..5).include?(d.wday) }.size
   end
 
   private
