@@ -24,6 +24,7 @@ export default class extends Controller {
                       el.innerHTML = tmp_html
                       el = ''
                   }
+                  contextMenu.style.visibility = "hidden";
              }
          });
    }
@@ -53,7 +54,6 @@ export default class extends Controller {
 
               var fr_orden = document.getElementById('lista_items_ord')
               fr_orden.src = fr_orden.src
-              console.log(fr_orden.src)
               fr_orden.reload()
          }else{
                alert("El proyecto aún no esta firmado")
@@ -129,6 +129,29 @@ export default class extends Controller {
    ctxitem(event){
       contextMenu.style.visibility = "hidden"; 
       this.cambiarnm('')
+   }
+
+   async ctxmover(event){
+       let item_py = event.params.idpy
+
+       try {
+          await fetch('/proyectos/moveritem', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'Accept':'application/json', 'X-CSRF-Token':token },
+                  body: JSON.stringify({ idproy:item_py})
+          })
+          .then(response => response.json())
+          .then( json => { 
+                    var fr_el = document.getElementById('pycontent')
+                    fr_el.src = '/proyectos/'
+                    fr_el.reload()
+     
+                    var fr_orden = document.getElementById('lista_items_ord')
+                    fr_orden.src = fr_orden.src
+                    fr_orden.reload()
+               })
+       }catch (e) { alert(e) }
+
    }
 
 

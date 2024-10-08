@@ -6,10 +6,11 @@
             %> 
             <div id="context-menu">
                 <div id="itemedit" class="item" data-action="click->organizar#ctxitem">Editar nombre...</div>
+                
             </div>
 
             <div class="mb-2">
-                    <div id="item_<%= item.id %>" class="context font-semibold mb-1 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                    <div id="item_<%= item.proyecto.id %>" class="context font-semibold mb-1 cursor-pointer" data-action="click->organizar#abrirEnlace" data-iditem="<%= item.proyecto.id %>" data-enlace="<%= resumen_vistas_path(:id=>item.proyecto_id) %>" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                        <%= item.nombre %>
                     </div>   
                     <div>
@@ -93,6 +94,7 @@
             els_items.forEach(function (el_item) {
                     el_item.addEventListener("contextmenu", (e) => {
                         e.preventDefault();
+                        
                         let mouseX = e.clientX || e.touches[0].clientX;
                         let mouseY = e.clientY || e.touches[0].clientY;
                         let menuHeight = contextMenu.getBoundingClientRect().height;
@@ -100,29 +102,29 @@
                         let width = window.innerWidth;
                         let height = window.innerHeight;
                         if (width - mouseX <= 200) {
-                        contextMenu.style.borderRadius = "5px 0 5px 5px";
-                        contextMenu.style.left = width - menuWidth + "px";
-                        contextMenu.style.top = mouseY + "px";
-                        //right bottom
-                        if (height - mouseY <= 200) {
-                            contextMenu.style.top = mouseY - menuHeight + "px";
-                            contextMenu.style.borderRadius = "5px 5px 0 5px";
-                        }
-                        }
-                        //left
-                        else {
-                        contextMenu.style.borderRadius = "0 5px 5px 5px";
-                        contextMenu.style.left = mouseX + "px";
-                        contextMenu.style.top = mouseY + "px";
-                        //left bottom
-                        if (height - mouseY <= 200) {
-                            contextMenu.style.top = mouseY - menuHeight + "px";
-                            contextMenu.style.borderRadius = "5px 5px 5px 0";
-                        }
+                                contextMenu.style.borderRadius = "5px 0 5px 5px";
+                                contextMenu.style.left = width - menuWidth + "px";
+                                contextMenu.style.top = mouseY + "px";
+                                //right bottom
+                                if (height - mouseY <= 200) {
+                                    contextMenu.style.top = mouseY - menuHeight + "px";
+                                    contextMenu.style.borderRadius = "5px 5px 0 5px";
+                                }
+                        }else { //left
+                            contextMenu.style.borderRadius = "0 5px 5px 5px";
+                            contextMenu.style.left = mouseX + "px";
+                            contextMenu.style.top = mouseY + "px";
+                            //left bottom
+                            if (height - mouseY <= 200) {
+                                contextMenu.style.top = mouseY - menuHeight + "px";
+                                contextMenu.style.borderRadius = "5px 5px 5px 0";
+                            }
                         }
                         item_id = el_item.dataset.iditem
                         let item_ctx = document.getElementById("context-menu")
-                        item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>`
+                        item_ctx.innerHTML = `<div id="itemedit" class="item" data-action="click->organizar#ctxitem"><span>Editar nombre...</span></div>
+                                              <div id="itemmover" class="item" data-action="click->organizar#ctxmover" data-organizar-idpy-param=${item_id} ><span>Mover al inicio...</span></div>
+                                             `
                         if ( el != '' ){
                             item_ctx.innerHTML = `<div id="itemedit" class="item"><span class="italic text-zinc-400">Editar nombre...</span></div>`
                         }

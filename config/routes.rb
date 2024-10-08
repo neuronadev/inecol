@@ -29,6 +29,7 @@ Rails.application.routes.draw do
             post 'nombrecorto'
             post "cambiarnm"
             post "seguimiento"
+            post "moveritem"
         end
         member do
             get 'planconv'

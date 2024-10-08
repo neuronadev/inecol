@@ -23,6 +23,7 @@ class Proyecto < ApplicationRecord
     has_many :informes
     has_many :firmas
     has_one :solicitud
+    has_one :item
 
     has_one :mconvocatoria, dependent: :destroy, inverse_of: :proyecto
     accepts_nested_attributes_for :mconvocatoria, reject_if: :all_blank, allow_destroy: true

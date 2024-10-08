@@ -8,7 +8,7 @@ class ProyectosController < ApplicationController
 
       if current_usuario.cuenta.rol.clave == 'EL'
              #@proyectos = Proyecto.includes(etapas: :tevento).order(:created_at).where('teventos.clave':'REV')
-               @proyectos = Proyecto.includes(:dictamen).includes(etapas: :tevento).where('teventos.clave':'REV').order('dictamenes.numregistro')
+               @proyectos = Proyecto.includes(:dictamen).includes(etapas: :tevento).where('teventos.clave':'REV').where.not('dictamenes.numregistro':'DMOD').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'CAP'
                @proyectos = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).order(:created_at)
                @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
@@ -342,7 +342,8 @@ class ProyectosController < ApplicationController
       nombre = params[:nombre]
       id = params[:item]
 
-      item = Item.find(id)
+      #item = Item.find(id)
+      item = Item.where(proyecto_id: id).first
       item.nombre = nombre
       item.save
 
@@ -352,6 +353,26 @@ class ProyectosController < ApplicationController
            format.json { render json:r.to_json}
       end
   end
+
+  def moveritem
+      py = Proyecto.find(params[:idproy].to_i)
+      loop do
+          if py.modificatorio.nil?
+               break
+          end
+          py = Proyecto.find(py.raiz)
+      end 
+      item_py = Item.where(proyecto_id: py.id).first
+      item_py.delete
+
+      r = {'result':'ok'}
+      respond_to do |format|
+           format.json { render json:r.to_json}
+      end
+
+  end
+
+  
 
   private
   def proyecto_params
