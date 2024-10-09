@@ -30,10 +30,11 @@
              <% if @proyectos.any? %>
                     <%  @proyectos.each do |py| 
                             @resp = py.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio
+                            py_mod = py.modificatorio.nil? ? false : true  #py.dictamen.blank? ? false : py.dictamen.numregistro == 'DMOD' ? true : false
                             item = Item.where(proyecto_id:py.id).first 
-                            if item.blank?
+                            if item.blank? && !py_mod
                     %>
-                                         <%= render 'rw_enlace', py:py %>
+                                  <%= render 'rw_enlace', py:py %>
                             <% end %>   
                     <% end %>   
              <% else %>           
