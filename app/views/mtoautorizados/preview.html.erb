@@ -26,9 +26,16 @@
                 <% if @proyecto.prorrogas.any? %>
                        <% @proyecto.prorrogas.order(:created_at).each do |p| %> 
                            <tr>
-                               <td class="text-center p-1 text-red-500"> Prorroga </td>
-                                <td>  <%= p.fecha.strftime("%d-%m-%Y") %>  </td>
-                                <td>  <%= p.txtobs %>  </td>
+                               <td class="text-center p-1"> <%= @proyecto.mtoautorizado.finicio.strftime("%d-%m-%Y") %> </td>
+                               <td class="text-center p-1">
+                                   <div style="display:flex; flex-direction:column;"> 
+                                      <div><%= p.fecha.strftime("%d-%m-%Y") %></div>
+                                      <div class="text-center p-1 text-red-500"> Prorroga </div>  
+                                   </div>
+                               </td>
+                               <td class="text-center p-1">
+                                    <%= number_to_currency(@proyecto.mtoautorizado.monto, :unit=>@proyecto.presupuesto.moneda.currency + ' ') %> 
+                               </td>
                            </tr>
                        <% end %>         
                 <% end %>

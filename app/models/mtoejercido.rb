@@ -8,7 +8,35 @@ class Mtoejercido < ApplicationRecord
     validate  do |mtoejercido|
        if !mtoejercido.monto.nil?
            Summto.new(mtoejercido).validate
-       end    
+           Fechas.new(mtoejercido).validate
+       end  
+
+    end
+end
+
+class Fechas
+    def initialize(ejercido)
+        @fecha_ini = nil
+        @fecha_fin = nil
+        @ejercido = ejercido
+        @py = Proyecto.find(ejercido.proyecto_id)
+    end
+
+    def validate
+        @fecha_act = Time.new
+        if !@py.mtoautorizado.nil?
+            @fecha_ini = @py.mtoautorizado.finicio
+            @fecha_fin = @py.mtoautorizado.ftermino
+        end
+  
+       if @py.prorrogas.any?
+           @fecha_fin = @py.prorrogas.order(:created_at).last.fecha
+       end
+
+        if !(@ejercido.fecha >= @fecha_ini && @ejercido.fecha <= @fecha_fin)
+              @ejercido.errors.add :fecha, :invalid, message:"La fecha seleccionada esta fuera del rango de fecha de inicio y fecha de termino"
+        end
+
     end
 end
 

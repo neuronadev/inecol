@@ -31,7 +31,7 @@ class ProrrogasController < ApplicationController
 
   private 
   def prorroga_params
-      params.require(:prorroga).permit(:proyecto_id, :fecha, :txtobs)
+      params.require(:prorroga).permit(:proyecto_id, :fecha)
   end
 
 end

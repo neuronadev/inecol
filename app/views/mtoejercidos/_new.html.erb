@@ -26,7 +26,12 @@
                                     Fecha:
                                 </td>
                                 <td class="text-left p-2">
-                                     <%= f.date_field :fecha, class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700' %> 
+                                     <div style="display:flex; flex-direction:column;">
+                                         <div> <%= f.date_field :fecha, class:'p-1 border-b dark:bg-gray-800 dark:border-gray-700' %> </div>
+                                         <div style="margin-left:3px; font-size:12px; color:blue;"> 
+                                           La fecha debe estar entre <%= @fecha_ini.strftime("%d-%m-%Y") %> y <%= @fecha_fin.strftime("%d-%m-%Y") %>
+                                         </div>
+                                     </div>
                                 </td>
                             </tr>    
                             <tr class="bg-white ">
@@ -51,7 +56,6 @@
                             </tr> 
                             <tr> 
                                 <td colspan="2" class="text-right p-2">
-                                       <%= f.submit "Aceptar", class:"focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" %>
                                        <% if controller.action_name == 'edit' %>
                                                 <%= link_to 'Cancelar', proyecto_mtoejercido_path(@proyecto, @mtoejercido),
                                                        class:'text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
@@ -63,6 +67,7 @@
                                                     Cancelar
                                                 </button>
                                        <% end %>
+                                       <%= f.submit "Aceptar", class:"focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" %>
                                 </td>
                             </tr>
                    </tbody>         

@@ -8,7 +8,6 @@ class Prorroga < ApplicationRecord
 
   validate do |prorroga| 
       Valcampos.new(prorroga).vfecha
-      Valcampos.new(prorroga).vtxtobs
   end
 
 end

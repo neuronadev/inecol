@@ -28,7 +28,7 @@ export default class extends Controller {
     async seguimiento(event){
 
         if ( event.target.checked ){
-               if (window.confirm("El proyecto será habilitado para seguimiento por parte del responsable técnico. ¿Desea continuar?")) {
+               if (window.confirm("El proyecto será habilitado para seguimiento por parte del investigador(a) responsable. ¿Desea continuar?")) {
                        let r = await this.activarseg(event.params.idpy, true)
                        if(r.seguimiento){
                                alert("Proyecto activado correctamente.")
