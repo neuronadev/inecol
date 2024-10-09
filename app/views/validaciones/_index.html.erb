@@ -31,7 +31,6 @@
         </thead>
         <tbody>
            <% if @proyecto.enlaces.last.enevento.clave == 'DICT' %>
-                    <%  puts "--------------------------------------  rrrrrrrrrrrrrrr" %> 
                     <%= render 'validaciones/dict' %>
            <% elsif @proyecto.enlaces.last.enevento.clave == 'FIR' %>
                     <%= render 'validaciones/firmado' %>

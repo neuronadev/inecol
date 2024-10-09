@@ -23,7 +23,7 @@
                                 <%  if @proyecto.validaciones.any? %>
                                         <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.nil? %> 
                                                 <% if !@proyecto.validaciones.where(evaluador_id:e.id).last.txtval.nil? %>  
-                                                        Comentarios: <%=  @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
+                                                        <%= render 'validaciones/comentarios', txt: @proyecto.validaciones.where(evaluador_id:e.id).last.txtval %>
                                                 <% end %>       
                                         <% end %>
                                 <% end %>
