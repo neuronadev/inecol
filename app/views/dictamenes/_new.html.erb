@@ -1,6 +1,11 @@
 <div  data-controller="inputmail">
 <%= form_with(model: @dictamen) do |form| %>
      <%= form.hidden_field :proyecto_id, value:@proyecto.id %>
+
+     <input type="hidden" name="fsol" value="<%= @fecha_inicial %>">
+     <input type="hidden" name="flim" value="<%= @fecha_limite %>">
+
+     
      <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5 font-semibold">
                          <%= form.label :tvalidacion_id, 'Tipo evaluación:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
@@ -64,25 +69,7 @@
                          <%= form.rich_text_area :txtdictamen, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>
                     </div>
      </div>
-     <div class="md_flex ">
-
-                  <div class="md:flex md:items-center mb-3"> 
-                    <div class="md:w-1/5 font-semibold">
-                              <%= label_tag 'Fecha dictamen:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
-                    </div>
-                    <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
-                              <%= date_field_tag 'fsol', nil, class: '', value:@fecha_inicial %>
-                    </div>
-                 </div>    
-                 <div class="md:flex md:items-center mb-3"> 
-                    <div class="md:w-1/5 font-semibold">
-                              <%= label_tag 'Fecha límite para firmar:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
-                    </div>
-                    <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
-                              <%= date_field_tag 'flim', nil, class: '', value:@fecha_limite %>
-                    </div>
-                 </div>    
-    </div>
+     
      <!--
      <div class="md:flex md:items-center mb-3 font-semibold">
                     <div class="md:w-1/5">                   

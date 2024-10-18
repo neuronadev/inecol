@@ -1,6 +1,7 @@
- <div class="text-blue-700 flex">
+ <div class="text-blue-700" style="display: flex;">
      <%  if proyecto.enlaces.any? %>
-                <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+               <div style="display:flex; flex-direction:row; width:100%;">
+                    <div style="display: flex; align-items: center;">    
                         <% if proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
                                 <span class="flex w-2.5 h-2.5 bg-green-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% elsif proyecto.enlaces.order(:created_at).last.enevento.clave == 'FIR' %>
@@ -10,24 +11,27 @@
                         <% else %>
                                 <span class="flex w-2.5 h-2.5 bg-orange-600 rounded-full mr-1.5 flex-shrink-0"></span>
                         <% end %>   
-                        
-                        <% if proyecto.modificatorio == 'SI' %>
-                               <% if proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
-                                           Evaluado
-                               <% else %>
-                                           <%= proyecto.enlaces.order(:created_at).last.enevento.nomenevento %> 
-                               <% end %>
-                        <% else %>        
-                                 <%= proyecto.enlaces.order(:created_at).last.enevento.nomenevento %>
-                        <% end %>
-                         
-                            
-
-                        <% if proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
-                               <%= proyecto.dictamen.created_at.strftime("%d-%m-%Y %H:%M ")  %>
-                        <% end %>
-
-                </span>
+                    </div>   
+                    <div style="display:flex; flex-direction:column; width:100%;">
+                       <div style="display:flex; justify-content: center;"> 
+                                <% if proyecto.modificatorio == 'SI' %>
+                                <% if proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
+                                                Evaluado
+                                <% else %>
+                                                <%= proyecto.enlaces.order(:created_at).last.enevento.nomenevento %> 
+                                <% end %>
+                                <% else %>        
+                                        <%= proyecto.enlaces.order(:created_at).last.enevento.nomenevento %>
+                                <% end %>
+                       </div>  
+                       <div style="display:flex; justify-content: center;">     
+                                <% if proyecto.enlaces.order(:created_at).last.enevento.clave == 'DICT' %>
+                                <%= proyecto.dictamen.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                                <% end %>
+                       </div>
+                    </div>  
+                </div>
+                
      <% else %>
                  <% if proyecto.modificatorio == 'SI' && current_usuario.cuenta.rol.clave == 'EL' %>
                          <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">

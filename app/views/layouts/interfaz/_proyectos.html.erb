@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-gray-100" data-controller="menuimage" >
-  <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
+<div class="min-h-screen bg-gray-100" data-controller="menuimage" style="display: flex;">
+  <div class="sidebar min-h-screen  border-r ">
     <div class="flex h-screen flex-col justify-between pt-2 pb-6">
       <div>
         <div class="w-max p-1">
@@ -15,7 +15,8 @@
         <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
           <li class="min-w-max" data-action='click->menup#onClickItem'>
 
-              <%= link_to proyectos_path, class:"menupactivo relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white",
+              <%= link_to proyectos_path, class:"menupactivo relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 py-3 text-white", 
+                   style:'padding-left: 1rem; padding-right: 4rem',
                    data:{turbo_frame: 'pycontent'} do %> 
                         <%= inline_svg_tag 'svg/dashboard.svg' %>
                         <span class="group-hover:text-gray-700">Inicio</span>
@@ -24,7 +25,8 @@
           </li>
           
           <li class="min-w-max" data-action='click->menup#onClickItem'>
-             <%= link_to new_proyecto_path, class:"group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600",
+             <%= link_to new_proyecto_path, class:"group flex items-center space-x-4 rounded-full py-3 text-gray-600",
+                  style:'padding-left: 1rem; padding-right: 4rem',
                   data:{turbo_frame: 'pycontent'} do %> 
                       <%= inline_svg_tag 'svg/nuevoproy.svg' %>
                       <span class="group-hover:text-gray-700">Nuevo</span>
