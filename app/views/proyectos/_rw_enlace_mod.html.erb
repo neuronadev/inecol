@@ -19,7 +19,12 @@
                              
                   </th>
                   <td class="p-2" style="text-align: center;">
-                        <%= tmp_py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                       <% if tmp_py.etapas.any? %>   
+                          <% if tmp_py.etapas.includes(:tevento).where('teventos.clave':'REV').any? %>   
+                             <%= tmp_py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y %H:%M ")  %>
+                           <% end %>  
+                        <% end %>  
+
                   </td>
                   <td class="p-2" style="text-align: center;">
                         <%= @resp %>
@@ -30,7 +35,10 @@
                   </td>
                   <td class="p-2" style="text-align: center;">
                         <% if tmp_py.etapas.last.tevento.clave == 'CAP' %> 
+                          <!--
                               <%= link_to 'Editar', resumen_vistas_path(:id=>tmp_py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+                          -->
+                          <%= link_to 'Ver', resumen_vistas_path(:id=>tmp_py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline",  data:{turbo_frame: 'pycontent'}  %>     
                         <% else %>    
                               <%= link_to 'Ver', resumen_vistas_path(:id=>tmp_py.id), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline",  data:{turbo_frame: 'pycontent'}  %> 
                         <% end %>                            
