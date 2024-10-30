@@ -36,10 +36,12 @@ export default class extends Controller {
      inputField.focus()
   }
 
+
+  
   addtag(event){
      let value = event.target.value
 
-      if (event.key === 'Enter'){
+      if (event.key === 'Enter' || event.type == 'focusout'){
            if( value.trim().length > 0 ){
                     if ( this.validaemail(event.target.value) ){
                               tags.push(event.target.value)

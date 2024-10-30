@@ -86,11 +86,12 @@
                         <tr>
                    <% end %>
                    -->
-                   <tr class="bg-gray-300">
-                        <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Concurrente </td>
-                   </tr>
-                   <% if @proyecto.recurso.omitir.nil? %> 
+                   
+                   <% if !@proyecto.recurso.omitir.nil? %> 
                        <% if !@proyecto.recurso.concurrentes.blank? %> 
+                              <tr class="bg-gray-300">
+                                   <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Concurrente </td>
+                              </tr> 
                               <tr>
                                    <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
                                         
@@ -98,19 +99,29 @@
                                         
                                    </td>
                               <tr>
-                       <% else %>            
+                       <% else %>  
+                         <!-- 
+                              <tr class="bg-gray-300">
+                                   <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Concurrente </td>
+                              </tr>        
                               <tr>
                                     <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
                                         <span class="italic">Sin recursos</span>
                                     </td>
                               <tr>
+                         -->          
                        <% end %>            
                    <% else %>
+                        <!--
+                          <tr class="bg-gray-300">
+                                   <td colspan="2" class="font-semibold p-1 text-center border-b border-slate-300" style='width:300px;'>Monto Concurrente </td>
+                              </tr> 
                           <tr>
                            <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
                                  <span class="italic">Sin recursos</span>
                            </td>
                         <tr>
+                       -->  
                    <% end %>
 
          </tbody>   
