@@ -2,8 +2,8 @@ class Mtoejercido < ApplicationRecord
     self.table_name='py.mtoejercidos'
     belongs_to :proyecto
 
-    validates :fecha, presence: true
-    validates :monto, presence: true
+    validates :fecha, presence: {message:"-debe seleccionar una fecha"}
+    validates :monto, presence: {message:"-el monto no puede estar vacio"}
   
     validate  do |mtoejercido|
        if !mtoejercido.monto.nil?
@@ -33,10 +33,13 @@ class Fechas
            @fecha_fin = @py.prorrogas.order(:created_at).last.fecha
        end
 
-        if !(@ejercido.fecha >= @fecha_ini && @ejercido.fecha <= @fecha_fin)
-              @ejercido.errors.add :fecha, :invalid, message:"La fecha seleccionada esta fuera del rango de fecha de inicio y fecha de termino"
-        end
-
+       if !@ejercido.fecha.nil? 
+            if !(@ejercido.fecha >= @fecha_ini && @ejercido.fecha <= @fecha_fin)
+                    @ejercido.errors.add :fecha, :invalid, message:"La fecha seleccionada esta fuera del rango de fecha de inicio y fecha de termino"
+            end
+       else
+            @ejercido.errors.add :fecha, :invalid, message:"Debe seleccionar una fecha"    
+       end
     end
 end
 
