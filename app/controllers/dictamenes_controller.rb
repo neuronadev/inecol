@@ -1,4 +1,5 @@
 require 'util/email.rb'
+require 'util/dato.rb'
 
 class DictamenesController < ApplicationController
 
@@ -10,11 +11,25 @@ class DictamenesController < ApplicationController
       @proyecto = Proyecto.find(params[:idpy])
       @fecha_inicial =  Date.today
       @fecha_limite = lim_eval
+
+      if @proyecto.modificatorio == 'SI'
+           @numreg =  Util::Dato.numregmod @proyecto.id
+      else
+           @numreg = nil
+      end  
+
   end
 
   def show
       @dictamen = Dictamen.find(params[:id])
       @proyecto = Proyecto.find(@dictamen.proyecto_id)
+
+      if @proyecto.modificatorio == 'SI'
+          @numreg =  Util::Dato.numregmod @proyecto.id
+      else
+          @numreg = nil
+      end  
+
   end
 
   def create

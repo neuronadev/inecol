@@ -1,4 +1,5 @@
 require 'util/email.rb'
+require 'util/dato.rb'
 
 class ValidacionesController < ApplicationController
   def index
@@ -12,6 +13,13 @@ class ValidacionesController < ApplicationController
       @tvalidacion = params[:tval]
       @fecha_inicial =  Date.today
       @fecha_limite = lim_eval
+
+      if @proyecto.modificatorio == 'SI'
+           @numreg =  Util::Dato.numregmod @proyecto.id
+      else
+           @numreg = nil
+      end  
+
   end
 
   def show
