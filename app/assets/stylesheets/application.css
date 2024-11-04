@@ -14,7 +14,7 @@
  *= require_self
  */
  @import '@kanety/stimulus-contextmenu';
- 
+
  
  .field_with_errors {
      color: #b22;

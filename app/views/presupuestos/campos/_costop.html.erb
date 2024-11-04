@@ -1,0 +1,26 @@
+<div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
+      <div class="w-4/12">
+          <%= form.label :costo, 'Costo del Proyecto (sin IVA):', class:'block font-semibold  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+      </div>
+      <div class="w-5/12" style="margin-left: 1px;">   
+         <%= form.text_field :costo, 
+               class: 'p-3',
+               style:"outline: none; 
+                      font-weight: bold;
+                      height: 16px; 
+                      border-bottom-width: 1px; 
+                      border-top: 0; 
+                      border-left: 0; 
+                      border-right: 0; 
+                      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); 
+                      border-radius: 0.0rem;",
+               autocomplete: 'off',
+               placeholder: 'Capture el monto de su proyecto sin IVA',
+               data: {action:'blur->presup-sol#campoformat
+                                          focus->presup-sol#campounformat  
+                                          keydown->utils#onlynumbers 
+                                          keydown->utils#keyEnter 
+                                          keyup->presup-sol#calcularGastos'}
+          %>
+      </div>
+</div>  

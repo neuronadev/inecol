@@ -1,5 +1,5 @@
 <div class="md:flex md:items-center mb-1 w-10/12">
-       <div class="p-2" id="wraper_caps" data-controller="caps">
+       <div class="p-2 w-full" id="wraper_caps" data-controller="caps">
               <template data-nested-form-sol-target="template" >
                      <%= form.fields_for :solicitados, Solicitado.new, child_index:'NEW_RECORD' do |sol_fields|%>
                           <%= render 'presupuestos/sol_form', f: sol_fields %>

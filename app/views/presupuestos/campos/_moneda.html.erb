@@ -1,0 +1,13 @@
+<div class="grid grid-cols-2 gap-4" style="display: flex;">
+      <div class="w-4/12">
+            <%= form.label :moneda_id, 'Moneda:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+      </div>
+      <div class="w-5/12" style="margin-left: 1px;">   
+           <%= form.select :moneda_id,
+                   Moneda.all.map{|item| [(item.nommoneda + ' (' + item.simbolo + ')' ) , item.id]},
+                   {prompt: '-- Seleccione --'},
+                   {class:'bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',
+                   'data-action':'change->presup-sol#TipoMoneda'}
+           %>    
+      </div>
+</div>  

@@ -1,0 +1,31 @@
+<div class="grid grid-cols-2 gap-4  mt-1" style="display: flex;">
+      <div class="w-4/12">
+          <% if @proyecto.tpoverhead.nil? || @proyecto.tpoverhead == 1 %>
+                <%= form.label :overhead, '20% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+          <% end %>
+
+          <% if @proyecto.tpoverhead == 2 %>
+                <%= form.label :overhead, '8.71% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+          <% end %>
+
+          <% if @proyecto.tpoverhead == 3 %>
+                <%= form.label :overhead, '10% Overhead:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+          <% end %>
+      </div>
+      <div class="w-5/12" style="margin-left: 1px;">   
+         <%= form.text_field :overhead,  
+               readonly:true,
+               class: 'p-3',
+               style:"outline: none; 
+                      height: 16px; 
+                      border-bottom-width: 1px; 
+                      border-color: #dbdbdb;
+                      border-top: 0; 
+                      border-left: 0; 
+                      border-right: 0; 
+                      box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1); 
+                      border-radius: 0.0rem;",
+               autocomplete: 'off'
+          %>
+      </div>
+</div>  

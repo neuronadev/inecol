@@ -1,4 +1,4 @@
-<div class="nested-form-wrapper flex p-1" data-new-record="<%= f.object.new_record? %>" >
+<div class="nested-form-wrapper flex p-1 w-full" data-new-record="<%= f.object.new_record? %>" >
   <div class="w-4/6 flex justify-center">
     <%= f.select :capitulo_id,
                          Capitulo.all.map{|item| [item.nomcapitulo, item.id]},
@@ -10,8 +10,9 @@
   </div>
   <div class="w-3/12 flex justify-center">
     <%= f.text_field :monto, 
-                   class:'capmonto font-semibold appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
-                    data:{action:'keydown->utils#keyEnter blur->presup-sol#itemformat focus->presup-sol#campounformat keydown->utils#onlynumbers keyup->presup-sol#sumaMontoCaps'}
+                    class:'capmonto font-semibold appearance-none border-1 border-gray-200 rounded w-10/12 py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                    data:{action:'keydown->utils#keyEnter blur->presup-sol#itemformat focus->presup-sol#campounformat keydown->utils#onlynumbers keyup->presup-sol#sumaMontoCaps'},
+                    autocomplete: 'off'
                    %>
   </div>
   <div class="w-2/12 flex justify-center items-center">

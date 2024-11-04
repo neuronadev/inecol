@@ -93,6 +93,7 @@ export default class extends Controller {
         document.getElementById('presupuesto_overhead').value = 0.0
         document.getElementById('presupuesto_estimulo').value = 0.0
         document.getElementById('presupuesto_tgastos').value = 0.0
+        document.getElementById('ptgastos').value = 0.0
     }
 
     setTgasto(event){
@@ -231,6 +232,7 @@ export default class extends Controller {
                 document.getElementById('presupuesto_overhead').value = formato.moneda(porcOverhead, moneda_data.locale, moneda_data.currency)
                 document.getElementById('presupuesto_estimulo').value = formato.moneda(porcEstimulo, moneda_data.locale, moneda_data.currency)
                 document.getElementById('presupuesto_tgastos').value = formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)
+                document.getElementById('ptgastos').innerHTML = ` Total para Gastos ${formato.moneda(tGastos, moneda_data.locale, moneda_data.currency)}`
            })
       
  
