@@ -2,7 +2,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Nombre del proyecto: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5" data-controller="upsf">
                     <%= @proyecto.nombre %>
           </div>
      </div>  
@@ -10,7 +10,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Institución, Gobierno o Empresa: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5" data-controller="upsf">
                     <%= @proyecto.fuente.nomfuente %>
           </div>
      </div>  
@@ -18,7 +18,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Responsable: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5" data-controller="upsf">
                     <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>
           </div>
      </div>  
@@ -27,7 +27,7 @@
                <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Número de registro: </span>
                </div>
-               <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+               <div id="div_file" class="md:w-2/5" data-controller="upsf">
                     <%= @numreg %>
                </div>
           </div>   
@@ -53,7 +53,7 @@
                     <div class="md:w-1/5 font-semibold">
                               <%= label_tag 'Fecha solicitud:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
                     </div>
-                    <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+                    <div id="div_file" class="md:w-2/5" data-controller="upsf">
                               <%= date_field_tag 'fsol', nil, class: '', value:@fecha_inicial %>
                     </div>
                  </div>    
@@ -61,7 +61,7 @@
                     <div class="md:w-1/5 font-semibold">
                               <%= label_tag 'Fecha límite:',nil, class: 'block  md:text-right mb-1 md:mb-0 pr-4' %>
                     </div>
-                    <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+                    <div id="div_file" class="md:w-2/5" data-controller="upsf">
                               <%= date_field_tag 'flim', nil, class: '', value:@fecha_limite %>
                     </div>
                  </div>    
@@ -75,12 +75,12 @@
                  </div>
           <% end %>
 
-          <div class="md:flex md:items-center mb-3 font-semibold"> 
+          <div class="md:flex md:items-center mb-3"> 
                     <div class="md:w-1/5 ">
-                         <%= form.label :txtval, 'Comentarios:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                         <%= form.label :txtval, 'Comentarios:', class:'block font-semibold md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                     </div>
                     <div class="md:w-4/5" data-controller="trix">
-                         <%= form.rich_text_area :txtval, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>
+                         <%= form.rich_text_area :txtval, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>
                     </div>
           </div>
 

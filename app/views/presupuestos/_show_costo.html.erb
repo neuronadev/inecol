@@ -1,0 +1,70 @@
+     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="w-1/2 p-1">
+                <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
+                      <div class="w-5/12" style="display:flex; justify-content: end;">
+                         Moneda:
+                      </div>
+                      <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                           <%= @presupuesto.moneda.nommoneda %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
+                      <div class="w-5/12" style="display:column;">
+                           <div class="font-semibold" style="display: flex; justify-content: end;">Costo del Proyecto</div>
+                           <div class="font-semibold" style="display: flex; justify-content: end;">(SIN IVA):</div>
+                      </div>
+                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px;">
+                           <%= number_to_currency(@presupuesto.costo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ' ) %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+                      <div class="w-5/12" style="display:flex; justify-content: end;">
+                            <% if @presupuesto.proyecto.tpoverhead.nil? || @presupuesto.proyecto.tpoverhead == 1 %>
+                                20% Overhead:
+                            <% end %>    
+                            <% if @presupuesto.proyecto.tpoverhead == 2 %>
+                                    8.71% Overhead:
+                            <% end %>    
+                            <% if @presupuesto.proyecto.tpoverhead == 3 %>
+                                    10% Overhead:
+                            <% end %> 
+                      </div>
+                      <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                            <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+                      <div class="w-5/12" style="display:flex; justify-content: end;">
+                           10% Estímulo:
+                      </div>
+                      <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                           <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+                      <div class="w-5/12" style="display:flex; justify-content: end;">
+                           IVA:
+                      </div>
+                      <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                           <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
+                      <div class="w-5/12 font-semibold" style="display:flex; justify-content: end; color: #0072eb;">
+                           Total para GASTOS:
+                      </div>
+                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px; color: #0072eb;">
+                           <%= number_to_currency(@presupuesto.tgastos, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+                      </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
+                      <div class="w-5/12 font-semibold" style="display:flex; justify-content: end;">
+                           TOTAL PROYECTO:
+                      </div>
+                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px;">
+                          <%= number_to_currency(@presupuesto.tproyecto, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+                      </div>
+                </div>
+                
+        </div>
+     </div>   
