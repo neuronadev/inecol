@@ -9,8 +9,8 @@
       </div>       
       <div class="w-3/5" style="display: flex; flex-direction:column;">
             <% @presupuesto.solicitados.each do |s|  %>
-                    <div class="w-full p-1" style="display: flex; border-bottom: solid 1px #d5d5d5;">    
-                        <div class="w-3/5" style="display: flex; align-items: center; justify-content: center;">
+                    <div class="w-full p-.5" style="display: flex; border-bottom: solid 1px #d5d5d5;">    
+                        <div class="w-3/5 p-1" style="display: flex; align-items: center; justify-content: start;">
                                 <%= s.capitulo.nomcapitulo %>
                         </div>
                         <div class="w-2/5" style="display: flex; align-items: center; justify-content: center;">

@@ -192,8 +192,17 @@ export default class extends Controller {
             body: JSON.stringify({ proyecto_id:proyecto.value})
         }).then(response => response.json())
           .then(data => {
-                
+
                 var tpoyovh
+                
+                var impuesto = {
+                       overhead: data.impuesto.porc_overhead,
+                       estimulo: data.impuesto.porc_estimulo,
+                       iva: data.impuesto.porc_iva
+                }
+
+                console.log(impuesto)
+
                 if ( data.tpovh == null || data.tpovh == 1 ){
                       tpoyovh = 1
                 }
@@ -215,11 +224,11 @@ export default class extends Controller {
             
 
                 if (clasifica.includes(py_clasifca) && Boolean(py_ovh) ){
-                    iva = presupuesto.iva(tpoyovh)
-                    tProyecto = presupuesto.tProyecto(tpoyovh)
-                    porcOverhead = presupuesto.porcOverhead(tpoyovh)
-                    porcEstimulo = presupuesto.porcEstimulo(tpoyovh)
-                    tGastos = presupuesto.tGastos(tpoyovh)
+                    iva = presupuesto.iva(tpoyovh, impuesto)
+                    tProyecto = presupuesto.tProyecto(tpoyovh, impuesto)
+                    porcOverhead = presupuesto.porcOverhead(tpoyovh, impuesto)
+                    porcEstimulo = presupuesto.porcEstimulo(tpoyovh, impuesto)
+                    tGastos = presupuesto.tGastos(tpoyovh, impuesto)
                 }
                 if (clasifica.includes(py_clasifca) && !Boolean(py_ovh)) {
                     tProyecto = costo.value

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  porc_overhead: 9.99
+  porc_estimulo: 9.99
+  clave: MyString
+
+two:
+  porc_overhead: 9.99
+  porc_estimulo: 9.99
+  clave: MyString

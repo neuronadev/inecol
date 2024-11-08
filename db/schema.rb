@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_07_184401) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_07_193245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -282,6 +282,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_184401) do
     t.index ["lugar_id"], name: "index_py.fuentes_on_lugar_id"
     t.index ["nacionalidad_id"], name: "index_py.fuentes_on_nacionalidad_id"
     t.index ["proyecto_id"], name: "index_py.fuentes_on_proyecto_id"
+  end
+
+  create_table "impuestos", force: :cascade do |t|
+    t.decimal "porc_overhead", precision: 10, scale: 5
+    t.decimal "porc_estimulo", precision: 10, scale: 5
+    t.string "clave", limit: 3
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "porc_iva", precision: 10, scale: 5
   end
 
   create_table "informes", force: :cascade do |t|

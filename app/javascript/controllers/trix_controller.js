@@ -19,6 +19,7 @@ export default class extends Controller {
 
     this.initTrix()
     this.reloadOriginalContent()
+
     UNUSED_TOOLBAR_CLASSES.forEach((cls) => {
       document.querySelector(cls).remove();
     });
@@ -41,6 +42,22 @@ export default class extends Controller {
       },
     };
 
+    Trix.config.textAttributes.green = {
+      style: { backgroundColor: "#09FF09" },
+      inheritable: true,
+      parser: function (element) {
+        return style.backgroundColor === "#09FF09";
+      },
+    };
+
+    Trix.config.textAttributes.blue = {
+      style: { backgroundColor: "#00FFFF" },
+      inheritable: true,
+      parser: function (element) {
+        return style.backgroundColor === "#00FFFF";
+      },
+    };
+
     const toolbar = this.editorTarget.previousSibling
     const sibling1 = toolbar.querySelector(".trix-button--icon-italic")
     const sibling2 = toolbar.querySelector(".trix-button--icon-backgroundColor")
@@ -51,40 +68,20 @@ export default class extends Controller {
                                                  </svg>
                              </span>
                               </button>`
-    const yellowButtonHTML = `<button type="button" class="trix-button" data-trix-attribute="yellow" title="Color">Y</button>`
+    const yellowButtonHTML = `<button type="button" class="trix-button trix-button--icon-yellow" data-trix-attribute="yellow" title="Color">
+                                    <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#FDCB58" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"></path></svg>
+                              </button>`
+    const greenButtonHTML = `<button type="button" class="trix-button trix-button--icon-green" data-trix-attribute="green" title="Color">
+                                   <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#78B159" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"></path></svg>
+                            </button>`
+    const blueButtonHTML = `<button type="button" class="trix-button trix-button--icon-blue" data-trix-attribute="blue" title="Color">
+                               <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#55ACEE" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"></path></svg>
+                            </button>`                            
 
     sibling1.insertAdjacentHTML("afterend", underButtonHTML)
+    sibling2.insertAdjacentHTML("afterend", blueButtonHTML)
+    sibling2.insertAdjacentHTML("afterend", greenButtonHTML)
     sibling2.insertAdjacentHTML("afterend", yellowButtonHTML)
-
-
-/*
-    const toolbar = this.editorTarget.previousSibling
-    const h2ButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="heading" title="Subheading">H1</button>'
-    const h3ButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="subHeading" title="Subheading">H3</button>'
-
-    const once = {
-            once: true
-    }
-
-    addEventListener("trix-initialize", function(event) {
-
-      Trix.config.textAttributes.heading = {
-          tagName: "h1",
-          style: { textDecoration: "heading" },
-          inheritable: true,
-          parser: function (element) {
-            var style = window.getComputedStyle(element);
-            return style.textDecoration === "heading";
-          },
-      }
-
-      const sibling1 = toolbar.querySelector(".trix-button--icon-increase-nesting-level")
-      sibling1.insertAdjacentHTML("afterend", h2ButtonHTML)
-      const sibling2 = toolbar.querySelector("[data-trix-attribute='heading']")
-      sibling2.insertAdjacentHTML("afterend", h3ButtonHTML)
-    }, once)
-
-*/
 
     
   }

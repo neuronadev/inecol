@@ -4,8 +4,9 @@ export default class Presupuesto{
           this.ovh = ovh
           this.monto = monto
     }
-    iva( tiva = 1 ){
-         if ( tiva == 1 ){
+    iva( tiva = 1, impuesto ){
+         return parseFloat(this.monto) * parseFloat((impuesto.iva/100))
+         /*if ( tiva == 1 ){
                return parseFloat(this.monto) * .16
          }
          if ( tiva == 2 ){
@@ -13,10 +14,12 @@ export default class Presupuesto{
          }   
          if ( tiva == 3 ){
             return 0.0
-         }   
+         } */  
     }
-    tProyecto( tproy = 1 ){
-         if ( tproy == 1 ){
+    tProyecto( tproy = 1, impuesto ){
+           return parseFloat(this.monto) + parseFloat(this.monto) * parseFloat((impuesto.iva/100))
+
+        /* if ( tproy == 1 ){
                   return parseFloat(this.monto) + parseFloat(this.monto) * .16
          }
          if ( tproy == 2 ){
@@ -24,10 +27,11 @@ export default class Presupuesto{
          }
          if ( tproy == 3 ){
             return parseFloat(this.monto)
-         }
+         }*/
     }
-    porcOverhead( toverh = 1 ){
-        if (toverh == 1){
+    porcOverhead( toverh = 1, impuesto ){
+        return parseFloat(this.monto) * parseFloat((impuesto.overhead/100))
+        /*if (toverh == 1){
               return parseFloat(this.monto) * .20
         }
         if (toverh == 2){
@@ -35,10 +39,11 @@ export default class Presupuesto{
         }
         if (toverh == 3){
             return parseFloat(this.monto) * 0.1
-        }
+        }*/
     } 
-    porcEstimulo( testim = 1 ){
-        if ( testim == 1 ){
+    porcEstimulo( testim = 1, impuesto ){
+         return  parseFloat(this.monto) * parseFloat((impuesto.estimulo/100))
+        /*if ( testim == 1 ){
                  return  parseFloat(this.monto) * .10
         }
         if ( testim == 2 ){
@@ -46,10 +51,11 @@ export default class Presupuesto{
         }
         if ( testim == 3 ){
             return  0.0
-        }
+        }*/
     }
-    tGastos( tgas = 1 ){
-        if ( tgas == 1 ){ 
+    tGastos( tgas = 1, impuesto ){
+         return parseFloat(this.monto) - ( ( parseFloat(this.monto) * (impuesto.overhead/100) ) + ( parseFloat(this.monto) * (impuesto.estimulo/100) ) )
+        /*if ( tgas == 1 ){ 
             return parseFloat(this.monto) - ( (parseFloat(this.monto) * .20) + (parseFloat(this.monto) * .10) )
         }
         if ( tgas == 2 ){ 
@@ -57,7 +63,7 @@ export default class Presupuesto{
         }    
         if ( tgas == 3 ){ 
             return parseFloat(this.monto) - ( (parseFloat(this.monto) * 0.1) )
-        }    
+        } */   
     }
 
 }

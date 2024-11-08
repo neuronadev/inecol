@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   post 'documentos/removatach'
   post 'monedas/data'
 
-
   devise_for :usuarios
   resources :proyectos do
         collection do
@@ -53,6 +52,10 @@ Rails.application.routes.draw do
         resources :prorrogas
         resources :avances
         resources :informes
+        
+        resources :presupuestos do
+               resources :impuestos
+        end
   end
 resources :mtoautorizados
 resources :mtoejercidos

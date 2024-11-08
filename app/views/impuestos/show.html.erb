@@ -1,0 +1,35 @@
+<turbo-frame id="porc_impuesto">
+    <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+          <div class="w-5/12" style="display:flex; justify-content: end;">
+              <% if @impuesto.porc_overhead % 1 == 0 %>
+                      <%= sprintf("%d", @impuesto.porc_overhead) %>% Overhead:
+              <% else %>
+                      <%= sprintf("%.2f", @impuesto.porc_overhead) %>% Overhead:
+              <% end %>
+                
+          </div>
+          <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                <%= number_to_currency(@presupuesto.overhead, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+          </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+          <div class="w-5/12" style="display:flex; justify-content: end;">
+              <% if @impuesto.porc_estimulo % 1 == 0 %>
+                      <%= sprintf("%d", @impuesto.porc_estimulo) %>% Estímulo:
+              <% else %>
+                      <%= sprintf("%.2f", @impuesto.porc_estimulo) %>% Estímulo:
+              <% end %>
+          </div>
+          <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+          </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-3" style=" <%= @proyecto.overhead ? 'display:flex;' : 'display:none;' %>  ">
+          <div class="w-5/12" style="display:flex; justify-content: end;">
+                IVA:
+          </div>
+          <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+                <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
+          </div>
+    </div>
+</turbo-frame>

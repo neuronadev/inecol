@@ -7,6 +7,13 @@ class PresupuestosController < ApplicationController
       @proyecto = @presupuesto.proyecto
       @sum_caps = @presupuesto.solicitados.sum(:monto)
       @moneda = @presupuesto.moneda
+
+      if @proyecto.tpoverhead.nil?
+            @impuesto = Impuesto.find(1)
+      else
+           @impuesto = Impuesto.find(@proyecto.tpoverhead)
+      end
+
   end
 
   def new
@@ -151,8 +158,14 @@ class PresupuestosController < ApplicationController
   def pytoverhead
         @proyecto = Proyecto.find(params[:proyecto_id])
         tpovh = @proyecto.tpoverhead
-        
-        data = {tpovh:tpovh}
+ 
+        if tpovh.nil?
+            tpovh = 1
+        end
+
+        prm_impuesto = Impuesto.find(tpovh)
+
+        data = {tpovh:tpovh, impuesto:prm_impuesto}
         
         respond_to do |format|
             format.json { render json:data.to_json }
