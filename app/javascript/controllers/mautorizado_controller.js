@@ -12,10 +12,18 @@ export default class extends Controller {
       target.reload()
   }
 
+  editar(event){
+    var url = event.params.url
+    console.log(`${url}`) 
+    var target = document.getElementById("monto_autorizado")
+    target.src = url
+    target.reload()
+}
+
   cancelnew(event){
     var py = event.params.idpy
     var target = document.getElementById("monto_autorizado")
-    target.src = `/proyectos/${py}/mtoautorizados`
+    target.src = `/proyectos/${py}/mtoautorizados/`
     target.reload()
   }
 

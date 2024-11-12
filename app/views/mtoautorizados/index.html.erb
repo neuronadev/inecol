@@ -17,7 +17,7 @@
         <tr>
             <td colspan="2" class="font-semibold p-2 text-center border-b border-slate-300" style='width:300px;'>  
                 
-                            <% if !@proyecto.mtoautorizado.nil? %> 
+                            <% if !@proyecto.mtoautorizado.blank? %> 
                                     <%= turbo_frame_tag "preview_monto_autorizado", src:preview_proyecto_mtoautorizado_path(@proyecto, @proyecto.mtoautorizado) do %>
                                     <% end %> 
                             <% else %>          

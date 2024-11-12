@@ -11,6 +11,10 @@
      <input type="hidden" id="totalgastos" name="totalgastos" value="<%= @presupuesto.tgastos %>">
      <input type="hidden" id="totalproyecto" name="totalproyecto" value="<%= @presupuesto.tproyecto %>">
 
+     <input type="hidden" id="lmoneda" name="lmoneda" value="<%= @presupuesto.moneda.locale %>">
+     <input type="hidden" id="cmoneda" name="cmoneda" value="<%= @presupuesto.moneda.currency %>">
+     <input type="hidden" id="smoneda" name="cmoneda" value="<%= @presupuesto.moneda.simbolo %>">
+
     <div class="border-solid border-2 border-gray-600" data-controller="impuestos">
         <div class="bg-blue-400 p-1 font-semibold" style="display: flex; align-items: center; justify-content: center;">Editar porcentajes</div>
 
@@ -23,7 +27,7 @@
                                                     value:sprintf("%d", @impuesto.porc_overhead),
                                                     class: 'p-1',
                                                     style:'width: 70px; height: 30px;',
-                                                    'data-action':'keyup->impuestos#calcular'
+                                                    'data-action':'keyup->impuestos#eventOverhead'
                                 %> 
                             </div>
                             <div class="w-1/2" style="display: flex; justify-content: end;">
@@ -34,7 +38,8 @@
                                 <%= form.text_field :porc_overhead, 
                                                     value:sprintf("%.2f", @impuesto.porc_overhead),
                                                     class: 'p-1',
-                                                    style:'width: 70px; height: 30px;'
+                                                    style:'width: 70px; height: 30px;',
+                                                    'data-action':'keyup->impuestos#eventOverhead'
                                 %> 
                             </div>    
                             <div class="w-1/2" style="display: flex; justify-content: end;">
@@ -55,7 +60,8 @@
                                   <%= form.text_field :porc_estimulo, 
                                                       value:sprintf("%d", @impuesto.porc_estimulo),
                                                       class: 'p-1',
-                                                      style:'width: 70px; height: 30px;'
+                                                      style:'width: 70px; height: 30px;',
+                                                      'data-action':'keyup->impuestos#eventEstimulo'
                                   %>
                               </div>    
                               <div class="w-1/2" style="display: flex; justify-content: end;">
@@ -66,7 +72,8 @@
                                   <%= form.text_field :porc_estimulo, 
                                                       value:sprintf("%.2f", @impuesto.porc_estimulo),
                                                       class: 'p-1',
-                                                      style:'width: 70px; height: 30px;'
+                                                      style:'width: 70px; height: 30px;',
+                                                      'data-action':'keyup->impuestos#eventEstimulo'
                                   %>
                               </div>    
                               <div class="w-1/2" style="display: flex; justify-content: end;">
@@ -75,7 +82,7 @@
                         <% end %>
                  </div>      
               </div>
-              <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+              <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;" id="monto_estimulo">
                     <%= number_to_currency(@presupuesto.estimulo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
               </div>
         </div>
@@ -84,15 +91,15 @@
                    <div class="w-full" style="display: flex; align-items: center;">
                         <div class="w-1/2" style="display: flex; align-items: center; justify-content: end;">
                               <% if @impuesto.porc_iva == 0 %> 
-                                   <input type="checkbox" value="1" name="iva" id="iva" checked> <div class="ml-2">Quitar</div>
+                                   <input type="checkbox" value="1" name="iva" id="iva" data-action="click->impuestos#eventIva" checked> <div class="ml-2">Quitar</div>
                               <% else %>
-                                   <input type="checkbox" value="1" name="iva" id="iva"> <div class="ml-2">Quitar</div>
+                                   <input type="checkbox" value="1" name="iva" id="iva" data-action="click->impuestos#eventIva"> <div class="ml-2">Quitar</div>
                               <% end %>  
                         </div>
                         <div class="w-1/2" style="display: flex; align-items: center; justify-content: end;">IVA:</div>
                    </div>      
               </div>
-              <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;">
+              <div class="w-5/12" style="display: flex; align-items: center; margin-left: 1px;" id="monto_iva">
                     <%= number_to_currency(@presupuesto.iva, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
               </div>
         </div>

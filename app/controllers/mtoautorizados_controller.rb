@@ -1,15 +1,19 @@
 class MtoautorizadosController < ApplicationController
   def index
+    puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" 
     @proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   def show
+      puts "##############################################################"
       @proyecto = Proyecto.find(params[:proyecto_id])
       @mtoautorizado = Mtoautorizado.find(params[:id])
       @moneda = @proyecto.presupuesto.moneda
   end
 
   def preview
+      puts "------------------------------------------------------------------"
+      puts params
       @proyecto = Proyecto.find(params[:proyecto_id])
       #@mtoautorizado = Mtoautorizado.find(params[:id])
       #@moneda = @proyecto.presupuesto.moneda
@@ -37,7 +41,7 @@ class MtoautorizadosController < ApplicationController
       @mtoautorizado.update(mtoautorizado_params)
       respond_to do |format|
            if @mtoautorizado.save
-               format.html { redirect_to proyecto_mtoautorizado_path(@proyecto, @mtoautorizado) }
+               format.html { redirect_to proyecto_mtoautorizados_path(@proyecto) }
            else
                format.html { render :edit, status: :bad_request }
            end

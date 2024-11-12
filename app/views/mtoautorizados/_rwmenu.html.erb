@@ -11,5 +11,17 @@
                   <span class='font-semibold'>Prórroga</span>
            <% end %>    
       </li>
+      <li>
+
+         <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+               data-turbo-action="replace" 
+               data-action='click->mautorizado#editar' 
+               data-mautorizado-url-param="<%= edit_proyecto_mtoautorizado_path(@proyecto.id, @proyecto.mtoautorizado.id) %>"
+         >
+            Editar monto
+         </span>
+
+           
+      </li>
     </ul>
 </div>

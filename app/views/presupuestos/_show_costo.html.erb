@@ -1,13 +1,15 @@
      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;" data-controller="impuestos">
+        <% if current_usuario.cuenta.rol.clave == 'EL' %>    
         <div class="w-full" style="display: flex;  justify-content: end;">
              <div class="text-blue-700" 
                   style="cursor: pointer;" 
                   data-action="click->impuestos#cambiar"
-                  data-impuestos-url-param="<%= edit_proyecto_presupuesto_impuesto_path(@proyecto.id, @presupuesto.id, @impuesto.id) %>"
+                  data-impuestos-url-param="<%= new_proyecto_presupuesto_impuesto_path(@proyecto.id, @presupuesto.id) %>"
                   >
                   Editar porcentajes
              </div>
          </div>
+        <% end %> 
         <div class="w-1/2 p-1">
                 <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
                       <div class="w-5/12" style="display:flex; justify-content: end;">
@@ -26,14 +28,16 @@
                            <%= number_to_currency(@presupuesto.costo, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ' ) %>
                       </div>
                 </div>
+
                 <!--   Porcentajes  -->
                   <turbo-frame id="porc_impuesto" src="<%= proyecto_presupuesto_impuesto_path(@proyecto.id, @presupuesto.id, @impuesto.id) %>"></turbo-frame>
                 <!--  ------------------------------------   -->
+
                 <div class="grid grid-cols-2 gap-4 mt-3" style="display: flex;">
                       <div class="w-5/12 font-semibold" style="display:flex; justify-content: end; color: #0072eb;">
                            Total para GASTOS:
                       </div>
-                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px; color: #0072eb;">
+                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px; color: #0072eb;" id="total_gastos">
                            <%= number_to_currency(@presupuesto.tgastos, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
                       </div>
                 </div>
@@ -41,7 +45,7 @@
                       <div class="w-5/12 font-semibold" style="display:flex; justify-content: end;">
                            TOTAL PROYECTO:
                       </div>
-                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px;">
+                      <div class="w-5/12 font-semibold" style="display: flex; align-items: center; margin-left: 1px;" id="total_proyecto">
                           <%= number_to_currency(@presupuesto.tproyecto, :unit=>@moneda.currency + ' ' + @moneda.simbolo + ' ') %>
                       </div>
                 </div>

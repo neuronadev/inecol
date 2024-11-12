@@ -29,15 +29,14 @@
                       <tr>
                                  <td style="width:35%; font-weight: bold;"> 
                                        <span style="margin-left:60px;">
-                                           <% if @proyecto.tpoverhead.nil? || @proyecto.tpoverhead == 1 %>
-                                                   20% Overhead
+                                          
+
+                                           <% if @impuesto.porc_overhead % 1 == 0 %>
+                                                    <%= sprintf("%d", @impuesto.porc_overhead) %>% Overhead:
+                                           <% else %>
+                                                    <%= sprintf("%.2f", @impuesto.porc_overhead) %>% Overhead:
                                            <% end %>
-                                           <% if @proyecto.tpoverhead == 2 %>
-                                                   8.71% Overhead
-                                           <% end %>
-                                           <% if @proyecto.tpoverhead == 3 %>
-                                                   10% Overhead
-                                           <% end %>
+
                                         </span> 
                                  </td>
                                  <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span><%=  @proyecto.presupuesto.moneda.simbolo %></span></td>
@@ -49,7 +48,15 @@
                                     <% end %>
                       </tr>
                        <tr>
-                                 <td style="width:35%; font-weight: bold;"> <span style="margin-left:60px;">10% Estímulos</span> </td>
+                                 <td style="width:35%; font-weight: bold;"> 
+                                     <span style="margin-left:60px;">
+                                        <% if @impuesto.porc_estimulo % 1 == 0 %>
+                                               <%= sprintf("%d", @impuesto.porc_estimulo) %>% Estímulo:
+                                        <% else %>
+                                               <%= sprintf("%.2f", @impuesto.porc_estimulo) %>% Estímulo:
+                                        <% end %>
+                                     </span> 
+                                </td>
                                  <td style="width:3%; text-align:right;"><%=  @proyecto.presupuesto.moneda.clave %> <span><%=  @proyecto.presupuesto.moneda.simbolo %></span></td>
                                  <td style="width:5%; text-align:right;">
                                      <% if !@proyecto.presupuesto.estimulo.nil? %>

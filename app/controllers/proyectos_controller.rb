@@ -162,6 +162,13 @@ class ProyectosController < ApplicationController
   def show
     
       @proyecto = Proyecto.find(params[:id])
+      if @proyecto.tpoverhead.nil?
+           @impuesto = Impuesto.find(1)
+      else
+           @impuesto = Impuesto.find(@proyecto.tpoverhead)
+      end
+
+
        respond_to do |format|
             format.html
             format.pdf do
