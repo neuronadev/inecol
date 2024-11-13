@@ -8,6 +8,9 @@ export default class extends Controller {
   static targets = ['editor', 'foregroundColorPicker', 'backgroundColorPicker']
   
   connect () {
+    this.initTrix()
+    this.reloadOriginalContent()
+    /*
     const UNUSED_TOOLBAR_CLASSES = [
       ".trix-button--icon-strike",
       ".trix-button--icon-link",
@@ -82,7 +85,7 @@ export default class extends Controller {
     sibling2.insertAdjacentHTML("afterend", blueButtonHTML)
     sibling2.insertAdjacentHTML("afterend", greenButtonHTML)
     sibling2.insertAdjacentHTML("afterend", yellowButtonHTML)
-
+   */
     
   }
 
