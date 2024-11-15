@@ -10,7 +10,7 @@ export default class extends Controller {
   connect () {
     this.initTrix()
     this.reloadOriginalContent()
-    /*
+    
     const UNUSED_TOOLBAR_CLASSES = [
       ".trix-button--icon-strike",
       ".trix-button--icon-link",
@@ -20,8 +20,7 @@ export default class extends Controller {
       ".trix-button-group--history-tools"
     ];
 
-    this.initTrix()
-    this.reloadOriginalContent()
+  
 
     UNUSED_TOOLBAR_CLASSES.forEach((cls) => {
       document.querySelector(cls).remove();
@@ -41,6 +40,7 @@ export default class extends Controller {
       style: { backgroundColor: "yellow" },
       inheritable: true,
       parser: function (element) {
+        var style = window.getComputedStyle(element);
         return style.backgroundColor === "yellow";
       },
     };
@@ -49,6 +49,7 @@ export default class extends Controller {
       style: { backgroundColor: "#09FF09" },
       inheritable: true,
       parser: function (element) {
+        var style = window.getComputedStyle(element);
         return style.backgroundColor === "#09FF09";
       },
     };
@@ -57,13 +58,43 @@ export default class extends Controller {
       style: { backgroundColor: "#00FFFF" },
       inheritable: true,
       parser: function (element) {
+        var style = window.getComputedStyle(element);
         return style.backgroundColor === "#00FFFF";
+      },
+    };
+
+    Trix.config.textAttributes.red = {
+      style: { backgroundColor: "#FF0000" },
+      inheritable: true,
+      parser: function (element) {
+        var style = window.getComputedStyle(element);
+        return style.backgroundColor === "#FF0000";
+      },
+    };
+
+    Trix.config.textAttributes.letterblue = {
+      style: { color: "#0000CC" },
+      inheritable: true,
+      parser: function (element) {
+        var style = window.getComputedStyle(element);
+        return style.color === "#0000CC";
+      },
+    };
+
+    Trix.config.textAttributes.letterred = {
+      style: { color: "#FF0000" },
+      inheritable: true,
+      parser: function (element) {
+        var style = window.getComputedStyle(element);
+        return style.color === "#FF0000";
       },
     };
 
     const toolbar = this.editorTarget.previousSibling
     const sibling1 = toolbar.querySelector(".trix-button--icon-italic")
     const sibling2 = toolbar.querySelector(".trix-button--icon-backgroundColor")
+    const sibling3 = toolbar.querySelector(".trix-button--icon-foregroundColor")
+    
 
     const underButtonHTML = `<button type="button" class="trix-button" data-trix-attribute="underline" title="Underline">
                              <span class="icon"> <svg fill="#000000" width="20px" height="20px" viewBox="-5.5 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -79,13 +110,30 @@ export default class extends Controller {
                             </button>`
     const blueButtonHTML = `<button type="button" class="trix-button trix-button--icon-blue" data-trix-attribute="blue" title="Color">
                                <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#55ACEE" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"></path></svg>
-                            </button>`                            
+                            </button>`
+    const redButtonHTML = `<button type="button" class="trix-button trix-button--icon-red" data-trix-attribute="red" title="Color">
+                               <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#DD2E44" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"></path></svg>
+                         </button>`                            
+
+    const letterBlueButtonHTML = `<button type="button" class="trix-button trix-button--icon-red" data-trix-attribute="letterblue" title="Color">
+                                      <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet" fill="#ffffff">  <g id="SVGRepo_bgCarrier" stroke-width="0"/>  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>  <g id="SVGRepo_iconCarrier">  <path fill="#0000CC" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"/>  <path fill="#0000CCFFF" d="M14.747 9.125c.527-1.426 1.736-2.573 3.317-2.573c1.643 0 2.792 1.085 3.318 2.573l6.077 16.867c.186.496.248.931.248 1.147c0 1.209-.992 2.046-2.139 2.046c-1.303 0-1.954-.682-2.264-1.611l-.931-2.915h-8.62l-.93 2.884c-.31.961-.961 1.642-2.232 1.642c-1.24 0-2.294-.93-2.294-2.17c0-.496.155-.868.217-1.023l6.233-16.867zm.34 11.256h5.891l-2.883-8.992h-.062l-2.946 8.992z"/>  </g>  </svg>
+                                  </button>`                            
+    const letterRedButtonHTML = `<button type="button" class="trix-button trix-button--icon-red" data-trix-attribute="letterred" title="Color">
+                                    <svg width="20px" height="20px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet" fill="#ffffff">  <g id="SVGRepo_bgCarrier" stroke-width="0"/>  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>  <g id="SVGRepo_iconCarrier">  <path fill="#FF0000" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"/>  <path fill="#FF0000FFF" d="M14.747 9.125c.527-1.426 1.736-2.573 3.317-2.573c1.643 0 2.792 1.085 3.318 2.573l6.077 16.867c.186.496.248.931.248 1.147c0 1.209-.992 2.046-2.139 2.046c-1.303 0-1.954-.682-2.264-1.611l-.931-2.915h-8.62l-.93 2.884c-.31.961-.961 1.642-2.232 1.642c-1.24 0-2.294-.93-2.294-2.17c0-.496.155-.868.217-1.023l6.233-16.867zm.34 11.256h5.891l-2.883-8.992h-.062l-2.946 8.992z"/>  </g>  </svg>
+                                 </button>`            
+
 
     sibling1.insertAdjacentHTML("afterend", underButtonHTML)
+
+    sibling2.insertAdjacentHTML("afterend", redButtonHTML)
     sibling2.insertAdjacentHTML("afterend", blueButtonHTML)
     sibling2.insertAdjacentHTML("afterend", greenButtonHTML)
     sibling2.insertAdjacentHTML("afterend", yellowButtonHTML)
-   */
+
+    sibling3.insertAdjacentHTML("afterend", letterRedButtonHTML)
+    sibling3.insertAdjacentHTML("afterend", letterBlueButtonHTML)
+
+   
     
   }
 
@@ -161,7 +209,7 @@ export default class extends Controller {
     
     return `<input type="color" style="width:0;height:0;padding:0;margin-top:20px;visibility:hidden"
                    data-trix-target="foregroundColorPicker" data-action="trix#foregroundColorChanged">
-            <button type="button" class="trix-button" data-action="click->trix#openForegroundColorPicker" title="Text color">
+            <button type="button" class="trix-button trix-button--icon trix-button--icon-foregroundColor" data-action="click->trix#openForegroundColorPicker" title="Text color">
               <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="20" height="20"><path d="M17.115,8.05A1.5,1.5,0,1,0,18.95,9.115,1.5,1.5,0,0,0,17.115,8.05Z"/><path d="M12.115,5.05A1.5,1.5,0,1,0,13.95,6.115,1.5,1.5,0,0,0,12.115,5.05Z"/><path d="M7.115,8.05A1.5,1.5,0,1,0,8.95,9.115,1.5,1.5,0,0,0,7.115,8.05Z"/><path d="M7.115,14.05A1.5,1.5,0,1,0,8.95,15.115,1.5,1.5,0,0,0,7.115,14.05Z"/><path d="M12.5.007A12,12,0,0,0,.083,12a12.014,12.014,0,0,0,12,12c.338,0,.67-.022,1-.05a1,1,0,0,0,.916-1l-.032-3.588A3.567,3.567,0,0,1,20.057,16.8l.1.1a1.912,1.912,0,0,0,1.769.521,1.888,1.888,0,0,0,1.377-1.177A11.924,11.924,0,0,0,24.08,11.7,12.155,12.155,0,0,0,12.5.007Zm8.982,15.4-.014-.014a5.567,5.567,0,0,0-9.5,3.985L11.992,22a10,10,0,0,1,.09-20c.117,0,.235,0,.353.006a10.127,10.127,0,0,1,9.645,9.743A9.892,9.892,0,0,1,21.485,15.4Z"/></svg></span>
             </button>`
   }

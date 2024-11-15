@@ -3,7 +3,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Nombre del proyecto: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5">
                     <%= @proyecto.nombre %>
           </div>
      </div>  
@@ -11,7 +11,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Institución, Gobierno o Empresa: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5" >
                     <%= @proyecto.fuente.nomfuente %>
           </div>
      </div>  
@@ -19,7 +19,7 @@
           <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Responsable: </span>
           </div>
-          <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+          <div id="div_file" class="md:w-2/5" >
                     <%= @proyecto.participante.pacademicos.where(responsable:true).first.academico.persona.nom_espacio %>
           </div>
      </div>     
@@ -28,7 +28,7 @@
                <div class="md:w-1/5 font-semibold">
                     <span class="block  md:text-right mb-1 md:mb-0 pr-4">Número de registro: </span>
                </div>
-               <div id="div_file" class="md:w-2/5" data-controller="trix upsf">
+               <div id="div_file" class="md:w-2/5" >
                     <%= @numreg %>
                </div>
           </div>   

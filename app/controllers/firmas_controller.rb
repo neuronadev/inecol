@@ -10,6 +10,11 @@ class FirmasController < ApplicationController
 
   def show
        @proyecto = Proyecto.find(params[:id])
+       if @proyecto.tpoverhead.nil?
+           @impuesto = Impuesto.find(1)
+       else
+           @impuesto = Impuesto.find(@proyecto.tpoverhead)
+       end
   end
 
   def new
@@ -61,7 +66,7 @@ class FirmasController < ApplicationController
             #Thread.new{
             #     `(sleep 60;echo "<html><body style='font-size:14px;font-family: Arial, Helvetica, sans-serif;'>#{msg}</body></html>" | mail -a "Content-Type: text/html; charset=UTF-8" -s "Ficha Firmada-#{@proyecto.persona.nom_espacio}-#{@proyecto.nombre[0..20]}" -a 'Reply-To:no-reply@inecol.mx' sara.sanchez@inecol.mx) &`
             #}
-      end
+     end
 
       respond_to do |format|
                     format.json { render json:{s:Base64.encode64(signature.unpack('H*')[0]), nombre:current_usuario.cuenta.persona.nom_espacio} }
