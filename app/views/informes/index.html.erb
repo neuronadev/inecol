@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "py_content_sub" do %>
      <div class="mt-3 p-3 font-semibold">Informes financieros y técnicos</div>
      <div class="w-full p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-         <% if current_usuario.cuenta.rol.clave == 'PLAN' %> 
+         <% if current_usuario.cuenta.rol.clave == 'PLAN' || current_usuario.cuenta.rol.clave == 'CAP' %> 
             <% if @proyecto.etapas.last.tevento.clave != 'FIN' %>    
                   <%= link_to new_proyecto_informe_path(@proyecto), data:{turbo_frame: "py_content_sub"} do %>
-                        <div class="flex mt-3 text-sm p-3 font-semibold">
+                        <div class="flex mt-3 p-3 font-semibold">
                               <%= inline_svg_tag 'svg/mas-blue.svg' %> 
                               <span class="ml-2 text-blue-800">Registra nuevo informe</span>
                         </div>

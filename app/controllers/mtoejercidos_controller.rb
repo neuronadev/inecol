@@ -22,9 +22,13 @@ class MtoejercidosController < ApplicationController
       @fecha_ini = nil
       @fecha_fin = nil
 
+      @autorizado = true
+
       if !@proyecto.mtoautorizado.nil?
            @fecha_ini = @proyecto.mtoautorizado.finicio
            @fecha_fin = @proyecto.mtoautorizado.ftermino
+      else
+           @autorizado = false
       end
  
       if @proyecto.prorrogas.any?
