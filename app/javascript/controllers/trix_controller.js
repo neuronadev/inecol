@@ -11,13 +11,21 @@ export default class extends Controller {
     this.initTrix()
     this.reloadOriginalContent()
     
-    const UNUSED_TOOLBAR_CLASSES = [
+    /*const UNUSED_TOOLBAR_CLASSES = [
       ".trix-button--icon-strike",
       ".trix-button--icon-link",
       ".trix-button--icon-quote",
       ".trix-button--icon-code",
       ".trix-button-group--file-tools",
       ".trix-button-group--history-tools"
+    ];*/
+
+    const UNUSED_TOOLBAR_CLASSES = [
+      ".trix-button--icon-strike",
+      ".trix-button--icon-link",
+      ".trix-button--icon-quote",
+      ".trix-button--icon-code",
+      ".trix-button-group--file-tools",
     ];
 
   

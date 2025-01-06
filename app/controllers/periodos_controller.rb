@@ -3,7 +3,18 @@ class PeriodosController < ApplicationController
   end
 
   def listado
-    render partial: 'listado'
+    anio = params[:periodo]
+    @periodo = Periodo.where(anio:anio).first
+    
+    if @periodo.anio == 2024
+         render partial: 'listado'
+    end
+
+    if @periodo.anio == 2025
+        render partial: 'listadoper'
+    end
+
+
   end
 
 end

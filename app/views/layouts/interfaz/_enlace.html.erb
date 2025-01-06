@@ -1,66 +1,69 @@
-<aside id="sidebar" class="sidebarz flex flex-col w-75 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-    <div class="resizer"></div>
+<aside id="sidebar" class="w-100 flex flex-col px-5 py-8 overflow-y-auto bg-white dark:bg-gray-900 dark:border-gray-700">
     <div class="flex flex-col  flex-1 mt-6" data-controller='menup'>
         <nav class="-mx-3 space-y-3 ">
-              
-             <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
-                   data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-                         </svg>
-                         <span class="mx-2 text-sm font-medium">Inicio</span>
-             <% end %>
-            
-            <%= link_to 'reportes/index', class:"group flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
-                  data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-                          </svg>
-                         <span class="mx-2 text-sm font-medium">Reportes</span>
-             <% end %> 
+            <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
+                data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+                        </svg>
+                        <span class="mx-2 text-sm font-medium">Inicio</span>
+            <% end %>
 
+            <%= link_to 'reportes/index', class:"group flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
+                data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                        </svg>
+                        <span class="mx-2 text-sm font-medium">Reportes</span>
+            <% end %> 
         </nav>
 
         <div class="mt-10" data-controller="sidecontent">
             <div class="flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-800 dark:text-white" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">Poyectos Externos</h2>
+            </div>
+        </div>  
 
-                <button class="p-0.5 hover:bg-gray-100 duration-200 transition-colors text-gray-500 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 border rounded-lg" data-action="click->sidecontent#addPeriodo">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        <nav class="mt-1 -mx-1 space-y-1" id="periodo" >
+                <button data-accordion="collapse" data-controller='seccperiodo' data-action='click->seccperiodo#mostrarsecc' data-seccperiodo-seccion-param = '2025' class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <div class="flex items-center gap-x-2 ">
+                        <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
+                        <span class="font-semibold text-gray-800">2025</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
                 </button>
-            </div>
-
-            <nav class="mt-1 -mx-1 space-y-1" id="periodo" >
-                <button data-accordion="collapse" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                <div id="estructura2025" class="box px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100 overflow-y-auto" style="height:610px; display:none;">
+                     <turbo-frame id="lista_items_ordper" src="<%= listado_periodos_path(:periodo=>2025)%>"></turbo-frame>
+                </div>
+        </nav>  
+        <!-- ----------------------------------------------------------------------------------  -->
+        <nav class="mt-1 -mx-1 space-y-1" id="periodo" >
+               <button data-accordion="collapse" data-controller='seccperiodo' data-action='click->seccperiodo#mostrarsecc' data-seccperiodo-seccion-param = '2024' class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <div class="flex items-center gap-x-2 ">
                         <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
                         <span class="font-semibold text-gray-800">2024</span>
                     </div>
-                    <!--
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rtl:rotate-180">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
-                    -->
                 </button>
-                <div id="estructura" class="box px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100 overflow-y-auto" data-action="drop->organizar#handleDrop" style="height:610px;" >
-                     <turbo-frame id="lista_items_ord" src="/periodos/listado"></turbo-frame>
-                </div>
-                
-                
-            </nav>
-        </div>
 
-        <div>
-            <nav class="mt-4 -mx-3 space-y-3 ">
+                <div id="estructura" class="box px-3 py-2 text-xs font-medium w-full  border-solid border-2 border-gray-100 overflow-y-auto" style="height:610px; display:none;">
+                     <turbo-frame id="lista_items_ord" src="<%= listado_periodos_path(:periodo=>2024)%>"></turbo-frame>
+                </div>
+        </nav>
+        
+        <nav class="mt-4 -mx-3 space-y-3 ">
              
              <%= link_to destroy_usuario_session_path,  data: {turbo_method: :delete}, class:"group flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" do %> 
                       <%= inline_svg_tag 'svg/salir-alt.svg' %>
                       <span class="mx-2 text-sm font-mediu">Salir</span>
              <% end %>
-            </nav>
-        </div>
-    </div>
-</aside>
+        </nav>
+
+    </div>    
+</aside>    

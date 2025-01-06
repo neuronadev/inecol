@@ -1,18 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 
+
 var token = document.querySelector('meta[name="csrf-token"]').content
-
-
-
-
+const items = [];
 // Connects to data-controller="organizar"
 export default class extends Controller {
-   
-   
-
+      
    connect() {
-         
-         
+      /*   
          document.addEventListener("click", function (e) {
             if (!contextMenu.contains(e.target)) {
                  contextMenu.style.visibility = "hidden";
@@ -27,15 +22,72 @@ export default class extends Controller {
                   contextMenu.style.visibility = "hidden";
              }
          });
+         */
+   }
+
+   selFila(event){
+     let elms = document.getElementsByClassName(event.params.iditems)
+
+     for ( let i = 0; i < elms.length; i++ ) {
+          if ( elms[i].style.backgroundColor != 'orange' ){
+                  elms[i].style.backgroundColor  = 'orange'
+                  console.log(items.indexOf(elms[i].id))
+                  if ( items.indexOf(elms[i].id) == -1 ){
+                        items.push( elms[i].id )
+                  }      
+          }else{
+                  elms[i].style.backgroundColor  = ''
+                  let index = items.indexOf(elms[i].id)
+                  if ( items.indexOf(elms[i].id) > -1 ){
+                        items.splice(index, 1)
+                  } 
+          }
+     }
+
+   }
+
+   async archivar(event){
+        
+        for ( let i = 0; i < items.length; i++ ) {
+               let r = await this.moverItemPeriodo(items[i], event.params.periodo)
+        }
+        var fr_el = document.getElementById('pycontent')
+        fr_el.src = '/proyectos/'
+        fr_el.reload()
+
+        if ( event.params.periodo == 2024 ){
+               var fr_orden = document.getElementById('lista_items_ord')
+               fr_orden.src = fr_orden.src
+               fr_orden.reload()
+        }       
+        if ( event.params.periodo == 2025 ){
+               var fr_orden = document.getElementById('lista_items_ordper')
+               fr_orden.src = fr_orden.src
+               fr_orden.reload()
+        }       
+   }
+
+   async moverItemPeriodo(py, periodo){
+      let data
+      try {
+               data = await fetch('/proyectos/nombrecorto', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept':'application/json', 'X-CSRF-Token':token },
+                    body: JSON.stringify({ idproy:py, periodo: periodo})
+               })
+               .then(response => response.json())
+               .then( json => { return json })
+      }catch (e) { alert(e) }
+      return data
    }
    
-   handleDragStart(e) {
+   /*handleDragStart(e) {
         
         e.target.style.opacity = '0.4';
         this.dragSrcEl = e.target;
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/html', e.target.innerHTML);
-     }
+     }*/
 
    async handleDrop(e) {
     e.stopPropagation(); // stops the browser from redirecting.

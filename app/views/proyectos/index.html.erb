@@ -9,7 +9,14 @@
               </div>
               <div>
                  <div>   <%= render 'notificacion' %> </div>
-              </div>  
+              </div>
+              <div>  
+               <% if current_usuario.cuenta.rol.clave == 'EL' %>
+                  <div class="text-slate-700 font-semibold pr-5" data-controller="menuitems">
+                        <%= enlaceMenuItem %>
+                  </div>
+               <% end %>
+              </div>
 
     </div>
   

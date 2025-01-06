@@ -1,4 +1,4 @@
- <turbo-frame id="lista_items_ord">
+ <turbo-frame id="lista_items_ordper">
             <% 
                 Item.where(periodo_id:@periodo.id).order(:nombre).each do |item| 
                     #item = Item.where(proyecto_id:py.id).first

@@ -334,7 +334,8 @@ class ProyectosController < ApplicationController
 
   def nombrecorto
     proyecto = Proyecto.find(params[:idproy].to_i)
-    periodo = Periodo.where(anio:2024).first
+    periodo = Periodo.where(anio:params[:periodo].to_i).first
+    #periodo = Periodo.where(anio:2024).first
 
     if proyecto.enlaces.last.enevento.clave == 'FIR'
           sc = proyecto.dictamen.numregistro + '-' + proyecto.persona.nom_espacio

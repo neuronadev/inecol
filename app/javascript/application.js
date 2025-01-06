@@ -4,6 +4,8 @@ import "controllers"
 import 'flowbite'
 import "trix"
 import "@rails/actiontext"
+
+
 //import {TabulatorFull as Tabulator} from 'tabulator-tables';
 //window.Tabulator = Tabulator
 
@@ -22,4 +24,3 @@ window.process = {
         NODE_ENV: 'development'
     }
 }
-
