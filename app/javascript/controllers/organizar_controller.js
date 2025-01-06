@@ -47,7 +47,7 @@ export default class extends Controller {
    }
 
    async archivar(event){
-        
+        console.log(items)
         for ( let i = 0; i < items.length; i++ ) {
                let r = await this.moverItemPeriodo(items[i], event.params.periodo)
         }
