@@ -312,6 +312,8 @@ class ProyectosController < ApplicationController
        proyecto.seguimiento = tipo
        proyecto.save
 
+       Util::Email.notificar(proyecto.id, 'SEGRP')
+
        respond_to do |format|
            format.json { render json:proyecto.to_json }
        end

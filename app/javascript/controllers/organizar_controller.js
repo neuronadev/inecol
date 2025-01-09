@@ -1,12 +1,41 @@
 import { Controller } from "@hotwired/stimulus"
-
+import TinyPopupMenu from 'tiny-popup-menu';
 
 var token = document.querySelector('meta[name="csrf-token"]').content
 const items = [];
+const tinyPopupMenu = new TinyPopupMenu({
+     autoclose: true,
+     margin: 5,
+     offset: {
+     x: 0,
+     y: 0
+     },
+     className: '',
+     arrow: true,
+     stopClick: true,
+     menuItems: [
+     {
+          content: 'Display alert',
+          callback: () => alert('Alert')
+     },
+     {
+          content: 'Display another alert',
+          callback: () => alert('Another alert')
+     },
+     '-', // separator
+     {
+          content: 'Delete',
+          callback: () => alert('Delete!'),
+          className: 'delete'
+     }
+     ]
+});
+
 // Connects to data-controller="organizar"
 export default class extends Controller {
       
-   connect() {
+   async connect() {
+
       /*   
          document.addEventListener("click", function (e) {
             if (!contextMenu.contains(e.target)) {
@@ -23,8 +52,10 @@ export default class extends Controller {
              }
          });
          */
+         
    }
 
+   
    selFila(event){
      let elms = document.getElementsByClassName(event.params.iditems)
 

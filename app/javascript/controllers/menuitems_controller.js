@@ -4,7 +4,6 @@ import { Dropdown } from 'flowbite';
 // Connects to data-controller="menuitems"
 export default class extends Controller {
   connect() {
-    console.log("Load controller")
           const targetEl = document.getElementById('dropdownSmall');
           const triggerEl = document.getElementById('dropdownSmallButton');
           const options = {

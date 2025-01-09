@@ -21,3 +21,5 @@ pin "tabulator-tables", to: "https://ga.jspm.io/npm:tabulator-tables@6.2.1/dist/
 pin "xlsx", to: "https://ga.jspm.io/npm:xlsx@0.18.5/xlsx.mjs"
 #pin "flowbite", to: "https://ga.jspm.io/npm:flowbite@2.5.2/lib/esm/index.js"
 #pin "flowbite-datepicker", to: "https://ga.jspm.io/npm:flowbite-datepicker@1.3.0/dist/main.esm.js"
+pin "tiny-popup-menu", to: "https://ga.jspm.io/npm:tiny-popup-menu@1.0.10/lib/tiny-popup-menu.js"
+pin "tiny-emitter", to: "https://ga.jspm.io/npm:tiny-emitter@2.1.0/index.js"
