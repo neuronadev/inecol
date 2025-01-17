@@ -22,20 +22,33 @@
                          </td>
                    </tr>
                    <tr class="">
-                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:300px;'></td>
+                         <td class="font-semibold p-2 text-right border-b border-slate-300" style='width:50px;'></td>
                          <td class="p-2 border-b border-slate-300">
-                              <label class="inline-flex items-center mb-5 cursor-pointer" >
-                                <% if @proyecto.seguimiento %>   
-                                    <input type="checkbox" value="" class="sr-only peer" data-controller="etapasvalpy" data-action="click->etapasvalpy#seguimiento" data-etapasvalpy-idpy-param="<%= @proyecto.id %>" checked="checked">
-                                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Proyecto activado para seguimiento</span>
-                                <% else %>
-                                   <input type="checkbox" value="" class="sr-only peer" data-controller="etapasvalpy" data-action="click->etapasvalpy#seguimiento" data-etapasvalpy-idpy-param="<%= @proyecto.id %>">
-                                   <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                   <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Activar proyecto para seguimiento</span>
-                                <% end %> 
-                                   
-                              </label>
+                             <div style="display:flex; flex-direction:row; ">
+                               <div class="w-auto" style="display:flex; font-semibold">
+                                   <label class="inline-flex items-center mb-5 cursor-pointer" >
+                                   <% if @proyecto.seguimiento %>   
+                                        <input type="checkbox" value="" class="sr-only peer" data-controller="etapasvalpy" data-action="click->etapasvalpy#seguimiento" data-etapasvalpy-idpy-param="<%= @proyecto.id %>" checked="checked">
+                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <span class="ms-3 text-sm font-medium ">Proyecto activado para seguimiento</span>
+                                   <% else %>
+                                        <input type="checkbox" value="" class="sr-only peer" data-controller="etapasvalpy" data-action="click->etapasvalpy#seguimiento" data-etapasvalpy-idpy-param="<%= @proyecto.id %>">
+                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <span class="ms-3 text-sm font-medium ">Activar proyecto para seguimiento</span>
+                                   <% end %> 
+                                   </label>
+                               </div>  
+                                <div class="p-1 ml-2" style="height: 20px; display:flex;"> 
+                                    <div style="border-left: 3px solid #f2f2f2; height: 24px;"></div>
+                                </div>    
+                               <div class="w-auto ml-3" style="display:flex; font-semibold">
+                                   <label class="inline-flex items-center mb-5 cursor-pointer" >
+                                        <input type="checkbox" value="" class="sr-only peer" data-controller="etapasvalpy" data-action="click->etapasvalpy#seguimiento" data-etapasvalpy-idpy-param="<%= @proyecto.id %>">
+                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <span class="ms-3 text-sm font-medium ">Finalizar proyecto</span>
+                                   </label>
+                               </div>     
+                             </div>       
                          </td>
                    </tr>
                    <tr>
