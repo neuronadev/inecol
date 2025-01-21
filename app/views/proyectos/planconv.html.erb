@@ -1,5 +1,11 @@
 <%= turbo_frame_tag "plan_conv" do %>
     
+     <%  if @proyecto.planconv.attached?  %>
+              <div class="flex w-3/4 border-b-2 border-gray-200"> 
+                  <div class="w-2/4 "><%= link_to  @proyecto.planconv.filename, rails_blob_path( @proyecto.planconv, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %></div>
+              </div>   
+     <% end %>
+
      <% 
         if @proyecto.convfirmados.attached? %>
              <% @proyecto.convfirmados.each do |item|

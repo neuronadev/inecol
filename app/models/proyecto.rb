@@ -35,7 +35,7 @@ class Proyecto < ApplicationRecord
     has_many_attached :docprotocolos, dependent: :detach
 
     has_one_attached :dconvocatoria, dependent: :detach
-    #has_one_attached :planconv, dependent: :detach #Convenio firmado
+    has_one_attached :planconv, dependent: :detach #Convenio firmado
     has_many_attached :convfirmados, dependent: :detach #Convenio firmado
     has_one_attached :dfiniquito, dependent: :detach #Documento finiquito
 
