@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "plan_conv" do %>
+     <% if @proyecto.planconv.attached? %>
+          <div class="flex"> 
+                <div><%= link_to @proyecto.planconv.filename, rails_blob_path(@proyecto.planconv, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %></div>
+          </div>   
+    <% end %>
+    <%= render 'proyectos/planconvup' %>
+<% end %>

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
             post 'nombrecorto'
             post "cambiarnm"
             post "seguimiento"
+            post "finalizar"
             post "moveritem"
         end
         member do
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
             get 'finalizar'
             post 'cfinalizar'
             get 'sfinalizar'
+            get 'eliminarconv'
         end
         resources :mtoautorizados do
                   member do

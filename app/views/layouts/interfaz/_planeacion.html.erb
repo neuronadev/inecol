@@ -10,7 +10,8 @@
               <div id="logo_expan" class="flex w-full" style="display:flex;">
                   <%= image_tag('logo140.png') %>
               </div>
-          -->    
+          -->   
+          Proyectos 
         </div>
         <ul class="mt-6 space-y-2 tracking-wide"  data-controller='menup'>
           <li class="min-w-max" data-action='click->menup#onClickItem'>
@@ -19,7 +20,17 @@
                    style:'padding-left: 1rem; padding-right: 4rem',
                    data:{turbo_frame: 'pycontent'} do %> 
                         <%= inline_svg_tag 'svg/dashboard.svg' %>
-                        <span class="group-hover:text-gray-700">Inicio</span>
+                        <span class="group-hover:text-gray-700">Revisados P.E.</span>
+             <% end %>
+
+          </li>
+          <li class="min-w-max" data-action='click->menup#onClickItem'>
+
+              <%= link_to proyectos_path(:tipo=>'ACTIV'), class:"relative flex items-center space-x-4 px-4 py-3",
+                   style:'padding-left: 1rem; padding-right: 4rem',
+                   data:{turbo_frame: 'pycontent'} do %> 
+                        <%= inline_svg_tag 'svg/dashboard.svg' %>
+                        <span class="group-hover:text-gray-700">Financiados</span>
              <% end %>
 
           </li>

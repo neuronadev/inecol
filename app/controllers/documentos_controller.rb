@@ -43,7 +43,7 @@ class DocumentosController < ApplicationController
             
         else
             data = { result:'ok' } 
-       end
+        end
        
        respond_to do |format|
               format.json { render json:data.to_json }

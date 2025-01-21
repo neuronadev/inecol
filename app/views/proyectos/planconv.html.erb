@@ -1,12 +1,17 @@
 <%= turbo_frame_tag "plan_conv" do %>
-     <% if @proyecto.planconv.attached? %>
-          <div class="flex"> 
-                <div><%= link_to @proyecto.planconv.filename, rails_blob_path(@proyecto.planconv, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %></div>
-                <div class="ml-5 text-green-800 font-semibold">
-                       <%= link_to 'Editar', eplanconv_proyecto_path(@proyecto) %>
-                </div>
-          </div>   
-     <% else %>
-             <%= render 'proyectos/planconvup' %>
-    <% end %>
+    
+     <% 
+        if @proyecto.convfirmados.attached? %>
+             <% @proyecto.convfirmados.each do |item|
+      %>
+               <div class="flex w-3/4 border-b-2 border-gray-200"> 
+                  <div class="w-2/4 "><%= link_to item.filename, rails_blob_path(item, disposition:'inline'), target:'_blank', class:'item_file text-blue-800' %></div>
+                    <div class="w-1/4 ml-5 text-red-500 ">
+                         <%= link_to 'Eliminar', eliminarconv_proyecto_path(@proyecto, :doc=>item)  %>
+                    </div>
+               </div>   
+             <% end %>
+      <% end %>
+      <%= render 'proyectos/planconvup' %>
+
 <% end %>

@@ -25,13 +25,15 @@ export default class extends Controller {
        }
     }
 
+    
     async seguimiento(event){
-
+        
         if ( event.target.checked ){
                if (window.confirm("El proyecto será habilitado para seguimiento por parte del investigador(a) responsable. ¿Desea continuar?")) {
                        let r = await this.activarseg(event.params.idpy, true)
                        if(r.seguimiento){
                                alert("Proyecto activado correctamente.")
+                               document.getElementById("stausseg").innerHTML = `<span class="ms-3 text-sm font-bold italic ">Proyecto activado para seguimiento</span>`
                        }
                }else{  event.target.checked = false }
         }else{
@@ -44,6 +46,16 @@ export default class extends Controller {
         } 
     }
 
+    async finalizar(event){
+          if (window.confirm("El proyecto será finalizado. ¿Desea continuar?")) {
+                let r = await this.finalizarpy(event.params.idpy, true)
+                if(r.seguimiento){
+                        alert("Proyecto finalizado correctamente.")
+                        document.getElementById("stausfin").innerHTML = `<span class="ms-3 text-sm font-bold italic ">Proyecto finalizado</span>`
+                }
+          }
+    } 
+
     async activarseg(idpy, tipo){
         try {
             var data = await fetch('/proyectos/seguimiento', {
@@ -54,6 +66,18 @@ export default class extends Controller {
             .then(response => response.json())
           return data
        } catch (e) { alert(e) }
+    }
+
+    async finalizarpy(idpy, tipo){
+          try {
+                var data = await fetch('/proyectos/finalizar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-Token': token },
+                    body: JSON.stringify({ id: idpy, tipo: tipo })
+                })
+                .then(response => response.json())
+               return data
+          }catch (e) { alert(e) }
     }
 
     mwcerrar(event) {

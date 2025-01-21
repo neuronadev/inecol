@@ -1,8 +1,9 @@
 require 'util/email.rb'
 
 class ProyectosController < ApplicationController
-  layout :select_layout
-
+    include Seguimiento  
+    layout :select_layout
+   
   def index
       @total_notifica_rp = 0
 
@@ -18,7 +19,13 @@ class ProyectosController < ApplicationController
                @total_notifica_rp = Proyecto.where(persona_id:current_usuario.cuenta.persona.id).includes(enlaces: :enevento).where('enlaces.estado':'A').where('eneventos.clave':'CORR').count
       elsif current_usuario.cuenta.rol.clave == 'PLAN'
              #@proyectos = Proyecto.includes(enlaces: :enevento).where('eneventos.clave':'DICT')
-               @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').where.not('dictamenes.numregistro':'DMOD').order('dictamenes.numregistro DESC')
+               if params[:tipo].blank?
+                    @proyectos = Proyecto.where(seguimiento:[false,nil]).includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').where.not('dictamenes.numregistro':'DMOD').order('dictamenes.numregistro DESC')
+               else
+                    if params[:tipo] == 'ACTIV'
+                        @proyectos = Proyecto.where(seguimiento:true).includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').where.not('dictamenes.numregistro':'DMOD').order('dictamenes.numregistro DESC')     
+                    end
+               end                   
       elsif current_usuario.cuenta.rol.clave == 'DIR'
                @proyectos = Proyecto.includes(:dictamen).includes(enlaces: :enevento).where('eneventos.clave':'FIR').order('dictamenes.numregistro')
       elsif current_usuario.cuenta.rol.clave == 'EVAL'
@@ -121,9 +128,20 @@ class ProyectosController < ApplicationController
        @proyecto = Proyecto.find(params[:id])
   end
 
+  def eliminarconv
+       @proyecto = Proyecto.find(params[:id])
+       attachment = ActiveStorage::Attachment.find(params[:doc])
+       attachment.delete
+       
+       respond_to do |format|
+            format.html { redirect_to planconv_proyecto_path(@proyecto) }
+       end
+  end
+
   def cplanconv
        @proyecto = Proyecto.find(params[:id])
-       @proyecto.planconv = params[:planconv]
+       #@proyecto.planconv = params[:planconv]
+       @proyecto.convfirmados = params[:convfirmados]
        respond_to do |format|
            if @proyecto.save
                  format.html { redirect_to planconv_proyecto_path(@proyecto) }
@@ -298,7 +316,7 @@ class ProyectosController < ApplicationController
        enevento = Enevento.where(clave:'NVO').first
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
               
-       Util::Email.notificar(proyecto.id, 'RPEN')
+       #Util::Email.notificar(proyecto.id, 'RPEN')
 
        respond_to do |format|
            format.json { render json:proyecto.to_json }
@@ -308,9 +326,11 @@ class ProyectosController < ApplicationController
   def seguimiento
        proyecto = Proyecto.find(params[:id])
        tipo = params[:tipo]
-
+       
        proyecto.seguimiento = tipo
        proyecto.save
+
+       Seguimiento::activarseg proyecto, 'SEG'
 
        Util::Email.notificar(proyecto.id, 'SEGRP')
 
@@ -318,6 +338,24 @@ class ProyectosController < ApplicationController
            format.json { render json:proyecto.to_json }
        end
   end
+
+  def finalizar
+    proyecto = Proyecto.find(params[:id])
+    tipo = params[:tipo]
+  
+    proyecto.finalizado = tipo
+    proyecto.save
+
+    Seguimiento::activarseg proyecto, 'FIN'
+
+    #Util::Email.notificar(proyecto.id, 'FINPY')
+
+    respond_to do |format|
+        format.json { render json:proyecto.to_json }
+    end
+  end
+
+
  
   def eliminar
        proyecto = Proyecto.find(params[:id])
