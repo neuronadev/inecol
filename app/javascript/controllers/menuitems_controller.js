@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import { Dropdown } from 'flowbite';
 
+let dropdown_btn
+
 // Connects to data-controller="menuitems"
 export default class extends Controller {
   connect() {
@@ -24,6 +26,7 @@ export default class extends Controller {
              override: true
            };
 
-           const dropdown = new Dropdown(targetEl, triggerEl, options, instanceOptions);
+           dropdown_btn = new Dropdown(targetEl, triggerEl, options, instanceOptions);
   }
+  
 }

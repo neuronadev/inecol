@@ -9,11 +9,11 @@ module ProyectosHelper
             <div id='dropdownSmall' class='z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600'>
                 
              <ul class='py-2 text-sm text-gray-700 dark:text-gray-200' aria-labelledby='dropdownSmallButton'>
-                <li>
-                    <div data-action='click->organizar#archivar' data-organizar-periodo-param='2025' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' style='cursor:pointer;'>Mover a 2025</div>
+                <li id='2025'>
+                    <div  data-action='click->organizar#archivar' data-organizar-periodo-param='2025' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' style='cursor:pointer;'>Mover a 2025</div>
                 </li>
-                <li>
-                    <div data-action='click->organizar#archivar' data-organizar-periodo-param='2024' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' style='cursor:pointer;'>Mover a 2024</div>
+                <li id='2024'>
+                    <div  data-action='click->organizar#archivar' data-organizar-periodo-param='2024' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' style='cursor:pointer;'>Mover a 2024</div>
                 </li>
              </ul>
            </div>

@@ -1,8 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
-import TinyPopupMenu from 'tiny-popup-menu';
+import { Dropdown } from 'flowbite';
+//import TinyPopupMenu from 'tiny-popup-menu';
 
 var token = document.querySelector('meta[name="csrf-token"]').content
 const items = [];
+let dropdown = ''
+let tmp_html = ''
+let el = ''
+
+/*
 const tinyPopupMenu = new TinyPopupMenu({
      autoclose: true,
      margin: 5,
@@ -29,7 +35,7 @@ const tinyPopupMenu = new TinyPopupMenu({
           className: 'delete'
      }
      ]
-});
+});*/
 
 // Connects to data-controller="organizar"
 export default class extends Controller {
@@ -41,20 +47,57 @@ export default class extends Controller {
             if (!contextMenu.contains(e.target)) {
                  contextMenu.style.visibility = "hidden";
             }
-         });
+         }); */
          document.addEventListener("keyup", function (e) {
              if (e.key === "Escape") { 
                   if ( el != '' ){
                       el.innerHTML = tmp_html
                       el = ''
                   }
-                  contextMenu.style.visibility = "hidden";
+                  //contextMenu.style.visibility = "hidden";
              }
-         });
-         */
+         })
+         
          
    }
 
+
+   openmenu(event){
+     
+      const targetEl = document.getElementById(`dropdownDots${event.params.item}`);
+      const triggerEl = document.getElementById(`dropdownMenuIconButton${event.params.item}`);
+      
+      const options = {
+          placement: 'bottom',
+          triggerType: 'click',
+          offsetSkidding: 0,
+          offsetDistance: 10,
+          delay: 300,
+          ignoreClickOutsideClass: false,
+          onHide: () => {},
+          onShow: () => {},
+          onToggle: () => {},
+      };
+      
+      // instance options object
+      const instanceOptions = {
+        id: 'dropdownMenu',
+        override: true
+      };
+
+
+      if (event.target.classList.contains("mactivo")) {
+            event.target.classList.remove("mactivo");
+       }else{
+            event.target.classList.add("mactivo"); 
+            dropdown = new Dropdown(targetEl, triggerEl, options, instanceOptions);
+            dropdown.show();
+       }
+
+      
+
+      
+   }
    
    selFila(event){
      let elms = document.getElementsByClassName(event.params.iditems)
@@ -78,7 +121,8 @@ export default class extends Controller {
    }
 
    async archivar(event){
-        console.log(items)
+       
+        
         for ( let i = 0; i < items.length; i++ ) {
                let r = await this.moverItemPeriodo(items[i], event.params.periodo)
         }
@@ -95,7 +139,7 @@ export default class extends Controller {
                var fr_orden = document.getElementById('lista_items_ordper')
                fr_orden.src = fr_orden.src
                fr_orden.reload()
-        }       
+        }     
    }
 
    async moverItemPeriodo(py, periodo){
@@ -153,30 +197,39 @@ export default class extends Controller {
    }
 
    cambiarnm(event){
+         dropdown.hide()
+         let item_id = event.params.item
          let str_id = "item_" + item_id
-         //item_id = event.params.iditem
          el = document.getElementById(str_id)
          tmp_html = el.innerHTML
          el.innerHTML = `
-               <input id="txt${item_id}" type="text" name="nmItem" style="height:20px;width:300px;font-size:12px;" value="${tmp_html.trim()}" data-action="keyup->organizar#aplicar" >  
+               <input id="txt${item_id}" 
+                      type="text" name="nmItem" 
+                      style="height:20px;width:300px;font-size:12px;" 
+                      value="${tmp_html.trim()}" 
+                      data-action="keyup->organizar#aplicar"
+                      data-organizar-item-param=${item_id} >  
              `
    }
 
    async aplicar(event){
+       let item_id = event.params.item
+       let el_input = document.getElementById("txt" + item_id)
+       //let str_id = "item_" + item_id
+       //let el = document.getElementById(str_id)
 
-       let el_input = document.getElementById("txt"+item_id)
        if (event.key === "Escape") { 
              el.innerHTML = tmp_html
              el = ''
        }
        if (event.key === "Enter") {
-             let cambio = await this.updatenombre(el_input.value)
+             let cambio = await this.updatenombre(el_input.value, item_id)
              el.innerHTML = el_input.value
              el = ''
        }
    }
 
-   async updatenombre(nm){
+   async updatenombre(nm, item_id){
           let data
           try {
                data = await fetch('/proyectos/cambiarnm', {
@@ -215,7 +268,8 @@ export default class extends Controller {
    }
 
    async ctxmover(event){
-       let item_py = event.params.idpy
+       dropdown.hide()
+       let item_py = event.params.item
 
        try {
           await fetch('/proyectos/moveritem', {
@@ -232,6 +286,12 @@ export default class extends Controller {
                     var fr_orden = document.getElementById('lista_items_ord')
                     fr_orden.src = fr_orden.src
                     fr_orden.reload()
+
+                    var fr_orden_per = document.getElementById('lista_items_ordper')
+                    fr_orden_per.src = fr_orden_per.src
+                    fr_orden_per.reload()
+
+                    
                })
        }catch (e) { alert(e) }
 
