@@ -32,7 +32,7 @@
 
                     <td class="p-2" style="text-align: center;">
                         <% if Proyecto.where(raiz:tmp_py.id).count == 0 %>
-                           <%= link_to 'Montos', resumen_vistas_path(:id=>tmp_py.id), class:"p-2 justify-self-center font-medium text-blue-600 dark:text-blue-500 rounded hover:bg-gray-200 hover:ring-2" %> 
+                           <%= link_to 'Montos', resumen_vistas_path(:id=>tmp_py.id, :origen=>@regresar), class:"p-2 justify-self-center font-medium text-blue-600 dark:text-blue-500 rounded hover:bg-gray-200 hover:ring-2" %> 
                         <% end %>                            
                     </td>
                 </tr>     

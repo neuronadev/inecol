@@ -4,9 +4,13 @@ class VistasController < ApplicationController
     def resumen
         session[:step] = 0
         @proyecto = Proyecto.find(params[:id])
+        @origen = params[:origen] if !params[:origen].blank?
         @total_notifica_rp = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').count  
         @total_notifica_sola = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'SOLA').count
         
+
+        puts "------------------------------------"
+        puts @origen
 
         #@total_notifica_rp = @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').count
         #@total_notifica_sola = @proyecto.enlaces.includes(:enevento).where('eneventos.clave':'SOLA').count
