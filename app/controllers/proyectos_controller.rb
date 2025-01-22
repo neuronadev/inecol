@@ -316,7 +316,7 @@ class ProyectosController < ApplicationController
        enevento = Enevento.where(clave:'NVO').first
        Enlace.create!(proyecto_id:proyecto.id, enevento_id:enevento.id)
               
-       #Util::Email.notificar(proyecto.id, 'RPEN')
+       Util::Email.notificar(proyecto.id, 'RPEN')
 
        respond_to do |format|
            format.json { render json:proyecto.to_json }

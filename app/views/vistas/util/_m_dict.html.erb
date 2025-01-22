@@ -23,15 +23,11 @@
                                                <% end %>    
                                           </li>
                                           <li>
-                                             <% if @proyecto.etapas.last.tevento.clave != 'FIN' %> 
-                                                  <span class="cursor-no-drop italic block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                       Logros
-                                                  </span>
-                                             <% else %>
+                                             
                                                   <%= link_to sfinalizar_proyecto_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
                                                        Logros
                                                   <% end %>
-                                             <% end %>     
+                                             
                                           </li>
                                     </ul>
                               </div>
