@@ -1,5 +1,5 @@
 <aside id="sidebar" class="w-100 flex flex-col px-5 py-8 overflow-y-auto bg-white dark:bg-gray-900 dark:border-gray-700">
-    <div class="flex flex-col  flex-1 mt-6" data-controller='menup'>
+    <div class="flex flex-col  flex-1 mt-6" data-controller='menup organizar'>
         <nav class="-mx-3 space-y-3 ">
             <%= link_to proyectos_path, class:"menupactivo flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700",
                 data:{turbo_frame: 'pycontent', action:'click->menup#onClickItem'} do %> 
