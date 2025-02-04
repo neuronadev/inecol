@@ -36,6 +36,7 @@ Rails.application.routes.draw do
             post 'cplanconv'
             get 'eplanconv'
             get 'finalizar'
+            get 'finalizarpy'
             post 'cfinalizar'
             get 'sfinalizar'
             get 'eliminarconv'

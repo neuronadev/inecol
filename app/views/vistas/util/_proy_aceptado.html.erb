@@ -53,7 +53,7 @@
                                           </li>
                                           <li>
                                              <% if @proyecto.etapas.last.tevento.clave != 'FIN' %> 
-                                                  <%= link_to finalizar_proyecto_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
+                                                  <%= link_to finalizarpy_proyecto_path(@proyecto), data:{turbo_frame: "py_content_sub"}, class:'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' do %>
                                                        Logros
                                                   <% end %>
                                              <% else %>

@@ -158,6 +158,10 @@ class ProyectosController < ApplicationController
       end
   end
 
+  def finalizarpy
+    @proyecto = Proyecto.find(params[:id])
+  end
+
   def finalizar
       @proyecto = Proyecto.find(params[:id])
   end
