@@ -18,6 +18,8 @@ class ParticipantesController < ApplicationController
     @proyecto = Proyecto.find(session[:proyecto_id]) 
     @participante = Participante.new
     @participante.pacademicos.build
+    #1.times { @participante.pacademicos.build } 
+
     @participante.pestudiantes.build
   end
 
@@ -54,29 +56,30 @@ class ParticipantesController < ApplicationController
   end
 
   def create
-       @participante = Participante.new(participante_params)
-       @proyecto = Proyecto.find(@participante.proyecto_id)
-       respond_to do |format|
-            if @participante.save
-                  session[:step] += 1
-                  #format.html { redirect_to new_presupuesto_path } 
-                  format.html { redirect_to @participante } 
-            else
-                  if @participante.errors.where(:base).any?
-                          flash.now[:error] = @participante.errors.where(:base).first.full_message
-                  else
-                          flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
-                  end
+    @participante = Participante.new(participante_params)
+    @proyecto = Proyecto.find(@participante.proyecto_id)
+    respond_to do |format|
+         if @participante.save
+               session[:step] += 1
+               #format.html { redirect_to new_presupuesto_path } 
+               format.html { redirect_to @participante } 
+         else
+               if @participante.errors.where(:base).any?
+                       flash.now[:error] = @participante.errors.where(:base).first.full_message
+               else
+                       flash.now[:error] = 'La infomación esta incompleta, favor de revisar los errores'
+               end
 
-                  puts "---------------------------------------" 
-                  puts @participante.errors.full_message
-
-                  @inv_sum = !params[:participante][:pacademicos_attributes].nil? ? SumParts.new(params[:participante][:pacademicos_attributes]).suma : 0.0
-                  @tec_sum = !params[:participante][:ptecnicos_attributes].nil? ? SumParts.new(params[:participante][:ptecnicos_attributes]).suma : 0.0
-                  @tot_porc = @inv_sum + @tec_sum
-                  format.html { render :new, status: :bad_request }
-            end
-       end    
+               #puts "---------------------------------------" 
+               #puts @participante.errors.full_message
+               
+               @inv_sum = !params[:participante][:pacademicos_attributes].nil? ? SumParts.new(params[:participante][:pacademicos_attributes]).suma : 0.0
+               @tec_sum = !params[:participante][:ptecnicos_attributes].nil? ? SumParts.new(params[:participante][:ptecnicos_attributes]).suma : 0.0
+               @tot_porc = @inv_sum + @tec_sum
+               format.html { render :new, status: :bad_request }
+         end
+    end    
+       
   end
 
   def tipopart

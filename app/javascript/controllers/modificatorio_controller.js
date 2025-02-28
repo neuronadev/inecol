@@ -10,7 +10,10 @@ export default class extends Controller {
   async aplicarproceso(){
       var py = document.getElementById('btnmod')
       var idpy = py.dataset.idxpy;
-
+      py.innerText = 'Procesando información, un momento...'
+      py.disabled = true
+      py.style.backgroundColor = 'gray'
+      
         try{
               var data = await fetch('/modificatorios/aplicarmod',{
                                       method: 'POST',
@@ -25,6 +28,8 @@ export default class extends Controller {
                                                            var td_conten = document.getElementById("cont_success")
                                                            row_conten.style.display = "table-row"
                                                            td_conten.innerHTML =  `<span>Proyecto en proceso de modificación. Fecha de inicio: ${data.fecha} </span>`
+                                                           py.innerText = 'Proceso realizado correctamente.'
+                                                           py.style.backgroundColor = 'blue'
                                                      }
                                                 } )
         } catch(e){ alert(e) }

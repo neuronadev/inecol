@@ -1,0 +1,66 @@
+<%
+
+ resp_proyecto = 0 
+ if current_usuario.cuenta.rol.clave == 'CAP'
+       resp_proyecto = current_usuario.cuenta.persona_id
+ else
+       
+       resp_proyecto = @participante.pacademicos.where(responsable:true).first.academico.persona_id
+ end
+
+%>
+
+<div class="itemrw" style="display:flex; justify-content: space-between; width:100%; margin-top: 5px;">
+      <div style="display: flex; width: 50%;">
+            <% if tipo == 'R' %>   
+                       <%= f.select :academico_id,
+                                Academico.where(persona_id: resp_proyecto)
+                                          .includes(:tacademico)
+                                          .where('tacademicos.clave':['INV','CAT'])
+                                          .all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
+                                {prompt: '--Seleccione un Investigador--', selected: resp_proyecto},
+                                { 
+                                   data:{controller:'slimrp', slimrp_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
+                                } 
+                       %>
+            <% else %>    
+                       <%= f.select :academico_id,
+                                Academico.includes(:tacademico)
+                                         .where('tacademicos.clave':['INV','CAT'])
+                                         .all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
+                                {prompt: '--Seleccione un Investigador--'},
+                                { 
+                                   data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
+                                }
+                       %>     
+            <% end %>
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center; width: 25%;">
+             <% if tipo == 'R' %>    
+                  <%= f.check_box :responsable,
+                        checked:true,
+                        class:'chkresp ',
+                        data:{action:'click->participan#onResponsable'}
+                  %> <span style="margin-left: 3px;">Responsable</span>
+             <% end %>     
+      </div>
+      <div style="display: flex; width: 15%;">             
+
+            <%= f.text_field :porcentaje, 
+                  autocomplete:"off",
+                  class:'porinvest appearance-none border-1 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 text-center',
+                  placeholder: '% de Participación',
+                  data:{action:'keydown->utils#keyEnter keyup->utils#formatPorcent keyup->participan#sumaPorc'}
+            %>
+      </div>
+
+      <div style="display: flex; justify-content: center;  align-items: center; width: 10%;">
+          <% if tipo != 'R' %>    
+            <button type="button" class="inline-flex items-center px-1 py-1 bg-red-500 hover:bg-red-800 text-white text-sm font-medium rounded-md" data-action="click->pacademico#removeItem">
+                  <%= inline_svg_tag 'svg/cruz.svg' %>
+            </button>
+          <% end %>  
+      </div>
+
+      <%= f.hidden_field :_destroy %>
+</div>  

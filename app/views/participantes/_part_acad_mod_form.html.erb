@@ -1,0 +1,7 @@
+ <%= f.select :academico_id,
+     Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave) },
+         {prompt: '--Seleccione un Investigador--'},
+         { 
+               data:{controller:'slim', slim_target:'field', action:'change->participan#onParticipante', class:'selectinv'}
+         }
+%>      
