@@ -7,6 +7,7 @@ class Dictamen < ApplicationRecord
   #has_one_attached :docdictamen
   has_many_attached :docdictamenes
 
-    
-
+  validates :tvalidacion_id, presence: true
+  validates :numregistro, presence: true
+  
 end
