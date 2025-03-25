@@ -91,16 +91,16 @@
                             <%= render 'marchivos/wrapvalida', form:form, tipo:'dictamen' %>  
                    </div>
      </div>
-     <div class="md:flex md:items-center mb-3 font-semibold">
+     <div class="md:flex md:items-center mb-3">
                     <div class="md:w-1/5">
                            <% if @proyecto.modificatorio != 'SI' %>
-                                   <%= form.label :txtdictamen, 'Dictamen:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
+                                   <%= form.label :txtdictamen, 'Dictamen:', class:'font-semibold block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                            <% else %>        
                                    <%= form.label :txtdictamen, 'Comentarios:', class:'block  md:text-right mb-1 md:mb-0 pr-4', for:'inline-full-name' %>
                            <% end %>
                     </div>
                      <div class="md:w-4/5" data-controller="trix">
-                         <%= form.rich_text_area :txtdictamen, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>
+                         <%= form.rich_text_area :txtdictamen, class:'trix-editor bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-2 leading-tight focus:outline-none focus:bg-white focus:border-purple-500',  data: { trix_target: 'editor' }%>
                     </div>
      </div>
      

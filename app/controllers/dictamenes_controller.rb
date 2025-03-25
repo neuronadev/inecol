@@ -55,9 +55,9 @@ class DictamenesController < ApplicationController
                     Util::Email.notificar(@proyecto.id, 'ENEVD') 
                     Util::Email.notificar(@proyecto.id, 'ENRPD') 
                     
-                    if !@dictamen.otrose.blank?
-                           Util::Email.notificar(@proyecto.id, 'OTROSE') 
-                    end
+                    #if !@dictamen.otrose.blank?
+                    #       Util::Email.notificar(@proyecto.id, 'OTROSE') 
+                    #end
 
                     format.html { redirect_to dictamen_path(@dictamen) } 
             else
