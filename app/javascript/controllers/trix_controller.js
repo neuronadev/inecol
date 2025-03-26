@@ -154,7 +154,7 @@ export default class extends Controller {
     
     if (this.hasForegroundColorPickerTarget) { return }
 
-    Trix.config.blockAttributes.heading1.tagName = 'h3'
+    //Trix.config.blockAttributes.heading1.tagName = 'h3'
     this.addForegroundButtonInToolbar()
     this.addBackgroundButtonInToolbar()
     this.addTextAlignCenterButtonInToolbar()
