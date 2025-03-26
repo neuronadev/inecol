@@ -43,12 +43,14 @@ class ValidacionesController < ApplicationController
                   enevento = Enevento.where(clave:'EVAL').first
                   if current_usuario.cuenta.rol.clave == 'EL'
 
-                      #Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
-                      #Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
+                      Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
+                      Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
-                      #Util::Email.notificar(@proyecto.id, 'ENEVA')
+                      Util::Email.notificar(@proyecto.id, 'ENEVA')
 
 
+
+                      
                   end     
 
                   if current_usuario.cuenta.rol.clave == 'EL'
