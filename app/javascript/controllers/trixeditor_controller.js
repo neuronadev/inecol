@@ -2,9 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 import Trix from "trix"
 
 export default class extends Controller {
-   
+  static targets = ['editor']
     connect() {
-        addEventListener("trix-initialize", function (event) {
+        this.editorTarget.reset()
+        /*addEventListener("trix-initialize", function (event) {*/
               /* -----------------------------------------UNDERLINE---------------------------------------------------------------------------------- */
               Trix.config.textAttributes.underline = {
                   tagName: "u",
@@ -150,7 +151,7 @@ export default class extends Controller {
               document.querySelector(".trix-button-group--text-tools").appendChild(underlineElLR);
               /* ------------------------------------------------------------------------------------------------------------------------------------ */
               
-        }, true);
+        /*}, true);*/
     }
     
 }
