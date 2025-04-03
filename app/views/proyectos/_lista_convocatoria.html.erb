@@ -21,4 +21,22 @@
                                         <% end %>
                                    </div>
                     </div>
+                    <div class="md:flex md:items-center mb-1 w-full">
+                                    <div class="font-semibold">
+                                       Archivo:
+                                   </div>
+                                   <div class="">
+                                        <% if @proyecto.dconvocatoria.attached? %>
+                                           <div class="ml-2 text-blue-800"> 
+                                             <%= link_to @proyecto.dconvocatoria.filename, rails_blob_path(@proyecto.dconvocatoria, disposition:'inline'), target:'_blank', class:'item_file text-blue-700' %>
+                                           </div>  
+                                        <% else %>   
+                                              <div class="ml-2 text-gray-800"> 
+                                                    Sin archivo.
+                                              </div>
+                                        <% end %>     
+                                   </div>  
+
+                    </div>
+
 </div>
