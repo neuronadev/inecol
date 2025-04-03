@@ -12,10 +12,16 @@
             <% end %>
             
     </td>
+
     <th scope="row" class="p-2 font-medium text-gray-900  dark:text-white" style="text-align: justify;">
-            <%= py.nombre %>
-            
+            <div><%= py.nombre %></div>
+            <div style="color:green; font-weight: bold;">
+                <% if !py.mconvocatoria.nil? %>
+                    <%= py.mconvocatoria.nomconvocatoria %>
+                <% end %>   
+            </div>
     </th>
+
     <td class="p-2" style="text-align: center;">
         <%= py.etapas.includes(:tevento).where('teventos.clave':'REV').first.created_at.strftime("%d-%m-%Y %H:%M ")  %>
     </td>
