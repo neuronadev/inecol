@@ -92,6 +92,15 @@
 
 <table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
     <tr>
+        <td style="padding: 5px 0; font-weight: bold;">Tipo Proyecto</td>
+        <td style="padding: 5px 0; width:85%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
+               <%= @proyecto.clasificacion.nomclasifica %>
+        </td>
+    </tr>
+</table>
+
+<table style="width:100%; background-color: #e4e4e4; padding:5px 0;">
+    <tr>
         <td style="padding: 5px 0; font-weight: bold;">Institución, Gobierno o Empresa</td>
         <td style="padding: 5px 0; width:47%; background-color: #ffffff; border: 1px solid #a9a9a9; padding: 5px;">
                  <%= @proyecto.fuente.nomfuente %>
