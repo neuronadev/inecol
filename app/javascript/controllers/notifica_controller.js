@@ -27,6 +27,18 @@ export default class extends Controller {
        
   }
 
+  enlaceAtendidoMod(event){
+     this.enlaceUpdateAtendido(event.params.idenlace).then(result => {
+          let txt_aten = document.getElementById("txt_atendida")
+          txt_aten.innerHTML = "Un momento, cerrando proceso..."
+          txt_aten.style.backgroundColor = "gray"
+
+          var m = document.getElementById("pycontent")
+          m.reload()
+          
+      })
+  }
+
   enlaceEnterado(event){
          this.enlaceUpdateEnterado(event.params.idenlace).then(result => {
              var el = event.target.closest('[role="alert"]')
