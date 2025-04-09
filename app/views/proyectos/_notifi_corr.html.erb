@@ -1,6 +1,6 @@
 <% if @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').any? %>
        
-        <div class="flex-column mt-3" style="align-items: center; justify-content: center;">
+        <div class="flex-column mt-3" style="align-items: center; justify-content: center; font-weight: bold;">
             <%  @proyecto.enlaces.where(estado:'A').includes(:enevento).where('eneventos.clave':'CORR').each do |item| %>
                   <div style="width:50%; margin-left:70px; color: red;">
                   Si ha terminado de hacer las modificaciones, haga clic en el siguiente botón
