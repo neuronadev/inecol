@@ -48,7 +48,7 @@ class FirmasController < ApplicationController
      if ( @proyecto.firmas.count() == evalua_cont )
             enevento = Enevento.where(clave:'FIR').first
             Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id, estado:'C') 
-            
+            sleep 5
             Util::Email.notificar(@proyecto.id, 'FIRCOM')
 
             #msg = " <p><b>Estimado(a) Investigador(a).</b></p>

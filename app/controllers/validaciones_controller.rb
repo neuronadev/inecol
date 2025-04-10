@@ -45,7 +45,7 @@ class ValidacionesController < ApplicationController
 
                       Enlace.create(proyecto_id:@proyecto.id, enevento_id:enevento.id)
                       Solicitud.create(proyecto_id:@proyecto.id, fecha_sol:params[:fsol], fecha_lim:params[:flim], estado:'A')
-
+                  
                       Util::Email.notificar(@proyecto.id, 'ENEVA')
 
 
@@ -61,6 +61,7 @@ class ValidacionesController < ApplicationController
                         aplicado_cont = Validacion.where(proyecto_id: @proyecto.id).includes(:evaluador).where('evaluador.estado':'A', 'evaluador.evalua':true).count
 
                         if aplicado_cont == evalua_cont
+                              sleep 5
                               Util::Email.notificar(@proyecto.id, 'VALCOM')
                         end
                         
