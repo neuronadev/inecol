@@ -53,7 +53,7 @@ class DictamenesController < ApplicationController
                     Solfirma.create(proyecto_id:@proyecto.id, fecha_dict:params[:fsol], fecha_lim:params[:flim], estado:'A')
 
                     Util::Email.notificar(@proyecto.id, 'ENEVD') 
-                    sleep 5
+                    sleep 8
                     Util::Email.notificar(@proyecto.id, 'ENRPD') 
                     
                     #if !@dictamen.otrose.blank?
