@@ -89,37 +89,22 @@
                      <% if @proyecto.modificatorio != 'SI' %> Dictamen: <% end %>
                      <% if @proyecto.modificatorio == 'SI' %> Comentarios: <% end %>
                 </th>
-                <td class="px-6 py-4">
-                  <!--  
-                    <div class="grid justify-items-end"><div class="flex">Reenviar dictamen</div></div>
-                    <div class="grid justify-items-start">
-                        <div class="flex"> 
-                            <div class="flex">Para:</div>
-                            <div class="flex"> 
-                               <%=
-                                 select_tag "emailtxt", 
-                                 options_for_select(Academico.includes(:tacademico).where('tacademicos.clave':['INV','CAT']).all.map{|item| [item.persona.nom_espacio, item.id] if ['INV','CAT'].include?(item.tacademico.clave)}),
-                                 {prompt: '--Seleccione un Investigador--', id:'multiple'}
-                               %>    
-                            </div>
-                        </div>   
-                    </div>
-                  -->  
+                <td id="" class="px-6 py-4">
                     <%= @dictamen.txtdictamen.body.html_safe %>
                 </td>
             </tr>    
-            <!--
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white font-semibold">
-                   Enviar:
-                </th>
-                <td class="px-6 py-4" data-controller="email">
-                    <input type="text" name="cr_email" id="cr_email">
-                    <button class="bg-blue-400 p-3" data-action="click->email#enviar" data-email-iddict-param="<%= @dictamen.id %>" >Enviar</button>
-                </td>
-            </tr>    
-           --> 
-           
+            <tr>
+               <td>
+                     <!-- <textarea id="contxt" style="display: none;" > 
+                        <%= @dictamen.txtdictamen.body.html_safe %>
+                      -->  
+                     <!-- </textarea>    -->
+                     <!-- 
+                     <div><span data-controller="copiar" data-action="click->copiar#txthtml">Copiar</span></div> 
+                     -->
+               </td>
+            <tr>
+          
            
         </tbody>
     </table>
